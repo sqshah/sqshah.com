@@ -40,6 +40,7 @@
   --ui:Jost,ui-sans-serif,system-ui,sans-serif;
   --gut:clamp(22px,5vw,76px);
   --edge:max(16px,env(safe-area-inset-left,0px));
+  --lip:clamp(20px,2.6vw,36px);   /* the rounded top edge of a card */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -130,7 +131,7 @@ a{color:inherit;text-decoration:none}
 100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ---- marquee ---- */
-.strip{position:relative;z-index:3;overflow:hidden;border-top:1px solid var(--hair);
+.strip{position:relative;z-index:2;overflow:hidden;border-top:1px solid var(--hair);
   border-bottom:1px solid var(--hair);padding-block:clamp(16px,2.4vh,26px);background:#0B0B0A}
 .strip .run{display:flex;width:max-content;will-change:transform}
 .strip span{display:block;white-space:nowrap;font-family:var(--display);font-style:italic;
@@ -138,11 +139,26 @@ a{color:inherit;text-decoration:none}
 .strip b{font-weight:300;color:#CFCCC6}
 
 /* ---- bands ---- */
+/* Each band is a card that sticks to the top while the next one rides up over it.
+   Siblings all sticky at top:0, each at least a screen tall: when the next card's
+   top reaches 0 it has exactly covered this one, and this one lets go. The two
+   sections GSAP pins (.hero, #who) are excluded — an element cannot be both. */
 .band{
-  position:relative;z-index:3;border-top:1px solid var(--hair);
+  position:sticky;top:0;z-index:3;
+  min-height:100svh;display:flex;align-items:center;
+  background:var(--ink);
+  border-top:1px solid var(--hair);
+  border-radius:var(--lip) var(--lip) 0 0;
+  box-shadow:0 -26px 70px -24px rgba(0,0,0,.92);
   padding-left:var(--edge);padding-right:var(--edge);
   padding-block:clamp(84px,14vh,150px);
+  will-change:transform;
 }
+.band > .wrap{width:100%}
+.band.pinned{position:relative;top:auto}
+.fine{position:relative;z-index:30;background:var(--ink);
+  border-radius:var(--lip) var(--lip) 0 0;
+  box-shadow:0 -26px 70px -24px rgba(0,0,0,.92)}
 .wrap{max-width:1180px;margin-inline:auto;padding-inline:calc(var(--gut) - var(--edge))}
 .kicker{display:flex;align-items:center;gap:16px;font-size:clamp(9px,.78vw,11px);
   letter-spacing:.34em;text-transform:uppercase;color:var(--quiet);margin-bottom:clamp(30px,5vh,56px)}
@@ -176,7 +192,9 @@ a{color:inherit;text-decoration:none}
 .plate canvas{display:block;width:100%;height:100%}
 
 /* the page turns to paper for one section — the portrait is printed, not projected */
-.paper{background:var(--plate);color:#15150F;border-top:none}
+.paper{background:var(--plate);color:#15150F;border-top:none;
+  border-radius:var(--lip) var(--lip) 0 0;
+  box-shadow:0 -26px 70px -24px rgba(0,0,0,.92)}
 .paper .kicker{color:#6E6B63}
 .paper .kicker i{background:#D6D3CA}
 .paper .ch{color:#15150F}
@@ -264,8 +282,8 @@ a{color:inherit;text-decoration:none}
 .ends{display:flex;flex-wrap:wrap;gap:clamp(16px,2.4vw,34px);margin-top:clamp(42px,6vh,70px);
   font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--quiet)}
 .ends a:hover{color:var(--paper)}
-.fine{border-top:1px solid var(--hair);padding-left:var(--edge);padding-right:var(--edge);
-  padding-block:clamp(26px,3.4vh,38px)}
+.fine{border-top:none;padding-left:var(--edge);padding-right:var(--edge);
+  padding-block:clamp(44px,7vh,76px)}
 .fine .wrap{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;
   font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#4E4E4B}
 
@@ -565,6 +583,35 @@ fetch('assets/signature.json').then(r=>r.json()).then(sig=>{
       skew(gsap.utils.clamp(-7, 7, -v/320));
     }
   });
+
+  // The cards stack: each one is given a z-index above the last so the next rides
+  // over it, and dims and settles back a little while it is being covered. #who is
+  // pinned by ScrollTrigger, which cannot share an element with position:sticky, so
+  // it is marked and left in normal flow.
+  (function cards(){
+    const pinned = document.getElementById('who');
+    if (pinned) pinned.classList.add('pinned');
+    const all = gsap.utils.toArray('.band');
+    all.forEach((sec,i)=>{ sec.style.zIndex = 10 + i; });
+    const fine = document.querySelector('.fine');
+    if (fine) fine.style.zIndex = 10 + all.length;
+
+    const last = all[all.length-1];
+    all.forEach((sec)=>{
+      if (sec.classList.contains('pinned')) return;
+      if (sec === last) return;        // nothing of substance rides over the last one
+      const inner = sec.querySelector('.wrap');
+      ScrollTrigger.create({
+        // only while the next card is actually riding over it
+        trigger: sec, start:'bottom bottom', end:'bottom top', scrub:true,
+        onUpdate(self){
+          const e = self.progress;
+          sec.style.transform = `scale(${1 - e*0.06})`;
+          if (inner) inner.style.opacity = 1 - e*0.68;
+        }
+      });
+    });
+  })();
 
   // a hairline across the top that tracks how far down the page you are
   gsap.to('.prog', {scaleX:1, ease:'none',
