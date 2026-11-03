@@ -24,7 +24,7 @@
 <meta name="twitter:image" content="https://sqshah.com/assets/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@200;300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* One dark world, one accent of paper. The signature writes itself, the figures count
    themselves up, a car dissolves into a face, and the work list reads like a contents page. */
@@ -37,7 +37,8 @@
   --dim:#78766F;        /* small caps still need 4.5:1 on the ink */
   --plate:#FBFAF8;      /* paper the portrait is printed on */
   --display:"Cormorant Garamond",ui-serif,Georgia,serif;
-  --ui:Jost,ui-sans-serif,system-ui,sans-serif;
+  --ui:Archivo,ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --gut:clamp(22px,5vw,76px);
   --edge:max(16px,env(safe-area-inset-left,0px));
   --lip:clamp(20px,2.6vw,36px);   /* the rounded top edge of a card */
@@ -83,6 +84,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---- fixed chrome ---- */
 .nav{
+  font-family:var(--mono);
   position:fixed;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;
   justify-content:space-between;mix-blend-mode:difference;
   padding:clamp(18px,2.6vh,30px) var(--gut);
@@ -109,7 +111,7 @@ a{color:inherit;text-decoration:none}
 .sig{position:relative;z-index:3;display:block;width:min(74vw,880px);height:auto;overflow:visible;will-change:transform}
 .sig .fill{fill:var(--paper)}
 .sig .pen{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
-.eyebrow{
+.eyebrow{font-family:var(--mono);
   position:relative;z-index:3;display:flex;align-items:center;gap:16px;
   font-size:clamp(9px,.78vw,11px);letter-spacing:.34em;text-transform:uppercase;
   color:var(--quiet);margin-bottom:clamp(26px,4vh,46px);opacity:0;
@@ -121,7 +123,7 @@ a{color:inherit;text-decoration:none}
   font-size:clamp(21px,2.5vw,34px);line-height:1.5;color:#D9D7D2;max-width:19ch;opacity:0;
   text-wrap:balance;
 }
-.cue{position:absolute;left:50%;bottom:clamp(22px,4vh,42px);transform:translateX(-50%);z-index:3;
+.cue{font-family:var(--mono);position:absolute;left:50%;bottom:clamp(22px,4vh,42px);transform:translateX(-50%);z-index:3;
   display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;
   font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
 .cue i{display:block;width:1px;height:38px;background:linear-gradient(var(--dim),transparent);
@@ -160,17 +162,17 @@ a{color:inherit;text-decoration:none}
   border-radius:var(--lip) var(--lip) 0 0;
   box-shadow:0 -26px 70px -24px rgba(0,0,0,.92)}
 .wrap{max-width:1180px;margin-inline:auto;padding-inline:calc(var(--gut) - var(--edge))}
-.kicker{display:flex;align-items:center;gap:16px;font-size:clamp(9px,.78vw,11px);
+.kicker{font-family:var(--mono);display:flex;align-items:center;gap:16px;font-size:clamp(9px,.78vw,11px);
   letter-spacing:.34em;text-transform:uppercase;color:var(--quiet);margin-bottom:clamp(30px,5vh,56px)}
 .kicker i{display:block;width:clamp(28px,4vw,56px);height:1px;background:var(--hair);flex:none;
   transform:scaleX(0);transform-origin:left}
-.figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:clamp(36px,5vw,58px)}
-.fn{display:block;font-size:clamp(29px,3.9vw,56px);font-weight:200;letter-spacing:-.03em;
+.figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:clamp(30px,3.4vw,46px)}
+.fn{display:block;font-size:clamp(27px,3.1vw,47px);font-weight:800;letter-spacing:-.035em;
   font-variant-numeric:tabular-nums;line-height:1}
 .fr{display:block;height:1px;background:var(--hair);margin-top:20px;
   transform:scaleX(0);transform-origin:left}
-.fk{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--quiet);
+.fk{font-family:var(--mono);display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--quiet);
   margin-top:16px;max-width:20ch;line-height:1.6}
 .ch{font-family:var(--display);font-style:italic;font-weight:300;
   font-size:clamp(26px,3.6vw,48px);line-height:1.34;color:var(--paper);max-width:20ch;text-wrap:balance}
@@ -224,11 +226,11 @@ a{color:inherit;text-decoration:none}
 .row .in{position:relative;z-index:2;display:grid;gap:4px clamp(18px,2.6vw,38px);align-items:baseline;
   grid-template-columns:auto 1fr;transition:transform .55s cubic-bezier(.3,0,.1,1)}
 @media (min-width:861px){ .row .in{grid-template-columns:auto minmax(0,1fr) auto} }
-.row .idx{font-size:10px;letter-spacing:.2em;color:var(--dim);font-variant-numeric:tabular-nums;
+.row .idx{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);font-variant-numeric:tabular-nums;
   transition:color .4s}
 .row .ttl{font-family:var(--display);font-style:italic;font-weight:300;
   font-size:clamp(22px,2.9vw,40px);line-height:1.22;color:#D6D4CE;transition:color .4s;text-wrap:balance}
-.row .met{grid-column:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+.row .met{font-family:var(--mono);grid-column:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--dim);transition:color .4s;line-height:1.7}
 @media (min-width:861px){ .row .met{grid-column:3;text-align:right;white-space:nowrap;align-self:center} }
 .row .sweep{position:absolute;inset:0;z-index:1;background:
@@ -240,7 +242,7 @@ a{color:inherit;text-decoration:none}
   .row:hover .ttl{color:#fff}
   .row:hover .idx,.row:hover .met{color:#9C9A94}
 }
-.note{margin-top:clamp(26px,3.6vh,40px);font-size:11px;letter-spacing:.14em;
+.note{font-family:var(--mono);margin-top:clamp(26px,3.6vh,40px);font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--dim)}
 
 
@@ -268,7 +270,7 @@ a{color:inherit;text-decoration:none}
 .col h3{font-family:var(--display);font-style:italic;font-weight:300;
   font-size:clamp(20px,2.1vw,28px);color:var(--paper);margin-bottom:14px}
 .col p{font-size:clamp(13.5px,1vw,15px);line-height:1.82;color:#A8A7A2}
-.col span{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+.col span{font-family:var(--mono);display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
   color:var(--dim);margin-bottom:18px}
 
 /* ---- contact ---- */
@@ -279,12 +281,12 @@ a{color:inherit;text-decoration:none}
 .mail::after{content:"";position:absolute;left:0;bottom:-7px;width:100%;height:1px;background:currentColor;
   transform:scaleX(1);transform-origin:left;transition:transform .5s cubic-bezier(.4,0,.1,1)}
 .mail:hover::after{transform:scaleX(0);transform-origin:right}
-.ends{display:flex;flex-wrap:wrap;gap:clamp(16px,2.4vw,34px);margin-top:clamp(42px,6vh,70px);
+.ends{font-family:var(--mono);display:flex;flex-wrap:wrap;gap:clamp(16px,2.4vw,34px);margin-top:clamp(42px,6vh,70px);
   font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--quiet)}
 .ends a:hover{color:var(--paper)}
 .fine{border-top:none;padding-left:var(--edge);padding-right:var(--edge);
   padding-block:clamp(44px,7vh,76px)}
-.fine .wrap{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;
+.fine .wrap{font-family:var(--mono);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;
   font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#4E4E4B}
 
 @media (max-width:860px){

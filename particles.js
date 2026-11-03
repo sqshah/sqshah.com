@@ -52,7 +52,7 @@
       shp.width = CW; shp.height = CH;
       const s = shp.getContext('2d', { willReadFrequently: true });
       (function type() {
-        const stack = '"Jost","Helvetica Neue",Arial,sans-serif';
+        const stack = '"Archivo","Helvetica Neue",Arial,sans-serif';
         s.fillStyle = '#000';
         s.textAlign = 'center';
         s.textBaseline = 'alphabetic';

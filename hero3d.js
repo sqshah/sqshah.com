@@ -66,7 +66,7 @@
         g.fillStyle = gr; g.fillRect(SX, SY, SW, SH);
 
         g.fillStyle = 'rgba(251,250,248,.5)';
-        g.font = '400 19px Jost, Arial, sans-serif';
+        g.font = '400 19px Archivo, Arial, sans-serif';
         g.fillText(item.idx, SX + 34, SY + 58);
         g.fillRect(SX + 34, SY + 74, 46, 1);
 
@@ -87,7 +87,7 @@
         });
         if (item.met) {
           g.fillStyle = 'rgba(251,250,248,.55)';
-          g.font = '400 16px Jost, Arial, sans-serif';
+          g.font = '400 16px Archivo, Arial, sans-serif';
           g.fillText(item.met.toUpperCase(), SX + 34, SY + SH - 40);
         }
       } else {
