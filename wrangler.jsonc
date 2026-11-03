@@ -1,0 +1,10 @@
+{
+  // Static site: the whole repo root is served as assets, minus the files listed
+  // in .assetsignore. Named to match the existing Worker so previews attach to it.
+  "name": "sqshah-com",
+  "compatibility_date": "2026-10-13",
+  "assets": {
+    "directory": "."
+  },
+  "preview_urls": true
+}
