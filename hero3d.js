@@ -72,15 +72,15 @@
 
         // the title, with a little tube fringe on it
         const lines = [];
-        g.font = 'italic 300 42px "Cormorant Garamond", Georgia, serif';
+        g.font = '700 34px Archivo, "Helvetica Neue", Arial, sans-serif';
         let ln = '';
-        item.title.split(' ').forEach(w => {
+        item.title.toUpperCase().split(' ').forEach(w => {
           const test = ln ? ln + ' ' + w : w;
           if (g.measureText(test).width > SW - 68 && ln) { lines.push(ln); ln = w; } else ln = test;
         });
         if (ln) lines.push(ln);
         lines.slice(0, 4).forEach((L, i) => {
-          const y = SY + 132 + i * 50;
+          const y = SY + 126 + i * 40;
           g.fillStyle = 'rgba(120,190,255,.30)'; g.fillText(L, SX + 32.4, y);
           g.fillStyle = 'rgba(255,110,120,.26)'; g.fillText(L, SX + 35.6, y);
           g.fillStyle = '#FFFFFF'; g.fillText(L, SX + 34, y);
