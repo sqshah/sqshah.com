@@ -8,17 +8,28 @@
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* ---------- 1. scrolling is the browser's job -------------------------
-     There was inertia smoothing here. It is gone: the page should move the
-     instant the wheel does, and any easing at all reads as lag. Anchor links
-     still glide, because that is a jump the reader asked for. */
-  if (!RM) {
+  /* ---------- 1. scroll ------------------------------------------------
+     Smoothing by frame-rate interpolation, not by a duration timer. A timer
+     commits to finishing a journey and so always lags the wheel; a lerp moves
+     a fixed fraction of the remaining distance every frame, which keeps the
+     page under the hand. 0.12 is fluid without feeling delayed. */
+  if (!RM && window.Lenis) {
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, wheelMultiplier: 1, syncTouch: false });
+    window.__lenis = lenis;
+    if (window.ScrollTrigger) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((t) => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', (e) => {
         const el = document.querySelector(a.getAttribute('href'));
         if (!el) return;
         e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        lenis.scrollTo(el, { duration: 1.1 });
       });
     });
   }
