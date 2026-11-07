@@ -60,12 +60,12 @@
     })();
 
     // what the cursor is over decides what it becomes
-    const WIDEN = 'a,button,.row,.mail,.plate,#room';
+    const WIDEN = 'a,button,.rowhead,.mail,.plate,#room';
     document.addEventListener('mouseover', (e) => {
       const t = e.target.closest(WIDEN);
       if (!t) return;
       ring.classList.add('on');
-      const say = t.dataset.cursor || (t.closest('.row') ? 'Read' : '');
+      const say = t.dataset.cursor || (t.closest('.rowhead') ? 'Open' : '');
       label.textContent = say;
       ring.classList.toggle('says', !!say);
     });
@@ -93,7 +93,55 @@
     });
   }
 
-  /* ---------- 4. the loader counts the work in -------------------------- */
+  /* ---------- 4. the case studies open in place ------------------------- */
+  (function cases() {
+    const rows = [...document.querySelectorAll('#work .row')];
+    if (!rows.length) return;
+
+    // measure the content rather than guess, so the transition lands exactly
+    const setH = (row, open) => {
+      const body = row.querySelector('.rowbody');
+      const inner = row.querySelector('.rowinner');
+      body.style.height = open ? inner.scrollHeight + 'px' : '0px';
+    };
+
+    rows.forEach(row => {
+      const head = row.querySelector('.rowhead');
+      const body = row.querySelector('.rowbody');
+
+      head.addEventListener('click', () => {
+        const open = !row.classList.contains('open');
+        // one at a time; seven open panels is a wall of text
+        rows.forEach(r => {
+          if (r === row) return;
+          if (!r.classList.contains('open')) return;
+          r.querySelector('.rowbody').style.height = r.querySelector('.rowinner').scrollHeight + 'px';
+          r.offsetHeight;                       // commit that height before collapsing from it
+          r.classList.remove('open');
+          r.querySelector('.rowhead').setAttribute('aria-expanded', 'false');
+          setH(r, false);
+        });
+        row.classList.toggle('open', open);
+        head.setAttribute('aria-expanded', String(open));
+        setH(row, open);
+        // the pinned sections below move, so the scroll maths has to be redone
+        if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 700);
+      });
+
+      // let an open panel grow with the window instead of freezing at one height
+      body.addEventListener('transitionend', (e) => {
+        if (e.propertyName === 'height' && row.classList.contains('open')) body.style.height = 'auto';
+      });
+    });
+
+    addEventListener('resize', () => {
+      rows.forEach(r => {
+        if (r.classList.contains('open')) r.querySelector('.rowbody').style.height = 'auto';
+      });
+    });
+  })();
+
+  /* ---------- 5. the loader counts the work in -------------------------- */
   const num = document.querySelector('.curtain .count');
   if (num) {
     let shown = 0, done = false;

@@ -242,28 +242,54 @@ a{color:inherit;text-decoration:none}
 
 /* ---- selected work ---- */
 .rows{border-top:1px solid var(--hair)}
-.row{position:relative;display:block;border-bottom:1px solid var(--hair);
-  padding-block:clamp(26px,3.6vh,40px);overflow:hidden}
+.row{position:relative;border-bottom:1px solid var(--hair)}
+.rowhead{position:relative;display:block;width:100%;text-align:left;background:none;border:0;
+  color:inherit;font:inherit;cursor:pointer;padding:clamp(22px,3vh,34px) 0;overflow:hidden}
 .row .in{position:relative;z-index:2;display:grid;gap:4px clamp(18px,2.6vw,38px);align-items:baseline;
-  grid-template-columns:auto 1fr;transition:transform .55s cubic-bezier(.3,0,.1,1)}
+  grid-template-columns:auto 1fr;transition:transform .55s cubic-bezier(.3,0,.1,1);
+  padding-right:46px}
 @media (min-width:861px){ .row .in{grid-template-columns:auto minmax(0,1fr) auto} }
-.row .idx{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);font-variant-numeric:tabular-nums;
-  transition:color .4s}
+.row .idx{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);
+  font-variant-numeric:tabular-nums;transition:color .4s}
 .row .ttl{font-family:var(--display);font-weight:700;text-transform:uppercase;
   font-size:clamp(17px,2.1vw,30px);line-height:1.08;letter-spacing:-.025em;
   color:#D6D4CE;transition:color .4s;text-wrap:balance}
-.row .met{font-family:var(--mono);grid-column:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--dim);transition:color .4s;line-height:1.7}
+.row .met{font-family:var(--mono);grid-column:2;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);transition:color .4s;line-height:1.7}
 @media (min-width:861px){ .row .met{grid-column:3;text-align:right;white-space:nowrap;align-self:center} }
 .row .sweep{position:absolute;inset:0;z-index:1;background:
-  linear-gradient(90deg,rgba(251,250,248,.065),rgba(251,250,248,.015) 55%,transparent);
+  linear-gradient(90deg,rgba(251,250,248,.07),rgba(251,250,248,.015) 55%,transparent);
   transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.3,0,.1,1)}
+/* the open/close mark, drawn rather than typed so it can rotate into a minus */
+.plus{position:absolute;right:2px;top:50%;z-index:2;width:13px;height:13px;margin-top:-6.5px;
+  transition:transform .5s cubic-bezier(.3,0,.1,1)}
+.plus::before,.plus::after{content:"";position:absolute;background:var(--quiet);
+  transition:opacity .4s,background-color .4s}
+.plus::before{left:0;top:6px;width:13px;height:1px}
+.plus::after{left:6px;top:0;width:1px;height:13px}
+.row.open .plus{transform:rotate(135deg)}
+.row.open .plus::before,.row.open .plus::after{background:var(--paper)}
 @media (hover:hover){
-  .row:hover .sweep{transform:scaleX(1)}
-  .row:hover .in{transform:translateX(clamp(10px,1.4vw,22px))}
-  .row:hover .ttl{color:#fff}
-  .row:hover .idx,.row:hover .met{color:#9C9A94}
+  .rowhead:hover .sweep{transform:scaleX(1)}
+  .rowhead:hover .in{transform:translateX(clamp(8px,1.1vw,18px))}
+  .rowhead:hover .ttl{color:#fff}
+  .rowhead:hover .idx,.rowhead:hover .met{color:#9C9A94}
 }
+.rowhead:focus-visible{outline:1px solid var(--quiet);outline-offset:-4px}
+/* the panel is measured, not guessed, so the height animates cleanly */
+.rowbody{height:0;overflow:hidden;transition:height .62s cubic-bezier(.3,0,.1,1)}
+.rowinner{padding:0 0 clamp(26px,3.6vh,40px);display:grid;gap:clamp(20px,3vw,44px);
+  opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+@media (min-width:861px){ .rowinner{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start} }
+.row.open .rowinner{opacity:1;transform:none;transition-delay:.12s}
+.rowinner p{font-size:clamp(13.5px,1.02vw,15.5px);line-height:1.85;color:#A8A7A2;max-width:58ch}
+.stats{list-style:none;display:grid;gap:14px 26px;grid-template-columns:repeat(2,minmax(0,1fr));
+  align-content:start}
+.stats li{border-top:1px solid var(--hair);padding-top:11px}
+.stats b{display:block;font-weight:700;font-size:clamp(17px,1.7vw,24px);letter-spacing:-.02em;
+  color:var(--paper);font-variant-numeric:tabular-nums}
+.stats span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin-top:7px}
 .note{font-family:var(--mono);margin-top:clamp(26px,3.6vh,40px);font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--dim)}
 
@@ -393,34 +419,125 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <p class="kicker"><i></i><span>Selected work</span></p>
     <div class="rows">
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
-        <span class="idx">01</span>
-        <span class="ttl">Four years of paid media for an East African motor group</span>
-        <span class="met">782 vehicles &middot; $0.29 CPL</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
-        <span class="idx">02</span>
-        <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
-        <span class="met">402 months of spend</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
-        <span class="idx">03</span>
-        <span class="ttl">$25,968 of advertising that no report had ever counted</span>
-        <span class="met">Found &middot; allocated &middot; booked</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
-        <span class="idx">04</span>
-        <span class="ttl">A 100,000-follower account, taken and recovered</span>
-        <span class="met">Instagram</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
-        <span class="idx">05</span>
-        <span class="ttl">A cloned website, traced and taken down</span>
-        <span class="met">Content theft</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
-        <span class="idx">06</span>
-        <span class="ttl">An email marketing platform built in-house instead of bought</span>
-        <span class="met">Product &middot; SEO CMS</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
-        <span class="idx">07</span>
-        <span class="ttl">Five years of freelance work across ten websites</span>
-        <span class="met">Search &middot; build &middot; growth</span></span></a>
+      <article class="row">
+        <button class="rowhead" aria-expanded="false" aria-controls="case1">
+          <span class="sweep"></span>
+          <span class="in">
+            <span class="idx">01</span>
+            <span class="ttl">Four years of paid media for an East African motor group</span>
+            <span class="met">782 vehicles &middot; $0.29 CPL</span>
+          </span>
+          <span class="plus" aria-hidden="true"></span>
+        </button>
+        <div class="rowbody" id="case1">
+          <div class="rowinner">
+            <p>Six advertising accounts across Kenya, Uganda, Tanzania and Pakistan, each run as its own island, none of them reconciled against what actually sold. I consolidated them into a single reporting structure, rebuilt the campaign architecture around it, and moved budget by cost per released vehicle rather than cost per lead &mdash; because the two disagree, and only one of them pays wages.</p>
+            <ul class="stats"><li><b>73.4M</b><span>Impressions</span></li><li><b>60,050</b><span>Leads</span></li><li><b>$0.29</b><span>Per lead</span></li><li><b>359</b><span>Campaigns</span></li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <button class="rowhead" aria-expanded="false" aria-controls="case2">
+          <span class="sweep"></span>
+          <span class="in">
+            <span class="idx">02</span>
+            <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
+            <span class="met">402 months of spend</span>
+          </span>
+          <span class="plus" aria-hidden="true"></span>
+        </button>
+        <div class="rowbody" id="case2">
+          <div class="rowinner">
+            <p>Spend lived in the ad platforms, sales in a separate system, payments in spreadsheets. Nobody in the business could answer what a sold vehicle had cost to sell. I built an entity-driven dashboard that pulls all three together, imported 402 months of spend across every branch and platform, and reconciled each payment to the cent &mdash; including currency conversion on locally invoiced ones.</p>
+            <ul class="stats"><li><b>$166,643</b><span>Reconciled</span></li><li><b>402</b><span>Months of spend</span></li><li><b>4</b><span>Countries</span></li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <button class="rowhead" aria-expanded="false" aria-controls="case3">
+          <span class="sweep"></span>
+          <span class="in">
+            <span class="idx">03</span>
+            <span class="ttl">$25,968 of advertising that no report had ever counted</span>
+            <span class="met">Found &middot; allocated &middot; booked</span>
+          </span>
+          <span class="plus" aria-hidden="true"></span>
+        </button>
+        <div class="rowbody" id="case3">
+          <div class="rowinner">
+            <p>One channel had been running for five years and had never appeared in a single report. The vehicles it sold were being counted as though they had cost nothing to sell. I found the spend in the archive, allocated it across branches by their share of its sales, spread package payments over the service months they actually covered, and reconciled every payment at its implied exchange rate. It turned out to be the cheapest channel in the business, and it had been invisible.</p>
+            <ul class="stats"><li><b>$25,968</b><span>Recovered</span></li><li><b>$152.45</b><span>True cost per sale</span></li><li><b>168</b><span>Sales re-attributed</span></li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <button class="rowhead" aria-expanded="false" aria-controls="case4">
+          <span class="sweep"></span>
+          <span class="in">
+            <span class="idx">04</span>
+            <span class="ttl">A 100,000-follower account, taken and recovered</span>
+            <span class="met">Instagram</span>
+          </span>
+          <span class="plus" aria-hidden="true"></span>
+        </button>
+        <div class="rowbody" id="case4">
+          <div class="rowinner">
+            <p>An audience built over years, gone overnight. I worked the recovery until the account was back under the company's control, then closed the hole that let it happen.</p>
+            <ul class="stats"><li><b>100K</b><span>Followers</span></li><li><b>Recovered</b><span>Outcome</span></li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <button class="rowhead" aria-expanded="false" aria-controls="case5">
+          <span class="sweep"></span>
+          <span class="in">
+            <span class="idx">05</span>
+            <span class="ttl">A cloned website, traced and taken down</span>
+            <span class="met">Content theft</span>
+          </span>
+          <span class="plus" aria-hidden="true"></span>
+        </button>
+        <div class="rowbody" id="case5">
+          <div class="rowinner">
+            <p>Somebody stood up a near-identical copy of the company's site on a lookalike domain and ran it as their own. I traced it, documented the duplication, and pursued it until the copy came down.</p>
+            <ul class="stats"><li><b>Taken down</b><span>Outcome</span></li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <button class="rowhead" aria-expanded="false" aria-controls="case6">
+          <span class="sweep"></span>
+          <span class="in">
+            <span class="idx">06</span>
+            <span class="ttl">An email marketing platform built in-house instead of bought</span>
+            <span class="met">Product &middot; SEO CMS</span>
+          </span>
+          <span class="plus" aria-hidden="true"></span>
+        </button>
+        <div class="rowbody" id="case6">
+          <div class="rowinner">
+            <p>Rather than pay per contact per month to a vendor, the company got its own sending platform and an SEO content system beside it. Both built in-house, both owned outright, neither renewing.</p>
+            <ul class="stats"><li><b>In-house</b><span>Built</span></li><li><b>2</b><span>Systems shipped</span></li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <button class="rowhead" aria-expanded="false" aria-controls="case7">
+          <span class="sweep"></span>
+          <span class="in">
+            <span class="idx">07</span>
+            <span class="ttl">Five years of freelance work across ten websites</span>
+            <span class="met">Search &middot; build &middot; growth</span>
+          </span>
+          <span class="plus" aria-hidden="true"></span>
+        </button>
+        <div class="rowbody" id="case7">
+          <div class="rowinner">
+            <p>Ten sites across AI tooling, crypto, legal technology and telecom &mdash; built, ranked, or both. Search strategy, technical fixes, content systems and the backlink work behind them.</p>
+            <ul class="stats"><li><b>10</b><span>Websites</span></li><li><b>5</b><span>Years</span></li></ul>
+          </div>
+        </div>
+      </article>
     </div>
     <p class="note">Full case studies on request</p>
   </div>
