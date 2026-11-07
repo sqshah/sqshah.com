@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Links &mdash; SQ Shah</title>
+<meta name="description" content="Every way to reach Syed Qasim Ali.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://sqshah.com/links">
+<meta name="theme-color" content="#060606">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" href="assets/icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.solo{min-height:100svh;display:flex;align-items:center;
+  padding:clamp(90px,14vh,150px) var(--edge)}
+.solo .wrap{width:100%}
+.back{display:inline-flex;align-items:center;gap:12px;margin-top:clamp(30px,5vh,52px);
+  font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--quiet)}
+.back:hover{color:var(--paper)}
+.back i{display:block;width:26px;height:1px;background:currentColor}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<nav class="nav" style="opacity:1">
+  <a class="mark" href="/">SQ</a>
+  <ul><li><a href="/#work">Work</a></li><li><a href="/#contact">Contact</a></li></ul>
+</nav>
+
+<style>
+.lnks{display:grid;border-top:1px solid var(--hair);margin-top:clamp(30px,5vh,52px)}
+.lnk{position:relative;display:grid;grid-template-columns:minmax(90px,.4fr) 1fr auto;
+  gap:18px;align-items:center;padding:clamp(20px,2.8vh,30px) 0;
+  border-bottom:1px solid var(--hair);overflow:hidden}
+.lnk::before{content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(90deg,rgba(251,250,248,.07),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.3,0,.1,1)}
+.lnk>*{position:relative;z-index:1}
+.lk{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.lv{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(16px,1.9vw,26px);color:#D6D4CE;transition:color .4s}
+.la{font-size:17px;color:var(--dim);transition:transform .5s cubic-bezier(.3,0,.1,1),color .4s}
+@media (hover:hover){
+  .lnk:hover::before{transform:scaleX(1)}
+  .lnk:hover .lv{color:#fff}
+  .lnk:hover .la{transform:translateX(9px);color:var(--paper)}
+}
+</style>
+<section class="solo">
+  <div class="wrap">
+    <p class="kicker"><i style="transform:scaleX(1)"></i><span>Syed Qasim Ali</span></p>
+    <h1 class="big">Everywhere at once.</h1>
+    <div class="lnks">
+      <a class="lnk" href="mailto:talk@sqshah.com">
+        <span class="lk">Email</span><span class="lv">talk@sqshah.com</span><span class="la" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="lnk" href="/resume.pdf">
+        <span class="lk">Resume</span><span class="lv">Download as PDF</span><span class="la" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="lnk" href="https://github.com/sqshah" target="_blank" rel="noopener">
+        <span class="lk">GitHub</span><span class="lv">github.com/sqshah</span><span class="la" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="lnk" href="/">
+        <span class="lk">Website</span><span class="lv">sqshah.com</span><span class="la" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+    <a class="back" href="/"><i></i>See the work</a>
+  </div>
+</section>
+<div class="fine">
+  <div class="wrap">
+    <span>&copy; 2026 Syed Qasim Ali</span>
+    <span>Gujranwala, Pakistan</span>
+  </div>
+</div>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="feel.js"></script>
+</body>
+</html>

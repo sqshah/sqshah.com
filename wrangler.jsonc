@@ -4,7 +4,9 @@
   "name": "sqshah-com",
   "compatibility_date": "2026-10-13",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    // unknown paths get the real 404 page, with a 404 status
+    "not_found_handling": "404-page"
   },
   "preview_urls": true,
   // required by `wrangler preview`; empty means previews inherit production settings
