@@ -259,6 +259,16 @@ a{color:inherit;text-decoration:none}
 .rowinner{padding:0 0 clamp(26px,3.6vh,40px);display:grid;gap:clamp(20px,3vw,44px);
   opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
 @media (min-width:861px){ .rowinner{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start} }
+/* a case with evidence leads with it */
+.shot{margin:0;border:1px solid var(--hair);border-radius:10px;overflow:hidden;background:#0B0B0A;
+  box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
+.shot img{display:block;width:100%;height:auto}
+.rowtext{display:grid;gap:clamp(18px,2.4vw,30px)}
+@media (min-width:861px){
+  .rowinner:has(.shot){grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+  .rowtext{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:860px){ .shot{order:-1} }
 .row.open .rowinner{opacity:1;transform:none;transition-delay:.12s}
 .rowinner p{font-size:clamp(13.5px,1.02vw,15.5px);line-height:1.8;color:#BCBBB5;max-width:56ch}
 .stats{list-style:none;display:grid;gap:14px 26px;grid-template-columns:repeat(2,minmax(0,1fr));

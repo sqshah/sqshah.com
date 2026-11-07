@@ -104,10 +104,10 @@
   <div class="wrap">
     <p class="kicker"><i></i><span>Four years</span></p>
     <div class="figures">
-      <div><span class="fn" data-n="166643" data-pre="$">$0</span><i class="fr"></i><span class="fk">Advertising managed</span></div>
+      <div><span class="fn" data-n="166643" data-pre="$">$0</span><i class="fr"></i><span class="fk">Advertising managed &mdash; four countries</span></div>
       <div><span class="fn" data-n="75887">0</span><i class="fr"></i><span class="fk">Leads at $0.29 each</span></div>
       <div><span class="fn" data-n="782">0</span><i class="fr"></i><span class="fk">Vehicles sold</span></div>
-      <div><span class="fn" data-n="25968" data-pre="$">$0</span><i class="fr"></i><span class="fk">Spend nobody had counted</span></div>
+      <div><span class="fn" data-n="25968" data-pre="$">$0</span><i class="fr"></i><span class="fk">Of that, unrecorded until I found it</span></div>
     </div>
   </div>
 </section>
@@ -148,8 +148,11 @@
         </button>
         <div class="rowbody" id="case1">
           <div class="rowinner">
+            <figure class="shot"><img src="assets/work/ads.jpg" alt="Google Ads account overview: 1,238,753 clicks and the conversion-value trend" loading="lazy" decoding="async"></figure>
+            <div class="rowtext">
             <p>Six advertising accounts across Kenya, Uganda, Tanzania and Pakistan, each run as its own island, none reconciled against what actually sold. I consolidated them into one reporting structure, rebuilt the campaign architecture around it, and moved budget by cost per released vehicle rather than cost per lead &mdash; the two disagree, and only one of them pays wages.</p>
             <ul class="stats"><li><b>73.4M</b><span>Impressions</span></li><li><b>60,050</b><span>Leads</span></li><li><b>$0.29</b><span>Per lead</span></li><li><b>359</b><span>Campaigns</span></li></ul>
+            </div>
           </div>
         </div>
       </article>
@@ -199,8 +202,11 @@
         </button>
         <div class="rowbody" id="case4">
           <div class="rowinner">
+            <figure class="shot"><img src="assets/work/arsh.jpg" alt="Meta ad breakdown for a Lahore listing: impressions, spend, CPC and CTR per placement" loading="lazy" decoding="async"></figure>
+            <div class="rowtext">
             <p>Premium apartments, penthouses and retail units priced in crores, listed on Zameen for intent and advertised on Meta for reach into Lahore, Karachi, Islamabad, Faisalabad and Sialkot. I built the strategy across both and tracked every property against its own spend rather than a pooled budget, so each listing could be judged on what it actually returned.</p>
             <ul class="stats"><li><b>95</b><span>Leads, one listing</span></li><li><b>$23</b><span>Spend behind them</span></li><li><b>5</b><span>Cities targeted</span></li></ul>
+            </div>
           </div>
         </div>
       </article>
@@ -218,6 +224,28 @@
           <div class="rowinner">
             <p>Not selling anything &mdash; filling roles. Meta campaigns running alongside Indeed job listings, billed in yen, over three years. Recruitment advertising is judged on applications rather than leads, so the campaigns were built and read against clicks through to apply.</p>
             <ul class="stats"><li><b>&yen;249,690</b><span>Spent</span></li><li><b>656,779</b><span>Impressions</span></li><li><b>8,293</b><span>Clicks to apply</span></li><li><b>22</b><span>Campaigns</span></li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <button class="rowhead" aria-expanded="false" aria-controls="case10">
+          <span class="sweep"></span>
+          <span class="in">
+            <span class="idx">10</span>
+            <span class="ttl">Khushi Motors &mdash; organic search, rebuilt</span>
+            <span class="met">113k clicks &middot; 6.1M impressions</span>
+          </span>
+          <span class="plus" aria-hidden="true"></span>
+        </button>
+        <div class="rowbody" id="case10">
+          <div class="rowinner">
+            <figure class="shot"><img src="assets/work/search.jpg" alt="Search Console: 113k clicks and 6.1M impressions over twelve months against the prior period" loading="lazy" decoding="async"></figure>
+            <div class="rowtext">
+            <p>Paid media buys attention; search keeps it. Over twelve months the site went from
+            30.9k clicks to 113k, and from 1.09M impressions to 6.1M, against the same period a year
+            earlier &mdash; average position improving from 10.4 to 6.9 as it went.</p>
+            <ul class="stats"><li><b>113k</b><span>Clicks</span></li><li><b>6.1M</b><span>Impressions</span></li><li><b>3.7&times;</b><span>Year on year</span></li><li><b>6.9</b><span>Avg position</span></li></ul>
+            </div>
           </div>
         </div>
       </article>
@@ -510,7 +538,7 @@ fetch('assets/signature.json').then(r=>r.json()).then(sig=>{
         onUpdate(self){
           const e = self.progress;
           sec.style.transform = `scale(${1 - e*0.06})`;
-          if (inner) inner.style.opacity = 1 - e*0.68;
+          if (inner) inner.style.opacity = 1 - e*0.5;
         }
       });
     });
