@@ -183,7 +183,7 @@
       ScrollTrigger.create({
         trigger: plate.closest('section'),
         start: 'top top',
-        end: () => '+=' + Math.round(innerHeight * (phone ? 3.6 : 3.1)),
+        end: () => '+=' + Math.round(innerHeight * (phone ? 2.4 : 2.0)),
         pin: true,
         anticipatePin: 1,
         scrub: phone ? 0.35 : 0.5,
