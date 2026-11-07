@@ -168,105 +168,155 @@
     return g;
   }
 
-  // 01 — the ledger: stacked measures and a reconciled line
+  // 01 — the ledger: an invoice, the coin it was paid with, the spend beside it
   function chLedger() {
     const g = new T.Group();
-    const plinth = LINE(new T.CylinderGeometry(3.5, 3.5, 0.3, 40), .5);
-    plinth.position.y = -2.3; g.add(plinth);
-    [[-1.9, 1.7], [0, 3.0], [1.9, 2.25]].forEach(([x, h]) => {
-      const bar = LINE(new T.BoxGeometry(1.15, h, 1.15), .9);
-      bar.position.set(x, -2.15 + h / 2, 0); g.add(bar);
-      const cap = LINE(new T.BoxGeometry(1.3, 0.07, 1.3), .5);
-      cap.position.set(x, -2.15 + h, 0); g.add(cap);
-    });
-    const sheet = LINE(new T.PlaneGeometry(3.4, 2.1), .7);
-    sheet.position.set(2.0, 1.3, -1.2); sheet.rotation.y = -0.4; g.add(sheet);
-    const rows = [];
-    for (let i = 0; i < 6; i++) rows.push([[-1.4, 0.72 - i * 0.26, 0.01], [1.1, 0.72 - i * 0.26, 0.01]]);
-    rows.forEach(r => { const l = STROKE(r, .3); sheet.add(l); });
-    const curve = [];
-    for (let i = 0; i <= 40; i++) {
-      const t = i / 40;
-      curve.push([-3.2 + t * 6.4, 0.6 + Math.sin(t * 5) * 0.5 + t * 1.1, 1.4]);
-    }
-    g.add(STROKE(curve, .85));
-    return g;
-  }
+    const plinth = WIRE(new T.CylinderGeometry(3.6, 3.8, 0.28, 46), .3);
+    plinth.position.y = -2.5; g.add(plinth);
 
-  // 02 — the method: the desk the work was done at
-  function chDesk() {
-    const g = new T.Group();
-    const top = LINE(new T.BoxGeometry(7.4, 0.18, 3.0), .9); top.position.y = -1.1; g.add(top);
-    [-3.3, 3.3].forEach(x => {
-      const l = LINE(new T.BoxGeometry(0.16, 2.4, 2.6), .55);
-      l.position.set(x, -2.3, 0); g.add(l);
-    });
-    [[-2.2, .24], [0.85, -.08], [3.0, -.42]].forEach(([x, ry]) => {
-      const m = LINE(new T.BoxGeometry(2.5, 1.5, 0.1), .95);
-      m.position.set(x, 0.15, -0.5); m.rotation.y = ry; g.add(m);
-      const chart = [];
-      for (let i = 0; i <= 22; i++) {
-        const t = i / 22;
-        chart.push([-1.0 + t * 2.0, -0.45 + Math.sin(t * 5 + x) * 0.3 + t * 0.5, 0.07]);
+    // stacks of coin: what was spent
+    [[-0.6, 7], [0.55, 11], [1.7, 5]].forEach(([x, n]) => {
+      for (let i = 0; i < n; i++) {
+        const c = WIRE(new T.CylinderGeometry(0.46, 0.46, 0.11, 18), .45);
+        c.position.set(x, -1.6 + i * 0.12, 0.4);
+        g.add(c);
       }
-      m.add(STROKE(chart, .5));
-      const s = LINE(new T.BoxGeometry(0.5, 0.45, 0.5), .5);
-      s.position.set(x, -0.72, -0.4); s.rotation.y = ry; g.add(s);
     });
-    const kb = LINE(new T.BoxGeometry(2.1, 0.07, 0.72), .6); kb.position.set(0, -0.98, 0.95); g.add(kb);
-    const mug = WIRE(new T.CylinderGeometry(0.22, 0.18, 0.4, 12), .3);
-    mug.position.set(2.3, -0.82, 1.0); g.add(mug);
+
+    // the invoice it is reconciled against, torn along the bottom
+    const inv = new T.Group();
+    inv.add(LINE(new T.PlaneGeometry(2.9, 3.9), .85));
+    for (let i = 0; i < 9; i++) {
+      const y = 1.5 - i * 0.33;
+      inv.add(STROKE([[-1.15, y, .01], [0.35, y, .01]], .3));
+      inv.add(STROKE([[0.7, y, .01], [1.15, y, .01]], .45));
+    }
+    inv.add(STROKE([[-1.15, -1.52, .01], [1.15, -1.52, .01]], .6));
+    const tear = [];
+    for (let i = 0; i <= 14; i++) tear.push([-1.45 + i * (2.9 / 14), -1.95 + (i % 2 ? .13 : -.13), .01]);
+    inv.add(STROKE(tear, .7));
+    inv.position.set(2.3, 0.6, -0.4); inv.rotation.y = -0.38;
+    g.add(inv);
+
+    // and the line the two of them have to agree on
+    const curve = [];
+    for (let i = 0; i <= 44; i++) {
+      const t = i / 44;
+      curve.push([-3.6 + t * 7.2, 1.5 + Math.sin(t * 4.6) * 0.55 + t * 1.0, 1.6]);
+    }
+    g.add(STROKE(curve, .8));
     return g;
   }
 
-  // 03 — the work: four countries, one account set
+  // 02 — the method: leads in at the top, cost per sale out of the bottom
+  function chFunnel() {
+    const g = new T.Group();
+    g.position.y = -0.7; g.scale.setScalar(0.88);
+    const cone = WIRE(new T.CylinderGeometry(3.1, 0.55, 3.2, 26, 1, true), .5);
+    cone.position.y = 0.5; g.add(cone);
+    g.add(LINE(new T.TorusGeometry(3.1, 0.02, 3, 44), .85)).position.y = 2.1;
+    const spout = WIRE(new T.CylinderGeometry(0.55, 0.55, 1.1, 16, 1, true), .45);
+    spout.position.y = -1.6; g.add(spout);
+
+    // leads falling through it
+    for (let i = 0; i < 16; i++) {
+      const c = LINE(new T.BoxGeometry(0.26, 0.26, 0.26), .8);
+      const a = Math.random() * 6.283, r = Math.random() * 2.3;
+      c.position.set(Math.cos(a) * r, 2.6 + Math.random() * 3.4, Math.sin(a) * r);
+      c.userData.fall = 0.9 + Math.random() * 1.5;
+      c.userData.spread = r;
+      g.add(c);
+    }
+    // what comes out the bottom
+    for (let i = 0; i < 4; i++) {
+      const coin = WIRE(new T.CylinderGeometry(0.5, 0.5, 0.12, 18), .55);
+      coin.position.set(0, -2.6 + i * 0.13, 0); g.add(coin);
+    }
+    return g;
+  }
+
+  // 03 — the work: four markets, and the places the advertising ran
   function chGlobe() {
     const g = new T.Group();
-    const plinth = LINE(new T.CylinderGeometry(3.1, 3.4, 0.35, 44), .45);
-    plinth.position.y = -2.6; g.add(plinth);
-    const globe = WIRE(new T.SphereGeometry(2.1, 20, 13), .5);
+    const plinth = WIRE(new T.CylinderGeometry(3.1, 3.4, 0.32, 44), .28);
+    plinth.position.y = -2.8; g.add(plinth);
+    const globe = WIRE(new T.SphereGeometry(2.0, 20, 13), .42);
     globe.position.y = 0.1; globe.userData.spin = true; g.add(globe);
-    const ring = WIRE(new T.TorusGeometry(2.8, 0.015, 3, 52), .3);
+    const ring = WIRE(new T.TorusGeometry(2.7, 0.015, 3, 52), .22);
     ring.position.y = 0.1; ring.rotation.x = Math.PI / 2.3; g.add(ring);
-    [[-3.3, 2.1, .6], [3.2, 1.7, -.55], [-3.0, -0.5, .5], [3.4, -0.9, -.5]].forEach(([x, y, ry]) => {
-      const p = LINE(new T.PlaneGeometry(1.9, 1.2), .7);
-      p.position.set(x, y, -0.6); p.rotation.y = ry; g.add(p);
-      g.add(STROKE([[x, y, -0.6], [0, 0.1, 0]], .14));
+
+    // billboards standing around it, each carrying a little advertisement
+    [[-3.9, 1.5, .55], [3.8, 1.1, -.5], [-3.6, -1.3, .45], [3.6, -1.6, -.45]].forEach(([x, y, ry]) => {
+      const bb = new T.Group();
+      bb.add(LINE(new T.PlaneGeometry(2.2, 1.35), .85));
+      bb.add(STROKE([[-0.75, 0.36, .01], [0.3, 0.36, .01]], .4));
+      bb.add(STROKE([[-0.75, 0.10, .01], [0.6, 0.10, .01]], .3));
+      bb.add(LINE(new T.PlaneGeometry(0.62, 0.26), .55)).position.set(-0.45, -0.32, .01);
+      [-0.5, 0.5].forEach(lx => bb.add(STROKE([[lx, -0.68, 0], [lx, -1.5, 0]], .3)));
+      bb.position.set(x, y, -0.5); bb.rotation.y = ry;
+      g.add(bb);
+      g.add(STROKE([[x, y, -0.5], [0, 0.1, 0]], .1));
     });
     return g;
   }
 
-  // 04 — the person: one room, one person, start to finish
+  // 04 — the person: the desk it all ran from, and the voice it went out through
   function chRoom() {
     const g = new T.Group();
     const W = 13, H = 7.4, D = 9;
-    g.add(STROKE([[-W / 2, -H / 2, D / 2], [-W / 2, -H / 2, -D / 2], [W / 2, -H / 2, -D / 2], [W / 2, -H / 2, D / 2]], .4));
-    g.add(STROKE([[-W / 2, H / 2, -D / 2], [-W / 2, -H / 2, -D / 2]], .3));
-    g.add(STROKE([[W / 2, H / 2, -D / 2], [W / 2, -H / 2, -D / 2]], .3));
-    g.add(STROKE([[-W / 2, H / 2, -D / 2], [W / 2, H / 2, -D / 2]], .3));
-    const desk = LINE(new T.BoxGeometry(5.0, 0.14, 2.2), .85);
-    desk.position.set(-1.4, -1.5, -2.2); g.add(desk);
-    [-3.6, 0.8].forEach(x => {
-      const l = LINE(new T.BoxGeometry(0.12, 2.2, 1.9), .45);
+    g.add(STROKE([[-W / 2, -H / 2, D / 2], [-W / 2, -H / 2, -D / 2], [W / 2, -H / 2, -D / 2], [W / 2, -H / 2, D / 2]], .32));
+    g.add(STROKE([[-W / 2, H / 2, -D / 2], [-W / 2, -H / 2, -D / 2]], .22));
+    g.add(STROKE([[W / 2, H / 2, -D / 2], [W / 2, -H / 2, -D / 2]], .22));
+    g.add(STROKE([[-W / 2, H / 2, -D / 2], [W / 2, H / 2, -D / 2]], .22));
+
+    const desk = LINE(new T.BoxGeometry(5.4, 0.14, 2.3), .85);
+    desk.position.set(-1.2, -1.5, -2.2); g.add(desk);
+    [-3.7, 1.3].forEach(x => {
+      const l = LINE(new T.BoxGeometry(0.12, 2.2, 1.9), .4);
       l.position.set(x, -2.6, -2.2); g.add(l);
     });
-    const mon = LINE(new T.BoxGeometry(2.2, 1.35, 0.1), .9);
-    mon.position.set(-1.6, -0.6, -2.9); g.add(mon);
-    const chair = LINE(new T.BoxGeometry(1.0, 0.12, 1.0), .5);
-    chair.position.set(-1.3, -2.2, -0.4); g.add(chair);
-    chair.add(LINE(new T.BoxGeometry(1.0, 1.2, 0.1), .5)).position.set(0, 0.6, -0.45);
-    const shelf = LINE(new T.BoxGeometry(3.0, 0.08, 0.7), .5);
-    [1.4, 2.3].forEach((y, i) => { const s = shelf.clone(); s.position.set(3.6, y, -3.9); g.add(s); });
-    const lamp = WIRE(new T.SphereGeometry(0.55, 12, 8), .4);
-    lamp.position.set(2.0, 2.0, -1.4); g.add(lamp);
-    g.add(STROKE([[2.0, 3.7, -1.4], [2.0, 2.5, -1.4]], .25));
-    const plant = new T.Group();
-    for (let i = 0; i < 7; i++) {
-      const a = (i / 7) * Math.PI * 2;
-      plant.add(STROKE([[0, 0, 0], [Math.cos(a) * .45, .7 + Math.random() * .4, Math.sin(a) * .45]], .45));
+
+    // the monitor, running a campaign
+    const mon = LINE(new T.BoxGeometry(2.5, 1.5, 0.08), .9);
+    mon.position.set(-1.9, -0.55, -2.9); g.add(mon);
+    const line = [];
+    for (let i = 0; i <= 24; i++) {
+      const t = i / 24;
+      line.push([-1.0 + t * 2.0, -0.42 + Math.sin(t * 5.2) * 0.26 + t * 0.52, 0.06]);
     }
-    plant.position.set(4.3, -2.2, -1.0); g.add(plant);
-    plant.add(LINE(new T.CylinderGeometry(0.3, 0.22, 0.5, 10), .5)).position.y = -0.25;
+    mon.add(STROKE(line, .55));
+    mon.add(STROKE([[-1.05, 0.52, .06], [1.05, 0.52, .06]], .3));
+
+    // the phone beside it, running the same thing small
+    const ph = LINE(new T.BoxGeometry(0.56, 1.1, 0.05), .7);
+    ph.position.set(0.8, -1.05, -1.6); ph.rotation.x = -0.32; g.add(ph);
+    ph.add(LINE(new T.PlaneGeometry(0.42, 0.3), .4)).position.set(0, 0.22, .04);
+
+    // and the megaphone: the part that is actually advertising
+    const meg = new T.Group();
+    meg.add(WIRE(new T.CylinderGeometry(1.15, 0.34, 1.5, 20, 1, true), .62));
+    meg.add(LINE(new T.TorusGeometry(1.15, 0.02, 3, 30), .85)).position.y = 0.75;
+    const grip = LINE(new T.BoxGeometry(0.17, 0.5, 0.17), .5);
+    grip.position.set(0, -0.95, 0.42); meg.add(grip);
+    meg.position.set(3.6, -0.5, -1.4);
+    meg.rotation.set(0.1, 0, -0.95);
+    g.add(meg);
+    // what comes out of it
+    [1.5, 2.0, 2.5].forEach((r, i) => {
+      const arc = [];
+      for (let k = 0; k <= 12; k++) {
+        const a = -0.55 + (k / 12) * 1.1;
+        arc.push([4.5 + Math.cos(a) * r * 0.55, 0.45 + Math.sin(a) * r, -1.4]);
+      }
+      g.add(STROKE(arc, .34 - i * 0.08));
+    });
+
+    const chair = LINE(new T.BoxGeometry(1.0, 0.12, 1.0), .4);
+    chair.position.set(-1.3, -2.2, -0.4); g.add(chair);
+    chair.add(LINE(new T.BoxGeometry(1.0, 1.2, 0.1), .4)).position.set(0, 0.6, -0.45);
+    const lamp = WIRE(new T.SphereGeometry(0.5, 12, 8), .3);
+    lamp.position.set(2.0, 2.0, -1.4); g.add(lamp);
+    g.add(STROKE([[2.0, 3.7, -1.4], [2.0, 2.5, -1.4]], .18));
     return g;
   }
 
@@ -294,8 +344,8 @@
   let ready = false;
   fetch('assets/sq-glyphs.json')
     .then(r => r.json())
-    .then(f => mount([chHero(f), chLedger(), chDesk(), chGlobe(), chRoom()]))
-    .catch(() => mount([chHero(null), chLedger(), chDesk(), chGlobe(), chRoom()]));
+    .then(f => mount([chHero(f), chLedger(), chFunnel(), chGlobe(), chRoom()]))
+    .catch(() => mount([chHero(null), chLedger(), chFunnel(), chGlobe(), chRoom()]));
 
   /* ------------------------------------------------------------------ motion */
   const aim = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
@@ -315,10 +365,13 @@
   const burst = new T.LineSegments(bGeo, bMat);
   burst.frustumCulled = false;
   scene.add(burst);
-  let bLife = 0;
+  let bLife = 0, bAt = -1e9;
 
   function shatter() {
     if (RM) return;
+    const now = performance.now();
+    if (now - bAt < 650) return;      // one burst per handoff, never a stream
+    bAt = now;
     for (let i = 0; i < BURST; i++) {
       const r = 2 + Math.random() * 6.5;
       const th = Math.random() * 6.283, ph = Math.acos(2 * Math.random() - 1);
@@ -365,7 +418,7 @@
     if (!vis || !ready) return;
     t += dt * 0.6;
     const rate = (per) => 1 - Math.pow(1 - per, dt * 60);   // per-frame -> per-second
-    const kMove = rate(0.055), kFade = rate(0.09);
+    const kMove = rate(0.055), kFade = rate(0.045);
     cur.x += (aim.x - cur.x) * kMove;
     cur.y += (aim.y - cur.y) * kMove;
 
@@ -386,6 +439,16 @@
         });
         c.position.y = (c.userData.y0 ??= c.position.y) + (1 - k) * 0.35;
         if (c.userData.spin) c.rotation.y = t * 0.2 + cur.x * 0.22;
+        if (c.userData.fall) {
+          c.position.y -= dt * c.userData.fall;
+          c.rotation.x += dt * 1.1; c.rotation.z += dt * 0.7;
+          if (c.position.y < -2.3) {           // back to the top of the funnel
+            c.position.y = 3.4 + Math.random() * 2.2;
+            const a = Math.random() * 6.283, r = Math.random() * 2.3;
+            c.position.x = Math.cos(a) * r; c.position.z = Math.sin(a) * r;
+          }
+          c.userData.y0 = c.position.y;        // don't fight the reveal offset
+        }
       });
       g.rotation.y = cur.x * 0.1;
       g.rotation.x = cur.y * 0.055;
@@ -398,7 +461,7 @@
     });
 
     if (bLife > 0) {
-      bLife = Math.max(0, bLife - dt * 1.5);
+      bLife = Math.max(0, bLife - dt * 1.05);
       const step = dt * 1.6;
       for (let i = 0; i < BURST; i++) {
         const o = i * 6, v = i * 3;

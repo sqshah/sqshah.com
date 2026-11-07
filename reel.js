@@ -63,7 +63,9 @@
     place(animate);
     const c = items[cur];
     num.textContent = String(cur + 1).padStart(2, '0');
-    const set = () => { ttl.innerHTML = c.short || c.ttl; met.textContent = c.met; };
+    // innerHTML, not textContent: the metrics carry entities (&middot;) and
+    // were printing as literal "&MIDDOT;" on the page.
+    const set = () => { ttl.innerHTML = c.short || c.ttl; met.innerHTML = c.met; };
     if (window.gsap && !RM) {
       gsap.to([ttl, met], { y: 12, opacity: 0, duration: .22, ease: 'power2.in',
         onComplete: () => { set(); gsap.fromTo([ttl, met], { y: -12, opacity: 0 },
@@ -74,15 +76,25 @@
   fetch('assets/cases.json').then(r => r.json()).then(d => {
     items = d.cases;
     tot.textContent = String(items.length).padStart(2, '0');
+    // A raw screenshot bled to the panel edge reads as a dropped file. Each
+    // panel is a card instead: index and metric above, the artefact inset and
+    // framed, the name and headline figure below. Cases with no screenshot
+    // use the same frame with the figures enlarged, so the drum stays even.
     deck.innerHTML = items.map((c, i) => {
-      const stat = (c.stats && c.stats[0]) || null;
-      const face = c.img
-        ? `<img src="${c.img}" alt="${c.alt || ''}" loading="lazy" decoding="async">`
-        : `<div class="type"><span class="k">${c.idx}</span>
-             <p>${c.ttl}</p>
-             ${stat ? `<b>${stat[0]}</b><span class="u">${stat[1]}</span>` : ''}</div>`;
-      return `<article class="pane" data-i="${i}">${face}
-          <button class="view" data-i="${i}" aria-label="Open case ${c.idx}">View</button>
+      const s = c.stats || [];
+      const body = c.img
+        ? `<div class="pshot"><img src="${c.img}" alt="${c.alt || ''}" loading="lazy" decoding="async"></div>`
+        : `<div class="pgrid">${s.slice(0, 4).map(([v, k]) =>
+             `<div><b>${v}</b><span>${k}</span></div>`).join('')}</div>`;
+      const lead = s[0];
+      return `<article class="pane" data-i="${i}">
+          <div class="phead"><span>${c.idx}</span><span>${c.met}</span></div>
+          ${body}
+          <div class="pfoot">
+            <h4>${c.short || c.ttl}</h4>
+            ${lead ? `<span class="pfig">${lead[0]}<i>${lead[1]}</i></span>` : ''}
+          </div>
+          <span class="view" aria-hidden="true">View</span>
         </article>`;
     }).join('');
     panels = [...deck.querySelectorAll('.pane')];
@@ -134,11 +146,16 @@
       show(cur + (e.deltaX > 0 ? 1 : -1), true);
     }, { passive: false });
 
-    // View opens that case in the log below, where the detail already lives
+    // The whole panel is the target, not the badge. A 72px circle sitting on a
+    // 3D-transformed, draggable surface is a bad hit target - the click was
+    // landing on the deck instead of the button - and this is better anyway:
+    // a side panel turns to the front, the front panel opens.
     deck.addEventListener('click', e => {
-      const b = e.target.closest('.view');
-      if (!b || moved > 6) return;
-      const open = document.querySelectorAll('#cases .case')[+b.dataset.i];
+      if (moved > 6) return;                      // that was a drag, not a click
+      const pane = e.target.closest('.pane');
+      const i = pane ? +pane.dataset.i : cur;
+      if (i !== cur) { show(i, true); return; }
+      const open = document.querySelectorAll('#cases .case')[cur];
       if (!open) return;
       document.querySelectorAll('#cases .case[open]').forEach(o => { o.open = false; });
       open.open = true;

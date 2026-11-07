@@ -107,23 +107,35 @@ header nav a{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-trans
   transform-style:preserve-3d;cursor:grab;touch-action:pan-y}
 .reel.grab .deck{cursor:grabbing}
 .pane{position:absolute;inset:0;transform-style:preserve-3d;backface-visibility:hidden;
-  background:#111214;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.6);
-  transition:opacity .45s ease;display:grid;place-items:center}
-.pane img{width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none}
-.pane .type{padding:clamp(20px,3vw,40px);color:#EDEEF0;text-align:left;width:100%}
-.pane .type .k{font-family:var(--m);font-size:10px;letter-spacing:.2em;color:#71777F}
-.pane .type p{margin-top:12px;font-size:clamp(15px,1.9vw,27px);font-weight:700;
-  letter-spacing:-.03em;line-height:1.12;text-transform:uppercase;max-width:18ch}
-.pane .type b{display:block;margin-top:clamp(16px,2.4vw,28px);font-size:clamp(26px,4vw,54px);
-  font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
-.pane .type .u{font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-  color:#71777F}
-.pane .view{position:absolute;left:50%;top:50%;translate:-50% -50%;
-  width:clamp(72px,8vw,96px);aspect-ratio:1;border-radius:50%;border:0;cursor:pointer;
-  background:#0C0D10;color:#fff;font-family:var(--m);font-size:10px;letter-spacing:.17em;
-  text-transform:uppercase;opacity:0;scale:.86;transition:opacity .4s,scale .4s}
-.pane.live .view{opacity:1;scale:1}
-.pane .view:hover{background:#000;scale:1.06}
+  background:#0E1013;overflow:hidden;box-shadow:0 34px 80px -34px rgba(0,0,0,.65);
+  transition:opacity .45s ease;cursor:pointer;
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+  padding:clamp(14px,1.5vw,22px);gap:clamp(10px,1.2vw,16px)}
+.phead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  font-family:var(--m);font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:#6C737C}
+.pshot{min-height:0;border:1px solid #23262B;border-radius:7px;overflow:hidden;background:#15181C}
+.pshot img{width:100%;height:100%;object-fit:cover;object-position:top left;
+  -webkit-user-drag:none;user-select:none}
+.pgrid{min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  background:#23262B;border:1px solid #23262B;border-radius:7px;overflow:hidden}
+.pgrid div{background:#111317;display:grid;align-content:center;gap:5px;
+  padding:clamp(10px,1.5vw,20px)}
+.pgrid b{font-size:clamp(17px,2.6vw,36px);font-weight:800;letter-spacing:-.04em;color:#EDEEF0;
+  font-variant-numeric:tabular-nums;line-height:1}
+.pgrid span{font-family:var(--m);font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:#6C737C}
+.pfoot{display:flex;justify-content:space-between;align-items:flex-end;gap:14px}
+.pfoot h4{font-size:clamp(13px,1.5vw,20px);font-weight:700;letter-spacing:-.025em;color:#F2F3F5}
+.pfig{text-align:right;font-size:clamp(14px,1.7vw,23px);font-weight:800;letter-spacing:-.03em;
+  color:#F2F3F5;font-variant-numeric:tabular-nums;line-height:1.05}
+.pfig i{display:block;margin-top:4px;font-style:normal;font-family:var(--m);font-size:8.5px;
+  letter-spacing:.15em;text-transform:uppercase;color:#6C737C;font-weight:400}
+.view{position:absolute;left:50%;top:50%;translate:-50% -50%;pointer-events:none;
+  width:clamp(68px,7vw,88px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+  background:rgba(8,9,11,.74);backdrop-filter:blur(7px);color:#fff;
+  font-family:var(--m);font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;
+  opacity:0;scale:.86;transition:opacity .4s,scale .4s}
+.pane.live:hover .view{opacity:1;scale:1}
 .arw{position:absolute;top:50%;translate:0 -50%;z-index:4;width:clamp(44px,4.4vw,58px);
   aspect-ratio:1;border-radius:50%;border:0;cursor:pointer;background:#0C0D10;color:#fff;
   display:grid;place-items:center;transition:background-color .3s,scale .3s}
@@ -239,8 +251,35 @@ header nav a{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-trans
   font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   transition:border-color .4s,background-color .4s,gap .4s}
 .cta:hover{border-color:var(--live);background:rgba(134,239,172,.07);gap:20px}
-footer{position:relative;background:var(--ink);border-top:1px solid var(--rule);padding-block:22px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+/* ---- the footer, as glass ----
+   The scene canvas is fixed behind the whole document, so leaving the footer
+   itself transparent means the blur has something real to refract: the last
+   chapter's drawing shows through the panel rather than a flat colour. */
+footer{position:relative;padding-block:clamp(26px,5vh,54px) clamp(20px,3vh,32px);
+  background:linear-gradient(180deg,rgba(8,8,10,0),rgba(8,8,10,.55) 42%,rgba(8,8,10,.86))}
+footer .wrap{display:grid;gap:clamp(16px,2.4vh,26px)}
+.glass{position:relative;overflow:hidden;border-radius:clamp(16px,2vw,24px);
+  border:1px solid rgba(255,255,255,.11);
+  background:linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.028));
+  -webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);
+  box-shadow:0 20px 60px -30px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.16);
+  padding:clamp(22px,3.4vw,44px);
+  display:grid;gap:clamp(18px,3vw,44px);align-items:center;
+  grid-template-columns:minmax(0,1fr)}
+@media (min-width:861px){ .glass{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)} }
+/* the sheen that makes it read as glass rather than a grey box */
+.glass::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(118deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 28%,
+    rgba(255,255,255,0) 72%,rgba(255,255,255,.07) 100%)}
+.gsig{position:relative;z-index:1;min-height:clamp(54px,7vw,96px);display:grid;align-items:center}
+.gsig svg{width:100%;max-width:min(100%,420px);height:auto;display:block}
+.gsig path{fill:#F2F3F5}
+.gmeta{position:relative;z-index:1;display:grid;gap:9px;justify-items:start}
+@media (min-width:861px){ .gmeta{justify-items:end;text-align:right} }
+.gmail{font-size:clamp(16px,1.9vw,25px);font-weight:700;letter-spacing:-.025em;
+  border-bottom:1px solid rgba(255,255,255,.22);padding-bottom:2px;transition:border-color .35s}
+.gmail:hover{border-color:var(--live)}
+.fbot{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 
 .boot{position:fixed;inset:0;z-index:90;background:var(--ink);display:grid;align-content:center;
   gap:12px;padding-inline:var(--gut);transition:opacity .7s ease}
@@ -455,10 +494,22 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
   <a class="cta" href="mailto:talk@sqshah.com">talk@sqshah.com &nbsp;&rarr;</a>
 </div></section>
 
-<footer><div class="wrap">
-  <span class="lab">&copy; 2026 Syed Qasim Ali</span>
-  <span class="lab">Gujranwala, Pakistan</span>
-</div></footer>
+<footer>
+  <div class="wrap">
+    <div class="glass">
+      <div class="gsig" id="gsig" aria-label="Signature of Syed Qasim Ali"></div>
+      <div class="gmeta">
+        <a class="gmail" href="mailto:talk@sqshah.com">talk@sqshah.com</a>
+        <span class="lab">Gujranwala, Pakistan &middot; GMT+5</span>
+        <span class="avail"><i></i>Available 15 November</span>
+      </div>
+    </div>
+    <div class="fbot">
+      <span class="lab">&copy; 2026 Syed Qasim Ali</span>
+      <span class="lab">Performance marketing &mdash; four countries</span>
+    </div>
+  </div>
+</footer>
 
 </main>
 
@@ -466,7 +517,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
 <script src="assets/vendor/lenis.min.js?v=0bf174d3"></script>
 <script src="assets/vendor/gsap.min.js?v=28033e44"></script>
 <script src="assets/vendor/ScrollTrigger.min.js?v=ad33c2df"></script>
-<script src="scene.js?v=18300bbe"></script>
+<script src="scene.js?v=1e96092f"></script>
 <script>
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -523,15 +574,34 @@ function start(){
     });
   }
 
-  // whichever chapter holds the frame owns the scene
-  document.querySelectorAll('.ch').forEach(sec=>{
-    const i = +sec.dataset.ch;
-    ScrollTrigger.create({
-      trigger: sec, start: 'top 62%', end: 'bottom 38%',
-      onToggle: s => { if (s.isActive) window.__scene?.(i, 0); },
-      onUpdate: s => { if (s.isActive) window.__scene?.(i, s.progress); }
-    });
-  });
+  // Whichever chapter holds the frame owns the scene.
+  //
+  // One authority, not one trigger per chapter. Per-chapter windows of
+  // 'top 62%' to 'bottom 38%' OVERLAP, so two were active at once and each
+  // frame handed the scene a different index. The active chapter ping-ponged
+  // and the dissolve re-fired every frame, which is why it read as a
+  // permanent field of specks rather than one burst.
+  const chs = [...document.querySelectorAll('.ch')];
+  let held = -1;
+  function pick(){
+    const mid = innerHeight / 2;
+    let best = -1, bestD = Infinity;
+    for (const sec of chs){
+      const r = sec.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) continue;       // off screen
+      const d = Math.abs((r.top + r.bottom) / 2 - mid);
+      if (d < bestD) { bestD = d; best = +sec.dataset.ch; }
+    }
+    if (best < 0) return;
+    const sec = chs[best];
+    const r = sec.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
+    if (best !== held) { held = best; window.__scene?.(best, p); }
+    else window.__scene?.(best, p);
+  }
+  ScrollTrigger.addEventListener('refresh', pick);
+  gsap.ticker.add(pick);
+  pick();
 
   gsap.utils.toArray('.band').forEach(b=>{
     gsap.from(b.children, { y: 26, opacity: 0, duration: 1, ease: 'power3.out', stagger: .12,
@@ -551,6 +621,23 @@ function start(){
 }
 </script>
 <script src="particles.js?v=3ab0e98a"></script>
-<script src="reel.js?v=ddb7569d"></script>
+<script src="reel.js?v=ebc85fb6"></script>
+<script>
+// The signature is ~98KB of path data, so it loads after the page rather than
+// shipping inside the document.
+(function(){
+  const host = document.getElementById('gsig');
+  if (!host) return;
+  const load = () => fetch('assets/signature.json').then(r => r.json()).then(d => {
+    host.innerHTML =
+      '<svg viewBox="0 0 ' + d.w + ' ' + d.h + '" role="img" aria-label="Syed Qasim Ali">' +
+      '<g transform="' + d.transform + '">' +
+      d.outline.map(p => '<path d="' + p + '"/>').join('') +
+      '</g></svg>';
+  }).catch(() => { host.textContent = 'Syed Qasim Ali'; });
+  if (window.requestIdleCallback) requestIdleCallback(load, { timeout: 2500 });
+  else setTimeout(load, 1200);
+})();
+</script>
 </body>
 </html>
