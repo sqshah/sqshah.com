@@ -386,8 +386,8 @@
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="hero3d.js?v=7fe29480"></script>
-<script src="particles.js?v=663e5fc0"></script>
-<script src="feel.js?v=9a592176"></script>
+<script src="particles.js?v=730829a5"></script>
+<script src="feel.js?v=fc106333"></script>
 <script>
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const showAll = () => {
@@ -580,7 +580,7 @@ fetch('assets/signature.json?v=ad9af16d').then(r=>r.json()).then(sig=>{
     const stage = document.querySelector('.stage');
     ScrollTrigger.create({
       trigger:'.hero', start:'top top',
-      end:()=>'+='+Math.round(innerHeight*(matchMedia('(max-width:860px)').matches?2.0:1.7)),
+      end:()=>'+='+Math.round(innerHeight*(matchMedia('(max-width:860px)').matches?1.3:1.1)),
       pin:true, anticipatePin:1, scrub:.45, invalidateOnRefresh:true,
       onUpdate(self){
         const p=self.progress;

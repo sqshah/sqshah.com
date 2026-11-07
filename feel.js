@@ -11,10 +11,10 @@
   /* ---------- 1. inertia scroll ---------------------------------------- */
   if (!RM && window.Lenis) {
     const lenis = new Lenis({
-      duration: 0.75,
+      duration: 0.42,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),  // expo out
       smoothWheel: true,
-      wheelMultiplier: 1.25,
+      wheelMultiplier: 1.6,
       touchMultiplier: 2
     });
     window.__lenis = lenis;
