@@ -93,6 +93,61 @@ header nav a{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-trans
   letter-spacing:.02em;text-transform:uppercase}
 .tile p{margin-top:10px;font-size:12.8px;line-height:1.72;color:var(--mid)}
 
+/* ---- the work, on a drum ----
+   --ry is animated as a plain number and composed into the transform in JS,
+   because a CSS custom property is not interpolable as an angle everywhere. */
+.reel{position:relative;background:#D7D5D0;color:#15150F;min-height:100svh;
+  display:grid;align-content:center;overflow:hidden;isolation:isolate;
+  --persp:1500px;--bend:0deg;--pw:620px;--ph:390px;--ry:0;--z:0px;
+  padding-block:clamp(70px,12vh,120px) clamp(96px,18vh,190px)}
+.reel:focus-visible{outline:2px solid #15150F;outline-offset:-4px}
+.stagewrap{perspective:var(--persp);perspective-origin:50% 50%;
+  transform:rotateX(var(--bend));height:var(--ph)}
+.deck{position:relative;width:var(--pw);height:var(--ph);margin-inline:auto;
+  transform-style:preserve-3d;cursor:grab;touch-action:pan-y}
+.reel.grab .deck{cursor:grabbing}
+.pane{position:absolute;inset:0;transform-style:preserve-3d;backface-visibility:hidden;
+  background:#111214;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.6);
+  transition:opacity .45s ease;display:grid;place-items:center}
+.pane img{width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none}
+.pane .type{padding:clamp(20px,3vw,40px);color:#EDEEF0;text-align:left;width:100%}
+.pane .type .k{font-family:var(--m);font-size:10px;letter-spacing:.2em;color:#71777F}
+.pane .type p{margin-top:12px;font-size:clamp(15px,1.9vw,27px);font-weight:700;
+  letter-spacing:-.03em;line-height:1.12;text-transform:uppercase;max-width:18ch}
+.pane .type b{display:block;margin-top:clamp(16px,2.4vw,28px);font-size:clamp(26px,4vw,54px);
+  font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.pane .type .u{font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  color:#71777F}
+.pane .view{position:absolute;left:50%;top:50%;translate:-50% -50%;
+  width:clamp(72px,8vw,96px);aspect-ratio:1;border-radius:50%;border:0;cursor:pointer;
+  background:#0C0D10;color:#fff;font-family:var(--m);font-size:10px;letter-spacing:.17em;
+  text-transform:uppercase;opacity:0;scale:.86;transition:opacity .4s,scale .4s}
+.pane.live .view{opacity:1;scale:1}
+.pane .view:hover{background:#000;scale:1.06}
+.arw{position:absolute;top:50%;translate:0 -50%;z-index:4;width:clamp(44px,4.4vw,58px);
+  aspect-ratio:1;border-radius:50%;border:0;cursor:pointer;background:#0C0D10;color:#fff;
+  display:grid;place-items:center;transition:background-color .3s,scale .3s}
+.arw:hover{background:#000;scale:1.07}
+.arw svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+.arw.prev{left:clamp(12px,3vw,46px)} .arw.next{right:clamp(12px,3vw,46px)}
+.reelfoot{position:absolute;left:var(--gut);bottom:clamp(26px,5vh,54px);z-index:4;
+  display:grid;gap:7px;max-width:min(80vw,18ch);pointer-events:none}
+.rcount{font-family:var(--m);font-size:11px;letter-spacing:.2em;color:#5E5C54}
+.rcount b{color:#15150F;font-weight:500}
+.rttl{font-size:clamp(24px,3.2vw,46px);font-weight:800;letter-spacing:-.045em;line-height:1;
+  text-wrap:balance}
+.rmet{font-family:var(--m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:#5E5C54}
+.rhint{position:absolute;right:var(--gut);bottom:clamp(26px,5vh,54px);z-index:4;color:#5E5C54}
+@media (max-width:860px){
+  /* arrows drop to the foot of the frame, so the title sits above them
+     rather than underneath */
+  .arw{top:auto;bottom:clamp(22px,4vh,40px);translate:0 0}
+  .rhint{display:none}
+  .reelfoot{max-width:76vw;bottom:clamp(88px,15vh,120px)}
+}
+
 /* ---- the instruments ----
    Every glyph is stroked in currentColor, so the set inverts with whatever it
    sits on; there is no second icon file for the light chapter. */
@@ -187,16 +242,25 @@ header nav a{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-trans
 footer{position:relative;background:var(--ink);border-top:1px solid var(--rule);padding-block:22px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
 
-.boot{position:fixed;inset:0;z-index:90;background:var(--ink);display:grid;place-content:center;
-  gap:14px;justify-items:center;transition:opacity .7s ease}
+.boot{position:fixed;inset:0;z-index:90;background:var(--ink);display:grid;align-content:center;
+  gap:12px;padding-inline:var(--gut);transition:opacity .7s ease}
 .boot.gone{opacity:0;pointer-events:none}
-.boot .c{font-family:var(--m);font-size:clamp(40px,9vw,104px);letter-spacing:-.04em;
+.bhead{display:flex;justify-content:space-between;align-items:baseline}
+.boot .c{font-size:clamp(38px,9vw,116px);font-weight:800;letter-spacing:-.05em;line-height:1;
   font-variant-numeric:tabular-nums}
+.bbar{height:1px;background:var(--rule);overflow:hidden}
+.bbar i{display:block;height:100%;width:0;background:var(--fg)}
+.bfoot{opacity:.7}
 </style>
 </head>
 <body>
 
-<div class="boot" id="boot"><div class="c" id="bc">00</div><div class="lab">Reconciling</div></div>
+<div class="boot" id="boot">
+  <div class="bhead"><span class="lab">Advertising reconciled</span><span class="lab" id="bpc">0%</span></div>
+  <div class="c" id="bc">$0</div>
+  <div class="bbar"><i id="bfill"></i></div>
+  <div class="lab bfoot">Kenya &middot; Uganda &middot; Tanzania &middot; Pakistan</div>
+</div>
 
 <div class="stage" id="stage" aria-hidden="true"></div>
 
@@ -337,6 +401,21 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
     of them.</p>
   </div>
 </section>
+<!-- the work, on a drum you turn -->
+<section class="reel" id="reel">
+  <div class="stagewrap"><div class="deck"></div></div>
+  <button class="arw prev" aria-label="Previous case">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg></button>
+  <button class="arw next" aria-label="Next case">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
+  <div class="reelfoot">
+    <span class="rcount"><b class="rnum">01</b> / <span class="rtot">00</span></span>
+    <h3 class="rttl">&nbsp;</h3>
+    <span class="rmet"></span>
+  </div>
+  <span class="rhint lab">Drag, or use the arrows</span>
+</section>
+
 <div class="slab"><div class="wrap"><div class="cases" id="cases"></div></div></div>
 
 <!-- 04 ─────────────────────────────────────────────────────────── the person -->
@@ -387,7 +466,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
 <script src="assets/vendor/lenis.min.js?v=0bf174d3"></script>
 <script src="assets/vendor/gsap.min.js?v=28033e44"></script>
 <script src="assets/vendor/ScrollTrigger.min.js?v=ad33c2df"></script>
-<script src="scene.js?v=6eb5a047"></script>
+<script src="scene.js?v=18300bbe"></script>
 <script>
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -411,15 +490,21 @@ fetch('assets/cases.json').then(r=>r.json()).then(d=>{
 });
 
 function start(){
+  // The loader counts the figure the page is actually about, not an
+  // abstract 0-100.
   const boot = document.getElementById('boot'), bc = document.getElementById('bc');
-  let done = false, shown = 0;
+  const bpc = document.getElementById('bpc'), bfill = document.getElementById('bfill');
+  const TARGET = 166643;
+  const t0 = performance.now(), RUN = 1250;
   (function count(){
-    if (done) return;
-    shown += (Math.min(96, performance.now()/22) - shown) * 0.08;
-    bc.textContent = String(Math.floor(shown)).padStart(2,'0');
-    requestAnimationFrame(count);
+    const k = Math.min(1, (performance.now() - t0) / RUN);
+    const e = 1 - Math.pow(1 - k, 3);
+    bc.textContent = '$' + Math.floor(TARGET * e).toLocaleString('en-US');
+    bpc.textContent = Math.round(e * 100) + '%';
+    bfill.style.width = (e * 100) + '%';
+    if (k < 1) requestAnimationFrame(count);
+    else setTimeout(()=> boot.classList.add('gone'), 260);
   })();
-  setTimeout(()=>{ done = true; bc.textContent = '100'; boot.classList.add('gone'); }, 1100);
 
   if (!RM && window.Lenis) {
     // A lerp, not a duration. A timer commits to finishing a journey and so
@@ -466,5 +551,6 @@ function start(){
 }
 </script>
 <script src="particles.js?v=3ab0e98a"></script>
+<script src="reel.js?v=ddb7569d"></script>
 </body>
 </html>

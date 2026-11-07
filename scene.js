@@ -301,6 +301,43 @@
   const aim = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
   let active = 0, within = 0, t = 0, prev = performance.now();
 
+  /* The reference does not cut between chapters, it shatters the drawing into
+     a cloud of loose strokes that scatter and die. One reused buffer: on a
+     change the segments are re-seeded around the frame and given a velocity,
+     then flown out and faded. Nothing is allocated per transition. */
+  const BURST = 1100;
+  const bPos = new Float32Array(BURST * 6);
+  const bVel = new Float32Array(BURST * 3);
+  const bGeo = new T.BufferGeometry();
+  bGeo.setAttribute('position', new T.BufferAttribute(bPos, 3));
+  const bMat = new T.LineBasicMaterial({ color: 0xFFFFFF, transparent: true,
+    opacity: 0, depthWrite: false, fog: false });
+  const burst = new T.LineSegments(bGeo, bMat);
+  burst.frustumCulled = false;
+  scene.add(burst);
+  let bLife = 0;
+
+  function shatter() {
+    if (RM) return;
+    for (let i = 0; i < BURST; i++) {
+      const r = 2 + Math.random() * 6.5;
+      const th = Math.random() * 6.283, ph = Math.acos(2 * Math.random() - 1);
+      const x = r * Math.sin(ph) * Math.cos(th);
+      const y = r * Math.cos(ph) * 0.62;
+      const z = r * Math.sin(ph) * Math.sin(th) * 0.8;
+      const L = 0.12 + Math.random() * 0.5;
+      const dx = (Math.random() - .5), dy = (Math.random() - .5), dz = (Math.random() - .5);
+      const m = Math.hypot(dx, dy, dz) || 1;
+      const o = i * 6;
+      bPos[o] = x; bPos[o + 1] = y; bPos[o + 2] = z;
+      bPos[o + 3] = x + dx / m * L; bPos[o + 4] = y + dy / m * L; bPos[o + 5] = z + dz / m * L;
+      const v = i * 3, sp = 1.4 + Math.random() * 3.4;
+      bVel[v] = x / r * sp; bVel[v + 1] = y / r * sp; bVel[v + 2] = z / r * sp;
+    }
+    bGeo.attributes.position.needsUpdate = true;
+    bLife = 1;
+  }
+
   function size() {
     const w = host.clientWidth, h = host.clientHeight;
     if (!w || !h) return;
@@ -360,6 +397,19 @@
       if (c.userData.mirror) c.rotation.y = -c.userData.mirror.rotation.y;
     });
 
+    if (bLife > 0) {
+      bLife = Math.max(0, bLife - dt * 1.5);
+      const step = dt * 1.6;
+      for (let i = 0; i < BURST; i++) {
+        const o = i * 6, v = i * 3;
+        bPos[o] += bVel[v] * step;     bPos[o + 1] += bVel[v + 1] * step;     bPos[o + 2] += bVel[v + 2] * step;
+        bPos[o + 3] += bVel[v] * step; bPos[o + 4] += bVel[v + 1] * step; bPos[o + 5] += bVel[v + 2] * step;
+      }
+      bGeo.attributes.position.needsUpdate = true;
+      bMat.opacity = Math.sin(bLife * Math.PI) * 0.85;   // in fast, out slow
+      burst.visible = true;
+    } else if (burst.visible) { burst.visible = false; bMat.opacity = 0; }
+
     camera.position.x = cur.x * 0.85;
     camera.position.y = 0.4 - cur.y * 0.45;
     camera.lookAt(0, 0.1 - within * 0.1, 0);
@@ -368,5 +418,8 @@
   if (RM) { const r = () => ready ? renderer.render(scene, camera) : requestAnimationFrame(r); r(); }
   else tick();
 
-  window.__scene = (i, p) => { active = i; within = p || 0; };
+  window.__scene = (i, p) => {
+    if (i !== active) shatter();
+    active = i; within = p || 0;
+  };
 })();
