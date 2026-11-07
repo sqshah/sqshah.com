@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v=502d2e88">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -115,7 +115,7 @@
 
 <section class="band paper" id="who">
   <div class="wrap who">
-    <figure class="plate" data-src="assets/figure-ink.png">
+    <figure class="plate" data-src="assets/figure-ink.png?v=054f6cd3">
       <canvas aria-label="Pen-and-ink drawing of Syed Qasim Ali" role="img"></canvas>
     </figure>
     <div>
@@ -385,9 +385,9 @@
 <script src="assets/vendor/lenis.min.js"></script>
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
-<script src="hero3d.js"></script>
-<script src="particles.js"></script>
-<script src="feel.js"></script>
+<script src="hero3d.js?v=7fe29480"></script>
+<script src="particles.js?v=663e5fc0"></script>
+<script src="feel.js?v=9a592176"></script>
 <script>
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const showAll = () => {
@@ -433,7 +433,7 @@ function splitWords(el){
 }
 
 /* ---------- the signature, written by hand ---------- */
-fetch('assets/signature.json').then(r=>r.json()).then(sig=>{
+fetch('assets/signature.json?v=ad9af16d').then(r=>r.json()).then(sig=>{
   const NS='http://www.w3.org/2000/svg';
   const svg=document.getElementById('sig');
   svg.setAttribute('viewBox',`0 0 ${sig.w} ${sig.h}`);
