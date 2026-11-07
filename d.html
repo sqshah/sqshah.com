@@ -59,7 +59,7 @@ header nav a:hover{color:#fff}
 /* ---- opening ---- */
 .open{min-height:100svh;display:flex;align-items:center;border-top:none}
 .scene{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.scene svg{width:100%;height:100%}
+.scene canvas{display:block;width:100%;height:100%}
 .scene path,.scene line,.scene rect,.scene circle,.scene polyline{
   fill:none;stroke:#FFF;stroke-width:1;vector-effect:non-scaling-stroke}
 .open .wrap{position:relative;z-index:2}
@@ -172,7 +172,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
 <div class="rail" id="rail"></div>
 
 <section class="ch open" id="top">
-  <div class="scene" aria-hidden="true"><svg id="sc" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"></svg></div>
+  <div class="scene" id="room" aria-hidden="true"></div>
   <div class="wrap">
     <p class="br">[ performance marketing &mdash; four countries ]</p>
     <h1 class="name"><span>Syed</span><span>Qasim Ali</span></h1>
@@ -246,63 +246,13 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
 
 <footer><div class="wrap"><span class="lab">&copy; 2026 Syed Qasim Ali</span><span class="lab">Gujranwala, Pakistan</span></div></footer>
 
+<script src="assets/vendor/three.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="room.js"></script>
 <script>
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ---- the line-art room behind the name ------------------------------- */
-(function scene(){
-  const svg = document.getElementById('sc');
-  const NS = 'http://www.w3.org/2000/svg';
-  const add = (t, a) => { const e = document.createElementNS(NS, t);
-    for (const k in a) e.setAttribute(k, a[k]); svg.appendChild(e); return e; };
-  const VX = 800, VY = 470;                       // the vanishing point
-  // a floor of lines running to it, so the page has somewhere to stand
-  for (let i = -26; i <= 26; i++)
-    add('line', {x1: VX + i * 190, y1: 900, x2: VX + i * 7, y2: VY, opacity: .1});
-  for (let r = 1; r < 22; r++){
-    const y = VY + Math.pow(r / 22, 2.4) * 430;
-    add('line', {x1: 0, y1: y, x2: 1600, y2: y, opacity: .1});
-  }
-  // panels standing in it — a dashboard, a chart, a table — drawn, not photographed
-  const panel = (x, y, w, h, o) => {
-    add('rect', {x, y, width: w, height: h, rx: 5, opacity: o});
-    add('line', {x1: x, y1: y + 22, x2: x + w, y2: y + 22, opacity: o * .7});
-    add('circle', {cx: x + 12, cy: y + 11, r: 3, opacity: o * .7});
-    return {x, y, w, h, o};
-  };
-  const spark = (x, y, w, h, o, seed) => {
-    let d = '', n = 26;
-    for (let i = 0; i <= n; i++){
-      const t = i / n;
-      const v = 0.52 + Math.sin(t * 5 + seed) * .2 + t * .3 + Math.sin(t * 17 + seed) * .05;
-      d += (i ? 'L' : 'M') + (x + t * w) + ' ' + (y + h - v * h);
-    }
-    add('path', {d, opacity: o});
-  };
-  const bars = (x, y, w, h, o, seed) => {
-    for (let i = 0; i < 7; i++){
-      const bh = h * (0.28 + Math.abs(Math.sin(i * 1.7 + seed)) * .66);
-      add('rect', {x: x + i * (w / 7) + 3, y: y + h - bh, width: w / 7 - 7, height: bh, opacity: o});
-    }
-  };
-  const P = [[90,250,330,210,.34,1],[1180,210,350,230,.30,2],[250,560,290,180,.22,3],
-             [1080,560,330,190,.20,4],[560,150,250,150,.16,5]];
-  P.forEach(([x,y,w,h,o,s],i)=>{
-    panel(x,y,w,h,o);
-    (i % 2 ? bars : spark)(x+16, y+36, w-32, h-54, o, s);
-  });
-  if (RM) return;
-  // the room drifts with the cursor; nothing more than that
-  let tx=0, ty=0, cx=0, cy=0;
-  addEventListener('mousemove', e=>{ tx=(e.clientX/innerWidth-.5); ty=(e.clientY/innerHeight-.5); },{passive:true});
-  (function loop(){ requestAnimationFrame(loop);
-    cx += (tx-cx)*.045; cy += (ty-cy)*.045;
-    svg.style.transform = `translate3d(${cx*-26}px,${cy*-16}px,0) scale(1.05)`;
-  })();
-})();
 
 /* ---- content ---------------------------------------------------------- */
 const SCOPE = ['Kenya, Uganda, Tanzania, Pakistan', 'verified against released sales',
@@ -347,6 +297,12 @@ function start(){
       e.preventDefault(); l.scrollTo(el,{duration:1.1});
     }));
   }
+
+  if (window.__room) ScrollTrigger.create({
+    trigger:'.open', start:'top top', end:()=>'+='+Math.round(innerHeight*1.4),
+    pin:true, anticipatePin:1, scrub:.3, invalidateOnRefresh:true,
+    onUpdate:self=>window.__room(self.progress)
+  });
 
   secs.forEach((s,i)=>ScrollTrigger.create({trigger:s, start:'top 45%', end:'bottom 45%',
     onToggle:self=>links[i]&&links[i].classList.toggle('on', self.isActive)}));
