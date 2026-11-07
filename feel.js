@@ -8,34 +8,17 @@
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* ---------- 1. inertia scroll ---------------------------------------- */
-  if (!RM && window.Lenis) {
-    const lenis = new Lenis({
-      duration: 0.42,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),  // expo out
-      smoothWheel: true,
-      wheelMultiplier: 1.6,
-      touchMultiplier: 2
-    });
-    window.__lenis = lenis;
-
-    // ScrollTrigger has to be told where we are, and gsap drives the frame
-    if (window.ScrollTrigger) {
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((t) => lenis.raf(t * 1000));
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
-      requestAnimationFrame(raf);
-    }
-
-    // the nav anchors should fly, not jump
+  /* ---------- 1. scrolling is the browser's job -------------------------
+     There was inertia smoothing here. It is gone: the page should move the
+     instant the wheel does, and any easing at all reads as lag. Anchor links
+     still glide, because that is a jump the reader asked for. */
+  if (!RM) {
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', (e) => {
         const el = document.querySelector(a.getAttribute('href'));
         if (!el) return;
         e.preventDefault();
-        lenis.scrollTo(el, { duration: 1.4 });
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
   }
