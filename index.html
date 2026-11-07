@@ -130,6 +130,12 @@ a{color:inherit;text-decoration:none}
 .sig{position:relative;z-index:3;display:block;width:min(74vw,880px);height:auto;overflow:visible;will-change:transform}
 .sig .fill{fill:var(--paper)}
 .sig .pen{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
+/* the nib and the wet ink behind it, only visible while the hand is moving */
+.sig .nib,.sig .wet{opacity:0;transition:opacity .25s ease}
+.sig.writing .nib,.sig.writing .wet{opacity:1}
+.sig .nib{fill:var(--paper)}
+.sig .wet{fill:var(--paper);opacity:0;filter:blur(14px)}
+.sig.writing .wet{opacity:.33}
 .eyebrow{font-family:var(--mono);
   position:relative;z-index:3;display:flex;align-items:center;gap:16px;
   font-size:clamp(9px,.78vw,11px);letter-spacing:.34em;text-transform:uppercase;
@@ -682,12 +688,30 @@ fetch('assets/signature.json').then(r=>r.json()).then(sig=>{
   // The pen is driven by the scroll, not by a timeline. Writing it this way means
   // scrolling back up un-writes it — nothing can latch on over the room.
   let acc=0; const starts=lens.map(L=>{const s=acc; acc+=L; return s;});
+
+  // A nib that rides the stroke being drawn. Without it the line simply appears;
+  // with it there is something doing the writing, which is the whole difference.
+  const nib=document.createElementNS(NS,'circle');
+  nib.setAttribute('class','nib'); nib.setAttribute('r','26');
+  const wet=document.createElementNS(NS,'circle');          // ink still settling behind it
+  wet.setAttribute('class','wet'); wet.setAttribute('r','54');
+  svg.append(wet,nib);
+
   window.__sign = (u) => {
     const drawn = u * total;
+    let live=-1, at=0;
     pens.forEach((p,i)=>{
       const k = Math.max(0, Math.min(1, (drawn - starts[i]) / lens[i]));
       p.style.strokeDashoffset = lens[i] * (1 - k);
+      if (k > 0 && k < 1) { live = i; at = k; }             // the stroke under the nib
     });
+    const writing = u > 0.001 && u < 0.999 && live >= 0;
+    svg.classList.toggle('writing', writing);
+    if (writing) {
+      const pt = pens[live].getPointAtLength(lens[live] * at);
+      nib.setAttribute('cx', pt.x); nib.setAttribute('cy', pt.y);
+      wet.setAttribute('cx', pt.x); wet.setAttribute('cy', pt.y);
+    }
   };
   window.__sign(0);
 
