@@ -93,6 +93,37 @@ header nav a{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-trans
   letter-spacing:.02em;text-transform:uppercase}
 .tile p{margin-top:10px;font-size:12.8px;line-height:1.72;color:var(--mid)}
 
+/* ---- the instruments ----
+   Every glyph is stroked in currentColor, so the set inverts with whatever it
+   sits on; there is no second icon file for the light chapter. */
+.kit{margin-top:clamp(34px,5vh,64px)}
+.kitline{display:flex;align-items:center;gap:14px;margin-bottom:clamp(16px,2.4vh,26px)}
+.kitline i{flex:1;height:1px;background:currentColor;opacity:.14}
+/* Six cards, so the column count has to divide six or the last row strands a
+   dead cell: auto-fit gave 5 + 1 on a wide screen. */
+.kitgrid{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  border-radius:12px;overflow:hidden;grid-template-columns:minmax(0,1fr)}
+@media (min-width:620px){ .kitgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:1060px){ .kitgrid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.kitcard{background:var(--ink);padding:clamp(20px,2.4vw,28px);
+  transition:background-color .4s}
+.kitcard:hover{background:#0D0F13}
+.kitcard .g{width:26px;height:26px;display:block;color:var(--fg);
+  fill:none;stroke:currentColor;stroke-width:1.25;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .5s cubic-bezier(.3,0,.1,1)}
+.kitcard:hover .g{transform:translateY(-2px) rotate(-4deg)}
+.kitcard h4{margin-top:clamp(14px,2vh,20px);font-size:clamp(14px,1.25vw,16.5px);
+  font-weight:700;letter-spacing:-.015em}
+.kitcard p{margin-top:8px;font-size:12.6px;line-height:1.7;color:var(--mid)}
+.kitcard ul{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;list-style:none}
+.kitcard li{font-family:var(--m);font-size:9px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--rule);border-radius:999px;padding:4px 9px}
+/* on paper the same markup flips without a second set of assets */
+.light .kitgrid,.light .kitcard{background:#E6E3DA}
+.light .kitcard{background:var(--paper)}
+.light .kitcard .g{color:#17170F}
+
 .cases{border-top:1px solid var(--rule)}
 .case{border-bottom:1px solid var(--rule)}
 .case summary{list-style:none;cursor:pointer;display:grid;gap:6px 20px;align-items:baseline;
@@ -220,7 +251,81 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
     <p>Cost per lead and cost per sale disagree, and only one of them pays wages.</p></div>
   <div class="tile"><div class="no">04</div><h3>Leave the machine behind</h3>
     <p>A result that cannot be repeated is luck. Dashboards outlive whoever built them.</p></div>
-</div></div></div>
+</div>
+
+<!-- The instruments. Glyphs are drawn here rather than borrowed: every stroke
+     is currentColor, so the whole set inverts with whatever it sits on and
+     there is no second light/dark icon file to keep in sync. -->
+<div class="kit">
+  <div class="kitline"><span class="lab">The instruments</span><i></i></div>
+  <div class="kitgrid">
+
+    <div class="kitcard">
+      <svg class="g" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="9.6" cy="14.4" r="7"/><circle cx="9.6" cy="14.4" r="3.1"/>
+        <path d="M21 3 12.1 11.9"/><path d="M11.6 7.4v4.9h4.9"/>
+      </svg>
+      <h4>Paid media</h4>
+      <p>Search, display, shopping and social, bid to cost per sale rather than cost per click.</p>
+      <ul><li>Google Ads</li><li>Meta Ads</li><li>Merchant Center</li></ul>
+    </div>
+
+    <div class="kitcard">
+      <svg class="g" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.2 15.2 21 21"/>
+        <path d="M7.2 12.1l2.3-3 2.1 2 2.2-3.4"/>
+      </svg>
+      <h4>Organic search</h4>
+      <p>Technical repair, content structure and the slow compounding that paid media cannot buy.</p>
+      <ul><li>Search Console</li><li>Analytics</li><li>Screaming Frog</li></ul>
+    </div>
+
+    <div class="kitcard">
+      <svg class="g" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="5.5" width="18" height="13" rx="1.6"/>
+        <path d="M3.6 6.4 12 13l8.4-6.6"/><path d="M1 9.5h2.6M1 13h1.8"/>
+      </svg>
+      <h4>Email &amp; lifecycle</h4>
+      <p>Sequences, segmentation and deliverability — including a sending platform built in-house
+      rather than licensed.</p>
+      <ul><li>Zoho</li><li>Mailchimp</li><li>In-house</li></ul>
+    </div>
+
+    <div class="kitcard">
+      <svg class="g" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2.5" y="4" width="19" height="16" rx="1.8"/><path d="M2.5 8.5h19"/>
+        <circle cx="5.4" cy="6.2" r=".7"/><circle cx="7.8" cy="6.2" r=".7"/>
+        <path d="M11 12.5l2.6 4.4 1.5-1.9 2.2 2.4"/>
+      </svg>
+      <h4>Sites &amp; landing pages</h4>
+      <p>Built, hosted and kept fast, because a campaign is only as good as the page it lands on.</p>
+      <ul><li>WordPress</li><li>Elementor</li><li>Cloudflare</li></ul>
+    </div>
+
+    <div class="kitcard">
+      <svg class="g" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2.5" y="6" width="14" height="12" rx="1.6"/>
+        <path d="M6 10.5h7M6 13.5h4.5"/>
+        <path d="M18 8.5h3.5v12H8v-2.5"/>
+      </svg>
+      <h4>CRM &amp; pipeline</h4>
+      <p>Leads routed, owned and followed up, so a number on a dashboard has a name behind it.</p>
+      <ul><li>Zoho CRM</li><li>ClickUp</li><li>Custom</li></ul>
+    </div>
+
+    <div class="kitcard">
+      <svg class="g" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 4.5h18l-7 8v7l-4 2v-9z"/><path d="M16.5 17.5l1.8 1.8 3.2-3.6"/>
+      </svg>
+      <h4>Measurement</h4>
+      <p>Tracking, attribution and the reconciliation that decides which of two disagreeing
+      numbers is true.</p>
+      <ul><li>Tag Manager</li><li>Sheets</li><li>Dashboards</li></ul>
+    </div>
+
+  </div>
+</div>
+</div></div>
 
 <!-- 03 ───────────────────────────────────────────────────────────── the work -->
 <section class="ch" data-ch="3" id="work">
