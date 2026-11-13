@@ -9,257 +9,11 @@
 <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <meta name="theme-color" content="#000000">
 <meta property="og:title" content="$0.29 a lead">
-<meta property="og:description" content="Four years of paid media for an East African motor group.">
+<meta property="og:description" content="Four years of paid media for an East African motor group. Six accounts, four countries, 145,902 leads at $0.29 each.">
 <meta property="og:image" content="/assets/work/km/cover.jpg">
 <link rel="preload" href="/assets/fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/instrument.woff2" as="font" type="font/woff2" crossorigin>
-<style>
-@font-face{font-family:Anton;font-style:normal;font-weight:400;font-display:block;
-  src:url(/assets/fonts/anton.woff2) format('woff2')}
-@font-face{font-family:Marker;font-style:normal;font-weight:400;font-display:swap;
-  src:url(/assets/fonts/marker.woff2) format('woff2')}
-@font-face{font-family:Instrument;font-style:normal;font-weight:400 700;font-display:block;
-  src:url(/assets/fonts/instrument.woff2) format('woff2-variations')}
-
-/* Black, white and grey. The only colour on the page comes out of the
-   screenshots, so the proof is the brightest thing on it. */
-:root{
-  --black:#000; --off:#FFF; --g1:#9C9C9A; --g2:#6E6E6B; --g3:#262625; --g4:#141413;
-  --head:Anton,Impact,"Haettenschweiler","Arial Narrow Bold",sans-serif;
-  --tag:Marker,"Comic Sans MS",cursive;
-  --ui:Instrument,ui-sans-serif,system-ui,sans-serif;
-  --gut:clamp(18px,4.4vw,70px);
-  --rail:clamp(0px,9vw,150px);
-  --ease:cubic-bezier(.22,.7,.2,1);
-  color-scheme:dark;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{background:var(--black);color:var(--off);font-family:var(--ui);font-size:16px;
-  line-height:1.5;font-variant-numeric:tabular-nums lining-nums;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{display:block;max-width:100%}
-.wrap{max-width:1320px;margin-inline:auto;padding-inline:var(--gut)}
-section{scroll-margin-top:70px}
-
-/* Condensed, bold, uppercase, tight. The headline is the design. */
-.h{font-family:var(--head);font-weight:400;text-transform:uppercase;
-  line-height:.86;letter-spacing:-.012em}
-.mk{font-family:var(--tag);text-transform:none;letter-spacing:0;
-  line-height:.9;display:inline-block;transform:rotate(-2.6deg)}
-.lbl{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--g2)}
-.tagline{font-family:var(--tag);font-size:clamp(15px,1.5vw,19px);color:var(--off);
-  display:inline-flex;align-items:center;gap:10px;transform:rotate(-1.6deg)}
-.tagline::before{content:"";width:16px;height:16px;flex:none;
-  background:var(--off);clip-path:polygon(0 100%,22% 34%,50% 62%,78% 34%,100% 100%)}
-
-.bar{position:fixed;top:0;left:0;right:0;z-index:60;mix-blend-mode:difference}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:16px}
-.bar a{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#fff;
-  text-decoration:none;opacity:.75;transition:opacity .3s}
-.bar a:hover{opacity:1}
-
-/* --------------------------------------------------------------- cover -- */
-.cover{min-height:100svh;display:grid;align-content:center;position:relative;
-  padding-block:120px 60px;overflow:hidden}
-.cover .shot{position:absolute;inset:0;z-index:0}
-.cover .shot img{width:100%;height:100%;object-fit:cover;opacity:.18;
-  filter:grayscale(1) blur(10px) contrast(1.1);transform:scale(1.08)}
-.cover .shot::after{content:"";position:absolute;inset:0;
-  background:radial-gradient(120% 86% at 30% 40%,rgba(0,0,0,.3) 8%,rgba(0,0,0,.86) 62%,#000 100%)}
-.cover .wrap{position:relative;z-index:2}
-.cover h1{margin-top:clamp(16px,2.6vh,28px);font-size:clamp(58px,13.5vw,210px)}
-.cover h1 .mk{font-size:.72em;margin-left:.06em}
-.cover .sub{margin-top:clamp(22px,3.4vh,38px);max-width:34ch;color:var(--g1);font-size:15px}
-
-/* ------------------------------------------------------------ info strip -- */
-.strip{border-block:1px solid var(--g3)}
-.strip .in{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--g3)}
-.strip div{background:var(--black);padding:clamp(18px,2.4vw,28px) clamp(14px,1.8vw,22px)}
-.strip b{display:block;margin-top:9px;font-family:var(--head);text-transform:uppercase;
-  font-size:clamp(14px,1.5vw,21px);letter-spacing:.004em;font-weight:400}
-@media(max-width:880px){.strip .in{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:420px){.strip .in{grid-template-columns:1fr}}
-
-/* ------------------------------------------------------------- the rail --
-   Where you are in the story, pinned to the side. */
-.rail{position:fixed;left:max(14px,calc((100vw - 1320px)/2 + 16px));top:50%;
-  translate:0 -50%;z-index:40;display:grid;gap:13px}
-.rail a{display:flex;align-items:center;gap:9px;text-decoration:none;
-  font-size:10px;letter-spacing:.2em;color:var(--g2);transition:color .35s var(--ease)}
-.rail a i{display:block;width:14px;height:1px;background:var(--g2);
-  transition:width .35s var(--ease),background .35s var(--ease)}
-.rail a.on{color:var(--off)}
-.rail a.on i{width:30px;background:var(--off)}
-.rail a span{opacity:0;transition:opacity .35s var(--ease)}
-.rail a.on span,.rail:hover a span{opacity:1}
-@media(max-width:1180px){.rail{display:none}}
-
-main{padding-left:var(--rail)}
-@media(max-width:1180px){main{padding-left:0}}
-
-/* ------------------------------------------------------------- chapters --
-   Held-Mint's numbered cards, in black and white: a bordered head with a big
-   outlined numeral, then the chapter under it. */
-.ch{padding-block:clamp(54px,9vh,120px);border-top:1px solid var(--g3)}
-.card{border:1px solid var(--g3);padding:clamp(20px,2.6vw,32px);
-  display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,40px);align-items:center}
-.card .no{font-family:var(--head);font-size:clamp(46px,7vw,104px);line-height:.8;
-  color:transparent;-webkit-text-stroke:1.5px var(--g1);text-stroke:1.5px var(--g1)}
-.card h2{font-size:clamp(26px,5vw,74px)}
-.card h2 .mk{font-size:.74em;margin-left:.08em}
-.card .meta{margin-top:12px;display:flex;flex-wrap:wrap;gap:7px}
-.card .meta span{border:1px solid var(--g3);padding:6px 12px;font-size:10px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--g2)}
-@media(max-width:700px){.card{grid-template-columns:1fr;gap:14px}}
-
-.body{margin-top:clamp(26px,4vh,46px);
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.44fr);
-  gap:clamp(20px,3.4vw,48px);align-items:end}
-.body .fig{text-align:right}
-.body .fig .v{display:block;font-family:var(--head);font-size:clamp(34px,5.4vw,84px);
-  line-height:.84;letter-spacing:-.01em}
-.body .fig .k{display:block;margin-top:11px}
-@media(max-width:760px){.body{grid-template-columns:1fr}.body .fig{text-align:left}}
-
-.plate img{width:100%;border:1px solid var(--g3);
-  filter:grayscale(1) blur(8px);opacity:.45;transform:translateY(18px);
-  transition:filter 1s var(--ease),opacity 1s var(--ease),transform 1s var(--ease)}
-.ch.in .plate img{filter:grayscale(.1) blur(0);opacity:1;transform:none}
-.plate figcaption{margin-top:11px;display:flex;justify-content:space-between;gap:16px}
-
-/* Original marks, not the platforms' own logos. */
-.mark{width:34px;height:34px;flex:none}
-.mark svg{display:block;width:100%;height:100%}
-.mark path,.mark circle,.mark rect{fill:none;stroke:var(--off);stroke-width:1.4}
-
-.aside{padding-block:clamp(44px,8vh,100px);border-top:1px solid var(--g3)}
-.aside p{font-family:var(--head);font-size:clamp(22px,3.4vw,52px);color:var(--g1);
-  max-width:24ch;text-transform:uppercase;line-height:.92}
-.aside p .mk{color:var(--off);text-transform:none;font-size:.8em}
-
-/* --------------------------------------------------------------- graph -- */
-.graph{padding-block:clamp(54px,9vh,120px);border-top:1px solid var(--g3)}
-.graph .top{position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;
-  flex-wrap:wrap;margin-bottom:clamp(24px,4vh,40px)}
-.graph svg{display:block;width:100%;height:auto;overflow:visible}
-.graph .gl{stroke:var(--g3);stroke-width:1}
-.graph .ar{fill:url(#fade)}
-.graph .ln{fill:none;stroke:var(--off);stroke-width:2;
-  stroke-dasharray:2600;stroke-dashoffset:2600}
-.graph.in .ln{transition:stroke-dashoffset 1.9s var(--ease);stroke-dashoffset:0}
-.graph .dt circle{fill:var(--off);opacity:0}
-.graph.in .dt circle{opacity:1;transition:opacity .5s var(--ease) 1.5s}
-.graph .mo text{font-family:var(--ui);font-size:11px;letter-spacing:.16em;fill:var(--g2)}
-.graph .pk{font-family:var(--head);font-size:21px;fill:var(--off);text-transform:uppercase}
-
-/* ------------------------------------------------------------- results -- */
-.figs{padding-block:clamp(60px,11vh,150px);border-top:1px solid var(--g3)}
-.figs .row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--g3);
-  border:1px solid var(--g3);margin-top:clamp(24px,4vh,42px)}
-.figs .row > div{background:var(--black);padding:clamp(22px,3vw,40px)}
-.figs .v{display:block;font-family:var(--head);font-size:clamp(36px,5.6vw,88px);
-  line-height:.84;letter-spacing:-.01em}
-.figs .k{display:block;margin-top:14px}
-@media(max-width:760px){.figs .row{grid-template-columns:1fr}}
-
-/* --------------------------------------------------------------- slider -- */
-.reveal{padding-bottom:clamp(60px,11vh,150px)}
-.reveal .head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;
-  margin-bottom:clamp(18px,2.6vh,30px);flex-wrap:wrap}
-.cmp{position:relative;aspect-ratio:1600/1021;overflow:hidden;border:1px solid var(--g3);
-  touch-action:pan-y;cursor:ew-resize;user-select:none;background:#000}
-.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.cmp .top2{clip-path:inset(0 0 0 var(--x,55%))}
-.cmp .bar2{position:absolute;top:0;bottom:0;left:var(--x,55%);width:2px;background:var(--off);
-  box-shadow:0 0 0 1px rgba(0,0,0,.45);z-index:3;pointer-events:none}
-.cmp .grab{position:absolute;top:50%;left:var(--x,55%);translate:-50% -50%;z-index:4;
-  width:52px;height:52px;border:1px solid var(--off);border-radius:50%;
-  background:rgba(0,0,0,.45);backdrop-filter:blur(6px);pointer-events:none;
-  display:grid;place-items:center;font-size:9px;letter-spacing:.18em;color:var(--off)}
-.cmp figcaption{position:absolute;bottom:13px;z-index:3;font-size:9px;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--off);background:rgba(0,0,0,.5);
-  backdrop-filter:blur(4px);padding:7px 11px}
-.cmp .l{left:13px} .cmp .r{right:13px}
-
-/* -------------------------------------------------------------- gallery -- */
-.gal{padding-bottom:clamp(60px,11vh,150px)}
-.gal .strip2{display:flex;gap:clamp(12px,2vw,24px);overflow-x:auto;
-  scroll-snap-type:x mandatory;padding-bottom:16px;
-  margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);
-  scrollbar-width:thin;scrollbar-color:var(--g3) transparent}
-.gal figure{flex:0 0 min(80vw,840px);scroll-snap-align:center}
-.gal img{width:100%;height:auto;border:1px solid var(--g3);
-  filter:grayscale(1) blur(7px);opacity:.5;transform:translateY(16px);
-  transition:filter .9s var(--ease),opacity .9s var(--ease),transform .9s var(--ease)}
-.gal figure.in img{filter:grayscale(.12) blur(2.2px);opacity:1;transform:none}
-.gal figcaption{margin-top:11px;display:flex;justify-content:space-between;gap:14px}
-
-/* ----------------------------------------------------------------- gate -- */
-.gate{border-top:1px solid var(--g3);padding-block:clamp(60px,11vh,140px)}
-.gate h2{font-size:clamp(30px,5.6vw,88px);max-width:14ch}
-.gate h2 .mk{font-size:.74em}
-.gate .act{margin-top:clamp(26px,4vh,48px);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.gate a.btn{font-size:10px;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;
-  color:var(--black);background:var(--off);padding:19px 34px;transition:background .3s var(--ease)}
-.gate a.btn:hover{background:var(--g1)}
-.gate a.ghost{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--g1);
-  text-decoration:none;border-bottom:1px solid var(--g3);padding-bottom:5px}
-.gate a.ghost:hover{color:var(--off)}
-
-footer{border-top:1px solid var(--g3);padding-block:34px;
-  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
-
-/* A data panel of our own, not a mocked-up dashboard. The figures are real;
-   the visual is clearly his, so nobody mistakes it for a screenshot of an
-   account it is not. */
-.panel{border:1px solid var(--g3)}
-.panel .pt{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  padding:clamp(16px,2vw,24px);border-bottom:1px solid var(--g3)}
-.panel .br{display:grid;grid-template-columns:minmax(96px,1.1fr) minmax(0,3fr) auto auto;
-  gap:clamp(12px,2vw,26px);align-items:center;
-  padding:clamp(13px,1.7vw,19px) clamp(16px,2vw,24px);border-bottom:1px solid var(--g3)}
-.panel .br:last-child{border-bottom:0}
-.panel .bn{font-size:13px;color:var(--off)}
-.panel .tk{height:7px;background:var(--g4);position:relative;overflow:hidden}
-.panel .tk i{position:absolute;inset:0 auto 0 0;width:0;background:var(--off);
-  transition:width 1.1s var(--ease)}
-.panel.in .tk i{width:var(--w,50%)}
-.panel .bv{font-family:var(--head);font-size:clamp(17px,2vw,27px);line-height:1;
-  text-align:right;min-width:4.6ch}
-.panel .bc{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);
-  text-align:right;min-width:5ch}
-@media(max-width:640px){
-  .panel .br{grid-template-columns:1fr auto;gap:6px 14px}
-  .panel .tk{grid-column:1/-1;order:3}
-}
-
-/* The results, one to a line, each with a rule that draws under it. */
-.stack{margin-top:clamp(24px,4vh,42px);border-top:1px solid var(--g3)}
-.res{padding-block:clamp(26px,4vw,48px);border-bottom:1px solid var(--g3);position:relative}
-.res .v{display:block;font-family:var(--head);font-size:clamp(52px,12vw,180px);
-  line-height:.82;letter-spacing:-.016em}
-.res .meta{margin-top:clamp(12px,1.6vh,20px);display:flex;justify-content:space-between;
-  gap:18px;align-items:baseline;flex-wrap:wrap}
-.res .fill{margin-top:clamp(14px,2vh,22px);height:2px;background:var(--g4);position:relative}
-.res .fill i{position:absolute;inset:0 auto 0 0;width:0;background:var(--off);
-  transition:width 1.4s var(--ease)}
-.res.in .fill i{width:100%}
-.note{font-family:var(--tag);font-size:clamp(14px,1.5vw,20px);color:var(--off);
-  display:inline-block;transform:rotate(-2deg)}
-.graph .note{position:absolute}
-
-[data-rise]{opacity:0;transform:translateY(14px)}
-[data-rise].in{opacity:1;transform:none;
-  transition:opacity .58s var(--ease),transform .58s var(--ease)}
-:focus-visible{outline:1px solid var(--off);outline-offset:4px}
-@media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  [data-rise]{opacity:1;transform:none}
-  .gal img,.plate img{filter:grayscale(.12);opacity:1;transform:none}
-  .graph .ln{stroke-dashoffset:0}.graph .dt circle{opacity:1}
-}
-</style>
+<link rel="stylesheet" href="/assets/case.css">
 </head>
 <body>
 
@@ -280,8 +34,7 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
   <div class="wrap">
     <p class="tagline">four years, four countries</p>
     <h1 class="h">$0.29 <span class="mk">a lead</span></h1>
-    <p class="sub">Six ad accounts for an East African motor group, consolidated into one
-      structure that could say what a sale had cost.</p>
+    <p class="sub">Six ad accounts for an East African motor group, consolidated into one structure that could say what a sale had cost.</p>
   </div>
 </section>
 
@@ -302,8 +55,7 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     <span class="no">01</span>
     <div>
       <h2 class="h">Nobody knew what a <span class="mk">sale</span> cost</h2>
-      <div class="meta"><span>Six accounts</span><span>Four countries</span>
-        <span>Nothing reconciled</span></div>
+      <div class="meta"><span>Six accounts</span><span>Four countries</span><span>Nothing reconciled</span></div>
     </div>
   </div>
 </section>
@@ -313,12 +65,10 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     <span class="no">02</span>
     <div>
       <div style="display:flex;align-items:center;gap:14px">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32">
-          <circle cx="16" cy="16" r="11"/><path d="M16 5v22M5 16h22"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 5v22M5 16h22"/></svg></span>
         <h2 class="h">Google carried the <span class="mk">volume</span></h2>
       </div>
-      <div class="meta"><span>Search</span><span>Performance Max</span><span>Demand Gen</span>
-        <span>Display</span><span>Video</span><span>Store visits</span></div>
+      <div class="meta"><span>Search</span><span>Performance Max</span><span>Demand Gen</span><span>Display</span><span>Video</span><span>Store visits</span></div>
     </div>
   </div>
   <div class="body">
@@ -339,33 +89,31 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     <span class="no">03</span>
     <div>
       <div style="display:flex;align-items:center;gap:14px">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32">
-          <path d="M5 20c0-7 3.4-11 7-11s5 4 8 8 4.6 5 6 5c2.2 0 3-2 3-5s-1.4-6-4-6"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 20c0-7 3.4-11 7-11s5 4 8 8 4.6 5 6 5c2.2 0 3-2 3-5s-1.4-6-4-6"/></svg></span>
         <h2 class="h">Meta carried the <span class="mk">leads</span></h2>
       </div>
-      <div class="meta"><span>Lead forms</span><span>Traffic</span><span>Boosted posts</span>
-        <span>Five branches</span></div>
+      <div class="meta"><span>Lead forms</span><span>Traffic</span><span>Boosted posts</span><span>Five branches</span></div>
     </div>
   </div>
   <div class="body">
     <div class="panel" data-panel>
       <div class="pt"><span class="lbl">Leads by branch</span>
         <span class="lbl">16.9M reached &nbsp;&middot;&nbsp; 32.2M impressions</span></div>
-    <div class="br"><span class="bn">Dar es Salaam</span>
-      <span class="tk" style="--w:100.0%"><i></i></span>
-      <span class="bv">11,866</span><span class="bc">$0.30</span></div>
-    <div class="br"><span class="bn">Kampala</span>
-      <span class="tk" style="--w:96.4%"><i></i></span>
-      <span class="bv">11,435</span><span class="bc">$0.34</span></div>
-    <div class="br"><span class="bn">Mombasa</span>
-      <span class="tk" style="--w:90.1%"><i></i></span>
-      <span class="bv">10,693</span><span class="bc">$0.39</span></div>
-    <div class="br"><span class="bn">Kisumu</span>
-      <span class="tk" style="--w:77.4%"><i></i></span>
-      <span class="bv">9,188</span><span class="bc">$0.19</span></div>
-    <div class="br"><span class="bn">Commercial</span>
-      <span class="tk" style="--w:30.0%"><i></i></span>
-      <span class="bv">3,565</span><span class="bc">$0.17</span></div>
+      <div class="br"><span class="bn">Dar es Salaam</span>
+        <span class="tk" style="--w:100.0%"><i></i></span>
+        <span class="bv">11,866</span><span class="bc">$0.30</span></div>
+      <div class="br"><span class="bn">Kampala</span>
+        <span class="tk" style="--w:96.4%"><i></i></span>
+        <span class="bv">11,435</span><span class="bc">$0.34</span></div>
+      <div class="br"><span class="bn">Mombasa</span>
+        <span class="tk" style="--w:90.1%"><i></i></span>
+        <span class="bv">10,693</span><span class="bc">$0.39</span></div>
+      <div class="br"><span class="bn">Kisumu</span>
+        <span class="tk" style="--w:77.4%"><i></i></span>
+        <span class="bv">9,188</span><span class="bc">$0.19</span></div>
+      <div class="br"><span class="bn">Commercial</span>
+        <span class="tk" style="--w:30.0%"><i></i></span>
+        <span class="bv">3,565</span><span class="bc">$0.17</span></div>
     </div>
     <div class="fig" data-rise>
       <span class="v" data-n="46747">46,747</span>
@@ -380,12 +128,10 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     <span class="no">04</span>
     <div>
       <div style="display:flex;align-items:center;gap:14px">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32">
-          <rect x="4" y="8" width="24" height="16"/><path d="M4 9l12 9 12-9"/></svg></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16"/><path d="M4 9l12 9 12-9"/></svg></span>
         <h2 class="h">The list we already <span class="mk">owned</span></h2>
       </div>
-      <div class="meta"><span>57 flows</span><span>95.2% delivered</span>
-        <span>Built in-house after</span></div>
+      <div class="meta"><span>57 flows</span><span>95.2% delivered</span><span>Built in-house after</span></div>
     </div>
   </div>
   <div class="body">
@@ -402,7 +148,7 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
 </section>
 
 <section class="aside wrap">
-  <p data-rise>Tested TikTok and Snapchat. The audience wasn't there yet, so the budget
+  <p data-rise>Tested TikTok and Snapchat. The audience wasn’t there yet, so the budget
     <span class="mk">moved</span></p>
 </section>
 
@@ -416,7 +162,8 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     <defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity=".13"/>
       <stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
-    <g class="gl"><line x1="26" y1="260" x2="974" y2="260"/><line x1="26" y1="177" x2="974" y2="177"/>
+    <g class="gl"><line x1="26" y1="260" x2="974" y2="260"/>
+      <line x1="26" y1="177" x2="974" y2="177"/>
       <line x1="26" y1="94" x2="974" y2="94"/></g>
     <path class="ar" d="M 26.0 191.1 L 131.3 155.5 L 236.7 140.1 L 342.0 173.9 L 447.3 88.0 L 552.7 114.3 L 658.0 27.3 L 763.3 136.3 L 868.7 132.5 L 974.0 84.5 L 974.0 260 L 26.0 260 Z"/>
     <path class="ln" d="M 26.0 191.1 L 131.3 155.5 L 236.7 140.1 L 342.0 173.9 L 447.3 88.0 L 552.7 114.3 L 658.0 27.3 L 763.3 136.3 L 868.7 132.5 L 974.0 84.5"/>
@@ -491,77 +238,6 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
 </footer>
 
 </main>
-
-<script>
-(function(){
-  'use strict';
-  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const $ = (s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-
-  function fmt(v, el){
-    if (el.dataset.compact && v >= 1e6) return (v/1e6).toFixed(1) + 'M';
-    return (el.dataset.pre||'') + Math.round(v).toLocaleString('en-US');
-  }
-  function count(el, ms){
-    const end = parseFloat(el.dataset.n), final = el.textContent, t0 = performance.now();
-    el.style.minWidth = el.getBoundingClientRect().width + 'px';
-    el.style.display = 'inline-block';
-    (function step(t){
-      const u = Math.min(1,(t-t0)/ms);
-      el.textContent = u<1 ? fmt(end*(1-Math.pow(1-u,4)), el) : final;
-      if (u<1) requestAnimationFrame(step);
-    })(t0);
-  }
-
-  const seen = new WeakSet();
-  const io = new IntersectionObserver(es=>{
-    for (const e of es){
-      if (!e.isIntersecting || seen.has(e.target)) continue;
-      seen.add(e.target); io.unobserve(e.target);
-      e.target.classList.add('in');
-      const n = e.target.matches('[data-n]') ? e.target : e.target.querySelector('[data-n]');
-      if (n && !RM && !seen.has(n)){ seen.add(n); count(n, 1250); }
-    }
-  },{threshold:.3});
-  $$('[data-rise], .gal figure, [data-ch], .graph, [data-panel], [data-res]').forEach(el=>io.observe(el));
-
-  /* The rail marks the chapter nearest the middle of the screen. One authority,
-     so two sections can never both claim it. */
-  const rail = $$('.rail a');
-  const marks = rail.map(a=>({a, el:document.getElementById(a.dataset.r)})).filter(m=>m.el);
-  function pick(){
-    const mid = innerHeight/2;
-    let best=null, bd=Infinity;
-    for (const m of marks){
-      const r = m.el.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > innerHeight) continue;
-      const d = Math.abs((r.top + r.bottom)/2 - mid);
-      if (d < bd){ bd = d; best = m; }
-    }
-    rail.forEach(a=>a.classList.remove('on'));
-    if (best) best.a.classList.add('on');
-  }
-  addEventListener('scroll', pick, {passive:true}); pick();
-
-  const cmp = $('#cmp');
-  if (cmp){
-    const set = (clientX)=>{
-      const r = cmp.getBoundingClientRect();
-      cmp.style.setProperty('--x',
-        Math.max(0, Math.min(100, ((clientX - r.left)/r.width)*100)).toFixed(2) + '%');
-    };
-    let down = false;
-    cmp.addEventListener('pointerdown', e=>{ down=true; cmp.setPointerCapture(e.pointerId); set(e.clientX); });
-    cmp.addEventListener('pointermove', e=>{ if(down) set(e.clientX); });
-    ['pointerup','pointercancel'].forEach(t=>cmp.addEventListener(t, ()=>{ down=false; }));
-    cmp.addEventListener('keydown', e=>{
-      const cur = parseFloat(getComputedStyle(cmp).getPropertyValue('--x')) || 55;
-      if (e.key==='ArrowLeft'){ e.preventDefault(); cmp.style.setProperty('--x', Math.max(0,cur-4)+'%'); }
-      if (e.key==='ArrowRight'){ e.preventDefault(); cmp.style.setProperty('--x', Math.min(100,cur+4)+'%'); }
-    });
-    cmp.tabIndex = 0;
-  }
-})();
-</script>
+<script src="/assets/case.js"></script>
 </body>
 </html>
