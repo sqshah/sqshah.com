@@ -140,7 +140,7 @@ main{padding-left:var(--rail)}
 
 /* --------------------------------------------------------------- graph -- */
 .graph{padding-block:clamp(54px,9vh,120px);border-top:1px solid var(--g3)}
-.graph .top{display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+.graph .top{position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;
   flex-wrap:wrap;margin-bottom:clamp(24px,4vh,40px)}
 .graph svg{display:block;width:100%;height:auto;overflow:visible}
 .graph .gl{stroke:var(--g3);stroke-width:1}
@@ -209,6 +209,45 @@ main{padding-left:var(--rail)}
 
 footer{border-top:1px solid var(--g3);padding-block:34px;
   display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+
+/* A data panel of our own, not a mocked-up dashboard. The figures are real;
+   the visual is clearly his, so nobody mistakes it for a screenshot of an
+   account it is not. */
+.panel{border:1px solid var(--g3)}
+.panel .pt{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:clamp(16px,2vw,24px);border-bottom:1px solid var(--g3)}
+.panel .br{display:grid;grid-template-columns:minmax(96px,1.1fr) minmax(0,3fr) auto auto;
+  gap:clamp(12px,2vw,26px);align-items:center;
+  padding:clamp(13px,1.7vw,19px) clamp(16px,2vw,24px);border-bottom:1px solid var(--g3)}
+.panel .br:last-child{border-bottom:0}
+.panel .bn{font-size:13px;color:var(--off)}
+.panel .tk{height:7px;background:var(--g4);position:relative;overflow:hidden}
+.panel .tk i{position:absolute;inset:0 auto 0 0;width:0;background:var(--off);
+  transition:width 1.1s var(--ease)}
+.panel.in .tk i{width:var(--w,50%)}
+.panel .bv{font-family:var(--head);font-size:clamp(17px,2vw,27px);line-height:1;
+  text-align:right;min-width:4.6ch}
+.panel .bc{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);
+  text-align:right;min-width:5ch}
+@media(max-width:640px){
+  .panel .br{grid-template-columns:1fr auto;gap:6px 14px}
+  .panel .tk{grid-column:1/-1;order:3}
+}
+
+/* The results, one to a line, each with a rule that draws under it. */
+.stack{margin-top:clamp(24px,4vh,42px);border-top:1px solid var(--g3)}
+.res{padding-block:clamp(26px,4vw,48px);border-bottom:1px solid var(--g3);position:relative}
+.res .v{display:block;font-family:var(--head);font-size:clamp(52px,12vw,180px);
+  line-height:.82;letter-spacing:-.016em}
+.res .meta{margin-top:clamp(12px,1.6vh,20px);display:flex;justify-content:space-between;
+  gap:18px;align-items:baseline;flex-wrap:wrap}
+.res .fill{margin-top:clamp(14px,2vh,22px);height:2px;background:var(--g4);position:relative}
+.res .fill i{position:absolute;inset:0 auto 0 0;width:0;background:var(--off);
+  transition:width 1.4s var(--ease)}
+.res.in .fill i{width:100%}
+.note{font-family:var(--tag);font-size:clamp(14px,1.5vw,20px);color:var(--off);
+  display:inline-block;transform:rotate(-2deg)}
+.graph .note{position:absolute}
 
 [data-rise]{opacity:0;transform:translateY(14px)}
 [data-rise].in{opacity:1;transform:none;
@@ -290,6 +329,7 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     <div class="fig" data-rise>
       <span class="v" data-n="1238753">1,238,753</span>
       <span class="lbl k">Clicks</span>
+      <p class="note" style="margin-top:14px">three cents each</p>
     </div>
   </div>
 </section>
@@ -308,12 +348,29 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     </div>
   </div>
   <div class="body">
-    <div>
-      <p class="lbl" data-rise>16.9 million people reached. Screenshots behind the request.</p>
+    <div class="panel" data-panel>
+      <div class="pt"><span class="lbl">Leads by branch</span>
+        <span class="lbl">16.9M reached &nbsp;&middot;&nbsp; 32.2M impressions</span></div>
+    <div class="br"><span class="bn">Dar es Salaam</span>
+      <span class="tk" style="--w:100.0%"><i></i></span>
+      <span class="bv">11,866</span><span class="bc">$0.30</span></div>
+    <div class="br"><span class="bn">Kampala</span>
+      <span class="tk" style="--w:96.4%"><i></i></span>
+      <span class="bv">11,435</span><span class="bc">$0.34</span></div>
+    <div class="br"><span class="bn">Mombasa</span>
+      <span class="tk" style="--w:90.1%"><i></i></span>
+      <span class="bv">10,693</span><span class="bc">$0.39</span></div>
+    <div class="br"><span class="bn">Kisumu</span>
+      <span class="tk" style="--w:77.4%"><i></i></span>
+      <span class="bv">9,188</span><span class="bc">$0.19</span></div>
+    <div class="br"><span class="bn">Commercial</span>
+      <span class="tk" style="--w:30.0%"><i></i></span>
+      <span class="bv">3,565</span><span class="bc">$0.17</span></div>
     </div>
     <div class="fig" data-rise>
       <span class="v" data-n="46747">46,747</span>
       <span class="lbl k">Leads at $0.30</span>
+      <p class="note" style="margin-top:14px">five branches</p>
     </div>
   </div>
 </section>
@@ -339,6 +396,7 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     <div class="fig" data-rise>
       <span class="v" data-n="158933">158,933</span>
       <span class="lbl k">Sends</span>
+      <p class="note" style="margin-top:14px">95.2% delivered</p>
     </div>
   </div>
 </section>
@@ -351,6 +409,7 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
 <section class="graph wrap" id="graph">
   <div class="top">
     <p class="lbl" data-rise>Media placed, 2026</p>
+    <p class="note" data-rise style="position:absolute;left:50%;top:-6px">July peak</p>
     <p class="lbl" data-rise>Google and Meta, from the invoices</p>
   </div>
   <svg viewBox="0 0 1000 300" role="img" aria-label="Monthly media spend through 2026, peaking at $11,831 in July">
@@ -372,13 +431,19 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
     <span class="no">05</span>
     <div><h2 class="h">What <span class="mk">changed</span></h2></div>
   </div>
-  <div class="row">
-    <div data-rise><span class="v" data-n="145902">145,902</span>
-      <span class="lbl k">Leads captured</span></div>
-    <div data-rise><span class="v" data-n="47859432" data-compact>47.9M</span>
-      <span class="lbl k">Impressions served</span></div>
-    <div data-rise><span class="v" data-n="166643" data-pre="$">$166,643</span>
-      <span class="lbl k">Advertising managed</span></div>
+  <div class="stack">
+    <div class="res" data-res><span class="v" data-n="145902">145,902</span>
+      <div class="meta"><span class="lbl">Leads captured</span>
+        <span class="note">all five branches</span></div>
+      <div class="fill"><i></i></div></div>
+    <div class="res" data-res><span class="v" data-n="47859432" data-compact>47.9M</span>
+      <div class="meta"><span class="lbl">Impressions served</span>
+        <span class="note">Google + Meta</span></div>
+      <div class="fill"><i></i></div></div>
+    <div class="res" data-res><span class="v" data-n="166643" data-pre="$">$166,643</span>
+      <div class="meta"><span class="lbl">Advertising managed</span>
+        <span class="note">four years of it</span></div>
+      <div class="fill"><i></i></div></div>
   </div>
 </section>
 
@@ -458,7 +523,7 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
       if (n && !RM && !seen.has(n)){ seen.add(n); count(n, 1250); }
     }
   },{threshold:.3});
-  $$('[data-rise], .gal figure, [data-ch], .graph').forEach(el=>io.observe(el));
+  $$('[data-rise], .gal figure, [data-ch], .graph, [data-panel], [data-res]').forEach(el=>io.observe(el));
 
   /* The rail marks the chapter nearest the middle of the screen. One authority,
      so two sections can never both claim it. */
