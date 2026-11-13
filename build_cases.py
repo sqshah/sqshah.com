@@ -194,12 +194,12 @@ CASES = [
     # ---------------------------------------------------------------------- 4
     dict(
         slug='organic-search',
-        title='67,000 sessions, no media cost',
+        title='113,000 clicks, no media cost',
         desc='Technical fixes, a content system and the keyword work behind the landing '
              'pages the ads point at.',
         shot='/assets/work/km/gsc.jpg',
         tagline='the same pages the ads point at',
-        big='67K', bigmk='sessions',
+        big='113K', bigmk='clicks',
         sub='Paid and organic were bidding against each other for the same queries. One '
             'set of pages, built to answer both.',
         strip=[('Industry', 'Automotive'), ('Market', 'East Africa'),
@@ -224,12 +224,23 @@ CASES = [
                  cap=('Backlink tooling', 'Organic growth'),
                  fig=fig('6.1M', 6100000, compact=True), figk='Impressions',
                  note='organic only'),
+            dict(id='traffic', label='Traffic', icon='find',
+                 head='And analytics counted what', mk='arrived',
+                 chips=['Sessions', 'Active users', 'Engagement time', 'Events'],
+                 img='/assets/work/km/ga4.jpg',
+                 alt='Analytics reports snapshot, sessions and active users',
+                 cap=('Analytics', 'Site-wide, Jan 2025 to Oct 2026'),
+                 fig=fig('907K'), figk='Sessions, all channels',
+                 note='search is the slice that cost nothing'),
         ],
         aside=('The landing pages the ads paid for were the pages search wanted. Nobody had',
                'noticed'),
-        results=[dict(f=fig('67,000', 67000), k='Sessions', note='in the period'),
-                 dict(f=fig('32,000', 32000), k='Visitors', note='new and returning'),
-                 dict(f=fig('113,000', 113000), k='Search clicks', note='no media cost')],
+        results=[dict(f=fig('113,000', 113000), k='Clicks from search',
+                      note='no media behind them'),
+                 dict(f=fig('6.1M', 6100000, compact=True), k='Search impressions',
+                      note='organic only'),
+                 dict(f=fig('907,000', 907000), k='Sessions, site-wide',
+                      note='all channels, Jan 2025 to Oct 2026')],
         gallery=dict(label='Before and after', items=[
             ('/assets/work/km/gsc.jpg', 'Search Console performance', 'Search Console',
              '113k clicks'),
@@ -240,14 +251,14 @@ CASES = [
     # ---------------------------------------------------------------------- 5
     dict(
         slug='email-platform',
-        title='158,933 sends, built not bought',
+        title='Built, not rented',
         desc='Four years on a per-contact plan taught us which automations mattered. Then '
-             'we built the thing that runs them.',
-        shot='/assets/work/km/email.jpg',
+             'we built the thing that runs them, inside the company site.',
+        shot='/assets/work/km/tool-overview.jpg',
         tagline='four years of rent, then we owned it',
-        big='158,933', bigmk='sends',
+        big='37.4%', bigmk='opened',
         sub='A bill that grew with the list, and a card that could decline on a Friday. '
-            'So the platform moved in-house.',
+            'So we built the platform ourselves, inside the company site.',
         strip=[('Industry', 'Automotive'), ('Market', 'East Africa'),
                ('Discipline', 'Lifecycle'), ('Channels', 'Email'),
                ('Role', 'Campaigns and product')],
@@ -258,22 +269,44 @@ CASES = [
             dict(id='rented', label='Rented', icon='mail',
                  head='The rented platform did the', mk='learning',
                  chips=['57 flows', 'Black November', 'Eid', 'New Year', 'Branch openings'],
-                 panel=dict(left='Six months of sending', right='95.2% delivered',
+                 panel=dict(left='Six months on the rented plan', right='95.2% delivered',
                             rows=[('Sends', 158933, '—'), ('Delivered', 151333, '95.2%'),
                                   ('Opened', 13182, '8.7%'), ('Clicked', 1396, '0.92%')]),
-                 fig=fig('95.2%'), figk='Delivery rate', note='151,333 landed'),
-            dict(id='owned', label='Owned', icon='build',
-                 head='Then we built our', mk='own',
-                 chips=['In-house sending', 'No per-contact bill', 'The same automations'],
-                 img='/assets/work/km/email.jpg',
-                 alt='Email engagement dashboard, sends and opens',
-                 cap=('Email', 'Engagement')),
+                 fig=fig('8.7%'), figk='Open rate', note='on a rented list'),
+            dict(id='built', label='Built', icon='build',
+                 head='So we built our', mk='own',
+                 chips=['Built with a developer', 'Inside the company site',
+                        'No per-contact bill'],
+                 win=dict(url='the company site /admin — email marketing / overview',
+                          img='/assets/work/km/tool-overview.jpg',
+                          alt='The in-house email platform, overview screen',
+                          cap=('In-house platform', 'Overview')),
+                 fig=fig('37.4%'), figk='Open rate', note='four times the rented one'),
+            dict(id='flows', label='Flows', icon='find',
+                 head='Three automations, one of them', mk='always on',
+                 chips=['Inquiry follow-up', 'Registration onboarding',
+                        'Customer retention', '12 core templates'],
+                 win=dict(url='the company site /admin — sequences / inquiry follow-up',
+                          img='/assets/work/km/tool-timeline.jpg',
+                          alt='The inquiry follow-up automation, eleven emails over 28 days',
+                          cap=('Automation timeline', 'Eleven emails, 28 days'), tall=True),
+                 fig=fig('5,152', 5152), figk='Leads enrolled', note='49,821 queued'),
         ],
         aside=('Four years of paying rent is also four years of finding out exactly what you',
                'need'),
-        results=[dict(f=fig('158,933', 158933), k='Sends', note='in six months'),
-                 dict(f=fig('151,333', 151333), k='Delivered', note='95.2% of them'),
-                 dict(f=fig('57', 57), k='Flows rebuilt', note='in-house')],
+        results=[dict(f=fig('37.4%'), k='Open rate on the platform we own',
+                      note='8.7% on the rented one'),
+                 dict(f=fig('158,933', 158933), k='Sends on the rented plan',
+                      note='95.2% delivered'),
+                 dict(f=fig('11', 11), k='Emails in the live sequence',
+                      note='28 days, automated')],
+        gallery=dict(label='The platform', items=[
+            ('/assets/work/km/tool-sequences.jpg', 'The three automations and their rates',
+             'Sequences', 'Three automations'),
+            ('/assets/work/km/tool-overview.jpg', 'Overview screen of the in-house platform',
+             'Overview', 'Delivery and engagement'),
+            ('/assets/work/km/email.jpg', 'The rented platform it replaced',
+             'Before', 'The rented plan')]),
         reveal=dict(left='Drag to see what access opens',
                     right='Email &nbsp;&middot;&nbsp; sends and engagement',
                     pub='/assets/work/km/email-public.jpg',
@@ -384,45 +417,55 @@ CASES = [
     # ---------------------------------------------------------------------- 9
     dict(
         slug='refund-recovery',
-        title='$2,000 charged in error, recovered',
-        desc='Roughly $2,400 of tool spend went out in three days on a company card. '
-             'Most of it came back.',
+        title='$2,343 charged in 48 hours, disputed',
+        desc='Fifty-nine automated charges against one company card in two days, '
+             'documented line by line and taken to the bank.',
+        shot='/assets/work/cs/refund.jpg',
         tagline='a bill nobody had read',
-        big='$2,000', bigmk='back',
-        sub='Sixty-one charges in seventy-two hours on one company card, against a '
-            'subscription nobody was watching.',
+        big='59', bigmk='charges, two days',
+        sub='Automated billing on a company card ran up $2,343.29 in forty-eight hours. '
+            'The vendor closed the case; the file is what moved it on.',
         strip=[('Scope', 'Internal'), ('Market', 'East Africa'),
                ('Discipline', 'Spend control'), ('Channel', 'Vendor billing'),
                ('Role', 'Expense owner')],
-        problem=dict(head='$2,400 gone in three <span class="mk">days</span>',
-                     chips=['Unreviewed charges', 'One company card', 'Nobody watching']),
+        problem=dict(head='$2,343 gone in forty-eight <span class="mk">hours</span>',
+                     chips=['59 separate charges', 'One company card',
+                            'Nobody watching the console']),
         chapters=[
             dict(id='ledger', label='Ledger', icon='coin',
-                 head='The ledger showed the', mk='spike',
-                 chips=['61 charges', '72 hours', 'One vendor'],
-                 panel=dict(left='The claim', right='83% returned', pre='$',
-                            rows=[('Charged in error', 2400, '100%'),
-                                  ('Recovered', 2000, '83%'),
-                                  ('Written off', 400, '17%')]),
-                 fig=fig('$2,400', 2400, pre='$'), figk='Charged in error',
-                 note='in 72 hours'),
+                 head='Every charge, reconciled by', mk='hand',
+                 chips=['22 to 23 July 2026', '59 transactions', 'One vendor'],
+                 panel=dict(left='The disputed period', right='48 hours',
+                            rows=[('Charges', 59, 'in two days'),
+                                  ('Days', 2, 'elapsed')]),
+                 fig=fig('$2,343.29'), figk='Disputed', note='59 charges'),
+            dict(id='file', label='The file', icon='copy',
+                 head='The vendor said no, so the file went', mk='further',
+                 chips=['Support correspondence', 'Transaction log',
+                        'Billing-interface evidence', 'Bank dispute filed'],
+                 win=dict(url='claude-refund-decline-report.pdf \u2014 9 pages',
+                          img='/assets/work/cs/refund.jpg',
+                          alt='The refund decline report, account details masked',
+                          cap=('Dispute file', 'Nine pages, with evidence')),
+                 fig=fig('9', 9), figk='Page report', note='built to be read by a bank'),
         ],
-        aside=('A spend report nobody reads is a spend report that costs more than it',
-               'saves'),
-        results=[dict(f=fig('$2,000', 2000, pre='$'), k='Recovered', note='of $2,400'),
-                 dict(f=fig('61', 61), k='Charges reviewed', note='line by line'),
-                 dict(f=fig('83%'), k='Returned', note='after escalation')],
-        gate=('The ledger, the claim and the vendor', 'correspondence'),
+        aside=('A vendor saying no is not the end of it. A file a bank can read is what',
+               'moves it'),
+        results=[dict(f=fig('$2,343.29'), k='Charged in error', note='22 to 23 July'),
+                 dict(f=fig('59', 59), k='Charges documented', note='line by line'),
+                 dict(f=fig('5', 5), k='Reports filed', note='vendor, then the bank')],
+        gate=('The transaction log, the support chats and the dispute', 'file'),
     ),
     # --------------------------------------------------------------------- 10
     dict(
-        slug='cloned-site',
-        title='A cloned website, traced and taken down',
+        slug='brand-protection',
+        title='Brand protection, start to finish',
         desc='A copy of the site on another domain, ranking on the same brand terms. '
-             'Traced, documented and removed.',
-        tagline='someone else was running our pages',
-        big='One', bigmk='clone, removed',
-        sub='Our pages, on a domain we did not own, competing for our own brand terms.',
+             'Traced, documented and taken down.',
+        tagline='our pages, somebody else\u2019s domain',
+        big='Taken', bigmk='down',
+        sub='A copy of the site, on a domain we did not own, competing for our own brand '
+            'terms. Traced, documented and removed.',
         strip=[('Industry', 'Automotive'), ('Market', 'East Africa'),
                ('Discipline', 'Brand protection'), ('Channels', 'Search, hosting'),
                ('Role', 'Investigator')],
@@ -437,24 +480,24 @@ CASES = [
                                 ('Registration', 'traced'),
                                 ('Host notified', 'complaint filed'),
                                 ('Content removed', 'confirmed')]),
-                 fig=fig('0'), figk='Legal cost', note='a complaint, filed properly'),
+                 fig=fig('$0'), figk='Legal cost', note='a complaint, filed properly'),
         ],
-        aside=('A paper trail closes a clone faster than a lawyer, if you build it',
+        aside=('A paper trail closes a copied site faster than a lawyer, if you build it',
                'first'),
-        results=[dict(f=fig('1', 1), k='Clone removed', note='with a paper trail'),
+        results=[dict(f=fig('1', 1), k='Copied site removed', note='with a paper trail'),
                  dict(f=fig('$0'), k='Legal cost', note='a complaint, filed properly')],
         gate=('The duplication evidence and the host', 'correspondence'),
     ),
     # --------------------------------------------------------------------- 11
     dict(
         slug='account-recovery',
-        title='100,000 followers, taken and recovered',
+        title='112,000 followers, taken and recovered',
         desc='A branch account was compromised and the recovery path a brand is supposed '
              'to use did not work.',
         tagline='the official route did not work',
-        big='100K', bigmk='followers back',
-        sub='A branch account with a hundred thousand followers, compromised, with the '
-            'standard recovery route going nowhere.',
+        big='112K', bigmk='followers back',
+        sub='A branch account with a hundred and twelve thousand followers, compromised, '
+            'with the route a brand is supposed to use going nowhere.',
         strip=[('Industry', 'Automotive'), ('Market', 'Mombasa'),
                ('Discipline', 'Brand protection'), ('Channel', 'Social'),
                ('Role', 'Recovery lead')],
@@ -470,13 +513,21 @@ CASES = [
                                 ('Identity verification', 'filed'),
                                 ('Escalation', 'answered'),
                                 ('Account restored', 'intact')]),
-                 fig=fig('100,000', 100000), figk='Followers recovered', note='all of them'),
+                 fig=fig('112,000', 112000), figk='Followers', note='all of them, back'),
+            dict(id='back', label='Back', icon='badge',
+                 head='Back up, with every follower', mk='intact',
+                 chips=['1,034 posts', 'Highlights intact', 'Every follower'],
+                 win=dict(url='the branch account, restored \u2014 handle hidden',
+                          img='/assets/work/cs/insta.jpg',
+                          alt='The restored account profile, identifying details masked',
+                          cap=('The account', 'Restored')),
+                 fig=fig('1,034', 1034), figk='Posts', note='nothing lost'),
         ],
         aside=('An audience you did not pay for is still an asset, and it can still be',
                'stolen'),
-        results=[dict(f=fig('100,000', 100000), k='Followers recovered',
-                      note='Mombasa branch'),
-                 dict(f=fig('0', 0), k='Followers lost', note='account intact')],
+        results=[dict(f=fig('112,000', 112000), k='Followers recovered',
+                      note='the branch account'),
+                 dict(f=fig('0', 0), k='Followers lost', note='nothing lost')],
         gate=('The timeline, the correspondence and the recovery', 'confirmation'),
     ),
 ]
@@ -525,6 +576,17 @@ def panel_markup(p):
     return out + '    </div>'
 
 
+def win_markup(w):
+    """A screen he built, shown inside window chrome with its real path."""
+    tall = ' tall' if w.get('tall') else ''
+    return (f'    <figure class="win{tall}" data-win>\n'
+            f'      <div class="top"><span class="dots"><i></i><i></i><i></i></span>\n'
+            f'        <span class="url">{w["url"]}</span></div>\n'
+            f'      <div class="pane"><img src="{w["img"]}" alt="{w["alt"]}"></div>\n'
+            f'      <figcaption><span class="lbl">{w["cap"][0]}</span>'
+            f'<span class="lbl">{w["cap"][1]}</span></figcaption>\n    </figure>')
+
+
 def list_markup(p):
     """Work that was built, not measured. A name, a rule, a status word."""
     out = (f'    <div class="lst" data-rise>\n'
@@ -548,6 +610,8 @@ def chapter(no, c):
                      f'      <img src="{c["img"]}" alt="{c["alt"]}">\n'
                      f'      <figcaption><span class="lbl">{a}</span>'
                      f'<span class="lbl">{b}</span></figcaption>\n    </figure>')
+    elif c.get('win'):
+        parts.append(win_markup(c['win']))
     elif c.get('panel'):
         parts.append(panel_markup(c['panel']))
     elif c.get('lst'):

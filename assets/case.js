@@ -28,7 +28,7 @@
       if (n && !RM && !seen.has(n)){ seen.add(n); count(n, 1250); }
     }
   },{threshold:.3});
-  $$('[data-rise], .gal figure, [data-ch], .graph, [data-panel], [data-res]').forEach(el=>io.observe(el));
+  $$('[data-rise], .gal figure, [data-ch], .graph, [data-panel], [data-res], [data-win]').forEach(el=>io.observe(el));
 
   /* The rail marks the chapter nearest the middle of the screen. One authority,
      so two sections can never both claim it. */

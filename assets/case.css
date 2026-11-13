@@ -258,3 +258,26 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
 .lst .ls{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--g2);
   white-space:nowrap}
 .lst .lr i{display:block;height:1px;flex:1;background:var(--g3);margin-bottom:5px}
+
+/* A screenshot of a page he built, shown as a page: window chrome, an address
+   bar with the real path, and the capture inside it. The frame says "this is
+   a live screen", which a bare crop does not. */
+.win{border:1px solid var(--g3);background:var(--g4);overflow:hidden}
+.win .top{display:flex;align-items:center;gap:12px;padding:11px 14px;
+  border-bottom:1px solid var(--g3)}
+.win .dots{display:flex;gap:6px;flex:none}
+.win .dots i{width:9px;height:9px;border-radius:50%;border:1px solid var(--g2)}
+.win .url{flex:1;min-width:0;background:var(--black);border:1px solid var(--g3);
+  padding:6px 12px;font-size:10px;letter-spacing:.1em;color:var(--g1);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.win .pane{position:relative;background:#fff;overflow:hidden;
+  max-height:min(72vh,620px)}
+.win .pane img{width:100%;height:auto;display:block;
+  filter:grayscale(1) blur(7px);opacity:.5;transform:translateY(14px);
+  transition:filter .95s var(--ease),opacity .95s var(--ease),transform .95s var(--ease)}
+.ch.in .win .pane img,.win.in .pane img{filter:none;opacity:1;transform:none}
+.win figcaption{display:flex;justify-content:space-between;gap:16px;
+  padding:11px 14px;border-top:1px solid var(--g3)}
+/* Long captures scroll inside the frame rather than being cropped to death. */
+.win.tall .pane{overflow-y:auto;scrollbar-width:thin;
+  scrollbar-color:var(--g2) transparent}
