@@ -3,44 +3,391 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SQ Shah — Performance Marketing</title>
-<meta name="description" content="Performance marketing and media buying across Google, Meta and TikTok.">
-<meta name="robots" content="noindex">
+<title>SQ Shah — Syed Qasim Ali</title>
+<meta name="description" content="Syed Qasim Ali, performance marketer. $68,259.97 of media across Kenya, Uganda, Tanzania and Pakistan in 2026, every figure traceable to an invoice.">
+<link rel="canonical" href="https://sqshah.com/">
 <link rel="icon" href="assets/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="assets/icon-180.png">
-<meta name="theme-color" content="#0E0E0D">
-<meta property="og:title" content="SQ Shah — Performance Marketing">
-<meta property="og:description" content="Performance marketing and media buying across Google, Meta and TikTok.">
-<meta property="og:image" content="assets/icon-512.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="assets/icon-180.png?v=3cc8c631">
+<meta name="theme-color" content="#0B1622">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="SQ Shah — Syed Qasim Ali">
+<meta property="og:description" content="Performance marketing across East Africa and Pakistan. Paid media, attribution, lead systems.">
+<meta property="og:image" content="https://sqshah.com/assets/icon-512.png">
+<meta property="og:url" content="https://sqshah.com/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/instrument.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-:root{--ink:#0E0E0D;--paper:#FBFAF8;--muted:#A6A6A2;--line:#2A2A28}
-*{box-sizing:border-box;margin:0;padding:0}
-html{padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
-body{min-height:100vh;background:var(--ink);color:var(--paper);font-family:Jost,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:44px;padding:48px 24px;text-align:center}
-.logo{width:min(560px,82vw);height:auto}
-.tag{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
-.tag span{font-size:11px;letter-spacing:.42em;color:var(--muted)}
-.tag i{display:block;width:54px;height:1px;background:var(--line)}
-.line{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;font-size:clamp(22px,3.6vw,30px);line-height:1.55;color:#D8D6D1;max-width:22ch}
-.links{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-.links a{font-size:11px;letter-spacing:.2em;color:var(--paper);text-decoration:none;border:1px solid #3A3A38;padding:15px 26px;transition:background .2s,color .2s}
-.links a:hover,.links a:focus-visible{background:var(--paper);color:var(--ink)}
-.foot{font-size:10px;letter-spacing:.28em;color:#6E6E6B}
-@media(prefers-reduced-motion:no-preference){body>*{animation:in .7s ease-out both}body>*:nth-child(2){animation-delay:.1s}body>*:nth-child(3){animation-delay:.2s}body>*:nth-child(4){animation-delay:.3s}body>*:nth-child(5){animation-delay:.4s}
-@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+/* Self-hosted rather than pulled from Google, so the page owns its own look and
+   makes no third-party request to render a headline. Latin subset, three files,
+   328KB, all axes live. */
+@font-face{
+  font-family:Fraunces; font-style:normal; font-weight:100 900; font-display:swap;
+  src:url(assets/fonts/fraunces.woff2) format('woff2-variations');
+}
+@font-face{
+  font-family:Fraunces; font-style:italic; font-weight:100 900; font-display:swap;
+  src:url(assets/fonts/fraunces-italic.woff2) format('woff2-variations');
+}
+@font-face{
+  font-family:Instrument; font-style:normal; font-weight:400 700; font-display:swap;
+  src:url(assets/fonts/instrument.woff2) format('woff2-variations');
+}
+
+/* ---------------------------------------------------------------- tokens --
+   Blue-black rather than grey-black, because the one light section is cool
+   paper and a warm black would fight it. Green and amber are the only two
+   accents and both carry meaning: a line reconciles, or it doesn't. */
+:root{
+  --ink:#0B1622; --ink-r:#0F1F2E; --rule:#1B2E40; --rule-s:#152635;
+  --text:#D9E2E9; --head:#F2F6F8; --mute:#7B91A4; --faint:#56697A;
+  --paper:#E9ECE4; --paper-ink:#141A16; --paper-mute:#5A6558; --paper-rule:#C9CEC0;
+  --bal:#4E9B7C; --var:#CB9440;
+  --gut:clamp(20px,5vw,72px); --max:1180px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink); color:var(--text);
+  font-family:Instrument,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px; line-height:1.62; font-variant-numeric:tabular-nums lining-nums;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{background:var(--bal);color:#06100A}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.prose{max-width:62ch}
+
+h1,h2,h3,.fig{
+  font-family:Fraunces,Georgia,serif; font-weight:400;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
+  letter-spacing:-.022em; line-height:1.02; color:var(--head);
+}
+h2{font-size:clamp(27px,3.5vw,44px);line-height:1.08}
+h3{font-size:clamp(19px,1.7vw,23px);line-height:1.22;letter-spacing:-.014em}
+a{color:inherit}
+
+/* --------------------------------------------------------------- top bar -- */
+.bar{
+  position:sticky; top:0; z-index:40; background:rgba(11,22,34,.82);
+  backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid transparent;
+  transition:border-color .3s;
+}
+.bar.stuck{border-bottom-color:var(--rule-s)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding-block:15px}
+.mark{font-family:Fraunces,serif;font-weight:500;font-size:19px;letter-spacing:-.02em;
+  color:var(--head);text-decoration:none;font-variation-settings:"opsz" 40}
+.bar nav{display:flex;gap:clamp(14px,2.4vw,30px);align-items:center}
+.bar nav a{font-size:14.5px;color:var(--mute);text-decoration:none;transition:color .2s}
+.bar nav a:hover,.bar nav a:focus-visible{color:var(--head)}
+@media(max-width:620px){.bar nav a.hide-s{display:none}}
+
+/* ------------------------------------------------------------------ hero -- */
+.hero{padding-block:clamp(64px,13vh,132px) clamp(40px,7vh,72px)}
+.hero h1{font-size:clamp(38px,6.6vw,92px);line-height:1.0;max-width:17ch;
+  text-wrap:balance;font-variation-settings:"opsz" 60,"SOFT" 0,"WONK" 0}
+.hero h1 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 0,"WONK" 1}
+.hero .who{margin-top:clamp(26px,3.6vh,40px);color:var(--mute);font-size:clamp(16.5px,1.5vw,19px);max-width:52ch}
+.hero .who b{color:var(--text);font-weight:500}
+
+/* --------------------------------------------------------------- balance -- */
+.balance{margin-top:clamp(44px,8vh,86px);border-top:1px solid var(--rule);padding-top:22px;
+  display:flex;align-items:baseline;gap:clamp(16px,3vw,34px);flex-wrap:wrap}
+.balance .fig{font-size:clamp(38px,6.4vw,82px);letter-spacing:-.03em;color:var(--head)}
+.balance .cap{color:var(--mute);font-size:15.5px;max-width:26ch;line-height:1.45}
+
+/* ---------------------------------------------------------------- ledger --
+   Accounting rules, used the way accounting uses them: a single rule above a
+   total, a double rule under the one that closes the statement. */
+.ledger{padding-block:clamp(56px,10vh,110px)}
+.ledger .lead{color:var(--mute);margin-top:14px}
+table.acct{width:100%;border-collapse:collapse;margin-top:clamp(28px,5vh,46px)}
+table.acct th{text-align:left;font-weight:500;font-size:14px;color:var(--faint);
+  padding:0 0 12px;border-bottom:1px solid var(--rule-s)}
+table.acct th.n{text-align:right}
+table.acct td{padding:17px 0;border-bottom:1px solid var(--rule-s);vertical-align:baseline}
+table.acct td.n{text-align:right;white-space:nowrap}
+.pf{font-size:clamp(17px,1.6vw,19.5px);color:var(--head);font-weight:500}
+.srcline{display:block;color:var(--faint);font-size:14px;margin-top:4px;line-height:1.4}
+.amt{font-family:Fraunces,serif;font-variation-settings:"opsz" 80,"SOFT" 0,"WONK" 0;
+  font-weight:400;font-size:clamp(20px,2.3vw,27px);letter-spacing:-.02em;color:var(--head)}
+.tick{display:inline-block;width:1.15em;color:var(--bal);font-size:15px}
+tr.total td{border-bottom:none;border-top:1.5px solid var(--rule);padding-top:22px}
+tr.total .pf{color:var(--head)}
+tr.total .amt{font-size:clamp(26px,3.4vw,40px);
+  border-bottom:3px double var(--rule);padding-bottom:9px}
+tr.flag td{border-bottom:none;padding-top:18px}
+.note{display:flex;gap:13px;align-items:flex-start;border-left:2px solid var(--var);
+  padding:13px 0 13px 16px;background:linear-gradient(90deg,rgba(203,148,64,.07),transparent 72%)}
+.note .amt-s{font-family:Fraunces,serif;color:var(--var);font-size:19px;white-space:nowrap;
+  font-variation-settings:"opsz" 40}
+.note p{font-size:15px;color:var(--mute);line-height:1.5;max-width:58ch}
+.note p b{color:var(--text);font-weight:500}
+
+/* --------------------------------------------------------------- results -- */
+.results{padding-bottom:clamp(56px,10vh,110px)}
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule-s);
+  border:1px solid var(--rule-s);margin-top:clamp(26px,4.4vh,40px)}
+.rgrid > div{background:var(--ink);padding:clamp(20px,2.6vw,30px)}
+.rgrid .fig{display:block;font-size:clamp(26px,3.2vw,38px);letter-spacing:-.028em}
+.rgrid .k{display:block;color:var(--mute);font-size:14.5px;margin-top:9px;line-height:1.42}
+@media(max-width:880px){.rgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:430px){.rgrid{grid-template-columns:1fr}}
+
+/* ----------------------------------------------------------------- plate --
+   The one light room in the house. A number becomes a person: which is the
+   job, stated once and not explained. */
+.flip{background:var(--paper);color:var(--paper-ink)}
+.flip h2,.flip .fig{color:var(--paper-ink)}
+.plateSec{min-height:100vh;display:flex;align-items:center;padding-block:clamp(48px,9vh,96px)}
+.plateSec .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,76px);
+  align-items:center;width:100%}
+.plate{position:relative;width:100%;aspect-ratio:3/4;max-width:460px;margin-inline:auto}
+.plate canvas{display:block;width:100%;height:100%}
+.beats{display:grid;gap:22px;align-content:center}
+.beats h2{max-width:15ch}
+.beats p{color:var(--paper-mute);max-width:40ch;line-height:1.66}
+.beats .src{font-size:14px;color:var(--paper-mute);border-top:1px solid var(--paper-rule);
+  padding-top:14px;max-width:40ch}
+@media(max-width:860px){
+  .plateSec{min-height:auto}
+  .plateSec .wrap{grid-template-columns:1fr;gap:34px}
+  .plate{max-width:340px}
+}
+
+/* ------------------------------------------------------------------ runs -- */
+.runs{padding-block:clamp(56px,10vh,110px)}
+.rows{margin-top:clamp(26px,4.4vh,42px);border-top:1px solid var(--rule-s)}
+.row{display:grid;grid-template-columns:minmax(150px,1.1fr) 2.2fr minmax(90px,.7fr);
+  gap:clamp(14px,3vw,36px);padding:19px 0;border-bottom:1px solid var(--rule-s);
+  align-items:baseline}
+.row dt{color:var(--head);font-weight:500;font-size:17px}
+.row dd{color:var(--mute);font-size:15.5px;line-height:1.5}
+.row .vol{text-align:right;color:var(--text);font-size:15.5px;white-space:nowrap}
+@media(max-width:720px){
+  .row{grid-template-columns:1fr auto;gap:6px 18px}
+  .row dd{grid-column:1/-1;order:3}
+  .row .vol{order:2}
+}
+
+/* ------------------------------------------------------------------ work -- */
+.work{padding-bottom:clamp(56px,10vh,110px)}
+.cases{margin-top:clamp(26px,4.4vh,42px);display:grid;gap:1px;background:var(--rule-s);
+  border-block:1px solid var(--rule-s)}
+.case{background:var(--ink);display:grid;grid-template-columns:1fr minmax(0,1.25fr);
+  gap:clamp(16px,3vw,44px);padding:clamp(22px,3vw,34px) 0;align-items:start;
+  text-decoration:none;transition:background .25s}
+.case:hover,.case:focus-visible{background:var(--ink-r)}
+.case .ttl{font-family:Fraunces,serif;font-size:clamp(19px,2vw,25px);line-height:1.18;
+  letter-spacing:-.018em;color:var(--head);font-variation-settings:"opsz" 72}
+.case .met{margin-top:9px;color:var(--faint);font-size:14.5px}
+.case p{color:var(--mute);font-size:15.5px;line-height:1.56}
+@media(max-width:760px){.case{grid-template-columns:1fr;gap:12px}}
+
+/* ---------------------------------------------------------------- footer -- */
+.foot{border-top:1px solid var(--rule);padding-block:clamp(48px,8vh,86px) 40px}
+.foot .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(30px,5vw,60px);
+  align-items:end}
+.sigbox{width:min(300px,62vw)}
+.sigbox svg{width:100%;height:auto;display:block}
+.sigbox path{fill:var(--head)}
+.contact{display:grid;gap:11px;justify-items:start}
+.contact a{font-size:17px;text-decoration:none;color:var(--text);
+  border-bottom:1px solid var(--rule);padding-bottom:3px;transition:border-color .22s,color .22s}
+.contact a:hover,.contact a:focus-visible{color:var(--head);border-bottom-color:var(--bal)}
+.fine{margin-top:clamp(34px,5vh,54px);color:var(--faint);font-size:13.5px;
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:720px){.foot .grid{grid-template-columns:1fr;gap:34px;align-items:start}}
+
+:focus-visible{outline:2px solid var(--bal);outline-offset:3px;border-radius:2px}
+
+/* The ledger resolving is the page's one piece of unasked-for motion, so
+   nothing else moves on its own. */
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<img class="logo" src="assets/logo.png" alt="I'm SQ Shah">
-<div class="tag"><i></i><span>PERFORMANCE MARKETING</span><i></i></div>
-<p class="line">Ad spend that ends in sales, not impressions.</p>
-<nav class="links">
-  <a href="https://wa.me/923279507957">WHATSAPP</a>
-  <a href="https://www.linkedin.com/in/imsqshah/">LINKEDIN</a>
-</nav>
-<p class="foot">FULL PORTFOLIO COMING SOON</p>
+
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="mark" href="/">SQ Shah</a>
+    <nav>
+      <a href="#ledger">Numbers</a>
+      <a href="#runs" class="hide-s">What I run</a>
+      <a href="#work">Work</a>
+      <a href="mailto:talk@sqshah.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero wrap">
+  <h1>I buy media in East Africa and make the numbers <em>tie out</em>.</h1>
+  <p class="who">Syed Qasim Ali. Four years of paid media for a used-car group selling
+    across Kenya, Uganda, Tanzania and Pakistan &mdash; Google, Meta, TikTok and
+    Snapchat, plus the dashboards, CRM and lead plumbing underneath them.</p>
+
+  <div class="balance">
+    <span class="fig" data-count="68259.97" data-money>$68,259.97</span>
+    <span class="cap">Media managed this year, January to October 2026.
+      Every line below reconciles to an invoice.</span>
+  </div>
+</section>
+
+<section class="ledger wrap" id="ledger">
+  <h2>What that was spent on</h2>
+  <p class="lead prose">Four platforms, five branches, three countries. The figures come
+    from the billing invoices rather than the platform dashboards, because the two
+    disagree and only one of them is what the company actually paid.</p>
+
+  <table class="acct">
+    <thead>
+      <tr><th scope="col">Platform</th><th scope="col" class="n">Billed</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pf">Google Ads</span>
+          <span class="srcline">Ten invoices, 5489923736 through 5733561135. Account 427-104-7997.</span></td>
+        <td class="n"><span class="amt" data-count="42080.85" data-money>$42,080.85</span>
+          <span class="tick" aria-hidden="true">&check;</span></td>
+      </tr>
+      <tr>
+        <td><span class="pf">Meta</span>
+          <span class="srcline">Ad invoices and boosted-post invoices, five branches, to 20 October.</span></td>
+        <td class="n"><span class="amt" data-count="25994.20" data-money>$25,994.20</span>
+          <span class="tick" aria-hidden="true">&check;</span></td>
+      </tr>
+      <tr>
+        <td><span class="pf">TikTok</span>
+          <span class="srcline">Two invoices, May and June.</span></td>
+        <td class="n"><span class="amt" data-count="161.92" data-money>$161.92</span>
+          <span class="tick" aria-hidden="true">&check;</span></td>
+      </tr>
+      <tr>
+        <td><span class="pf">Snapchat</span>
+          <span class="srcline">One statement, February.</span></td>
+        <td class="n"><span class="amt" data-count="23.00" data-money>$23.00</span>
+          <span class="tick" aria-hidden="true">&check;</span></td>
+      </tr>
+      <tr class="total">
+        <td><span class="pf">Total</span></td>
+        <td class="n"><span class="amt" data-count="68259.97" data-money data-last>$68,259.97</span></td>
+      </tr>
+      <tr class="flag">
+        <td colspan="2">
+          <div class="note">
+            <span class="amt-s">$633.36</span>
+            <p>One line doesn't tie, and this is the useful part. September's Google invoice
+              covers <b>8 to 30 September only</b> &mdash; the first week sits on a separate
+              invoice nobody had filed. The export says $2,592.46, the invoice says $1,959.10,
+              and the difference is a missing document rather than missing money. Found it by
+              reconciling the ad-group export against the billing PDF line by line.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="results wrap">
+  <h2>What it bought</h2>
+  <div class="rgrid">
+    <div><span class="fig" data-count="47859432" data-compact>47.9M</span>
+      <span class="k">Impressions across Google and Meta</span></div>
+    <div><span class="fig" data-count="1167638" data-compact>1.17M</span>
+      <span class="k">Google clicks at $0.032 each</span></div>
+    <div><span class="fig" data-count="46747">46,747</span>
+      <span class="k">Meta leads at $0.30 each</span></div>
+    <div><span class="fig" data-count="145902">145,902</span>
+      <span class="k">Leads in the CRM, five branches</span></div>
+  </div>
+</section>
+
+<section class="flip plateSec">
+  <div class="wrap">
+    <div class="plate" data-src="assets/figure-ink.png?v=7ac1f6ce"><canvas></canvas></div>
+    <div class="beats">
+      <h2 class="beat">A number is a person who answered.</h2>
+      <p class="beat">Twenty-nine cents is what it cost to put one real human being,
+        in Mombasa or Kampala or Dar, in front of a salesperson. Not an impression,
+        not a click. Someone who left a phone number.</p>
+      <p class="src beat">Blended cost per lead, Khushi Motors, Google and Meta,
+        January to October 2026.</p>
+    </div>
+  </div>
+</section>
+
+<section class="runs wrap" id="runs">
+  <h2>What I run</h2>
+  <dl class="rows">
+    <div class="row">
+      <dt>Google Ads</dt>
+      <dd>Search, Performance Max, Demand Gen, Display, YouTube and local store visits
+        across four markets.</dd>
+      <span class="vol">$42,080.85</span>
+    </div>
+    <div class="row">
+      <dt>Meta</dt>
+      <dd>Lead-form and traffic campaigns per branch, plus the boosted-post budget the
+        branch managers spend directly.</dd>
+      <span class="vol">$25,994.20</span>
+    </div>
+    <div class="row">
+      <dt>TikTok and Snapchat</dt>
+      <dd>Smaller tests, run to find out whether the audience was there before committing
+        a budget to it.</dd>
+      <span class="vol">$184.92</span>
+    </div>
+    <div class="row">
+      <dt>Reporting and attribution</dt>
+      <dd>A live ROI dashboard reconciling spend, sales and payments to the cent, and the
+        monthly spend reports the board reads.</dd>
+      <span class="vol">402 months</span>
+    </div>
+    <div class="row">
+      <dt>Lead systems</dt>
+      <dd>CRM, lead routing and the merge work that turns thirty-one separate exports into
+        one list anybody can use.</dd>
+      <span class="vol">145,902 leads</span>
+    </div>
+    <div class="row">
+      <dt>Search</dt>
+      <dd>Technical SEO, content strategy and the keyword work behind the landing pages the
+        ads point at.</dd>
+      <span class="vol">10 sites</span>
+    </div>
+  </dl>
+</section>
+
+<section class="work wrap" id="work">
+  <h2>Selected work</h2>
+  <div class="cases" id="cases"></div>
+</section>
+
+</main>
+
+<footer class="foot wrap">
+  <div class="grid">
+    <div class="sigbox" id="sig" aria-label="Signature of Syed Qasim Ali"></div>
+    <div class="contact">
+      <a href="mailto:talk@sqshah.com">talk@sqshah.com</a>
+      <a href="https://wa.me/923279507957" rel="me">WhatsApp</a>
+      <a href="https://www.linkedin.com/in/imsqshah/" rel="me">LinkedIn</a>
+      <a href="https://github.com/sqshah" rel="me">GitHub</a>
+    </div>
+  </div>
+  <div class="fine">
+    <span>Gujranwala, Pakistan. Working across GMT+3 and GMT+5.</span>
+    <span>Figures January&ndash;October 2026, from billing invoices.</span>
+  </div>
+</footer>
+
+<script src="assets/vendor/lenis.min.js?v=0bf174d3"></script>
+<script src="assets/vendor/gsap.min.js?v=28033e44"></script>
+<script src="assets/vendor/ScrollTrigger.min.js?v=ad33c2df"></script>
+<script src="particles.js?v=d44bd550"></script>
+<script src="site.js?v=92084d95"></script>
 </body>
 </html>
