@@ -266,6 +266,48 @@ a{color:inherit;text-decoration:none}
   .grain,.cue i{animation:none}
   .kicker i{transform:none!important}
 }
+/* ------------------------------------------------------------------ reach --
+   Where the money was spent, and on whom. Both are displays, not controls:
+   the point is that a glance tells you the range without anything being
+   clicked. */
+.mapbox{margin-top:clamp(30px,4.4vh,52px)}
+.map{display:block;width:100%;height:auto}
+.map .grat line{stroke:var(--hair);stroke-width:1}
+.map .arc path{fill:none;stroke:var(--hair);stroke-width:1;stroke-dasharray:3 7}
+.map .pin circle.halo{fill:var(--paper);opacity:.07}
+.map .pin.base text{font-size:10px;fill:var(--dim)}
+.map .pin.base circle.dot{fill:var(--dim)}
+.map .pin circle.dot{fill:var(--paper)}
+.map .pin text{font-family:var(--ui);font-size:13px;letter-spacing:.14em;
+  text-transform:uppercase;fill:var(--quiet)}
+@media(prefers-reduced-motion:no-preference){
+  .map .pin{opacity:0;animation:pin .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d)}
+  @keyframes pin{to{opacity:1}}
+}
+
+.cov{width:100%;border-collapse:collapse;margin-top:clamp(34px,5vh,58px)}
+.cov th,.cov td{border-bottom:1px solid var(--hair);padding:14px 8px;text-align:center}
+.cov thead th{font-family:var(--ui);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);font-weight:400;padding-bottom:12px}
+.cov tbody th{text-align:left;padding-left:0;font-weight:400}
+.cov tbody th b{display:block;font-family:var(--display);font-style:italic;font-weight:300;
+  font-size:clamp(16px,1.5vw,21px);color:var(--paper)}
+.cov .where{display:block;font-family:var(--ui);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);margin-top:5px}
+.cov td i{display:inline-block;width:7px;height:7px;background:var(--paper);
+  transform:rotate(45deg)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(max-width:720px){
+  .cov{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .cov th,.cov td{padding:12px 6px}
+  .cov tbody th{min-width:150px;position:sticky;left:0;background:var(--ink)}
+}
+
+/* The market and industry sit under each row, so the range is readable while
+   scrolling the list rather than only after opening something. */
+.row .tag{grid-column:2;font-family:var(--ui);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);margin-top:2px}
+
 </style>
 </head>
 <body>
@@ -314,6 +356,17 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
+<section class="band" id="reach">
+  <div class="wrap">
+    <p class="kicker"><i></i><span>Four countries &nbsp;&middot;&nbsp; six cities</span></p>
+    <div class="mapbox"><svg class="map" viewBox="0 0 1000 430" role="img" aria-label="Media run across Mombasa, Kisumu, Kampala, Dar es Salaam and Lahore"><g class="grat"><line x1="118.0" y1="10" x2="118.0" y2="420"/><line x1="309.0" y1="10" x2="309.0" y2="420"/><line x1="500.0" y1="10" x2="500.0" y2="420"/><line x1="691.0" y1="10" x2="691.0" y2="420"/><line x1="882.0" y1="10" x2="882.0" y2="420"/><line x1="10" y1="404.0" x2="990" y2="404.0"/><line x1="10" y1="305.4" x2="990" y2="305.4"/><line x1="10" y1="206.8" x2="990" y2="206.8"/><line x1="10" y1="108.2" x2="990" y2="108.2"/></g><g class="arc"><path d="M 271.9 355.0 Q 531.8 124.6 824.0 62.8"/></g><g class="pin" style="--d:0.45s"><circle class="halo" cx="271.9" cy="355.0" r="12.0"/><circle class="dot" cx="271.9" cy="355.0" r="2.8"/><text x="293.9" y="358.5" text-anchor="start">Mombasa</text></g><g class="pin" style="--d:0.28s"><circle class="halo" cx="193.8" cy="322.7" r="9.0"/><circle class="dot" cx="193.8" cy="322.7" r="2.8"/><text x="212.8" y="326.2" text-anchor="start">Kisumu</text></g><g class="pin" style="--d:0.35s"><circle class="halo" cx="159.1" cy="319.0" r="10.2"/><circle class="dot" cx="159.1" cy="319.0" r="2.8"/><text x="138.9" y="322.5" text-anchor="end">Kampala</text></g><g class="pin" style="--d:0.33s"><circle class="halo" cx="264.6" cy="377.6" r="9.9"/><circle class="dot" cx="264.6" cy="377.6" r="2.8"/><text x="284.5" y="381.1" text-anchor="start">Dar es Salaam</text></g><g class="pin" style="--d:0.21s"><circle class="halo" cx="824.0" cy="62.8" r="7.7"/><circle class="dot" cx="824.0" cy="62.8" r="2.8"/><text x="806.3" y="66.3" text-anchor="end">Lahore</text></g><g class="pin base" style="--d:.5s"><circle class="dot" cx="821.3" cy="57.6" r="2.2"/><text x="821.3" y="44.6" text-anchor="middle">Gujranwala &#183; base</text></g></svg></div>
+    <table class="cov">
+  <thead><tr><th scope="col"><span class="sr">Industry</span></th><th scope="col">Google</th><th scope="col">Meta</th><th scope="col">TikTok</th><th scope="col">Snapchat</th><th scope="col">Email</th><th scope="col">Search</th><th scope="col">Web</th></tr></thead>
+  <tbody><tr><th scope="row"><b>Automotive</b><span class="where">Kenya, Uganda, Tanzania</span></th><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td></tr><tr><th scope="row"><b>Real estate</b><span class="where">Pakistan</span></th><td><span class="sr">no</span></td><td><i></i><span class="sr">yes</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td></tr><tr><th scope="row"><b>Recruitment</b><span class="where">Japan</span></th><td><span class="sr">no</span></td><td><i></i><span class="sr">yes</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td></tr><tr><th scope="row"><b>Local services</b><span class="where">Canada</span></th><td><span class="sr">no</span></td><td><i></i><span class="sr">yes</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td></tr><tr><th scope="row"><b>Lead generation</b><span class="where">United States</span></th><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><span class="sr">no</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td><td><i></i><span class="sr">yes</span></td></tr></tbody>
+</table>
+  </div>
+</section>
+
 <section class="band" id="chapter">
   <div class="wrap">
     <p class="kicker"><i></i><span>2018 &nbsp;&middot;&nbsp; Gujranwala</span></p>
@@ -347,36 +400,63 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <p class="kicker"><i></i><span>Selected work</span></p>
     <div class="rows">
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
+      <a class="row" href="#contact" data-slug="khushi-motors" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">01</span>
         <span class="ttl">Four years of paid media for an East African motor group</span>
-        <span class="met">782 vehicles &middot; $0.29 CPL</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
+        <span class="met">Google, Meta, TikTok</span>
+        <span class="tag">Automotive &nbsp;&middot;&nbsp; East Africa</span></span></a>
+      <a class="row" href="#contact" data-slug="roi-dashboard" data-industry="Attribution" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">02</span>
         <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
-        <span class="met">402 months of spend</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
+        <span class="met">402 months of spend</span>
+        <span class="tag">Attribution &nbsp;&middot;&nbsp; East Africa</span></span></a>
+      <a class="row" href="#contact" data-slug="missing-spend" data-industry="Audit" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">03</span>
         <span class="ttl">$25,968 of advertising that no report had ever counted</span>
-        <span class="met">Found &middot; allocated &middot; booked</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
+        <span class="met">Found, allocated, booked</span>
+        <span class="tag">Audit &nbsp;&middot;&nbsp; East Africa</span></span></a>
+      <a class="row" href="#contact" data-slug="arsh-properties" data-industry="Real estate" data-market="Pakistan"><span class="sweep"></span><span class="in">
         <span class="idx">04</span>
-        <span class="ttl">A 100,000-follower account, taken and recovered</span>
-        <span class="met">Instagram</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
+        <span class="ttl">Lahore real estate, two channels at once</span>
+        <span class="met">Zameen, Meta</span>
+        <span class="tag">Real estate &nbsp;&middot;&nbsp; Pakistan</span></span></a>
+      <a class="row" href="#contact" data-slug="ocean-trading" data-industry="Recruitment" data-market="Japan"><span class="sweep"></span><span class="in">
         <span class="idx">05</span>
-        <span class="ttl">A cloned website, traced and taken down</span>
-        <span class="met">Content theft</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
+        <span class="ttl">Hiring ads for a Japanese exporter</span>
+        <span class="met">Meta</span>
+        <span class="tag">Recruitment &nbsp;&middot;&nbsp; Japan</span></span></a>
+      <a class="row" href="#contact" data-slug="organic-search" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">06</span>
-        <span class="ttl">An email marketing platform built in-house instead of bought</span>
-        <span class="met">Product &middot; SEO CMS</span></span></a>
-      <a class="row" href="#contact"><span class="sweep"></span><span class="in">
+        <span class="ttl">Organic search, rebuilt</span>
+        <span class="met">113k clicks</span>
+        <span class="tag">Automotive &nbsp;&middot;&nbsp; East Africa</span></span></a>
+      <a class="row" href="#contact" data-slug="account-recovery" data-industry="Brand" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">07</span>
-        <span class="ttl">Five years of freelance work across nine websites</span>
-        <span class="met">Search &middot; build &middot; growth</span></span></a>
+        <span class="ttl">A 100,000-follower account, taken and recovered</span>
+        <span class="met">Instagram</span>
+        <span class="tag">Brand &nbsp;&middot;&nbsp; East Africa</span></span></a>
+      <a class="row" href="#contact" data-slug="cloned-site" data-industry="Brand" data-market="East Africa"><span class="sweep"></span><span class="in">
+        <span class="idx">08</span>
+        <span class="ttl">A cloned website, traced and taken down</span>
+        <span class="met">Content theft</span>
+        <span class="tag">Brand &nbsp;&middot;&nbsp; East Africa</span></span></a>
+      <a class="row" href="#contact" data-slug="sending-platform" data-industry="Product" data-market="East Africa"><span class="sweep"></span><span class="in">
+        <span class="idx">09</span>
+        <span class="ttl">An email marketing platform built in-house instead of bought</span>
+        <span class="met">158,933 sends</span>
+        <span class="tag">Product &nbsp;&middot;&nbsp; East Africa</span></span></a>
+      <a class="row" href="#contact" data-slug="to-gear" data-industry="Local services" data-market="Canada"><span class="sweep"></span><span class="in">
+        <span class="idx">10</span>
+        <span class="ttl">Twelve Canadian brands, handled end to end</span>
+        <span class="met">Brand, web</span>
+        <span class="tag">Local services &nbsp;&middot;&nbsp; Canada</span></span></a>
+      <a class="row" href="#contact" data-slug="ten-websites" data-industry="Lead generation" data-market="United States"><span class="sweep"></span><span class="in">
+        <span class="idx">11</span>
+        <span class="ttl">Five years of freelance work across ten websites</span>
+        <span class="met">Search, build, growth</span>
+        <span class="tag">Lead generation &nbsp;&middot;&nbsp; United States</span></span></a>
     </div>
-    <p class="note">Full case studies on request</p>
+    <p class="note">Figures, dashboards and invoices behind each one &mdash; available on request</p>
   </div>
 </section>
 
