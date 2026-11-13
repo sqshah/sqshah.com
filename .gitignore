@@ -6,3 +6,5 @@ m-*.png
 f-*.png
 mm-*.png
 s-*.png
+__pycache__/
+*.pyc
