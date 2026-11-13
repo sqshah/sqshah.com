@@ -1,6 +1,0 @@
-wrangler.jsonc
-.assetsignore
-.gitignore
-README.md
-stamp.py
-node_modules
