@@ -2,646 +2,392 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>SQ Shah &mdash; Syed Qasim Ali</title>
-<meta name="description" content="Syed Qasim Ali. Performance marketing across Kenya, Uganda, Tanzania and Pakistan: paid media, attribution, lead systems and the dashboards that measure them.">
-<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SQ Shah — Syed Qasim Ali</title>
+<meta name="description" content="Syed Qasim Ali, performance marketer. $68,259.97 of media across Kenya, Uganda, Tanzania and Pakistan in 2026, every figure traceable to an invoice.">
 <link rel="canonical" href="https://sqshah.com/">
-<meta name="theme-color" content="#060606">
 <link rel="icon" href="assets/favicon.ico" sizes="any">
-<link rel="icon" href="assets/icon-32.png?v=e04049c9" type="image/png" sizes="32x32">
-<link rel="icon" href="assets/icon-16.png?v=59099a92" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="assets/icon-180.png?v=3cc8c631">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://sqshah.com/">
-<meta property="og:site_name" content="SQ Shah">
-<meta property="og:title" content="SQ Shah &mdash; Syed Qasim Ali">
+<meta name="theme-color" content="#0B1622">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="SQ Shah — Syed Qasim Ali">
 <meta property="og:description" content="Performance marketing across East Africa and Pakistan. Paid media, attribution, lead systems.">
 <meta property="og:image" content="https://sqshah.com/assets/icon-512.png">
+<meta property="og:url" content="https://sqshah.com/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SQ Shah &mdash; Syed Qasim Ali">
-<meta name="twitter:description" content="Performance marketing across East Africa and Pakistan. Paid media, attribution, lead systems.">
-<meta name="twitter:image" content="https://sqshah.com/assets/icon-512.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=c7441c0e">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://sqshah.com/#person",
-      "name": "Syed Qasim Ali",
-      "alternateName": "SQ Shah",
-      "url": "https://sqshah.com/",
-      "email": "talk@sqshah.com",
-      "jobTitle": "Performance Marketer",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Gujranwala",
-        "addressRegion": "Punjab",
-        "addressCountry": "PK"
-      },
-      "knowsAbout": [
-        "Paid media",
-        "Marketing attribution",
-        "Lead generation",
-        "Search engine optimisation",
-        "Marketing analytics"
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://sqshah.com/#site",
-      "url": "https://sqshah.com/",
-      "name": "SQ Shah",
-      "publisher": {
-        "@id": "https://sqshah.com/#person"
-      },
-      "inLanguage": "en"
-    }
-  ]
+<link rel="preload" href="assets/fonts/instrument.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Self-hosted rather than pulled from Google, so the page owns its own look and
+   makes no third-party request to render a headline. Latin subset, three files,
+   328KB, all axes live. */
+@font-face{
+  font-family:Fraunces; font-style:normal; font-weight:100 900; font-display:swap;
+  src:url(assets/fonts/fraunces.woff2) format('woff2-variations');
 }
-</script>
+@font-face{
+  font-family:Fraunces; font-style:italic; font-weight:100 900; font-display:swap;
+  src:url(assets/fonts/fraunces-italic.woff2) format('woff2-variations');
+}
+@font-face{
+  font-family:Instrument; font-style:normal; font-weight:400 700; font-display:swap;
+  src:url(assets/fonts/instrument.woff2) format('woff2-variations');
+}
 
+/* ---------------------------------------------------------------- tokens --
+   Blue-black rather than grey-black, because the one light section is cool
+   paper and a warm black would fight it. Green and amber are the only two
+   accents and both carry meaning: a line reconciles, or it doesn't. */
+:root{
+  --ink:#0B1622; --ink-r:#0F1F2E; --rule:#1B2E40; --rule-s:#152635;
+  --text:#D9E2E9; --head:#F2F6F8; --mute:#7B91A4; --faint:#56697A;
+  --paper:#E9ECE4; --paper-ink:#141A16; --paper-mute:#5A6558; --paper-rule:#C9CEC0;
+  --bal:#4E9B7C; --var:#CB9440;
+  --gut:clamp(20px,5vw,72px); --max:1180px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink); color:var(--text);
+  font-family:Instrument,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px; line-height:1.62; font-variant-numeric:tabular-nums lining-nums;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{background:var(--bal);color:#06100A}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.prose{max-width:62ch}
+
+h1,h2,h3,.fig{
+  font-family:Fraunces,Georgia,serif; font-weight:400;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
+  letter-spacing:-.022em; line-height:1.02; color:var(--head);
+}
+h2{font-size:clamp(27px,3.5vw,44px);line-height:1.08}
+h3{font-size:clamp(19px,1.7vw,23px);line-height:1.22;letter-spacing:-.014em}
+a{color:inherit}
+
+/* --------------------------------------------------------------- top bar -- */
+.bar{
+  position:sticky; top:0; z-index:40; background:rgba(11,22,34,.82);
+  backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid transparent;
+  transition:border-color .3s;
+}
+.bar.stuck{border-bottom-color:var(--rule-s)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding-block:15px}
+.mark{font-family:Fraunces,serif;font-weight:500;font-size:19px;letter-spacing:-.02em;
+  color:var(--head);text-decoration:none;font-variation-settings:"opsz" 40}
+.bar nav{display:flex;gap:clamp(14px,2.4vw,30px);align-items:center}
+.bar nav a{font-size:14.5px;color:var(--mute);text-decoration:none;transition:color .2s}
+.bar nav a:hover,.bar nav a:focus-visible{color:var(--head)}
+@media(max-width:620px){.bar nav a.hide-s{display:none}}
+
+/* ------------------------------------------------------------------ hero -- */
+.hero{padding-block:clamp(64px,13vh,132px) clamp(40px,7vh,72px)}
+.hero h1{font-size:clamp(38px,6.6vw,92px);line-height:1.0;max-width:17ch;
+  text-wrap:balance;font-variation-settings:"opsz" 60,"SOFT" 0,"WONK" 0}
+.hero h1 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 0,"WONK" 1}
+.hero .who{margin-top:clamp(26px,3.6vh,40px);color:var(--mute);font-size:clamp(16.5px,1.5vw,19px);max-width:52ch}
+.hero .who b{color:var(--text);font-weight:500}
+
+/* --------------------------------------------------------------- balance -- */
+.balance{margin-top:clamp(44px,8vh,86px);border-top:1px solid var(--rule);padding-top:22px;
+  display:flex;align-items:baseline;gap:clamp(16px,3vw,34px);flex-wrap:wrap}
+.balance .fig{font-size:clamp(38px,6.4vw,82px);letter-spacing:-.03em;color:var(--head)}
+.balance .cap{color:var(--mute);font-size:15.5px;max-width:26ch;line-height:1.45}
+
+/* ---------------------------------------------------------------- ledger --
+   Accounting rules, used the way accounting uses them: a single rule above a
+   total, a double rule under the one that closes the statement. */
+.ledger{padding-block:clamp(56px,10vh,110px)}
+.ledger .lead{color:var(--mute);margin-top:14px}
+table.acct{width:100%;border-collapse:collapse;margin-top:clamp(28px,5vh,46px)}
+table.acct th{text-align:left;font-weight:500;font-size:14px;color:var(--faint);
+  padding:0 0 12px;border-bottom:1px solid var(--rule-s)}
+table.acct th.n{text-align:right}
+table.acct td{padding:17px 0;border-bottom:1px solid var(--rule-s);vertical-align:baseline}
+table.acct td.n{text-align:right;white-space:nowrap}
+.pf{font-size:clamp(17px,1.6vw,19.5px);color:var(--head);font-weight:500}
+.srcline{display:block;color:var(--faint);font-size:14px;margin-top:4px;line-height:1.4}
+.amt{font-family:Fraunces,serif;font-variation-settings:"opsz" 80,"SOFT" 0,"WONK" 0;
+  font-weight:400;font-size:clamp(20px,2.3vw,27px);letter-spacing:-.02em;color:var(--head)}
+.tick{display:inline-block;width:1.15em;color:var(--bal);font-size:15px}
+tr.total td{border-bottom:none;border-top:1.5px solid var(--rule);padding-top:22px}
+tr.total .pf{color:var(--head)}
+tr.total .amt{font-size:clamp(26px,3.4vw,40px);
+  border-bottom:3px double var(--rule);padding-bottom:9px}
+tr.flag td{border-bottom:none;padding-top:18px}
+.note{display:flex;gap:13px;align-items:flex-start;border-left:2px solid var(--var);
+  padding:13px 0 13px 16px;background:linear-gradient(90deg,rgba(203,148,64,.07),transparent 72%)}
+.note .amt-s{font-family:Fraunces,serif;color:var(--var);font-size:19px;white-space:nowrap;
+  font-variation-settings:"opsz" 40}
+.note p{font-size:15px;color:var(--mute);line-height:1.5;max-width:58ch}
+.note p b{color:var(--text);font-weight:500}
+
+/* --------------------------------------------------------------- results -- */
+.results{padding-bottom:clamp(56px,10vh,110px)}
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule-s);
+  border:1px solid var(--rule-s);margin-top:clamp(26px,4.4vh,40px)}
+.rgrid > div{background:var(--ink);padding:clamp(20px,2.6vw,30px)}
+.rgrid .fig{display:block;font-size:clamp(26px,3.2vw,38px);letter-spacing:-.028em}
+.rgrid .k{display:block;color:var(--mute);font-size:14.5px;margin-top:9px;line-height:1.42}
+@media(max-width:880px){.rgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:430px){.rgrid{grid-template-columns:1fr}}
+
+/* ----------------------------------------------------------------- plate --
+   The one light room in the house. A number becomes a person: which is the
+   job, stated once and not explained. */
+.flip{background:var(--paper);color:var(--paper-ink)}
+.flip h2,.flip .fig{color:var(--paper-ink)}
+.plateSec{min-height:100vh;display:flex;align-items:center;padding-block:clamp(48px,9vh,96px)}
+.plateSec .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,76px);
+  align-items:center;width:100%}
+.plate{position:relative;width:100%;aspect-ratio:3/4;max-width:460px;margin-inline:auto}
+.plate canvas{display:block;width:100%;height:100%}
+.beats{display:grid;gap:22px;align-content:center}
+.beats h2{max-width:15ch}
+.beats p{color:var(--paper-mute);max-width:40ch;line-height:1.66}
+.beats .src{font-size:14px;color:var(--paper-mute);border-top:1px solid var(--paper-rule);
+  padding-top:14px;max-width:40ch}
+@media(max-width:860px){
+  .plateSec{min-height:auto}
+  .plateSec .wrap{grid-template-columns:1fr;gap:34px}
+  .plate{max-width:340px}
+}
+
+/* ------------------------------------------------------------------ runs -- */
+.runs{padding-block:clamp(56px,10vh,110px)}
+.rows{margin-top:clamp(26px,4.4vh,42px);border-top:1px solid var(--rule-s)}
+.row{display:grid;grid-template-columns:minmax(150px,1.1fr) 2.2fr minmax(90px,.7fr);
+  gap:clamp(14px,3vw,36px);padding:19px 0;border-bottom:1px solid var(--rule-s);
+  align-items:baseline}
+.row dt{color:var(--head);font-weight:500;font-size:17px}
+.row dd{color:var(--mute);font-size:15.5px;line-height:1.5}
+.row .vol{text-align:right;color:var(--text);font-size:15.5px;white-space:nowrap}
+@media(max-width:720px){
+  .row{grid-template-columns:1fr auto;gap:6px 18px}
+  .row dd{grid-column:1/-1;order:3}
+  .row .vol{order:2}
+}
+
+/* ------------------------------------------------------------------ work -- */
+.work{padding-bottom:clamp(56px,10vh,110px)}
+.cases{margin-top:clamp(26px,4.4vh,42px);display:grid;gap:1px;background:var(--rule-s);
+  border-block:1px solid var(--rule-s)}
+.case{background:var(--ink);display:grid;grid-template-columns:1fr minmax(0,1.25fr);
+  gap:clamp(16px,3vw,44px);padding:clamp(22px,3vw,34px) 0;align-items:start;
+  text-decoration:none;transition:background .25s}
+.case:hover,.case:focus-visible{background:var(--ink-r)}
+.case .ttl{font-family:Fraunces,serif;font-size:clamp(19px,2vw,25px);line-height:1.18;
+  letter-spacing:-.018em;color:var(--head);font-variation-settings:"opsz" 72}
+.case .met{margin-top:9px;color:var(--faint);font-size:14.5px}
+.case p{color:var(--mute);font-size:15.5px;line-height:1.56}
+@media(max-width:760px){.case{grid-template-columns:1fr;gap:12px}}
+
+/* ---------------------------------------------------------------- footer -- */
+.foot{border-top:1px solid var(--rule);padding-block:clamp(48px,8vh,86px) 40px}
+.foot .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(30px,5vw,60px);
+  align-items:end}
+.sigbox{width:min(300px,62vw)}
+.sigbox svg{width:100%;height:auto;display:block}
+.sigbox path{fill:var(--head)}
+.contact{display:grid;gap:11px;justify-items:start}
+.contact a{font-size:17px;text-decoration:none;color:var(--text);
+  border-bottom:1px solid var(--rule);padding-bottom:3px;transition:border-color .22s,color .22s}
+.contact a:hover,.contact a:focus-visible{color:var(--head);border-bottom-color:var(--bal)}
+.fine{margin-top:clamp(34px,5vh,54px);color:var(--faint);font-size:13.5px;
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:720px){.foot .grid{grid-template-columns:1fr;gap:34px;align-items:start}}
+
+:focus-visible{outline:2px solid var(--bal);outline-offset:3px;border-radius:2px}
+
+/* The ledger resolving is the page's one piece of unasked-for motion, so
+   nothing else moves on its own. */
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
 
-<div class="curtain"><span>SQ Shah</span><i class="count">00</i></div>
-<i class="prog"></i>
-<div class="grain"></div>
-
-<nav class="nav">
-  <a class="mark" href="#top">SQ</a>
-  <ul>
-    <li><a href="#work">Work</a></li>
-        <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<section class="hero" id="top">
-  <div id="room" aria-hidden="true"></div>
-  <div class="scan" aria-hidden="true"></div>
-  <div class="vig" aria-hidden="true"></div>
-  <div class="stage">
-    <p class="eyebrow"><i></i><span>Performance marketing &nbsp;&middot;&nbsp; East Africa</span></p>
-    <svg class="sig" id="sig" role="img" aria-label="SQ Shah"></svg>
-    <p class="line">The numbers were wrong before they were bad.</p>
-  </div>
-  <div class="cue"><i></i><span>Scroll</span></div>
-</section>
-
-<div class="strip" aria-hidden="true">
-  <div class="run">
-    <span>Paid media <b>&middot;</b> Attribution <b>&middot;</b> Lead systems <b>&middot;</b> Analytics <b>&middot;</b> SEO <b>&middot;</b> Automation <b>&middot;</b> </span>
-    <span>Paid media <b>&middot;</b> Attribution <b>&middot;</b> Lead systems <b>&middot;</b> Analytics <b>&middot;</b> SEO <b>&middot;</b> Automation <b>&middot;</b> </span>
-  </div>
-</div>
-
-<section class="band" id="figures">
+<header class="bar" id="bar">
   <div class="wrap">
-    <p class="kicker"><i></i><span>Four years</span></p>
-    <div class="figures">
-      <div><span class="fn" data-n="166643" data-pre="$">$0</span><i class="fr"></i><span class="fk">Advertising managed &mdash; four countries</span></div>
-      <div><span class="fn" data-n="75887">0</span><i class="fr"></i><span class="fk">Leads at $0.29 each</span></div>
-      <div><span class="fn" data-n="782">0</span><i class="fr"></i><span class="fk">Vehicles sold</span></div>
-      <div><span class="fn" data-n="25968" data-pre="$">$0</span><i class="fr"></i><span class="fk">Of that, unrecorded until I found it</span></div>
-    </div>
-  </div>
-</section>
-
-
-<section class="band paper" id="who">
-  <div class="wrap who">
-    <figure class="plate" data-src="assets/figure-ink.png?v=7ac1f6ce">
-      <canvas aria-label="Pen-and-ink drawing of Syed Qasim Ali" role="img"></canvas>
-    </figure>
-    <div>
-      <p class="kicker"><i></i><span>Syed Qasim Ali</span></p>
-      <div class="beats">
-        <div class="beat">
-          <h2 class="ch bt">I started at one dollar an hour.</h2>
-          <p class="body bt">Four years later I was accountable for $166,643 of advertising across
-          Kenya, Uganda, Tanzania and Pakistan &mdash; and for the systems that measured whether
-          any of it worked. Now I build the machine, not just the campaign.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="work">
-  <div class="wrap">
-    <p class="kicker"><i></i><span>Selected work</span></p>
-    <div class="rows">
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case1">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">01</span>
-            <span class="ttl">Khushi Motors &mdash; four years of paid media across East Africa</span>
-            <span class="met">782 vehicles &middot; $0.29 CPL</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case1">
-          <div class="rowinner">
-            <figure class="shot"><img src="assets/work/ads.jpg?v=b15c6bf7" alt="Google Ads account overview: 1,238,753 clicks and the conversion-value trend" loading="lazy" decoding="async"></figure>
-            <div class="rowtext">
-            <p>Six advertising accounts across Kenya, Uganda, Tanzania and Pakistan, each run as its own island, none reconciled against what actually sold. I consolidated them into one reporting structure, rebuilt the campaign architecture around it, and moved budget by cost per released vehicle rather than cost per lead &mdash; the two disagree, and only one of them pays wages.</p>
-            <ul class="stats"><li><b>73.4M</b><span>Impressions</span></li><li><b>60,050</b><span>Leads</span></li><li><b>$0.29</b><span>Per lead</span></li><li><b>359</b><span>Campaigns</span></li></ul>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case2">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">02</span>
-            <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
-            <span class="met">402 months of spend</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case2">
-          <div class="rowinner">
-            <p>Spend lived in the ad platforms, sales in a separate system, payments in spreadsheets. Nobody could answer what a sold vehicle had cost to sell. I built an entity-driven dashboard that pulls all three together, imported 402 months of spend across every branch and platform, and reconciled each payment to the cent &mdash; including currency conversion on locally invoiced ones.</p>
-            <ul class="stats"><li><b>$166,643</b><span>Reconciled</span></li><li><b>402</b><span>Months of spend</span></li><li><b>4</b><span>Countries</span></li></ul>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case3">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">03</span>
-            <span class="ttl">$25,968 of advertising that no report had ever counted</span>
-            <span class="met">Found &middot; allocated &middot; booked</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case3">
-          <div class="rowinner">
-            <p>One channel had run for five years and never appeared in a single report. The vehicles it sold were counted as though they had cost nothing. I found the spend in the archive, allocated it across branches by their share of its sales, spread package payments over the months they actually covered, and reconciled every payment at its implied exchange rate. It turned out to be the cheapest channel in the business, and it had been invisible.</p>
-            <ul class="stats"><li><b>$25,968</b><span>Recovered</span></li><li><b>$152.45</b><span>True cost per sale</span></li><li><b>168</b><span>Sales re-attributed</span></li></ul>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case4">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">04</span>
-            <span class="ttl">Arsh Premium Properties &mdash; Lahore real estate, two channels at once</span>
-            <span class="met">Zameen &middot; Meta</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case4">
-          <div class="rowinner">
-            <figure class="shot"><img src="assets/work/arsh.jpg?v=37875613" alt="Meta ad breakdown for a Lahore listing: impressions, spend, CPC and CTR per placement" loading="lazy" decoding="async"></figure>
-            <div class="rowtext">
-            <p>Premium apartments, penthouses and retail units priced in crores, listed on Zameen for intent and advertised on Meta for reach into Lahore, Karachi, Islamabad, Faisalabad and Sialkot. I built the strategy across both and tracked every property against its own spend rather than a pooled budget, so each listing could be judged on what it actually returned.</p>
-            <ul class="stats"><li><b>95</b><span>Leads, one listing</span></li><li><b>$23</b><span>Spend behind them</span></li><li><b>5</b><span>Cities targeted</span></li></ul>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case5">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">05</span>
-            <span class="ttl">Ocean Trading &mdash; hiring ads for a Japanese exporter</span>
-            <span class="met">Recruitment &middot; JPY</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case5">
-          <div class="rowinner">
-            <p>Not selling anything &mdash; filling roles. Meta campaigns running alongside Indeed job listings, billed in yen, over three years. Recruitment advertising is judged on applications rather than leads, so the campaigns were built and read against clicks through to apply.</p>
-            <ul class="stats"><li><b>&yen;249,690</b><span>Spent</span></li><li><b>656,779</b><span>Impressions</span></li><li><b>8,293</b><span>Clicks to apply</span></li><li><b>22</b><span>Campaigns</span></li></ul>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case10">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">06</span>
-            <span class="ttl">Khushi Motors &mdash; organic search, rebuilt</span>
-            <span class="met">113k clicks &middot; 6.1M impressions</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case10">
-          <div class="rowinner">
-            <figure class="shot"><img src="assets/work/search.jpg?v=04128f26" alt="Search Console: 113k clicks and 6.1M impressions over twelve months against the prior period" loading="lazy" decoding="async"></figure>
-            <div class="rowtext">
-            <p>Paid media buys attention; search keeps it. Over twelve months the site went from
-            30.9k clicks to 113k, and from 1.09M impressions to 6.1M, against the same period a year
-            earlier &mdash; average position improving from 10.4 to 6.9 as it went.</p>
-            <ul class="stats"><li><b>113k</b><span>Clicks</span></li><li><b>6.1M</b><span>Impressions</span></li><li><b>3.7&times;</b><span>Year on year</span></li><li><b>6.9</b><span>Avg position</span></li></ul>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case6">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">07</span>
-            <span class="ttl">A 100,000-follower account, taken and recovered</span>
-            <span class="met">Instagram</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case6">
-          <div class="rowinner">
-            <p>An audience built over years, gone overnight. I worked the recovery until the account was back under the company's control, then closed the hole that let it happen.</p>
-            <ul class="stats"><li><b>100K</b><span>Followers</span></li><li><b>Recovered</b><span>Outcome</span></li></ul>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case7">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">08</span>
-            <span class="ttl">A cloned website, traced and taken down</span>
-            <span class="met">Content theft</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case7">
-          <div class="rowinner">
-            <p>Somebody stood up a near-identical copy of the company's site on a lookalike domain and ran it as their own. I traced it, documented the duplication, and pursued it until the copy came down.</p>
-            <ul class="stats"><li><b>Taken down</b><span>Outcome</span></li></ul>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case8">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">09</span>
-            <span class="ttl">An email marketing platform built in-house instead of bought</span>
-            <span class="met">Product &middot; SEO CMS</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case8">
-          <div class="rowinner">
-            <p>Rather than pay per contact per month to a vendor, the company got its own sending platform and an SEO content system beside it. Both built in-house, both owned outright, neither renewing.</p>
-            <ul class="stats"><li><b>In-house</b><span>Built</span></li><li><b>2</b><span>Systems shipped</span></li></ul>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case11">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">10</span>
-            <span class="ttl">To Gear Marketing &mdash; twelve Canadian brands</span>
-            <span class="met">Surrey &middot; brand &amp; web</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case11">
-          <div class="rowinner">
-            <figure class="shot"><img src="assets/work/brands.jpg?v=506c4bed" alt="Twelve client logos designed for a Canadian agency" loading="lazy" decoding="async"></figure>
-            <div class="rowtext">
-            <p>A Surrey agency's client roster, handled end to end: a daycare, construction and landscaping,
-            a restaurant, a salon, plumbing, two pest control firms, limousine hire, glazing, property
-            maintenance and a realtor. Logos, banners and service graphics for each, held to one standard
-            so that a dozen small businesses looked like they could afford a design team.</p>
-            <ul class="stats"><li><b>12</b><span>Brands</span></li><li><b>Canada</b><span>Market</span></li><li><b>Brand + web</b><span>Scope</span></li></ul>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <button class="rowhead" aria-expanded="false" aria-controls="case9">
-          <span class="sweep"></span>
-          <span class="in">
-            <span class="idx">11</span>
-            <span class="ttl">Five years of freelance work across ten websites</span>
-            <span class="met">Search &middot; build &middot; growth</span>
-          </span>
-          <span class="plus" aria-hidden="true"></span>
-        </button>
-        <div class="rowbody" id="case9">
-          <div class="rowinner">
-            <p>Ten sites across AI tooling, crypto, legal technology and telecom &mdash; built, ranked, or both. Search strategy, technical fixes, content systems and the backlink work behind them.</p>
-            <ul class="stats"><li><b>10</b><span>Websites</span></li><li><b>5</b><span>Years</span></li></ul>
-          </div>
-        </div>
-      </article>
-    </div>
-    <p class="note">Full case studies on request</p>
-  </div>
-</section>
-
-<section class="band" id="method">
-  <div class="wrap">
-    <p class="kicker"><i></i><span>How I work</span></p>
-    <div class="cols">
-      <div class="col"><span>01</span><h3>Measure first</h3>
-        <p>Before a budget moves, I want to know what the last one actually bought. Most of the
-        money I have saved was found in the gap between what was spent and what was recorded.</p></div>
-      <div class="col"><span>02</span><h3>Then spend</h3>
-        <p>Channels are an argument settled by cost per outcome, not by preference. I run the
-        test small, read it honestly, and put the budget where the evidence points.</p></div>
-      <div class="col"><span>03</span><h3>Then build the system</h3>
-        <p>A result that cannot be repeated is luck. Dashboards, pipelines and automations exist
-        so the next person can see what I saw without having to ask me.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="contact">
-  <div class="wrap">
-    <p class="kicker"><i></i><span>Contact</span></p>
-    <h2 class="big">Let&rsquo;s build something worth measuring.</h2>
-    <a class="mail" href="mailto:talk@sqshah.com">talk@sqshah.com</a>
-    <div class="ends">
+    <a class="mark" href="/">SQ Shah</a>
+    <nav>
+      <a href="#ledger">Numbers</a>
+      <a href="#runs" class="hide-s">What I run</a>
       <a href="#work">Work</a>
-      <a href="#top">Back to top</a>
+      <a href="mailto:talk@sqshah.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero wrap">
+  <h1>I buy media in East Africa and make the numbers <em>tie out</em>.</h1>
+  <p class="who">Syed Qasim Ali. Four years of paid media for a used-car group selling
+    across Kenya, Uganda, Tanzania and Pakistan &mdash; Google, Meta, TikTok and
+    Snapchat, plus the dashboards, CRM and lead plumbing underneath them.</p>
+
+  <div class="balance">
+    <span class="fig" data-count="68259.97" data-money>$68,259.97</span>
+    <span class="cap">Media managed this year, January to October 2026.
+      Every line below reconciles to an invoice.</span>
+  </div>
+</section>
+
+<section class="ledger wrap" id="ledger">
+  <h2>What that was spent on</h2>
+  <p class="lead prose">Four platforms, five branches, three countries. The figures come
+    from the billing invoices rather than the platform dashboards, because the two
+    disagree and only one of them is what the company actually paid.</p>
+
+  <table class="acct">
+    <thead>
+      <tr><th scope="col">Platform</th><th scope="col" class="n">Billed</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pf">Google Ads</span>
+          <span class="srcline">Ten invoices, 5489923736 through 5733561135. Account 427-104-7997.</span></td>
+        <td class="n"><span class="amt" data-count="42080.85" data-money>$42,080.85</span>
+          <span class="tick" aria-hidden="true">&check;</span></td>
+      </tr>
+      <tr>
+        <td><span class="pf">Meta</span>
+          <span class="srcline">Ad invoices and boosted-post invoices, five branches, to 20 October.</span></td>
+        <td class="n"><span class="amt" data-count="25994.20" data-money>$25,994.20</span>
+          <span class="tick" aria-hidden="true">&check;</span></td>
+      </tr>
+      <tr>
+        <td><span class="pf">TikTok</span>
+          <span class="srcline">Two invoices, May and June.</span></td>
+        <td class="n"><span class="amt" data-count="161.92" data-money>$161.92</span>
+          <span class="tick" aria-hidden="true">&check;</span></td>
+      </tr>
+      <tr>
+        <td><span class="pf">Snapchat</span>
+          <span class="srcline">One statement, February.</span></td>
+        <td class="n"><span class="amt" data-count="23.00" data-money>$23.00</span>
+          <span class="tick" aria-hidden="true">&check;</span></td>
+      </tr>
+      <tr class="total">
+        <td><span class="pf">Total</span></td>
+        <td class="n"><span class="amt" data-count="68259.97" data-money data-last>$68,259.97</span></td>
+      </tr>
+      <tr class="flag">
+        <td colspan="2">
+          <div class="note">
+            <span class="amt-s">$633.36</span>
+            <p>One line doesn't tie, and this is the useful part. September's Google invoice
+              covers <b>8 to 30 September only</b> &mdash; the first week sits on a separate
+              invoice nobody had filed. The export says $2,592.46, the invoice says $1,959.10,
+              and the difference is a missing document rather than missing money. Found it by
+              reconciling the ad-group export against the billing PDF line by line.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="results wrap">
+  <h2>What it bought</h2>
+  <div class="rgrid">
+    <div><span class="fig" data-count="47859432" data-compact>47.9M</span>
+      <span class="k">Impressions across Google and Meta</span></div>
+    <div><span class="fig" data-count="1167638" data-compact>1.17M</span>
+      <span class="k">Google clicks at $0.032 each</span></div>
+    <div><span class="fig" data-count="46747">46,747</span>
+      <span class="k">Meta leads at $0.30 each</span></div>
+    <div><span class="fig" data-count="145902">145,902</span>
+      <span class="k">Leads in the CRM, five branches</span></div>
+  </div>
+</section>
+
+<section class="flip plateSec">
+  <div class="wrap">
+    <div class="plate" data-src="assets/figure-ink.png?v=7ac1f6ce"><canvas></canvas></div>
+    <div class="beats">
+      <h2 class="beat">A number is a person who answered.</h2>
+      <p class="beat">Twenty-nine cents is what it cost to put one real human being,
+        in Mombasa or Kampala or Dar, in front of a salesperson. Not an impression,
+        not a click. Someone who left a phone number.</p>
+      <p class="src beat">Blended cost per lead, Khushi Motors, Google and Meta,
+        January to October 2026.</p>
     </div>
   </div>
 </section>
 
-<div class="fine">
-  <div class="wrap">
-    <span>&copy; 2026 Syed Qasim Ali</span>
-    <span>Gujranwala, Pakistan</span>
-  </div>
-</div>
+<section class="runs wrap" id="runs">
+  <h2>What I run</h2>
+  <dl class="rows">
+    <div class="row">
+      <dt>Google Ads</dt>
+      <dd>Search, Performance Max, Demand Gen, Display, YouTube and local store visits
+        across four markets.</dd>
+      <span class="vol">$42,080.85</span>
+    </div>
+    <div class="row">
+      <dt>Meta</dt>
+      <dd>Lead-form and traffic campaigns per branch, plus the boosted-post budget the
+        branch managers spend directly.</dd>
+      <span class="vol">$25,994.20</span>
+    </div>
+    <div class="row">
+      <dt>TikTok and Snapchat</dt>
+      <dd>Smaller tests, run to find out whether the audience was there before committing
+        a budget to it.</dd>
+      <span class="vol">$184.92</span>
+    </div>
+    <div class="row">
+      <dt>Reporting and attribution</dt>
+      <dd>A live ROI dashboard reconciling spend, sales and payments to the cent, and the
+        monthly spend reports the board reads.</dd>
+      <span class="vol">402 months</span>
+    </div>
+    <div class="row">
+      <dt>Lead systems</dt>
+      <dd>CRM, lead routing and the merge work that turns thirty-one separate exports into
+        one list anybody can use.</dd>
+      <span class="vol">145,902 leads</span>
+    </div>
+    <div class="row">
+      <dt>Search</dt>
+      <dd>Technical SEO, content strategy and the keyword work behind the landing pages the
+        ads point at.</dd>
+      <span class="vol">10 sites</span>
+    </div>
+  </dl>
+</section>
 
-<script src="assets/vendor/three.min.js?v=170c6789"></script>
+<section class="work wrap" id="work">
+  <h2>Selected work</h2>
+  <div class="cases" id="cases"></div>
+</section>
+
+</main>
+
+<footer class="foot wrap">
+  <div class="grid">
+    <div class="sigbox" id="sig" aria-label="Signature of Syed Qasim Ali"></div>
+    <div class="contact">
+      <a href="mailto:talk@sqshah.com">talk@sqshah.com</a>
+      <a href="https://wa.me/923279507957" rel="me">WhatsApp</a>
+      <a href="https://www.linkedin.com/in/imsqshah/" rel="me">LinkedIn</a>
+      <a href="https://github.com/sqshah" rel="me">GitHub</a>
+    </div>
+  </div>
+  <div class="fine">
+    <span>Gujranwala, Pakistan. Working across GMT+3 and GMT+5.</span>
+    <span>Figures January&ndash;October 2026, from billing invoices.</span>
+  </div>
+</footer>
+
 <script src="assets/vendor/lenis.min.js?v=0bf174d3"></script>
 <script src="assets/vendor/gsap.min.js?v=28033e44"></script>
 <script src="assets/vendor/ScrollTrigger.min.js?v=ad33c2df"></script>
-<script src="hero3d.js?v=b98023cd"></script>
-<script src="particles.js?v=3ab0e98a"></script>
-<script src="feel.js?v=470284f4"></script>
-<script>
-const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const showAll = () => {
-  document.querySelectorAll('.eyebrow,.line,.cue,.nav').forEach(el=>el.style.opacity=1);
-  const c = document.querySelector('.curtain'); if (c) c.remove();
-  document.querySelectorAll('.fn').forEach(el=>{
-    el.textContent = (el.dataset.pre||'') + (+el.dataset.n).toLocaleString('en-US');
-  });
-};
-
-/* Wrap every word in its own clipped box so headlines can rise out of the line
-   rather than fading in as a block. Inline tags inside the heading are preserved. */
-function splitWords(el){
-  if (el.dataset.split) return Array.prototype.slice.call(el.querySelectorAll('.w>i'));
-  el.dataset.split = '1';
-  let lastWord = null, afterSpace = true;
-  const PUNCT = /^[.,;:!?)\]'"’”»—-]+$/;
-  const walk = (node) => {
-    Array.prototype.slice.call(node.childNodes).forEach(n=>{
-      if (n.nodeType === 3){
-        const frag = document.createDocumentFragment();
-        n.nodeValue.split(/(\s+)/).forEach(tok=>{
-          if (!tok) return;
-          if (/^\s+$/.test(tok)){
-            frag.appendChild(document.createTextNode(tok)); afterSpace = true; return;
-          }
-          // punctuation that follows a word with no space belongs to that word, or the
-          // line can break in front of it and strand a comma
-          if (!afterSpace && lastWord && PUNCT.test(tok)){
-            lastWord.textContent += tok; return;
-          }
-          const w = document.createElement('span'); w.className = 'w';
-          const i = document.createElement('i'); i.textContent = tok;
-          w.appendChild(i); frag.appendChild(w);
-          lastWord = i; afterSpace = false;
-        });
-        node.replaceChild(frag, n);
-      } else if (n.nodeType === 1 && !n.classList.contains('w')) walk(n);
-    });
-  };
-  walk(el);
-  return Array.prototype.slice.call(el.querySelectorAll('.w>i'));
-}
-
-/* ---------- the signature, written by hand ---------- */
-fetch('assets/signature.json?v=ad9af16d').then(r=>r.json()).then(sig=>{
-  const NS='http://www.w3.org/2000/svg';
-  const svg=document.getElementById('sig');
-  svg.setAttribute('viewBox',`0 0 ${sig.w} ${sig.h}`);
-
-  const defs=document.createElementNS(NS,'defs');
-  const mask=document.createElementNS(NS,'mask');
-  mask.setAttribute('id','write');
-  mask.setAttribute('maskUnits','userSpaceOnUse');
-  mask.setAttribute('x',-40); mask.setAttribute('y',-40);
-  mask.setAttribute('width',sig.w+80); mask.setAttribute('height',sig.h+80);
-  const pens=sig.pen.map(d=>{
-    const p=document.createElementNS(NS,'path');
-    p.setAttribute('d',d); p.setAttribute('class','pen');
-    mask.appendChild(p); return p;
-  });
-  defs.appendChild(mask); svg.appendChild(defs);
-
-  // the mask lives in the SVG's own user space, so it goes on an outer group &mdash;
-  // put it on the transformed group and it inherits the 40x scale and reveals a sliver
-  const outer=document.createElementNS(NS,'g');
-  outer.setAttribute('mask','url(#write)');
-  const g=document.createElementNS(NS,'g');
-  g.setAttribute('transform',sig.transform);
-  sig.outline.forEach(d=>{
-    const p=document.createElementNS(NS,'path');
-    p.setAttribute('d',d); p.setAttribute('class','fill');
-    p.setAttribute('fill-rule','evenodd'); g.appendChild(p);
-  });
-  outer.appendChild(g); svg.appendChild(outer);
-
-  const lens=pens.map(p=>{const L=p.getTotalLength();
-    p.style.strokeDasharray=L; p.style.strokeDashoffset=L; return L;});
-  const total=lens.reduce((a,b)=>a+b,0);
-
-  if (RM || !window.gsap){ pens.forEach(p=>p.style.strokeDashoffset=0); showAll(); return; }
-
-  // The curtain lifts onto the room, not onto the name. The signature is held back
-  // until the camera has flown through the wall and out of the fog.
-  const tl=gsap.timeline();
-  tl.add(()=>{ if(window.__loaded) window.__loaded(); })
-    .to('.curtain span',{opacity:1,duration:.34,ease:'power2.out'})
-    .to('.curtain span',{opacity:0,duration:.26,ease:'power1.in'},'+=0.14')
-    .to('.curtain',{yPercent:-100,duration:.72,ease:'power3.inOut'},'-=0.08')
-    .add(()=>{const c=document.querySelector('.curtain'); if(c) c.remove();})
-    .to('.eyebrow',{opacity:1,duration:.7,ease:'power2.out'},'-=0.45')
-    .to('.nav',{opacity:1,duration:.7,ease:'power2.out'},'-=0.55');
-
-  // The pen is driven by the scroll, not by a timeline. Writing it this way means
-  // scrolling back up un-writes it — nothing can latch on over the room.
-  let acc=0; const starts=lens.map(L=>{const s=acc; acc+=L; return s;});
-
-  // A nib that rides the stroke being drawn. Without it the line simply appears;
-  // with it there is something doing the writing, which is the whole difference.
-  const nib=document.createElementNS(NS,'circle');
-  nib.setAttribute('class','nib'); nib.setAttribute('r','26');
-  const wet=document.createElementNS(NS,'circle');          // ink still settling behind it
-  wet.setAttribute('class','wet'); wet.setAttribute('r','54');
-  svg.append(wet,nib);
-
-  window.__sign = (u) => {
-    const drawn = u * total;
-    let live=-1, at=0;
-    pens.forEach((p,i)=>{
-      const k = Math.max(0, Math.min(1, (drawn - starts[i]) / lens[i]));
-      p.style.strokeDashoffset = lens[i] * (1 - k);
-      if (k > 0 && k < 1) { live = i; at = k; }             // the stroke under the nib
-    });
-    const writing = u > 0.001 && u < 0.999 && live >= 0;
-    svg.classList.toggle('writing', writing);
-    if (writing) {
-      const pt = pens[live].getPointAtLength(lens[live] * at);
-      nib.setAttribute('cx', pt.x); nib.setAttribute('cy', pt.y);
-      wet.setAttribute('cx', pt.x); wet.setAttribute('cy', pt.y);
-    }
-  };
-  window.__sign(0);
-
-  if (!matchMedia('(hover: none)').matches){
-    const sx=gsap.quickTo('.sig','x',{duration:.9,ease:'power3'}),
-          sy=gsap.quickTo('.sig','y',{duration:.9,ease:'power3'});
-    addEventListener('mousemove',e=>{
-      const dx=e.clientX/innerWidth-.5, dy=e.clientY/innerHeight-.5;
-      sx(dx*-26); sy(dy*-14);
-    },{passive:true});
-  }
-}).catch(showAll);
-
-/* ---------- everything the scroll drives ---------- */
-(function(){
-  if (RM || !window.gsap || !window.ScrollTrigger){ showAll(); return; }
-  gsap.registerPlugin(ScrollTrigger);
-
-  // the marquee runs on its own; the scroll leans on it
-  const run = document.querySelector('.strip .run');
-  const loop = gsap.to(run, {xPercent:-50, duration:26, ease:'none', repeat:-1});
-  const skew = gsap.quickTo(run, 'skewX', {duration:.5, ease:'power3'});
-  ScrollTrigger.create({
-    onUpdate(self){
-      const v = self.getVelocity();
-      loop.timeScale(gsap.utils.clamp(-4, 4, 1 + v/900));
-      skew(gsap.utils.clamp(-7, 7, -v/320));
-    }
-  });
-
-  // The cards stack: each one is given a z-index above the last so the next rides
-  // over it, and dims and settles back a little while it is being covered. #who is
-  // pinned by ScrollTrigger, which cannot share an element with position:sticky, so
-  // it is marked and left in normal flow.
-  (function cards(){
-    const pinned = document.getElementById('who');
-    if (pinned) pinned.classList.add('pinned');
-    const all = gsap.utils.toArray('.band');
-    all.forEach((sec,i)=>{ sec.style.zIndex = 10 + i; });
-    const fine = document.querySelector('.fine');
-    if (fine) fine.style.zIndex = 10 + all.length;
-
-    const last = all[all.length-1];
-    all.forEach((sec)=>{
-      if (sec.classList.contains('pinned')) return;
-      if (sec === last) return;        // nothing of substance rides over the last one
-      const inner = sec.querySelector('.wrap');
-      ScrollTrigger.create({
-        // only while the next card is actually riding over it
-        trigger: sec, start:'bottom bottom', end:'bottom top', scrub:true,
-        onUpdate(self){
-          const e = self.progress;
-          sec.style.transform = `scale(${1 - e*0.06})`;
-          if (inner) inner.style.opacity = 1 - e*0.5;
-        }
-      });
-    });
-  })();
-
-  // a hairline across the top that tracks how far down the page you are
-  gsap.to('.prog', {scaleX:1, ease:'none',
-    scrollTrigger:{start:0, end:()=>document.body.scrollHeight-innerHeight, scrub:.3}});
-
-  // The hero is held while the camera flies through the sets. The last stretch of
-  // that same scroll draws the signature, so it writes on the way out and unwrites
-  // on the way back.
-  const room = document.getElementById('room');
-  if (room && window.__flight){
-    const cue = document.querySelector('.cue');
-    const stage = document.querySelector('.stage');
-    ScrollTrigger.create({
-      trigger:'.hero', start:'top top',
-      end:()=>'+='+Math.round(innerHeight*(matchMedia('(max-width:860px)').matches?1.3:1.1)),
-      pin:true, anticipatePin:1, scrub:.45, invalidateOnRefresh:true,
-      onUpdate(self){
-        const p=self.progress;
-        window.__flight(p);
-        if (cue) cue.style.opacity = Math.max(0, 1 - p*8);
-        const u = gsap.utils.clamp(0,1,(p-0.80)/0.17);
-        if (window.__sign) window.__sign(u);
-        if (stage) stage.style.opacity = u > 0 ? 1 : 1;
-        const ln = document.querySelector('.line');
-        if (ln) ln.style.opacity = gsap.utils.clamp(0,1,(p-0.93)/0.06);
-      }
-    });
-  } else if (window.__sign){
-    window.__sign(1);
-    const ln=document.querySelector('.line'); if(ln) ln.style.opacity=1;
-  }
-
-  // each band introduces itself: the rule draws, the headline rises word by word,
-  // and everything under it follows
-  gsap.utils.toArray('.band').forEach(sec=>{
-    const rule  = sec.querySelector('.kicker i');
-    const heads = Array.prototype.slice.call(sec.querySelectorAll('.ch:not(.bt),.big'));
-    const words = heads.reduce((all,h)=>all.concat(splitWords(h)), []);
-    const bits  = Array.prototype.slice.call(
-      sec.querySelectorAll('.kicker span,.body:not(.bt),.fn,.fk,.col,.row,.mail,.ends,.note'));
-    if (!words.length && !bits.length) return;
-    if (words.length) gsap.set(words, {yPercent:115});
-    if (bits.length)  gsap.set(bits,  {opacity:0, y:20});
-    const rules = Array.prototype.slice.call(sec.querySelectorAll('.fr'));
-    ScrollTrigger.create({
-      trigger: sec, start:'top 76%', once:true,
-      onEnter(){
-        const t = gsap.timeline();
-        if (rule) t.to(rule, {scaleX:1, duration:.85, ease:'power3.inOut'});
-        if (words.length)
-          t.to(words, {yPercent:0, duration:1.05, ease:'power4.out', stagger:.035}, '-=0.55');
-        if (bits.length)
-          t.to(bits, {opacity:1, y:0, duration:.9, ease:'power3.out', stagger:.05}, '-=0.75');
-        if (rules.length)
-          t.to(rules, {scaleX:1, duration:.9, ease:'power3.inOut', stagger:.08}, '-=0.95');
-      }
-    });
-  });
-
-  // the figures count themselves up
-  gsap.utils.toArray('.fn').forEach(el=>{
-    const end = +el.dataset.n, pre = el.dataset.pre || '', o = {v:0};
-    ScrollTrigger.create({
-      trigger: el, start:'top 82%', once:true,
-      onEnter(){
-        gsap.to(o, {v:end, duration:2.1, ease:'power2.out',
-          onUpdate(){ el.textContent = pre + Math.round(o.v).toLocaleString('en-US'); },
-          onComplete(){ el.textContent = pre + end.toLocaleString('en-US'); }});
-      }
-    });
-  });
-
-  addEventListener('load', ()=>ScrollTrigger.refresh());
-})();
-</script>
-
-</body></html>
+<script src="particles.js?v=d44bd550"></script>
+<script src="site.js?v=92084d95"></script>
 </body>
 </html>

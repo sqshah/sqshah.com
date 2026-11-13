@@ -150,7 +150,10 @@
         plate.style.transform = '';
         const pr = plate.getBoundingClientRect(), sr = sec.getBoundingClientRect();
         if (!pr.height || !sr.height) return;
-        FILL = Math.min(2.6, (sr.height * 0.86) / pr.height);
+        // Bounded by the section's width as well as its height. Height alone let
+        // the plate grow past both edges on a phone, where the section is short
+        // and narrow, and the figure was being clipped left and right.
+        FILL = Math.min(2.6, (sr.height * 0.86) / pr.height, (sr.width * 0.92) / pr.width);
         DX = (sr.left + sr.width / 2) - (pr.left + pr.width / 2);
       }
       measure();
