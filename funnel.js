@@ -194,8 +194,21 @@
   // whose middle is closest to the middle of the screen.
   const marked = [...document.querySelectorAll('[data-stage]')];
   let stage = 'impressions', warmTo = 0;
-  const SIZE = { impressions: 1, clicks: 1, leads: .92, people: .52, sold: .46, rest: .9 };
+  const SIZE = { impressions: 1, clicks: 1, leads: .92, people: .52, sold: .46,
+                 story: .8, rest: .9 };
+  // Cold and wide at the top of the funnel, hot and narrow at the bottom - the
+  // same scale any media buyer reads a heatmap on. The page's accent follows it.
+  const HUE = {
+    impressions: ['#5B7CFA', '91,124,250'],
+    clicks:      ['#17B6CE', '23,182,206'],
+    leads:       ['#3FBF86', '63,191,134'],
+    people:      ['#F5A524', '245,165,36'],
+    sold:        ['#F2683C', '242,104,60'],
+    story:       ['#C98BF0', '201,139,240'],
+    rest:        ['#F5A524', '245,165,36']
+  };
   let sizeTo = 1;
+  const root = document.documentElement;
 
   function pick() {
     const mid = innerHeight / 2;
@@ -213,6 +226,12 @@
       // The field warms as it stops being traffic and starts being people.
       warmTo = (want === 'people' || want === 'sold') ? 1 : 0;
       sizeTo = SIZE[want] || 1;
+      const h = HUE[want];
+      if (h) {
+        root.style.setProperty('--accent', h[0]);
+        root.style.setProperty('--glow', h[1]);
+        mat.uniforms.uCold.value.set(h[0]);
+      }
     }
   }
 

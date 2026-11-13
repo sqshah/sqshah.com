@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SQ Shah</title>
-<meta name="description" content="Syed Qasim Ali, performance marketer. 47.9 million impressions, 145,902 leads and $68,259.97 of media across Kenya, Uganda, Tanzania and Pakistan in 2026.">
+<meta name="description" content="Syed Qasim Ali. Performance marketing across Kenya, Uganda, Tanzania and Pakistan. 47.9M impressions, 145,902 leads, $0.29 a lead.">
 <link rel="canonical" href="https://sqshah.com/">
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="assets/icon-180.png?v=3cc8c631">
-<meta name="theme-color" content="#060B12">
+<meta name="theme-color" content="#070A16">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="SQ Shah">
-<meta property="og:description" content="Performance marketing across East Africa and Pakistan. 47.9M impressions, 145,902 leads, every figure traceable to an invoice.">
+<meta property="og:description" content="Performance marketing across East Africa and Pakistan. 47.9M impressions, 145,902 leads, $0.29 a lead.">
 <meta property="og:image" content="https://sqshah.com/assets/icon-512.png">
 <meta property="og:url" content="https://sqshah.com/">
 <meta name="twitter:card" content="summary_large_image">
@@ -25,10 +25,14 @@
 @font-face{font-family:Instrument;font-style:normal;font-weight:400 700;font-display:swap;
   src:url(assets/fonts/instrument.woff2) format('woff2-variations')}
 
+/* Colour is the depth gauge. A funnel report is read as a heatmap - cold and
+   wide at the top, hot and narrow at the bottom - so the page runs the same
+   scale. The accent is not decoration: it tells you how far down you are. */
 :root{
-  --ink:#060B12; --ink-r:#0D1724; --rule:#1A2B3C; --rule-s:#13212F;
-  --text:#D7E1EA; --head:#F4F8FA; --mute:#8098AC; --faint:#5A7085;
-  --bal:#5BA98A; --var:#D6A04C;
+  --ink:#070A16; --ink-r:#0E1426; --rule:#1E2740; --rule-s:#161D31;
+  --text:#D6DEEC; --head:#F6F9FD; --mute:#8293B2; --faint:#5E6E8D;
+  --accent:#5B7CFA; --glow:91,124,250;
+  --bal:#3FBF86; --var:#F5A524;
   --gut:clamp(20px,5vw,72px); --max:1180px;
   color-scheme:dark;
 }
@@ -37,30 +41,32 @@ html{-webkit-text-size-adjust:100%}
 body{
   background:var(--ink); color:var(--text);
   font-family:Instrument,system-ui,-apple-system,"Segoe UI",sans-serif;
-  font-size:17px; line-height:1.62; font-variant-numeric:tabular-nums lining-nums;
+  font-size:17px; line-height:1.6; font-variant-numeric:tabular-nums lining-nums;
   -webkit-font-smoothing:antialiased; overflow-x:hidden;
 }
-::selection{background:var(--bal);color:#04140D}
+::selection{background:var(--accent);color:#05070F}
 
-/* The field sits behind everything and never scrolls. */
 #field{position:fixed;inset:0;z-index:0;pointer-events:none}
 #field canvas{display:block;width:100%;height:100%}
+/* The room takes the colour of the stage you are standing in. */
+#wash{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(120% 80% at 72% 42%,rgba(var(--glow),.17),transparent 62%),
+             radial-gradient(90% 70% at 10% 90%,rgba(var(--glow),.08),transparent 60%);
+  transition:background 1.1s ease}
 main,header,footer{position:relative;z-index:1}
 
 .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
-.prose{max-width:62ch}
 
-h1,h2,h3,.fig,.amt{
+h1,h2,.count,.amt,.ttl,.ch h3{
   font-family:Fraunces,Georgia,serif;font-weight:400;
   font-variation-settings:"opsz" 60,"SOFT" 0,"WONK" 0;
-  letter-spacing:-.022em;line-height:1.02;color:var(--head);
+  letter-spacing:-.022em;line-height:1.04;color:var(--head);
 }
-h2{font-size:clamp(27px,3.5vw,44px);line-height:1.08}
+h2{font-size:clamp(26px,3.2vw,40px)}
 a{color:inherit}
 
-/* -------------------------------------------------------------- top bar -- */
 .bar{position:fixed;top:0;left:0;right:0;z-index:30;
-  background:linear-gradient(180deg,rgba(6,11,18,.9),rgba(6,11,18,0))}
+  background:linear-gradient(180deg,rgba(7,10,22,.9),rgba(7,10,22,0))}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;
   padding-block:16px}
 .mark{font-family:Fraunces,serif;font-weight:500;font-size:19px;letter-spacing:-.02em;
@@ -70,105 +76,110 @@ a{color:inherit}
 .bar nav a:hover,.bar nav a:focus-visible{color:var(--head)}
 @media(max-width:620px){.bar nav a.hide-s{display:none}}
 
-/* ---------------------------------------------------------- the descent --
-   Six rooms you fall through. Each is mostly empty on purpose: the field
-   behind is doing the talking and the type is its caption. */
-.stage{min-height:100svh;display:flex;align-items:center;
+/* ---------------------------------------------------------- the descent -- */
+.stage{min-height:100svh;display:flex;align-items:center;position:relative;
   padding-block:clamp(90px,14vh,150px)}
-.stage .wrap{width:100%}
-.stage{position:relative}
 .stage::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(6,11,18,.97) 0%,rgba(6,11,18,.92) 32%,
-    rgba(6,11,18,.62) 54%,rgba(6,11,18,0) 80%)}
-.stage .wrap{position:relative}
+  background:linear-gradient(90deg,rgba(7,10,22,.97) 0%,rgba(7,10,22,.92) 32%,
+    rgba(7,10,22,.6) 54%,rgba(7,10,22,0) 80%)}
+.stage .wrap{width:100%;position:relative}
 .scrim{max-width:min(34ch,92vw)}
-.count{display:block;font-family:Fraunces,serif;font-weight:400;
-  font-variation-settings:"opsz" 110,"SOFT" 0,"WONK" 0;
-  font-size:clamp(42px,8.4vw,112px);letter-spacing:-.035em;line-height:.94;
-  color:var(--head)}
-.label{display:block;margin-top:clamp(14px,2vh,22px);font-size:clamp(17px,1.7vw,21px);
-  color:var(--head);max-width:23ch;line-height:1.3}
-.sub{margin-top:14px;color:var(--mute);font-size:15.5px;max-width:34ch;line-height:1.55}
+.count{display:block;font-variation-settings:"opsz" 120,"SOFT" 0,"WONK" 0;
+  font-size:clamp(44px,8.6vw,116px);letter-spacing:-.038em;line-height:.92}
+.label{display:block;margin-top:clamp(12px,1.8vh,20px);font-size:clamp(17px,1.7vw,21px);
+  color:var(--accent);max-width:23ch;line-height:1.25;transition:color .9s ease}
+.sub{margin-top:11px;color:var(--faint);font-size:14.5px}
 
-#top h1{font-size:clamp(36px,5.6vw,78px);line-height:1.03;max-width:19ch;text-wrap:balance}
+#top h1{font-size:clamp(34px,5.2vw,74px);line-height:1.08;max-width:17ch;text-wrap:balance}
 #top h1 em{font-style:italic;font-variation-settings:"opsz" 60,"SOFT" 0,"WONK" 1}
-#top .who{margin-top:clamp(22px,3.4vh,36px);color:var(--mute);
-  font-size:clamp(16.5px,1.5vw,19px);max-width:46ch}
-#top .scrim{max-width:min(52ch,94vw)}
+#top .who{margin-top:clamp(20px,3vh,32px);color:var(--mute);
+  font-size:clamp(16px,1.4vw,18px);max-width:40ch}
+#top .scrim{max-width:min(50ch,94vw)}
+.cue{margin-top:clamp(26px,4.4vh,48px);font-size:13.5px;color:var(--faint);
+  display:flex;align-items:center;gap:10px}
+.cue i{display:block;width:34px;height:1px;background:var(--accent);
+  animation:slide 2.6s ease-in-out infinite;transition:background .9s ease}
+@keyframes slide{0%,100%{transform:translateX(0);opacity:.45}50%{transform:translateX(9px);opacity:1}}
+
 .doors{display:none}
 @media(max-width:760px){
   .doors{display:grid;grid-template-columns:1fr 1fr;gap:10px;
-    margin-top:clamp(26px,4vh,40px);max-width:420px}
-  .doors a{display:flex;flex-direction:column;justify-content:space-between;gap:16px;
-    min-height:104px;padding:15px 16px;text-decoration:none;
-    border:1px solid var(--rule);border-radius:3px;
-    background:rgba(13,23,36,.72);backdrop-filter:blur(6px);
+    margin-top:clamp(24px,3.6vh,36px);max-width:420px}
+  .doors a{display:flex;flex-direction:column;justify-content:space-between;gap:14px;
+    min-height:100px;padding:14px 15px;text-decoration:none;border-radius:3px;
+    border:1px solid var(--rule);background:rgba(14,20,38,.76);
     color:var(--head);font-size:16px;line-height:1.25}
   .doors a span{color:var(--faint);font-size:12.5px}
-  .doors a:active{background:var(--ink-r)}
+  .doors a:active{border-color:var(--accent)}
   #top .cue{display:none}
 }
-.cue{margin-top:clamp(30px,5vh,56px);font-size:13.5px;color:var(--faint);
-  display:flex;align-items:center;gap:10px}
-.cue i{display:block;width:34px;height:1px;background:var(--rule);
-  animation:slide 2.6s ease-in-out infinite}
-@keyframes slide{0%,100%{transform:translateX(0);opacity:.5}50%{transform:translateX(9px);opacity:1}}
 
-/* ----------------------------------------------------------- the ground --
-   Below the descent the field falls back and the page becomes readable. */
-.ground{background:linear-gradient(180deg,rgba(6,11,18,0),var(--ink) 9%,var(--ink));
-  padding-top:clamp(40px,8vh,90px)}
+/* ------------------------------------------------------------- the story --
+   Three beats, his own words, between the funnel and the invoices. */
+.story{padding-block:clamp(52px,10vh,112px);position:relative}
+.ch{display:grid;grid-template-columns:minmax(120px,.5fr) minmax(0,1.6fr);
+  gap:clamp(16px,4vw,52px);padding-block:clamp(26px,4vh,42px);
+  border-top:1px solid var(--rule-s);align-items:baseline}
+.ch .when{color:var(--accent);font-size:14px;transition:color .9s ease}
+.ch h3{font-size:clamp(21px,2.5vw,32px);line-height:1.18;max-width:20ch;
+  font-variation-settings:"opsz" 72,"SOFT" 0,"WONK" 0}
+.ch h3 em{font-style:italic;font-variation-settings:"opsz" 72,"SOFT" 0,"WONK" 1}
+.ch p{margin-top:12px;color:var(--mute);font-size:15.5px;max-width:48ch}
+@media(max-width:700px){.ch{grid-template-columns:1fr;gap:8px}}
+
+/* ------------------------------------------------------------ the ground -- */
+.ground{background:linear-gradient(180deg,rgba(7,10,22,0),var(--ink) 7%,var(--ink))}
 
 .ledger{padding-block:clamp(40px,8vh,90px)}
-.ledger .lead{color:var(--mute);margin-top:14px}
-table.acct{width:100%;border-collapse:collapse;margin-top:clamp(28px,5vh,46px)}
+.ledger .lead{color:var(--faint);margin-top:10px;font-size:15px}
+table.acct{width:100%;border-collapse:collapse;margin-top:clamp(26px,4.4vh,42px)}
 table.acct th{text-align:left;font-weight:500;font-size:14px;color:var(--faint);
   padding:0 0 12px;border-bottom:1px solid var(--rule-s)}
 table.acct th.n{text-align:right}
-table.acct td{padding:17px 0;border-bottom:1px solid var(--rule-s);vertical-align:baseline}
+table.acct td{padding:16px 0;border-bottom:1px solid var(--rule-s);vertical-align:baseline}
 table.acct td.n{text-align:right;white-space:nowrap}
-.pf{font-size:clamp(17px,1.6vw,19.5px);color:var(--head);font-weight:500}
-.srcline{display:block;color:var(--faint);font-size:14px;margin-top:4px;line-height:1.4}
+.pf{font-size:clamp(16.5px,1.5vw,19px);color:var(--head);font-weight:500}
+.srcline{display:block;color:var(--faint);font-size:13.5px;margin-top:4px}
 .amt{font-variation-settings:"opsz" 80,"SOFT" 0,"WONK" 0;
-  font-size:clamp(20px,2.3vw,27px);letter-spacing:-.02em}
+  font-size:clamp(20px,2.2vw,26px);letter-spacing:-.02em}
 .tick{display:inline-block;width:1.15em;color:var(--bal);font-size:15px}
-tr.total td{border-bottom:none;border-top:1.5px solid var(--rule);padding-top:22px}
-tr.total .amt{font-size:clamp(26px,3.4vw,40px);
-  border-bottom:3px double var(--rule);padding-bottom:9px}
-tr.flag td{border-bottom:none;padding-top:18px}
+tr.total td{border-bottom:none;border-top:1.5px solid var(--rule);padding-top:20px}
+tr.total .amt{font-size:clamp(25px,3.2vw,38px);
+  border-bottom:3px double var(--rule);padding-bottom:8px}
+tr.flag td{border-bottom:none;padding-top:16px}
 .note{display:flex;gap:13px;align-items:flex-start;border-left:2px solid var(--var);
-  padding:13px 0 13px 16px;
-  background:linear-gradient(90deg,rgba(214,160,76,.08),transparent 72%)}
+  padding:12px 0 12px 16px;
+  background:linear-gradient(90deg,rgba(245,165,36,.09),transparent 70%)}
 .note .amt-s{font-family:Fraunces,serif;color:var(--var);font-size:19px;white-space:nowrap;
   font-variation-settings:"opsz" 40}
-.note p{font-size:15px;color:var(--mute);line-height:1.5;max-width:58ch}
+.note p{font-size:15px;color:var(--mute);max-width:52ch}
 .note p b{color:var(--text);font-weight:500}
 
 .runs{padding-block:clamp(40px,8vh,90px)}
-.rows{margin-top:clamp(26px,4.4vh,42px);border-top:1px solid var(--rule-s)}
-.row{display:grid;grid-template-columns:minmax(150px,1.1fr) 2.2fr minmax(90px,.7fr);
-  gap:clamp(14px,3vw,36px);padding:19px 0;border-bottom:1px solid var(--rule-s);
+.rows{margin-top:clamp(24px,4vh,40px);border-top:1px solid var(--rule-s)}
+.row{display:grid;grid-template-columns:minmax(140px,1fr) 2fr minmax(90px,.7fr);
+  gap:clamp(14px,3vw,36px);padding:17px 0;border-bottom:1px solid var(--rule-s);
   align-items:baseline}
 .row dt{color:var(--head);font-weight:500;font-size:17px}
-.row dd{color:var(--mute);font-size:15.5px;line-height:1.5}
-.row .vol{text-align:right;color:var(--text);font-size:15.5px;white-space:nowrap}
+.row dd{color:var(--mute);font-size:15px}
+.row .vol{text-align:right;color:var(--accent);font-size:15px;white-space:nowrap;
+  transition:color .9s ease}
 @media(max-width:720px){
-  .row{grid-template-columns:1fr auto;gap:6px 18px}
+  .row{grid-template-columns:1fr auto;gap:5px 18px}
   .row dd{grid-column:1/-1;order:3}.row .vol{order:2}
 }
 
 .work{padding-bottom:clamp(40px,8vh,90px)}
-.cases{margin-top:clamp(26px,4.4vh,42px);display:grid;gap:1px;background:var(--rule-s);
+.cases{margin-top:clamp(24px,4vh,40px);display:grid;gap:1px;background:var(--rule-s);
   border-block:1px solid var(--rule-s)}
-.case{background:var(--ink);display:grid;grid-template-columns:1fr minmax(0,1.25fr);
-  gap:clamp(16px,3vw,44px);padding:clamp(22px,3vw,34px) 0;align-items:start;
+.case{background:var(--ink);display:grid;grid-template-columns:1fr minmax(0,auto);
+  gap:clamp(12px,3vw,40px);padding:clamp(17px,2.2vw,24px) 0;align-items:baseline;
   transition:background .25s}
 .case:hover{background:var(--ink-r)}
-.case .ttl{font-family:Fraunces,serif;font-size:clamp(19px,2vw,25px);line-height:1.18;
-  letter-spacing:-.018em;color:var(--head);font-variation-settings:"opsz" 72}
-.case .met{margin-top:9px;color:var(--faint);font-size:14.5px}
-.case p{color:var(--mute);font-size:15.5px;line-height:1.56}
-@media(max-width:760px){.case{grid-template-columns:1fr;gap:12px}}
+.case .ttl{font-size:clamp(18px,1.9vw,25px);line-height:1.18;
+  font-variation-settings:"opsz" 72,"SOFT" 0,"WONK" 0}
+.case .met{color:var(--faint);font-size:14px;text-align:right;white-space:nowrap}
+@media(max-width:760px){.case{grid-template-columns:1fr;gap:4px}.case .met{text-align:left}}
 
 .foot{border-top:1px solid var(--rule);padding-block:clamp(44px,7vh,80px) 40px}
 .foot .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(30px,5vw,60px);
@@ -180,19 +191,17 @@ tr.flag td{border-bottom:none;padding-top:18px}
 .contact a{font-size:17px;text-decoration:none;color:var(--text);
   border-bottom:1px solid var(--rule);padding-bottom:3px;
   transition:border-color .22s,color .22s}
-.contact a:hover,.contact a:focus-visible{color:var(--head);border-bottom-color:var(--bal)}
-.fine{margin-top:clamp(30px,4.4vh,50px);color:var(--faint);font-size:13.5px;
+.contact a:hover,.contact a:focus-visible{color:var(--head);border-bottom-color:var(--accent)}
+.fine{margin-top:clamp(28px,4vh,46px);color:var(--faint);font-size:13.5px;
   display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-@media(max-width:720px){.foot .grid{grid-template-columns:1fr;gap:34px;align-items:start}}
+@media(max-width:720px){.foot .grid{grid-template-columns:1fr;gap:32px;align-items:start}}
 
-:focus-visible{outline:2px solid var(--bal);outline-offset:3px;border-radius:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 
-/* Without WebGL the descent still reads; it just holds still. */
 body.nofield .stage{min-height:auto;padding-block:clamp(54px,9vh,100px)}
 body.nofield .cue{display:none}
-
 @media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
+  *{animation:none!important}
   .stage{min-height:auto;padding-block:clamp(54px,9vh,100px)}
 }
 </style>
@@ -200,13 +209,14 @@ body.nofield .cue{display:none}
 <body>
 
 <div id="field" data-figure="assets/figure-ink.png" aria-hidden="true"></div>
+<div id="wash" aria-hidden="true"></div>
 
 <header class="bar">
   <div class="wrap">
     <a class="mark" href="#top">SQ Shah</a>
     <nav>
+      <a href="#story" class="hide-s">Story</a>
       <a href="#ledger">Numbers</a>
-      <a href="#runs" class="hide-s">What I run</a>
       <a href="#work">Work</a>
       <a href="mailto:talk@sqshah.com">Contact</a>
     </nav>
@@ -217,88 +227,107 @@ body.nofield .cue{display:none}
 
 <section class="stage" id="top" data-stage="impressions">
   <div class="wrap"><div class="scrim">
-    <h1>I buy media in East Africa and make the numbers <em>tie out</em>.</h1>
-    <p class="who">Syed Qasim Ali. Four years of paid media for a used-car group selling
-      across Kenya, Uganda, Tanzania and Pakistan.</p>
+    <h1>The numbers were wrong <em>before</em> they were bad.</h1>
+    <p class="who">Syed Qasim Ali &mdash; performance marketing across Kenya, Uganda,
+      Tanzania and Pakistan.</p>
     <nav class="doors" aria-label="Jump to">
-      <a href="#runs">See profile<span>Numbers, platforms, what I run</span></a>
+      <a href="#story">See profile<span>Story, numbers, scope</span></a>
       <a href="#work">See case studies<span>Eleven pieces of work</span></a>
     </nav>
-    <p class="cue"><i></i> Everything below is one year of it</p>
+    <p class="cue"><i></i> One year, in order</p>
   </div></div>
 </section>
 
 <section class="stage" data-stage="impressions">
   <div class="wrap"><div class="scrim">
     <span class="count" data-count="47859432" data-compact>47.9M</span>
-    <span class="label">times an advert appeared in front of somebody</span>
-    <p class="sub">Google and Meta, January to October 2026. Four markets, five branches,
-      nine campaign types.</p>
+    <span class="label">impressions served</span>
+    <p class="sub">Google and Meta, Jan&ndash;Oct 2026</p>
   </div></div>
 </section>
 
 <section class="stage" data-stage="clicks">
   <div class="wrap"><div class="scrim">
     <span class="count" data-count="1167638" data-compact>1.17M</span>
-    <span class="label">of them stopped and clicked</span>
-    <p class="sub">Three cents a click. Most of it Performance Max and local store visits,
-      where the cost per click runs under two.</p>
+    <span class="label">clicks</span>
+    <p class="sub">$0.032 each</p>
   </div></div>
 </section>
 
 <section class="stage" data-stage="leads">
   <div class="wrap"><div class="scrim">
     <span class="count" data-count="145902">145,902</span>
-    <span class="label">left a name and a phone number</span>
-    <p class="sub">Across thirty-one separate exports, five branches and three countries,
-      merged into one list anybody in the company can use.</p>
+    <span class="label">leads captured</span>
+    <p class="sub">Five branches, three countries</p>
   </div></div>
 </section>
 
 <section class="stage" data-stage="people">
   <div class="wrap"><div class="scrim">
     <span class="count">$0.29</span>
-    <span class="label">is what one of them cost</span>
-    <p class="sub">Not an impression. Not a click. A person in Mombasa or Kampala or Dar
-      who picked up when the showroom called back.</p>
+    <span class="label">cost per lead</span>
+    <p class="sub">Blended, Google and Meta</p>
   </div></div>
 </section>
 
 <section class="stage" data-stage="sold">
   <div class="wrap"><div class="scrim">
     <span class="count">300&ndash;400</span>
-    <span class="label">vehicles leave the showrooms every month</span>
-    <p class="sub">Across all five branches, online and on the forecourt. 782 of this
-      year's were tracked back to a campaign; the rest walked in, which is what the
-      billboards, the store-visit campaigns and the brand work are for.</p>
+    <span class="label">vehicles sold per month</span>
+    <p class="sub">All branches. 782 attributed to campaigns this year</p>
   </div></div>
 </section>
 
 <div class="ground">
 
+<section class="story wrap" id="story" data-stage="story">
+  <div class="ch">
+    <span class="when">2018 &mdash; Gujranwala</span>
+    <div>
+      <h3>My father said the word <em>freelancing</em>, and handed me his office laptop.</h3>
+      <p>The same machine had Vice City on it. Cars, films, computers &mdash; the career
+        came out of what arrived on that laptop.</p>
+    </div>
+  </div>
+  <div class="ch">
+    <span class="when">2021 &mdash; one dollar an hour</span>
+    <div>
+      <h3>Everything here began as a number.</h3>
+      <p>Cost per lead, cost per vehicle, cost per hour. The trade was learned by arguing
+        with figures that did not add up.</p>
+    </div>
+  </div>
+  <div class="ch">
+    <span class="when">2026 &mdash; East Africa</span>
+    <div>
+      <h3>Now the machine, not just the campaign.</h3>
+      <p>$166,643 of advertising across four countries, and the dashboards, pipelines and
+        reconciliations that say whether any of it worked.</p>
+    </div>
+  </div>
+</section>
+
 <section class="ledger wrap" id="ledger" data-stage="rest">
-  <h2>What that cost</h2>
-  <p class="lead prose">The figures come from the billing invoices rather than the platform
-    dashboards, because the two disagree and only one of them is what the company
-    actually paid.</p>
+  <h2>Media billed, 2026</h2>
+  <p class="lead">From the invoices, not the dashboards.</p>
 
   <table class="acct">
     <thead><tr><th scope="col">Platform</th><th scope="col" class="n">Billed</th></tr></thead>
     <tbody>
       <tr><td><span class="pf">Google Ads</span>
-        <span class="srcline">Ten invoices, 5489923736 through 5733561135. Account 427-104-7997.</span></td>
+        <span class="srcline">Ten invoices, account 427-104-7997</span></td>
         <td class="n"><span class="amt" data-count="42080.85" data-money>$42,080.85</span>
           <span class="tick" aria-hidden="true">&check;</span></td></tr>
       <tr><td><span class="pf">Meta</span>
-        <span class="srcline">Ad invoices and boosted-post invoices, five branches, to 20 October.</span></td>
+        <span class="srcline">Ads and boosted posts, five branches</span></td>
         <td class="n"><span class="amt" data-count="25994.20" data-money>$25,994.20</span>
           <span class="tick" aria-hidden="true">&check;</span></td></tr>
       <tr><td><span class="pf">TikTok</span>
-        <span class="srcline">Two invoices, May and June.</span></td>
+        <span class="srcline">Two invoices</span></td>
         <td class="n"><span class="amt" data-count="161.92" data-money>$161.92</span>
           <span class="tick" aria-hidden="true">&check;</span></td></tr>
       <tr><td><span class="pf">Snapchat</span>
-        <span class="srcline">One statement, February.</span></td>
+        <span class="srcline">One statement</span></td>
         <td class="n"><span class="amt" data-count="23.00" data-money>$23.00</span>
           <span class="tick" aria-hidden="true">&check;</span></td></tr>
       <tr class="total"><td><span class="pf">Total</span></td>
@@ -306,10 +335,8 @@ body.nofield .cue{display:none}
       <tr class="flag"><td colspan="2">
         <div class="note">
           <span class="amt-s">$633.36</span>
-          <p>One line doesn't tie, and this is the useful part. September's Google invoice
-            covers <b>8 to 30 September only</b> &mdash; the first week sits on a separate
-            invoice nobody had filed. The export says $2,592.46, the invoice says $1,959.10,
-            and the difference is a missing document rather than missing money.</p>
+          <p>September's invoice covers <b>8&ndash;30 September only</b>. The first week sits
+            on a separate invoice nobody had filed.</p>
         </div>
       </td></tr>
     </tbody>
@@ -317,27 +344,29 @@ body.nofield .cue{display:none}
 </section>
 
 <section class="runs wrap" id="runs" data-stage="rest">
-  <h2>What I run</h2>
+  <h2>Scope</h2>
   <dl class="rows">
     <div class="row"><dt>Google Ads</dt>
-      <dd>Search, Performance Max, Demand Gen, Display, YouTube and local store visits
-        across four markets.</dd><span class="vol">$42,080.85</span></div>
+      <dd>Search, Performance Max, Demand Gen, Display, YouTube, store visits</dd>
+      <span class="vol">$42,080.85</span></div>
     <div class="row"><dt>Meta</dt>
-      <dd>Lead-form and traffic campaigns per branch, plus the boosted-post budget the
-        branch managers spend directly.</dd><span class="vol">$25,994.20</span></div>
+      <dd>Lead forms, traffic, boosted posts</dd>
+      <span class="vol">$25,994.20</span></div>
+    <div class="row"><dt>TikTok and Snapchat</dt>
+      <dd>Market tests</dd>
+      <span class="vol">$184.92</span></div>
     <div class="row"><dt>Email</dt>
-      <dd>158,933 sends through Mailchimp at 95.2% delivery, then an in-house sending
-        platform built with my developer so there was no per-contact bill.</dd>
-      <span class="vol">57 flows</span></div>
-    <div class="row"><dt>Reporting and attribution</dt>
-      <dd>A live ROI dashboard reconciling spend, sales and payments to the cent, and the
-        monthly spend reports the board reads.</dd><span class="vol">402 months</span></div>
+      <dd>Mailchimp at 95.2% delivery, then an in-house sending platform</dd>
+      <span class="vol">158,933 sends</span></div>
+    <div class="row"><dt>Attribution</dt>
+      <dd>Live ROI dashboard, spend reconciled to sales and payments</dd>
+      <span class="vol">402 months</span></div>
     <div class="row"><dt>Lead systems</dt>
-      <dd>CRM, lead routing and the merge work that turns thirty-one separate exports into
-        one list anybody can use.</dd><span class="vol">145,902 leads</span></div>
+      <dd>CRM, routing, de-duplication</dd>
+      <span class="vol">145,902 leads</span></div>
     <div class="row"><dt>Search</dt>
-      <dd>Technical SEO, content strategy and the keyword work behind the landing pages
-        the ads point at.</dd><span class="vol">10 sites</span></div>
+      <dd>Technical SEO, content, keyword strategy</dd>
+      <span class="vol">10 sites</span></div>
   </dl>
 </section>
 
@@ -351,7 +380,7 @@ body.nofield .cue{display:none}
 
 <footer class="foot wrap" data-stage="rest">
   <div class="grid">
-    <div class="sigbox" id="sig" aria-label="Signature of Syed Qasim Ali"></div>
+    <div class="sigbox" id="sig" aria-label="Syed Qasim Ali"></div>
     <div class="contact">
       <a href="mailto:talk@sqshah.com">talk@sqshah.com</a>
       <a href="https://wa.me/923279507957" rel="me">WhatsApp</a>
@@ -360,14 +389,14 @@ body.nofield .cue{display:none}
     </div>
   </div>
   <div class="fine">
-    <span>Gujranwala, Pakistan. Working across GMT+3 and GMT+5.</span>
-    <span>Figures January&ndash;October 2026, from billing invoices.</span>
+    <span>Gujranwala, Pakistan</span>
+    <span>Figures January&ndash;October 2026, from billing invoices</span>
   </div>
 </footer>
 
 <script src="assets/vendor/three.min.js?v=170c6789"></script>
 <script src="assets/vendor/lenis.min.js?v=0bf174d3"></script>
-<script src="funnel.js?v=9b7ebb8c"></script>
+<script src="funnel.js?v=cbad2f6a"></script>
 <script src="site.js?v=a7b2d0da"></script>
 </body>
 </html>
