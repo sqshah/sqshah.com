@@ -1,9 +1,9 @@
-/* The page has one piece of motion it performs by itself: the statement adding
-   up. Everything else waits to be asked.
+/* Everything that is not the field: smooth scroll, the figures counting up as
+   you reach them, the signature, and the case list.
 
-   Figures are rendered from data-count rather than tweened from the DOM text, so
-   the markup still reads correctly with JavaScript off and nothing reflows while
-   the numbers run - tabular-nums plus a reserved width means the column never
+   Figures are rendered from data-count rather than tweened from the DOM text,
+   so the markup reads correctly with JavaScript off and nothing reflows while a
+   number runs - tabular figures plus a reserved width means the column never
    twitches. */
 (function () {
   'use strict';
@@ -11,29 +11,18 @@
 
   // ---------------------------------------------------------------- scroll --
   if (window.Lenis && !RM) {
-    const lenis = new Lenis({ duration: 1.05, smoothWheel: true });
+    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
     window.__lenis = lenis;
     const tick = (t) => { lenis.raf(t); requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
-    if (window.ScrollTrigger) {
-      lenis.on('scroll', ScrollTrigger.update);
-      ScrollTrigger.refresh();
-    }
   }
 
-  const bar = document.getElementById('bar');
-  if (bar) {
-    const onScroll = () => bar.classList.toggle('stuck', scrollY > 8);
-    addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  }
-
-  // in-page links still need to go through Lenis, or they fight it
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href'));
       if (!t) return;
       e.preventDefault();
-      window.__lenis ? window.__lenis.scrollTo(t, { offset: -64 })
+      window.__lenis ? window.__lenis.scrollTo(t, { offset: -56 })
                      : t.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
     });
   });
@@ -45,14 +34,12 @@
                                   : Math.round(n).toLocaleString('en-US');
   const plain = (n) => Math.round(n).toLocaleString('en-US');
 
-  function format(el, n) {
-    if (el.hasAttribute('data-money')) return money(n);
-    if (el.hasAttribute('data-compact')) return compact(n);
-    return plain(n);
-  }
+  const format = (el, n) => el.hasAttribute('data-money') ? money(n)
+                          : el.hasAttribute('data-compact') ? compact(n)
+                          : plain(n);
 
-  // Easing out of a count that starts fast and lands softly; the last tenth of
-  // the run is where the eye actually reads the number, so give it room.
+  // Fast out of the gate, soft on landing: the last tenth of the run is where
+  // the eye actually reads the number, so give it the time.
   const ease = (u) => 1 - Math.pow(1 - u, 4);
 
   function run(el, ms) {
@@ -72,13 +59,16 @@
 
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
 
-  async function resolve(section) {
+  // The descent's figures each run once on arrival. The ledger is different:
+  // its rows resolve in sequence and the total lands last, so the arithmetic
+  // visibly completes rather than four numbers appearing at once.
+  async function resolveLedger(section) {
     const figs = [...section.querySelectorAll('[data-count]')];
     const ticks = [...section.querySelectorAll('.tick')];
     ticks.forEach(t => { t.style.opacity = 0; t.style.transition = 'opacity .3s ease'; });
     for (let i = 0; i < figs.length; i++) {
       const last = figs[i].hasAttribute('data-last');
-      if (last) await wait(260);                       // let the eye catch up
+      if (last) await wait(260);
       const p = run(figs[i], last ? 900 : 620);
       if (ticks[i]) { await wait(260); ticks[i].style.opacity = 1; }
       await p;
@@ -87,18 +77,22 @@
   }
 
   const ledger = document.getElementById('ledger');
-  if (ledger) {
-    if (RM) {
-      ledger.querySelectorAll('.tick').forEach(t => { t.style.opacity = 1; });
-    } else {
-      new IntersectionObserver((es, obs) => {
-        es.forEach(e => {
-          if (!e.isIntersecting) return;
-          obs.disconnect();
-          resolve(ledger);
-        });
-      }, { threshold: .3 }).observe(ledger);
-    }
+
+  if (RM) {
+    document.querySelectorAll('.tick').forEach(t => { t.style.opacity = 1; });
+  } else {
+    const seen = new WeakSet();
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (!e.isIntersecting || seen.has(e.target)) continue;
+        seen.add(e.target);
+        io.unobserve(e.target);
+        e.target === ledger ? resolveLedger(ledger) : run(e.target, 1100);
+      }
+    }, { threshold: .55, rootMargin: '0px 0px -8% 0px' });
+
+    if (ledger) io.observe(ledger);
+    document.querySelectorAll('.stage [data-count]').forEach(el => io.observe(el));
   }
 
   // ------------------------------------------------------------- signature --
@@ -114,8 +108,8 @@
   }).catch(() => {});
 
   // ------------------------------------------------------------------ work --
-  // No case pages exist yet, so these are not links. A "View" that opens nothing
-  // is worse than no View at all.
+  // Not links: no case pages exist yet, and a View that opens nothing is worse
+  // than no View at all.
   fetch('assets/cases.json').then(r => r.json()).then(d => {
     const box = document.getElementById('cases');
     if (!box) return;
@@ -130,7 +124,7 @@
       <article class="case">
         <div>
           <div class="ttl">${c.short || c.ttl}</div>
-          <div class="met">${(c.met || "").replace(/\s*&middot;\s*/g, ", ")}</div>
+          <div class="met">${(c.met || '').replace(/\s*&middot;\s*/g, ', ')}</div>
         </div>
         <p>${trim(c.body, 230)}</p>
       </article>`).join('');
