@@ -9,9 +9,6 @@
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="assets/icon-180.png?v=3cc8c631">
 <meta name="theme-color" content="#0E0E0D">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@200;300;400;500;700&display=swap">
 <style>
 /* One dark world, one accent of paper. The signature writes itself, the figures count
    themselves up, a car dissolves into a face, and the work list reads like a contents page. */
@@ -23,8 +20,8 @@
   --hair:#232322;       /* rules */
   --dim:#78766F;        /* small caps still need 4.5:1 on the ink */
   --plate:#FBFAF8;      /* paper the portrait is printed on */
-  --display:"Cormorant Garamond",ui-serif,Georgia,serif;
-  --ui:Jost,ui-sans-serif,system-ui,sans-serif;
+  --display:Fraunces,ui-serif,Georgia,serif;
+  --ui:Instrument,ui-sans-serif,system-ui,sans-serif;
   --gut:clamp(22px,5vw,76px);
   --edge:max(16px,env(safe-area-inset-left,0px));
 }
@@ -54,18 +51,8 @@ a{color:inherit;text-decoration:none}
 #room{position:absolute;inset:0;z-index:0;background:#060606}
 #room canvas{display:block;width:100%;height:100%}
 /* the glass of the whole room, laid over the hero */
-.scan{position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:repeating-linear-gradient(to bottom,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);
-  mix-blend-mode:multiply;opacity:.34}
 .vig{position:absolute;inset:0;z-index:2;pointer-events:none;
   background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.62) 100%)}
-.grain{
-  position:fixed;inset:-50%;pointer-events:none;z-index:40;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 7s steps(6) infinite;
-}
-@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}
-60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,1%)}100%{transform:translate(0,0)}}
 
 /* ---- fixed chrome ---- */
 .nav{
@@ -92,6 +79,7 @@ a{color:inherit;text-decoration:none}
 }
 /* the room the camera flies through, behind everything in the hero */
 .stage{position:relative;width:100%;padding-inline:calc(var(--gut) - var(--edge))}
+.ch,.ttl,.fn,.mark{font-variation-settings:"opsz" 72,"SOFT" 0,"WONK" 0}
 .sig{position:relative;z-index:3;display:block;width:min(74vw,880px);height:auto;overflow:visible;will-change:transform}
 .sig .fill{fill:var(--paper)}
 .sig .pen{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
@@ -263,7 +251,7 @@ a{color:inherit;text-decoration:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .eyebrow,.line,.cue,.nav{opacity:1!important}
-  .grain,.cue i{animation:none}
+  .cue i{animation:none}
   .kicker i{transform:none!important}
 }
 /* ------------------------------------------------------------------ reach --
@@ -305,8 +293,6 @@ a{color:inherit;text-decoration:none}
 
 /* The market and industry sit under each row, so the range is readable while
    scrolling the list rather than only after opening something. */
-.row .tag{grid-column:2;font-family:var(--ui);font-size:10px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--dim);margin-top:2px}
 
 </style>
 </head>
@@ -314,7 +300,6 @@ a{color:inherit;text-decoration:none}
 
 <div class="curtain"><span>SQ Shah</span></div>
 <i class="prog"></i>
-<div class="grain"></div>
 
 <nav class="nav">
   <a class="mark" href="#top">SQ</a>
@@ -327,7 +312,6 @@ a{color:inherit;text-decoration:none}
 
 <section class="hero" id="top">
   <div id="room" aria-hidden="true"></div>
-  <div class="scan" aria-hidden="true"></div>
   <div class="vig" aria-hidden="true"></div>
   <div class="stage">
     <p class="eyebrow"><i></i><span>Performance marketing &nbsp;&middot;&nbsp; East Africa</span></p>
@@ -399,79 +383,52 @@ a{color:inherit;text-decoration:none}
       <a class="row" href="#contact" data-slug="khushi-motors" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">01</span>
         <span class="ttl">Four years of paid media for an East African motor group</span>
-        <span class="met">Google, Meta, TikTok</span>
-        <span class="tag">East Africa</span></span></a>
+        <span class="met">Google, Meta, TikTok</span></span></a>
       <a class="row" href="#contact" data-slug="roi-dashboard" data-industry="Attribution" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">02</span>
         <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
-        <span class="met">402 months of spend</span>
-        <span class="tag">East Africa</span></span></a>
+        <span class="met">402 months of spend</span></span></a>
       <a class="row" href="#contact" data-slug="missing-spend" data-industry="Audit" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">03</span>
         <span class="ttl">$25,968 of advertising that no report had ever counted</span>
-        <span class="met">Found, allocated, booked</span>
-        <span class="tag">East Africa</span></span></a>
+        <span class="met">Found, allocated, booked</span></span></a>
       <a class="row" href="#contact" data-slug="arsh-properties" data-industry="Real estate" data-market="Pakistan"><span class="sweep"></span><span class="in">
         <span class="idx">04</span>
         <span class="ttl">Lahore real estate, two channels at once</span>
-        <span class="met">Zameen, Meta</span>
-        <span class="tag">Pakistan</span></span></a>
+        <span class="met">Zameen, Meta</span></span></a>
       <a class="row" href="#contact" data-slug="ocean-trading" data-industry="Recruitment" data-market="Japan"><span class="sweep"></span><span class="in">
         <span class="idx">05</span>
         <span class="ttl">Hiring ads for a Japanese exporter</span>
-        <span class="met">Meta</span>
-        <span class="tag">Japan</span></span></a>
+        <span class="met">Meta</span></span></a>
       <a class="row" href="#contact" data-slug="organic-search" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">06</span>
         <span class="ttl">Organic search, rebuilt</span>
-        <span class="met">113k clicks</span>
-        <span class="tag">East Africa</span></span></a>
+        <span class="met">113k clicks</span></span></a>
       <a class="row" href="#contact" data-slug="account-recovery" data-industry="Brand" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">07</span>
         <span class="ttl">A 100,000-follower account, taken and recovered</span>
-        <span class="met">Instagram</span>
-        <span class="tag">East Africa</span></span></a>
+        <span class="met">Instagram</span></span></a>
       <a class="row" href="#contact" data-slug="cloned-site" data-industry="Brand" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">08</span>
         <span class="ttl">A cloned website, traced and taken down</span>
-        <span class="met">Content theft</span>
-        <span class="tag">East Africa</span></span></a>
+        <span class="met">Content theft</span></span></a>
       <a class="row" href="#contact" data-slug="sending-platform" data-industry="Product" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">09</span>
         <span class="ttl">An email marketing platform built in-house instead of bought</span>
-        <span class="met">158,933 sends</span>
-        <span class="tag">East Africa</span></span></a>
+        <span class="met">158,933 sends</span></span></a>
       <a class="row" href="#contact" data-slug="to-gear" data-industry="Local services" data-market="Canada"><span class="sweep"></span><span class="in">
         <span class="idx">10</span>
         <span class="ttl">Twelve Canadian brands, handled end to end</span>
-        <span class="met">Brand, web</span>
-        <span class="tag">Canada</span></span></a>
+        <span class="met">Brand, web</span></span></a>
       <a class="row" href="#contact" data-slug="ten-websites" data-industry="Lead generation" data-market="United States"><span class="sweep"></span><span class="in">
         <span class="idx">11</span>
         <span class="ttl">Five years of freelance work across ten websites</span>
-        <span class="met">Search, build, growth</span>
-        <span class="tag">United States</span></span></a>
+        <span class="met">Search, build, growth</span></span></a>
     </div>
     <p class="note">Figures, dashboards and invoices behind each one &mdash; available on request</p>
   </div>
 </section>
 
-<section class="band" id="method">
-  <div class="wrap">
-    <p class="kicker"><i></i><span>How I work</span></p>
-    <div class="cols">
-      <div class="col"><span>01</span><h3>Measure first</h3>
-        <p>Before a budget moves, I want to know what the last one actually bought. Most of the
-        money I have saved was found in the gap between what was spent and what was recorded.</p></div>
-      <div class="col"><span>02</span><h3>Then spend</h3>
-        <p>Channels are an argument settled by cost per outcome, not by preference. I run the
-        test small, read it honestly, and put the budget where the evidence points.</p></div>
-      <div class="col"><span>03</span><h3>Then build the system</h3>
-        <p>A result that cannot be repeated is luck. Dashboards, pipelines and automations exist
-        so the next person can see what I saw without having to ask me.</p></div>
-    </div>
-  </div>
-</section>
 
 <section class="band" id="contact">
   <div class="wrap">
@@ -564,13 +521,13 @@ a{color:inherit;text-decoration:none}
         g.fillStyle = gr; g.fillRect(SX, SY, SW, SH);
 
         g.fillStyle = 'rgba(251,250,248,.5)';
-        g.font = '400 19px Jost, Arial, sans-serif';
+        g.font = '500 19px Instrument, Arial, sans-serif';
         g.fillText(item.idx, SX + 34, SY + 58);
         g.fillRect(SX + 34, SY + 74, 46, 1);
 
         // the title, with a little tube fringe on it
         const lines = [];
-        g.font = 'italic 300 42px "Cormorant Garamond", Georgia, serif';
+        g.font = 'italic 400 42px Fraunces, Georgia, serif';
         let ln = '';
         item.title.split(' ').forEach(w => {
           const test = ln ? ln + ' ' + w : w;
@@ -585,7 +542,7 @@ a{color:inherit;text-decoration:none}
         });
         if (item.met) {
           g.fillStyle = 'rgba(251,250,248,.55)';
-          g.font = '400 16px Jost, Arial, sans-serif';
+          g.font = '500 16px Instrument, Arial, sans-serif';
           g.fillText(item.met.toUpperCase(), SX + 34, SY + SH - 40);
         }
       } else {
@@ -804,7 +761,7 @@ a{color:inherit;text-decoration:none}
       shp.width = CW; shp.height = CH;
       const s = shp.getContext('2d', { willReadFrequently: true });
       (function type() {
-        const stack = '"Jost","Helvetica Neue",Arial,sans-serif';
+        const stack = 'Instrument,"Helvetica Neue",Arial,sans-serif';
         s.fillStyle = '#000';
         s.textAlign = 'center';
         s.textBaseline = 'alphabetic';
