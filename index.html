@@ -118,19 +118,21 @@ a{color:inherit;text-decoration:none}
    make the first thing anyone sees a menu, and the room behind it the second
    click. This keeps both. */
 .doors{display:flex;flex-wrap:wrap;justify-content:center;width:100%;
-  gap:clamp(10px,1.4vw,18px);opacity:0;transform:translateY(12px)}
-.doors a{flex:0 1 clamp(240px,30vw,380px);text-decoration:none;
-  border:1px solid var(--hair);background:rgba(10,10,9,.42);
-  backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
-  padding:clamp(14px,1.7vw,20px) clamp(16px,1.9vw,24px);
-  display:flex;flex-direction:column;gap:7px;
-  transition:border-color .45s var(--eo,cubic-bezier(.3,0,.1,1)),
+  gap:clamp(12px,1.6vw,22px);opacity:0;transform:translateY(14px)}
+.doors a{flex:1 1 clamp(260px,38vw,440px);max-width:480px;text-decoration:none;
+  border:1px solid var(--hair);background:rgba(10,10,9,.5);
+  min-height:clamp(150px,26vh,230px);
+  padding:clamp(20px,2.6vw,34px) clamp(20px,2.6vw,34px) clamp(18px,2.2vw,28px);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  gap:clamp(8px,1vw,13px);
+  transition:border-color .45s cubic-bezier(.3,0,.1,1),
              background .45s cubic-bezier(.3,0,.1,1),
              transform .45s cubic-bezier(.3,0,.1,1)}
 .doors .dk{font-family:var(--display);text-transform:uppercase;font-weight:400;
-  letter-spacing:-.008em;font-size:clamp(17px,1.9vw,25px);line-height:1;color:var(--paper)}
-.doors .dn{font-size:clamp(10px,.82vw,12px);letter-spacing:.055em;line-height:1.5;
-  color:var(--dim)}
+  letter-spacing:-.015em;font-size:clamp(28px,4.4vw,58px);line-height:.9;
+  color:var(--paper);text-wrap:balance}
+.doors .dn{font-family:var(--tag);font-size:clamp(12px,1.15vw,16px);line-height:1.35;
+  color:var(--quiet);transform:rotate(-1.6deg);transform-origin:left}
 @media (hover:hover){
   .doors a:hover{border-color:#4A4845;background:rgba(18,18,16,.62);
     transform:translateY(-3px)}
@@ -1090,7 +1092,6 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
     document.body.style.overflow = '';
     gsap.timeline()
       .to(doors, {opacity:0, y:-8, duration:.3, ease:'power2.in'})
-      .to('.gsig', {opacity:0, duration:.3, ease:'power2.in'}, '-=0.22')
       .to(gateEl, {yPercent:-100, duration:.78, ease:'power3.inOut'}, '-=0.06')
       .add(()=>{ gateEl.remove(); if (target) location.hash = target; })
       .to('.eyebrow',{opacity:1,duration:.7,ease:'power2.out'},'-=0.42')
@@ -1101,12 +1102,16 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
 
+  // The name is the preloader: it writes, it holds, it clears. Only then do the
+  // two ways in arrive, and they have the screen to themselves.
   const o = {u:0};
   const tl = gsap.timeline();
   tl.to(o, {u:1, duration:1.9, ease:'power1.inOut',
             onUpdate(){ if (gate) gate.draw(o.u); }})
-    .to(doors, {opacity:1, y:0, duration:.72, ease:'power2.out'}, '-=0.25')
-    .to(skip,  {opacity:1, duration:.5, ease:'power2.out'}, '-=0.4');
+    .to('.gsig', {opacity:0, duration:.5, ease:'power2.in'}, '+=0.55')
+    .set('.gsig', {display:'none'})
+    .to(doors, {opacity:1, y:0, duration:.8, ease:'power2.out'}, '-=0.12')
+    .to(skip,  {opacity:1, duration:.5, ease:'power2.out'}, '-=0.35');
 
   if (doors) doors.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', e => { e.preventDefault(); open(a.dataset.go); });
