@@ -285,8 +285,18 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
 /* Fourteen properties will not fit as fourteen full window frames, so they go
    in a grid of small ones. The chrome is the point: it says these are live
    sites, not mockups. */
+.sgrps{display:flex;flex-direction:column;gap:clamp(26px,3.4vw,46px)}
+/* Each client's name sits on a rule above its own properties: the grouping is
+   the information. One line, one client. */
+.sgh{display:flex;align-items:center;gap:clamp(10px,1.4vw,18px);
+  margin-bottom:clamp(10px,1.2vw,16px)}
+.sgh b{flex:none;font-family:var(--ui);font-weight:400;
+  font-size:clamp(13px,1.15vw,16px);color:var(--off);letter-spacing:-.005em}
+.sgh i{flex:1;height:1px;background:var(--g3)}
+.sgh span{flex:none;font-family:var(--tag);font-size:clamp(11px,.95vw,14px);
+  color:var(--g2)}
 .sgrid{display:grid;gap:clamp(10px,1.4vw,18px);
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
 .swin{border:1px solid var(--g3);background:var(--g4);overflow:hidden}
 .swin .st{display:flex;align-items:center;gap:7px;padding:6px 9px;
   border-bottom:1px solid var(--g3)}
@@ -296,6 +306,6 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
 .swin img{display:block;width:100%;height:auto;
   filter:grayscale(1) contrast(.95);opacity:.55;
   transition:filter .9s var(--ease),opacity .9s var(--ease)}
-.sgrid.in img,.swin.in img{filter:none;opacity:1}
+.sgrid.in img,.swin.in img,.sgrps.in img{filter:none;opacity:1}
 /* fourteen frames want the whole measure, not the plate column */
-.body .sgrid{grid-column:1/-1}
+.body .sgrid,.body .sgrps{grid-column:1/-1}

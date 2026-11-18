@@ -46,19 +46,22 @@ a{color:inherit;text-decoration:none}
 /* ---- load curtain + scroll progress ---- */
 .curtain{position:fixed;inset:0;z-index:60;background:var(--ink);
   display:grid;place-items:center;will-change:transform}
-/* The gate. The signature writes itself, then the two ways in arrive under it.
-   This is the whole first screen: nothing behind it is reachable until a route
-   is chosen, so the entrance is the experience rather than a menu over it. */
-.curtain{display:grid;place-items:center;padding:var(--edge)}
-.gin{display:flex;flex-direction:column;align-items:center;
-  gap:clamp(26px,5vh,54px);width:min(960px,92vw)}
-.gsig{display:block;width:min(66vw,620px);height:auto;overflow:visible}
+/* The gate. The name writes itself on an empty screen, clears, and the screen
+   splits in two. The halves are opposites on purpose: the work is the black
+   side with a grid under it, the story is the white side with ruled lines, so
+   which is which lands before a word is read. */
+.curtain{display:block;padding:0;overflow:hidden}
+.gsig{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:block;width:min(66vw,620px);height:auto;overflow:visible;z-index:2}
 .gsig .fill{fill:var(--paper)}
 .gsig .pen{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
-.skip{appearance:none;background:none;border:0;cursor:pointer;opacity:0;
-  font:inherit;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--dim);padding:6px 10px;transition:color .4s}
-.skip:hover{color:var(--quiet)}
+.skip{position:absolute;left:50%;bottom:clamp(16px,2.4vh,26px);
+  transform:translateX(-50%);z-index:5;
+  appearance:none;background:var(--ink);border:1px solid #2A2927;border-radius:999px;
+  cursor:pointer;opacity:0;display:none;
+  font:inherit;font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--dim);padding:9px 18px;transition:color .4s,border-color .4s}
+.skip:hover{color:var(--paper);border-color:#55524E}
 .prog{position:fixed;top:0;left:0;height:1px;width:100%;z-index:50;background:var(--paper);
   transform:scaleX(0);transform-origin:left;mix-blend-mode:difference;pointer-events:none}
 
@@ -114,32 +117,126 @@ a{color:inherit;text-decoration:none}
   font-size:clamp(26px,3.4vw,46px);line-height:.96;color:#D9D7D2;max-width:19ch;opacity:0;
   text-wrap:balance;
 }
-/* Two ways in, over the scene rather than in front of it. A door screen would
-   make the first thing anyone sees a menu, and the room behind it the second
-   click. This keeps both. */
-.doors{display:flex;flex-wrap:wrap;justify-content:center;width:100%;
-  gap:clamp(12px,1.6vw,22px);opacity:0;transform:translateY(14px)}
-.doors a{flex:1 1 clamp(260px,38vw,440px);max-width:480px;text-decoration:none;
-  border:1px solid var(--hair);background:rgba(10,10,9,.5);
-  min-height:clamp(150px,26vh,230px);
-  padding:clamp(20px,2.6vw,34px) clamp(20px,2.6vw,34px) clamp(18px,2.2vw,28px);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  gap:clamp(8px,1vw,13px);
-  transition:border-color .45s cubic-bezier(.3,0,.1,1),
-             background .45s cubic-bezier(.3,0,.1,1),
-             transform .45s cubic-bezier(.3,0,.1,1)}
-.doors .dk{font-family:var(--display);text-transform:uppercase;font-weight:400;
-  letter-spacing:-.015em;font-size:clamp(28px,4.4vw,58px);line-height:.9;
-  color:var(--paper);text-wrap:balance}
-.doors .dn{font-family:var(--tag);font-size:clamp(12px,1.15vw,16px);line-height:1.35;
-  color:var(--quiet);transform:rotate(-1.6deg);transform-origin:left}
-@media (hover:hover){
-  .doors a:hover{border-color:#4A4845;background:rgba(18,18,16,.62);
-    transform:translateY(-3px)}
-  .doors a:hover .dn{color:var(--quiet)}
+/* The two ways in. They arrive alone, after the name has written itself and
+   cleared, so they are the only thing on the screen. Full-bleed halves rather
+   than two cards in a void: the whole side is the target, it moves when you
+   reach for it, and each one carries the mood of what is behind it. Lean on
+   one and it takes two thirds of the screen and shows you two of its numbers
+   before you have committed to the click. */
+.split{position:absolute;inset:0;z-index:3;display:none}
+.half{position:relative;flex:1 1 50%;min-width:0;overflow:hidden;cursor:pointer;
+  text-decoration:none;display:flex;flex-direction:column;
+  justify-content:space-between;gap:clamp(18px,2.6vh,40px);
+  padding:clamp(22px,3.4vw,54px);
+  transition:flex-basis .85s cubic-bezier(.22,1,.36,1),
+             filter .65s cubic-bezier(.22,1,.36,1)}
+/* the work: a technical surface, ruled into a grid */
+.hw{background:var(--ink);color:var(--paper)}
+.hw::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(to right,rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(circle at 34% 54%,#000 12%,transparent 76%);
+  mask-image:radial-gradient(circle at 34% 54%,#000 12%,transparent 76%)}
+/* the story: a page, ruled like something written by hand */
+.hp{background:var(--paper);color:var(--ink)}
+.hp::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(to bottom,
+    rgba(10,10,9,.07) 0 1px,transparent 1px 34px);
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 72%,transparent);
+  mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 72%,transparent)}
+.half>*{position:relative;z-index:1}
+.htop{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.hx{font-family:var(--ui);font-size:10px;letter-spacing:.3em;text-transform:uppercase}
+.hw .hx{color:var(--dim)} .hp .hx{color:#8A8782}
+.pill{font-family:var(--ui);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  padding:5px 12px;border-radius:999px;white-space:nowrap;transition:border-color .45s,color .45s}
+.hw .pill{border:1px solid #2B2A28;color:var(--quiet)}
+.hp .pill{border:1px solid #DCD8D0;color:#6E6B66}
+.dk{display:block;font-family:var(--display);text-transform:uppercase;font-weight:400;
+  letter-spacing:-.012em;font-size:clamp(30px,4.3vw,66px);line-height:.9}
+.dn{display:block;margin-top:clamp(10px,1.1vw,16px);font-family:var(--tag);
+  font-size:clamp(12px,1vw,16px);line-height:1.45;max-width:30ch;
+  transform:rotate(-1.1deg);transform-origin:left;transition:color .5s}
+.hw .dn{color:var(--dim)} .hp .dn{color:#6E6B66}
+/* two of its numbers, which come in only when you lean on that side */
+.ev{position:absolute;inset:0;z-index:0;pointer-events:none}
+.evc{position:absolute;right:clamp(18px,4vw,64px);
+  font-family:var(--ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  padding:11px 15px;white-space:nowrap;opacity:0;
+  transition:opacity .6s cubic-bezier(.22,1,.36,1),
+             transform .85s cubic-bezier(.22,1,.36,1)}
+.e1{top:21%;transform:rotate(2.4deg) translateY(22px)}
+.e2{bottom:25%;transform:rotate(-2deg) translateY(28px)}
+.hw .evc{border:1px solid #333130;background:rgba(14,14,13,.9);color:var(--quiet)}
+.hp .evc{border:1px solid #D6D1C9;background:rgba(255,255,255,.92);color:#54514D}
+/* the action line: what happens when you click, and the arrow that says you can */
+.hfoot{display:flex;flex-direction:column;gap:clamp(10px,1.1vw,15px)}
+.dgo{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-top:clamp(14px,1.4vw,20px)}
+.hw .dgo{border-top:1px solid #272624} .hp .dgo{border-top:1px solid #DCD8D0}
+.dgt{font-family:var(--ui);font-weight:400;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;transition:color .45s}
+.hw .dgt{color:var(--quiet)} .hp .dgt{color:#5E5B57}
+.meta{font-family:var(--ui);font-size:9px;letter-spacing:.26em;text-transform:uppercase}
+.meta i{font-style:normal}
+.hw .meta{color:#54514D} .hp .meta{color:#A09B93}
+.meta .tp{display:none}
+.dar{flex:none;width:clamp(44px,3.6vw,58px);height:clamp(44px,3.6vw,58px);
+  border-radius:50%;display:grid;place-items:center;
+  transition:background .5s cubic-bezier(.22,1,.36,1),
+             border-color .5s cubic-bezier(.22,1,.36,1)}
+.hw .dar{border:1px solid #3C3A37} .hp .dar{border:1px solid #CFCAC2}
+.dar svg{width:44%;height:44%;fill:none;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:stroke .5s,transform .5s cubic-bezier(.22,1,.36,1)}
+.hw .dar svg{stroke:var(--paper)} .hp .dar svg{stroke:var(--ink)}
+/* a hair of grain, so the two flat fields are not plastic */
+.grain{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:.34;
+  background-image:radial-gradient(rgba(130,130,125,.18) 1px,transparent 0);
+  background-size:3px 3px}
+@media (hover:hover) and (min-width:861px){
+  .split:hover .half{flex-basis:34%;filter:brightness(.5)}
+  .split .half:hover{flex-basis:66%;filter:none}
+  .half:hover .evc{opacity:1}
+  .half:hover .e1{transform:rotate(1.4deg) translateY(0)}
+  .half:hover .e2{transform:rotate(-1.2deg) translateY(0)}
+  .hw:hover .dgt,.hw:hover .pill{color:var(--paper)}
+  .hw:hover .pill{border-color:#55524E}
+  .hw:hover .dar{background:var(--paper);border-color:var(--paper)}
+  .hw:hover .dar svg{stroke:var(--ink);transform:translateX(2px)}
+  .hp:hover .dgt,.hp:hover .pill{color:var(--ink)}
+  .hp:hover .pill{border-color:#B6B1A9}
+  .hp:hover .dar{background:var(--ink);border-color:var(--ink)}
+  .hp:hover .dar svg{stroke:var(--paper);transform:translateX(2px)}
 }
-.doors a:focus-visible{outline:1px solid var(--paper);outline-offset:3px}
-@media (max-width:560px){ .doors a{flex:1 1 100%} }
+.half:focus-visible{outline:2px solid currentColor;outline-offset:-12px}
+/* the monogram rides the seam and leans toward whichever side is winning */
+.seam{position:absolute;left:50%;top:50%;z-index:5;opacity:0;
+  transform:translate(-50%,-50%) scale(.55);pointer-events:none;
+  width:clamp(44px,3.6vw,56px);height:clamp(44px,3.6vw,56px);border-radius:50%;
+  background:var(--ink);color:var(--paper);border:1px solid #333130;
+  display:grid;place-items:center;font-family:var(--display);font-size:13px;
+  letter-spacing:.06em;
+  transition:left .85s cubic-bezier(.22,1,.36,1),
+             transform .7s cubic-bezier(.22,1,.36,1),opacity .7s}
+.seam.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@media (hover:hover) and (min-width:861px){
+  .split:has(.hw:hover)~.seam{left:66%;transform:translate(-50%,-50%) rotate(8deg)}
+  .split:has(.hp:hover)~.seam{left:34%;transform:translate(-50%,-50%) rotate(-8deg)}
+}
+@media (max-width:860px){
+  .split{flex-direction:column}
+  .half{flex:1 1 50%;gap:clamp(12px,2.4vh,22px);padding:clamp(20px,5.4vw,28px)}
+  .dk{font-size:clamp(30px,8.6vw,50px)}
+  .dn{font-size:13px;max-width:34ch}
+  .meta .kb{display:none} .meta .tp{display:inline}
+  .ev{display:none}
+  .hw::before{-webkit-mask-image:radial-gradient(circle at 40% 50%,#000 10%,transparent 80%);
+    mask-image:radial-gradient(circle at 40% 50%,#000 10%,transparent 80%)}
+  .seam{display:none}
+  .skip{bottom:auto;top:50%;transform:translate(-50%,-50%)}
+}
 .cue{position:absolute;left:50%;bottom:clamp(22px,4vh,42px);transform:translateX(-50%);z-index:3;
   display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;
   font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
@@ -344,20 +441,42 @@ a{color:inherit;text-decoration:none}
 <body>
 
 <div class="curtain" id="gate">
-  <div class="gin">
-    <svg class="gsig" id="gsig" role="img" aria-label="SQ Shah"></svg>
-    <nav class="doors" id="doors" aria-label="Choose where to start">
-      <a href="#work" data-go="work">
-        <span class="dk">Show me the receipts</span>
+  <svg class="gsig" id="gsig" role="img" aria-label="SQ Shah"></svg>
+  <nav class="split" id="doors" aria-label="Choose where to start">
+    <a class="half hw" href="#work" data-go="work">
+      <span class="ev" aria-hidden="true">
+        <span class="evc e1">300&ndash;400 vehicles a month</span>
+        <span class="evc e2">14 months of invoices</span>
+      </span>
+      <span class="htop"><span class="hx">01 / The work</span><span class="pill">12 cases</span></span>
+      <span class="hc">
+        <span class="dk">Show me<br>the receipts</span>
         <span class="dn">Twelve cases. Screenshots, invoices, dashboards.</span>
-      </a>
-      <a href="#who" data-go="who">
-        <span class="dk">Show me the person</span>
+      </span>
+      <span class="hfoot">
+        <span class="dgo"><span class="dgt">Open the case files</span><span class="dar" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 13h15M13.5 6.5 20 13l-6.5 6.5"/></svg></span></span>
+        <span class="meta"><i class="kb">Press 1 or click</i><i class="tp">Tap this half</i></span>
+      </span>
+    </a>
+    <a class="half hp" href="#who" data-go="who">
+      <span class="ev" aria-hidden="true">
+        <span class="evc e1">2021 &middot; one dollar an hour</span>
+        <span class="evc e2">2026 &middot; $166,643 managed</span>
+      </span>
+      <span class="htop"><span class="hx">02 / The person</span><span class="pill">2021 &rarr; now</span></span>
+      <span class="hc">
+        <span class="dk">Show me<br>the person</span>
         <span class="dn">One dollar an hour to $166,643 of media.</span>
-      </a>
-    </nav>
-    <button class="skip" id="skip" type="button">Skip</button>
-  </div>
+      </span>
+      <span class="hfoot">
+        <span class="dgo"><span class="dgt">Start at the beginning</span><span class="dar" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 13h15M13.5 6.5 20 13l-6.5 6.5"/></svg></span></span>
+        <span class="meta"><i class="kb">Press 2 or click</i><i class="tp">Tap this half</i></span>
+      </span>
+    </a>
+  </nav>
+  <span class="grain" aria-hidden="true"></span>
+  <span class="seam" id="seam" aria-hidden="true">SQ</span>
+  <button class="skip" id="skip" type="button">Skip</button>
 </div>
 <i class="prog"></i>
 
@@ -470,7 +589,7 @@ a{color:inherit;text-decoration:none}
         <span class="met">Shopify, WordPress, Meta</span></span></a>
       <a class="row" href="/work/digital-presence/" data-slug="digital-presence" data-industry="SaaS and AI" data-market="United States"><span class="sweep"></span><span class="in">
         <span class="idx">08</span>
-        <span class="ttl">Fourteen web properties, run as their digital department</span>
+        <span class="ttl">Eight clients, fourteen properties, one digital department</span>
         <span class="met">Search, ads, email</span></span></a>
       <a class="row" href="/work/refund-recovery/" data-slug="refund-recovery" data-industry="Spend control" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">09</span>
@@ -1102,22 +1221,37 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
 
-  // The name is the preloader: it writes, it holds, it clears. Only then do the
-  // two ways in arrive, and they have the screen to themselves.
+  // The name is the preloader: it writes on an empty screen, holds, clears.
+  // Then the screen splits and the two ways in arrive from their own sides.
+  const seam = document.getElementById('seam');
   const o = {u:0};
   const tl = gsap.timeline();
   tl.to(o, {u:1, duration:1.9, ease:'power1.inOut',
             onUpdate(){ if (gate) gate.draw(o.u); }})
     .to('.gsig', {opacity:0, duration:.5, ease:'power2.in'}, '+=0.55')
     .set('.gsig', {display:'none'})
-    .to(doors, {opacity:1, y:0, duration:.8, ease:'power2.out'}, '-=0.12')
-    .to(skip,  {opacity:1, duration:.5, ease:'power2.out'}, '-=0.35');
+    .set(doors, {display:'flex'})
+    .set(skip,  {display:'block'})
+    .fromTo('.hw', {xPercent:-101}, {xPercent:0, duration:1, ease:'power3.inOut'})
+    .fromTo('.hp', {xPercent:101},  {xPercent:0, duration:1, ease:'power3.inOut'}, '<')
+    .from('.half>*', {opacity:0, y:16, duration:.75, ease:'power3.out',
+                      stagger:{each:.07, from:'start'}}, '-=0.45')
+    .add(()=>{ if (seam) seam.classList.add('on'); }, '-=0.5')
+    // one nudge of the arrows as they land: the only thing that moves on its
+    // own, and it points at the place to click
+    .to('.dar svg', {x:5, duration:.4, ease:'power2.out', stagger:.08}, '-=0.25')
+    .to('.dar svg', {x:0, duration:.8, ease:'elastic.out(1,.55)', stagger:.08}, '-=0.14')
+    .to(skip, {opacity:1, duration:.5, ease:'power2.out'}, '-=0.95');
 
   if (doors) doors.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', e => { e.preventDefault(); open(a.dataset.go); });
   });
   if (skip) skip.addEventListener('click', ()=>open(null));
-  addEventListener('keydown', e => { if (e.key === 'Escape') open(null); });
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape') open(null);
+    else if (e.key === '1') open('work');
+    else if (e.key === '2') open('who');
+  });
 
   if (!matchMedia('(hover: none)').matches){
     const sx=gsap.quickTo('.sig','x',{duration:.9,ease:'power3'}),

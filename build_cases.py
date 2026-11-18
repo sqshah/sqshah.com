@@ -420,15 +420,15 @@ CASES = [
     # ---------------------------------------------------------------------- 8
     dict(
         slug='digital-presence',
-        title='Fourteen properties, one digital department',
+        title='Eight clients, fourteen properties, one department',
         desc='Search, paid, email, lead capture and the pages behind them, run end to '
              'end for a roster of US software and services brands.',
         tagline='not a specialist. the whole department.',
         big='14', bigmk='properties',
         sub='Founders who needed a digital department and did not want to hire five '
             'people to get one.',
-        strip=[('Industry', 'SaaS, AI and services'), ('Market', 'United States'),
-               ('Properties', 'Fourteen'),
+        strip=[('Clients', 'Eight'), ('Properties', 'Fourteen'),
+               ('Market', 'United States'),
                ('Disciplines', 'Search, paid, email, CRO'),
                ('Role', 'Their digital department')],
         problem=dict(head='They needed a department, not a <span class="mk">specialist</span>',
@@ -447,16 +447,32 @@ CASES = [
                                 ('Email marketing and sequences', 'after the capture'),
                                 ('Analytics and reporting', 'monthly')]),
                  fig=fig('6', 6), figk='Disciplines per brand', note='one person on all of them'),
-            dict(id='sites', label='Sites', icon='link',
-                 head='The properties, as they stand', mk='today',
-                 chips=['Voice and messaging', 'Call reputation', 'AI workspaces',
-                        'Energy', 'Finance', 'Legal'],
-                 sites=['drop.co', 'dropvm.ai', 'ringlessvoicemail.ai', 'press1voice.com',
-                        'calltrack.ai', 'callconfident.com', 'spamchecker.co',
-                        'shiftforbusiness.ai', 'earnwithshift.ai', 'modeinc.ai',
-                        'acquiralabs.com', 'sociallawsuit.org', 'xgrid.io',
-                        'aurumcrypto.ai'],
-                 fig=fig('9', 9), figk='Client groups', note='fourteen properties between them'),
+            dict(id='sites', label='Clients', icon='link',
+                 head='Eight clients, and what each of them', mk='sells',
+                 chips=['Voice and messaging', 'Call reputation', 'Lead generation',
+                        'Energy', 'Digital assets', 'Legal'],
+                 sites=[
+                     dict(client='Voice broadcast and ringless voicemail',
+                          kind='four properties',
+                          sites=['drop.co', 'dropvm.ai', 'ringlessvoicemail.ai',
+                                 'press1voice.com']),
+                     dict(client='Call tracking and number reputation',
+                          kind='three properties',
+                          sites=['calltrack.ai', 'callconfident.com', 'spamchecker.co']),
+                     dict(client='SHIFT', kind='two properties',
+                          sites=['shiftforbusiness.ai', 'earnwithshift.ai']),
+                     dict(client='Acquira Labs', kind='performance lead generation',
+                          sites=['acquiralabs.com']),
+                     dict(client='Mode', kind='company data partnerships',
+                          sites=['modeinc.ai']),
+                     dict(client='XGRID', kind='energy and virtual power plants',
+                          sites=['xgrid.io']),
+                     dict(client='Aurum Crypto', kind='digital assets',
+                          sites=['aurumcrypto.ai']),
+                     dict(client='SocialLawsuit.org', kind='school district claims',
+                          sites=['sociallawsuit.org']),
+                 ],
+                 fig=fig('8', 8), figk='Clients', note='fourteen properties between them'),
             dict(id='reporting', label='Reporting', icon='find',
                  head='And a report every month, per', mk='property',
                  chips=['Rankings', 'Backlinks', 'Traffic', 'Conversions'],
@@ -465,9 +481,9 @@ CASES = [
                  cap=('Monthly reporting', 'One property of fourteen'),
                  fig=fig('5', 5), figk='Years', note='alongside the day job'),
         ],
-        aside=('Several of these compete in the same category, which means they can never',
-               'compete'),
-        results=[dict(f=fig('14', 14), k='Properties run', note='nine client groups'),
+        aside=('Two of these compete in the same category, which is why neither one knows',
+               'the other'),
+        results=[dict(f=fig('14', 14), k='Properties run', note='for eight clients'),
                  dict(f=fig('6', 6), k='Disciplines each', note='search to follow-up'),
                  dict(f=fig('5', 5), k='Years', note='still running')],
         gate=('The reports, the rankings and the campaign', 'structure'),
@@ -679,14 +695,27 @@ def panel_markup(p):
     return out + '    </div>'
 
 
-def sites_markup(items):
-    """A grid of live sites, each in its own small window."""
-    out = '    <div class="sgrid" data-rise>\n'
-    for host in items:
-        out += (f'      <figure class="swin"><div class="st"><i></i><i></i><i></i>'
-                f'<b>{host}</b></div>'
-                f'<img src="/assets/work/sites/{host}.jpg" alt="{host} home page">'
-                f'</figure>\n')
+def sites_markup(groups):
+    """The properties, grouped by the client they belong to.
+
+    Each client gets its own band with its name and sector on the line above,
+    so a brand with four properties reads as one client with four properties
+    and a brand with one reads as a client of its own. Flattening them into a
+    single grid would have implied fourteen unrelated clients, which the sites
+    themselves disprove the moment anyone opens two of them.
+    """
+    out = '    <div class="sgrps" data-rise>\n'
+    for g in groups:
+        out += ('      <div class="sgrp">\n'
+                f'        <div class="sgh"><b>{g["client"]}</b><i></i>'
+                f'<span>{g["kind"]}</span></div>\n'
+                '        <div class="sgrid">\n')
+        for host in g['sites']:
+            out += (f'          <figure class="swin"><div class="st"><i></i><i></i><i></i>'
+                    f'<b>{host}</b></div>'
+                    f'<img src="/assets/work/sites/{host}.jpg" alt="{host} home page">'
+                    f'</figure>\n')
+        out += '        </div>\n      </div>\n'
     return out + '    </div>'
 
 
