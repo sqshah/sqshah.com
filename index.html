@@ -330,6 +330,38 @@ a{color:inherit;text-decoration:none}
 .row .met{grid-column:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--dim);transition:color .4s;line-height:1.7}
 @media (min-width:861px){ .row .met{grid-column:3;text-align:right;white-space:nowrap;align-self:center} }
+/* Hovering one case pulls the other eleven back and lifts a card of its own
+   evidence under the cursor: the screenshot and the number the case turns on.
+   It is a preview of the page you are about to open, not decoration, so it
+   carries the real plate from that case. Pointer devices only. */
+.pk{position:fixed;left:0;top:0;z-index:40;width:280px;pointer-events:none;
+  opacity:0;will-change:transform;
+  border:1px solid #2E2C2A;background:#0C0C0B;
+  box-shadow:0 26px 60px rgba(0,0,0,.72)}
+.pk img:not([src]){display:none}
+.pk img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;
+  object-position:top center;filter:grayscale(1) contrast(1.04)}
+.pk .pb{display:flex;align-items:baseline;gap:10px;padding:13px 15px 15px;
+  border-top:1px solid #1E1D1C}
+.pk .pf{font-family:var(--display);text-transform:uppercase;font-size:30px;
+  line-height:.86;color:var(--paper);letter-spacing:-.012em;white-space:nowrap}
+.pk .pn{font-family:var(--tag);font-size:12px;color:var(--dim);
+  transform:rotate(-1.4deg)}
+/* two of the twelve have no screenshot to show. Those cards say so with the
+   number the case turns on, at the size the plate would have been. */
+.pk.noimg{width:240px}
+.pk.noimg .pb{flex-direction:column;align-items:flex-start;gap:8px;
+  border-top:0;padding:26px 20px 24px;min-height:120px;justify-content:center}
+.pk.noimg .pf{font-size:48px}
+.pk.noimg .pn{font-size:13px}
+@media (hover:none),(max-width:860px){ .pk{display:none} }
+@media (hover:hover){
+  /* the reveal animation leaves an inline opacity on each row, so the dim has
+     to outrank it */
+  .rows:hover .row{opacity:.32!important}
+  .rows:hover .row:hover{opacity:1!important}
+  .row{transition:opacity .4s cubic-bezier(.3,0,.1,1)}
+}
 .row .sweep{position:absolute;inset:0;z-index:1;background:
   linear-gradient(90deg,rgba(251,250,248,.065),rgba(251,250,248,.015) 55%,transparent);
   transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.3,0,.1,1)}
@@ -479,6 +511,7 @@ a{color:inherit;text-decoration:none}
   <button class="skip" id="skip" type="button">Skip</button>
 </div>
 <i class="prog"></i>
+<figure class="pk" id="peek" aria-hidden="true"><img alt=""><figcaption class="pb"><b class="pf"></b><span class="pn"></span></figcaption></figure>
 
 <nav class="nav">
   <a class="mark" href="#top">SQ</a>
@@ -559,54 +592,54 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <p class="kicker"><i></i><span>Selected work</span></p>
     <div class="rows">
-      <a class="row" href="/work/khushi-motors/" data-slug="khushi-motors" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/khushi-motors/" data-slug="khushi-motors" data-peek="/assets/work/km/cover.jpg" data-fig="$0.29" data-fk="a lead" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">01</span>
         <span class="ttl">Four years of paid media for an East African motor group</span>
         <span class="met">Google, Meta, email</span></span></a>
-      <a class="row" href="/work/arsh-properties/" data-slug="arsh-properties" data-industry="Real estate" data-market="Pakistan"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/arsh-properties/" data-slug="arsh-properties" data-peek="/assets/work/cs/arsh.jpg" data-fig="$0.32" data-fk="an enquiry" data-industry="Real estate" data-market="Pakistan"><span class="sweep"></span><span class="in">
         <span class="idx">02</span>
         <span class="ttl">Premium property across four cities, two channels at once</span>
         <span class="met">Zameen, Meta</span></span></a>
-      <a class="row" href="/work/ocean-trading/" data-slug="ocean-trading" data-industry="Export trade" data-market="Japan"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/ocean-trading/" data-slug="ocean-trading" data-peek="/assets/work/cs/ocean.jpg" data-fig="A to Z" data-fk="from nothing" data-industry="Export trade" data-market="Japan"><span class="sweep"></span><span class="in">
         <span class="idx">03</span>
         <span class="ttl">A Japanese exporter, set up digitally from nothing</span>
         <span class="met">Search, Meta, hiring</span></span></a>
-      <a class="row" href="/work/organic-search/" data-slug="organic-search" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/organic-search/" data-slug="organic-search" data-peek="/assets/work/km/gsc.jpg" data-fig="113K" data-fk="clicks" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">04</span>
         <span class="ttl">Organic search, rebuilt on the pages the ads point at</span>
         <span class="met">113k clicks</span></span></a>
-      <a class="row" href="/work/email-platform/" data-slug="email-platform" data-industry="Product" data-market="East Africa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/email-platform/" data-slug="email-platform" data-peek="/assets/work/km/tool-overview.jpg" data-fig="37.4%" data-fk="opened" data-industry="Product" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">05</span>
         <span class="ttl">An email platform built in-house instead of rented</span>
         <span class="met">158,933 sends</span></span></a>
-      <a class="row" href="/work/twelve-brands/" data-slug="twelve-brands" data-industry="Local services" data-market="Canada"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/twelve-brands/" data-slug="twelve-brands" data-peek="/assets/work/cs/togear.jpg" data-fig="12" data-fk="brands" data-industry="Local services" data-market="Canada"><span class="sweep"></span><span class="in">
         <span class="idx">06</span>
         <span class="ttl">Twelve Canadian brands, handled end to end</span>
         <span class="met">Search, brand, web</span></span></a>
-      <a class="row" href="/work/ecommerce-setup/" data-slug="ecommerce-setup" data-industry="Ecommerce" data-market="Pakistan"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/ecommerce-setup/" data-slug="ecommerce-setup" data-peek="" data-fig="A to Z" data-fk="the whole stack" data-industry="Ecommerce" data-market="Pakistan"><span class="sweep"></span><span class="in">
         <span class="idx">07</span>
         <span class="ttl">An ecommerce brand, built, migrated and advertised</span>
         <span class="met">Shopify, WordPress, Meta</span></span></a>
-      <a class="row" href="/work/digital-presence/" data-slug="digital-presence" data-industry="SaaS and AI" data-market="United States"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/digital-presence/" data-slug="digital-presence" data-peek="/assets/work/sites/ringlessvoicemail.ai.jpg" data-fig="14" data-fk="properties" data-industry="SaaS and AI" data-market="United States"><span class="sweep"></span><span class="in">
         <span class="idx">08</span>
         <span class="ttl">Eight clients, fourteen properties, one digital department</span>
         <span class="met">Search, ads, email</span></span></a>
-      <a class="row" href="/work/refund-recovery/" data-slug="refund-recovery" data-industry="Spend control" data-market="East Africa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/refund-recovery/" data-slug="refund-recovery" data-peek="/assets/work/cs/refund.jpg" data-fig="59" data-fk="charges, two days" data-industry="Spend control" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">09</span>
         <span class="ttl">$2,343 billed in forty-eight hours, disputed line by line</span>
         <span class="met">59 charges</span></span></a>
-      <a class="row" href="/work/brand-protection/" data-slug="brand-protection" data-industry="Brand" data-market="East Africa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/brand-protection/" data-slug="brand-protection" data-peek="" data-fig="Taken" data-fk="down" data-industry="Brand" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">10</span>
         <span class="ttl">Brand protection, from the first copy to the takedown</span>
         <span class="met">Content theft</span></span></a>
-      <a class="row" href="/work/account-recovery/" data-slug="account-recovery" data-industry="Brand" data-market="Mombasa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/account-recovery/" data-slug="account-recovery" data-peek="/assets/work/cs/insta.jpg" data-fig="112K" data-fk="followers back" data-industry="Brand" data-market="Mombasa"><span class="sweep"></span><span class="in">
         <span class="idx">11</span>
         <span class="ttl">A 112,000-follower account, taken and recovered</span>
         <span class="met">Social</span></span></a>
-      <a class="row" href="/work/roi-dashboard/" data-slug="roi-dashboard" data-industry="Attribution" data-market="East Africa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/roi-dashboard/" data-slug="roi-dashboard" data-peek="/assets/work/km/dash-overview.jpg" data-fig="$227" data-fk="a sale" data-industry="Attribution" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">12</span>
         <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
-        <span class="met">402 months of spend</span></span></a>
+        <span class="met">$74,049 reconciled</span></span></a>
     </div>
     <p class="note">Figures, dashboards and invoices behind each one &mdash; available on request</p>
   </div>
@@ -1262,6 +1295,59 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
     },{passive:true});
   }
 }).catch(showAll);
+
+/* ---------- the case index previews itself under the cursor ---------- */
+(function(){
+  const card = document.getElementById('peek');
+  if (!card || RM || !matchMedia('(hover: hover)').matches) return;
+  const img = card.querySelector('img'),
+        fig = card.querySelector('.pf'),
+        kic = card.querySelector('.pn');
+  const rows = Array.prototype.slice.call(document.querySelectorAll('#work .row'));
+  if (!rows.length) return;
+
+  const W = 280, PAD = 18;
+  let shown = false, raf = 0, tx = 0, ty = 0, cx = 0, cy = 0;
+
+  const place = () => {
+    raf = 0;
+    cx += (tx - cx) * .18; cy += (ty - cy) * .18;
+    card.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) +
+      'px,0) rotate(1.6deg)';
+    if (shown && (Math.abs(tx-cx) > .4 || Math.abs(ty-cy) > .4)) raf = requestAnimationFrame(place);
+  };
+  const track = e => {
+    const h = card.offsetHeight || 230;
+    tx = Math.min(innerWidth - W - PAD, e.clientX + 26);
+    ty = Math.min(innerHeight - h - PAD, Math.max(PAD, e.clientY - h/2));
+    if (!raf) raf = requestAnimationFrame(place);
+  };
+
+  rows.forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      const src = row.dataset.peek || '';
+      card.classList.toggle('noimg', !src);
+      if (src){ img.src = src; img.style.display = ''; } else { img.removeAttribute('src'); img.style.display = 'none'; }
+      fig.textContent = row.dataset.fig || '';
+      kic.textContent = row.dataset.fk  || '';
+      // drop it where the cursor already is, then let it follow
+      const r = row.getBoundingClientRect();
+      const h = card.offsetHeight || 230;
+      cx = tx = Math.min(innerWidth - W - PAD, r.right - W - 40);
+      cy = ty = Math.min(innerHeight - h - PAD, Math.max(PAD, r.top - h/3));
+      card.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0) rotate(1.6deg)';
+      shown = true;
+      if (window.gsap) gsap.to(card, {opacity:1, duration:.28, ease:'power2.out'});
+      else card.style.opacity = 1;
+    });
+    row.addEventListener('mousemove', track, {passive:true});
+    row.addEventListener('mouseleave', () => {
+      shown = false;
+      if (window.gsap) gsap.to(card, {opacity:0, duration:.22, ease:'power2.in'});
+      else card.style.opacity = 0;
+    });
+  });
+})();
 
 /* ---------- everything the scroll drives ---------- */
 (function(){
