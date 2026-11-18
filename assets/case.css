@@ -281,3 +281,21 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
 /* Long captures scroll inside the frame rather than being cropped to death. */
 .win.tall .pane{overflow-y:auto;scrollbar-width:thin;
   scrollbar-color:var(--g2) transparent}
+
+/* Fourteen properties will not fit as fourteen full window frames, so they go
+   in a grid of small ones. The chrome is the point: it says these are live
+   sites, not mockups. */
+.sgrid{display:grid;gap:clamp(10px,1.4vw,18px);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.swin{border:1px solid var(--g3);background:var(--g4);overflow:hidden}
+.swin .st{display:flex;align-items:center;gap:7px;padding:6px 9px;
+  border-bottom:1px solid var(--g3)}
+.swin .st i{width:5px;height:5px;border-radius:50%;border:1px solid var(--g2);flex:none}
+.swin .st b{flex:1;min-width:0;font-weight:400;font-size:8px;letter-spacing:.11em;
+  color:var(--g1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.swin img{display:block;width:100%;height:auto;
+  filter:grayscale(1) contrast(.95);opacity:.55;
+  transition:filter .9s var(--ease),opacity .9s var(--ease)}
+.sgrid.in img,.swin.in img{filter:none;opacity:1}
+/* fourteen frames want the whole measure, not the plate column */
+.body .sgrid{grid-column:1/-1}

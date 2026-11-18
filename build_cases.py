@@ -419,35 +419,58 @@ CASES = [
     ),
     # ---------------------------------------------------------------------- 8
     dict(
-        slug='freelance-seo',
-        title='Four AI products, ranked',
-        desc='Ringless Voicemail, CallTrack, CallConfident and Spam Checker. Search '
-             'strategy, technical fixes, content and link work.',
-        shot='/assets/work/cs/seo.jpg',
-        tagline='five years of freelance search',
-        big='4', bigmk='products',
-        sub='New domains in competitive telecom and AI categories, with no authority to '
-            'start from. Ranked on off-page work and a content system.',
-        strip=[('Industry', 'SaaS and AI'), ('Market', 'United States'),
-               ('Discipline', 'Search'), ('Channels', 'Organic'),
-               ('Role', 'Freelance lead')],
-        problem=dict(head='Four new domains, no <span class="mk">authority</span>',
-                     chips=['Competitive terms', 'No backlink profile', 'Thin content']),
+        slug='digital-presence',
+        title='Fourteen properties, one digital department',
+        desc='Search, paid, email, lead capture and the pages behind them, run end to '
+             'end for a roster of US software and services brands.',
+        tagline='not a specialist. the whole department.',
+        big='14', bigmk='properties',
+        sub='Founders who needed a digital department and did not want to hire five '
+            'people to get one.',
+        strip=[('Industry', 'SaaS, AI and services'), ('Market', 'United States'),
+               ('Properties', 'Fourteen'),
+               ('Disciplines', 'Search, paid, email, CRO'),
+               ('Role', 'Their digital department')],
+        problem=dict(head='They needed a department, not a <span class="mk">specialist</span>',
+                     chips=['New domains', 'No organic presence',
+                            'No lead capture', 'Nothing measured']),
         chapters=[
-            dict(id='links', label='Links', icon='link',
-                 head='Off-page did the heavy', mk='lifting',
-                 chips=['RinglessVoicemail.ai', 'CallTrack.ai', 'CallConfident.com',
-                        'SpamChecker.co'],
+            dict(id='stack', label='Stack', icon='build',
+                 head='Everything a brand needs to be', mk='found and followed up',
+                 chips=['One operator', 'Per property', 'Start to finish'],
+                 lst=dict(left='What I run on each property',
+                          right='search through to the follow-up',
+                          rows=[('Technical and on-page search', 'foundation'),
+                                ('Off-page and authority', 'ongoing'),
+                                ('Google Ads', 'search and demand'),
+                                ('Landing pages and lead forms', 'built and tested'),
+                                ('Email marketing and sequences', 'after the capture'),
+                                ('Analytics and reporting', 'monthly')]),
+                 fig=fig('6', 6), figk='Disciplines per brand', note='one person on all of them'),
+            dict(id='sites', label='Sites', icon='link',
+                 head='The properties, as they stand', mk='today',
+                 chips=['Voice and messaging', 'Call reputation', 'AI workspaces',
+                        'Energy', 'Finance', 'Legal'],
+                 sites=['drop.co', 'dropvm.ai', 'ringlessvoicemail.ai', 'press1voice.com',
+                        'calltrack.ai', 'callconfident.com', 'spamchecker.co',
+                        'shiftforbusiness.ai', 'earnwithshift.ai', 'modeinc.ai',
+                        'acquiralabs.com', 'sociallawsuit.org', 'xgrid.io',
+                        'aurumcrypto.ai'],
+                 fig=fig('9', 9), figk='Client groups', note='fourteen properties between them'),
+            dict(id='reporting', label='Reporting', icon='find',
+                 head='And a report every month, per', mk='property',
+                 chips=['Rankings', 'Backlinks', 'Traffic', 'Conversions'],
                  img='/assets/work/cs/seo.jpg',
-                 alt='Monthly backlink report for one of the products',
-                 cap=('Backlink reporting', 'Monthly, per site'),
-                 fig=fig('4', 4), figk='Products ranked', note='five years of it'),
+                 alt='Monthly backlink and ranking report for one of the properties',
+                 cap=('Monthly reporting', 'One property of fourteen'),
+                 fig=fig('5', 5), figk='Years', note='alongside the day job'),
         ],
-        aside=('Four products in the same category, which means four sites that must never',
+        aside=('Several of these compete in the same category, which means they can never',
                'compete'),
-        results=[dict(f=fig('4', 4), k='Products ranked', note='AI and telecom'),
-                 dict(f=fig('5', 5), k='Years freelancing', note='alongside the day job')],
-        gate=('The per-site reports and the ranking', 'movement'),
+        results=[dict(f=fig('14', 14), k='Properties run', note='nine client groups'),
+                 dict(f=fig('6', 6), k='Disciplines each', note='search to follow-up'),
+                 dict(f=fig('5', 5), k='Years', note='still running')],
+        gate=('The reports, the rankings and the campaign', 'structure'),
     ),
     # ---------------------------------------------------------------------- 9
     dict(
@@ -656,6 +679,17 @@ def panel_markup(p):
     return out + '    </div>'
 
 
+def sites_markup(items):
+    """A grid of live sites, each in its own small window."""
+    out = '    <div class="sgrid" data-rise>\n'
+    for host in items:
+        out += (f'      <figure class="swin"><div class="st"><i></i><i></i><i></i>'
+                f'<b>{host}</b></div>'
+                f'<img src="/assets/work/sites/{host}.jpg" alt="{host} home page">'
+                f'</figure>\n')
+    return out + '    </div>'
+
+
 def win_markup(w):
     """A screen he built, shown inside window chrome with its real path."""
     tall = ' tall' if w.get('tall') else ''
@@ -690,6 +724,8 @@ def chapter(no, c):
                      f'      <img src="{c["img"]}" alt="{c["alt"]}">\n'
                      f'      <figcaption><span class="lbl">{a}</span>'
                      f'<span class="lbl">{b}</span></figcaption>\n    </figure>')
+    elif c.get('sites'):
+        parts.append(sites_markup(c['sites']))
     elif c.get('win'):
         parts.append(win_markup(c['win']))
     elif c.get('panel'):
