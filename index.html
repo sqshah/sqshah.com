@@ -46,8 +46,19 @@ a{color:inherit;text-decoration:none}
 /* ---- load curtain + scroll progress ---- */
 .curtain{position:fixed;inset:0;z-index:60;background:var(--ink);
   display:grid;place-items:center;will-change:transform}
-.curtain span{font-family:var(--display);font-size:clamp(26px,4vw,44px);
-  color:var(--paper);opacity:0;text-transform:uppercase}
+/* The gate. The signature writes itself, then the two ways in arrive under it.
+   This is the whole first screen: nothing behind it is reachable until a route
+   is chosen, so the entrance is the experience rather than a menu over it. */
+.curtain{display:grid;place-items:center;padding:var(--edge)}
+.gin{display:flex;flex-direction:column;align-items:center;
+  gap:clamp(26px,5vh,54px);width:min(960px,92vw)}
+.gsig{display:block;width:min(66vw,620px);height:auto;overflow:visible}
+.gsig .fill{fill:var(--paper)}
+.gsig .pen{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
+.skip{appearance:none;background:none;border:0;cursor:pointer;opacity:0;
+  font:inherit;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--dim);padding:6px 10px;transition:color .4s}
+.skip:hover{color:var(--quiet)}
 .prog{position:fixed;top:0;left:0;height:1px;width:100%;z-index:50;background:var(--paper);
   transform:scaleX(0);transform-origin:left;mix-blend-mode:difference;pointer-events:none}
 
@@ -106,10 +117,9 @@ a{color:inherit;text-decoration:none}
 /* Two ways in, over the scene rather than in front of it. A door screen would
    make the first thing anyone sees a menu, and the room behind it the second
    click. This keeps both. */
-.doors{position:relative;z-index:3;display:flex;flex-wrap:wrap;
-  gap:clamp(10px,1.4vw,18px);margin-top:clamp(26px,4.2vh,46px);opacity:0;
-  transform:translateY(10px)}
-.doors a{flex:1 1 clamp(220px,24vw,300px);max-width:340px;text-decoration:none;
+.doors{display:flex;flex-wrap:wrap;justify-content:center;width:100%;
+  gap:clamp(10px,1.4vw,18px);opacity:0;transform:translateY(12px)}
+.doors a{flex:0 1 clamp(240px,30vw,380px);text-decoration:none;
   border:1px solid var(--hair);background:rgba(10,10,9,.42);
   backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
   padding:clamp(14px,1.7vw,20px) clamp(16px,1.9vw,24px);
@@ -331,7 +341,22 @@ a{color:inherit;text-decoration:none}
 </head>
 <body>
 
-<div class="curtain"><span>SQ Shah</span></div>
+<div class="curtain" id="gate">
+  <div class="gin">
+    <svg class="gsig" id="gsig" role="img" aria-label="SQ Shah"></svg>
+    <nav class="doors" id="doors" aria-label="Choose where to start">
+      <a href="#work" data-go="work">
+        <span class="dk">Show me the receipts</span>
+        <span class="dn">Twelve cases. Screenshots, invoices, dashboards.</span>
+      </a>
+      <a href="#who" data-go="who">
+        <span class="dk">Show me the person</span>
+        <span class="dn">One dollar an hour to $166,643 of media.</span>
+      </a>
+    </nav>
+    <button class="skip" id="skip" type="button">Skip</button>
+  </div>
+</div>
 <i class="prog"></i>
 
 <nav class="nav">
@@ -350,16 +375,6 @@ a{color:inherit;text-decoration:none}
     <p class="eyebrow"><i></i><span>Performance marketing &nbsp;&middot;&nbsp; East Africa</span></p>
     <svg class="sig" id="sig" role="img" aria-label="SQ Shah"></svg>
     <p class="line">The numbers were wrong before they were bad.</p>
-    <nav class="doors" aria-label="Where to start">
-      <a href="#work" data-door>
-        <span class="dk">See the work</span>
-        <span class="dn">Thirteen cases, with the screenshots behind them</span>
-      </a>
-      <a href="#who" data-door>
-        <span class="dk">See the profile</span>
-        <span class="dn">Four years, four countries, how it happened</span>
-      </a>
-    </nav>
   </div>
   <div class="cue"><i></i><span>Scroll</span></div>
 </section>
@@ -1006,63 +1021,98 @@ function splitWords(el){
 /* ---------- the signature, written by hand ---------- */
 Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then(sig=>{
   const NS='http://www.w3.org/2000/svg';
-  const svg=document.getElementById('sig');
-  svg.setAttribute('viewBox',`0 0 ${sig.w} ${sig.h}`);
 
-  const defs=document.createElementNS(NS,'defs');
-  const mask=document.createElementNS(NS,'mask');
-  mask.setAttribute('id','write');
-  mask.setAttribute('maskUnits','userSpaceOnUse');
-  mask.setAttribute('x',-40); mask.setAttribute('y',-40);
-  mask.setAttribute('width',sig.w+80); mask.setAttribute('height',sig.h+80);
-  const pens=sig.pen.map(d=>{
-    const p=document.createElementNS(NS,'path');
-    p.setAttribute('d',d); p.setAttribute('class','pen');
-    mask.appendChild(p); return p;
-  });
-  defs.appendChild(mask); svg.appendChild(defs);
+  // one builder, two signatures: the gate writes itself on a timeline, the hero
+  // one is driven by the flight scroll
+  function build(svg, uid){
+    svg.setAttribute('viewBox',`0 0 ${sig.w} ${sig.h}`);
+
+    const defs=document.createElementNS(NS,'defs');
+    const mask=document.createElementNS(NS,'mask');
+    mask.setAttribute('id',uid);
+    mask.setAttribute('maskUnits','userSpaceOnUse');
+    mask.setAttribute('x',-40); mask.setAttribute('y',-40);
+    mask.setAttribute('width',sig.w+80); mask.setAttribute('height',sig.h+80);
+    const pens=sig.pen.map(d=>{
+      const p=document.createElementNS(NS,'path');
+      p.setAttribute('d',d); p.setAttribute('class','pen');
+      mask.appendChild(p); return p;
+    });
+    defs.appendChild(mask); svg.appendChild(defs);
 
   // the mask lives in the SVG's own user space, so it goes on an outer group &mdash;
   // put it on the transformed group and it inherits the 40x scale and reveals a sliver
-  const outer=document.createElementNS(NS,'g');
-  outer.setAttribute('mask','url(#write)');
-  const g=document.createElementNS(NS,'g');
-  g.setAttribute('transform',sig.transform);
-  sig.outline.forEach(d=>{
-    const p=document.createElementNS(NS,'path');
-    p.setAttribute('d',d); p.setAttribute('class','fill');
-    p.setAttribute('fill-rule','evenodd'); g.appendChild(p);
-  });
-  outer.appendChild(g); svg.appendChild(outer);
+    const outer=document.createElementNS(NS,'g');
+    outer.setAttribute('mask',`url(#${uid})`);
+    const g=document.createElementNS(NS,'g');
+    g.setAttribute('transform',sig.transform);
+    sig.outline.forEach(d=>{
+      const q=document.createElementNS(NS,'path');
+      q.setAttribute('d',d); q.setAttribute('class','fill');
+      q.setAttribute('fill-rule','evenodd'); g.appendChild(q);
+    });
+    outer.appendChild(g); svg.appendChild(outer);
 
-  const lens=pens.map(p=>{const L=p.getTotalLength();
-    p.style.strokeDasharray=L; p.style.strokeDashoffset=L; return L;});
-  const total=lens.reduce((a,b)=>a+b,0);
+    const lens=pens.map(p=>{const L=p.getTotalLength();
+      p.style.strokeDasharray=L; p.style.strokeDashoffset=L; return L;});
+    const total=lens.reduce((a,b)=>a+b,0);
+    let acc=0; const starts=lens.map(L=>{const st=acc; acc+=L; return st;});
+    // u is 0..1 across the whole signature, pen by pen
+    const draw=u=>{const drawn=u*total;
+      pens.forEach((q,i)=>{
+        const k=Math.max(0,Math.min(1,(drawn-starts[i])/lens[i]));
+        q.style.strokeDashoffset=lens[i]*(1-k);
+      });};
+    return {pens, draw};
+  }
+
+  const hero = build(document.getElementById('sig'), 'write');
+  const gateSvg = document.getElementById('gsig');
+  const gate = gateSvg ? build(gateSvg, 'writegate') : null;
+  const pens = hero.pens;
 
   if (RM || !window.gsap){ pens.forEach(p=>p.style.strokeDashoffset=0); showAll(); return; }
 
-  // The curtain lifts onto the room, not onto the name. The signature is held back
-  // until the camera has flown through the wall and out of the fog.
-  const tl=gsap.timeline();
-  tl.to('.curtain span',{opacity:1,duration:.34,ease:'power2.out'})
-    .to('.curtain span',{opacity:0,duration:.26,ease:'power1.in'},'+=0.14')
-    .to('.curtain',{yPercent:-100,duration:.72,ease:'power3.inOut'},'-=0.08')
-    .add(()=>{const c=document.querySelector('.curtain'); if(c) c.remove();})
-    .to('.eyebrow',{opacity:1,duration:.7,ease:'power2.out'},'-=0.45')
-    .to('.nav',{opacity:1,duration:.7,ease:'power2.out'},'-=0.55')
-    .to('.doors',{opacity:1,y:0,duration:.8,ease:'power2.out'},'-=0.42');
-
-  // The pen is driven by the scroll, not by a timeline. Writing it this way means
-  // scrolling back up un-writes it — nothing can latch on over the room.
-  let acc=0; const starts=lens.map(L=>{const s=acc; acc+=L; return s;});
-  window.__sign = (u) => {
-    const drawn = u * total;
-    pens.forEach((p,i)=>{
-      const k = Math.max(0, Math.min(1, (drawn - starts[i]) / lens[i]));
-      p.style.strokeDashoffset = lens[i] * (1 - k);
-    });
-  };
+  // The gate writes the name, then offers the two ways in and waits. Nothing
+  // behind it moves until a route is chosen, so the page cannot be scrolled
+  // past the entrance.
+  window.__sign = hero.draw;
   window.__sign(0);
+
+  const gateEl = document.getElementById('gate');
+  const doors  = document.getElementById('doors');
+  const skip   = document.getElementById('skip');
+  let opened = false;
+
+  const open = (target) => {
+    if (opened) return; opened = true;
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    gsap.timeline()
+      .to(doors, {opacity:0, y:-8, duration:.3, ease:'power2.in'})
+      .to('.gsig', {opacity:0, duration:.3, ease:'power2.in'}, '-=0.22')
+      .to(gateEl, {yPercent:-100, duration:.78, ease:'power3.inOut'}, '-=0.06')
+      .add(()=>{ gateEl.remove(); if (target) location.hash = target; })
+      .to('.eyebrow',{opacity:1,duration:.7,ease:'power2.out'},'-=0.42')
+      .to('.nav',{opacity:1,duration:.7,ease:'power2.out'},'-=0.55');
+  };
+
+  // hold the page still behind the gate
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+
+  const o = {u:0};
+  const tl = gsap.timeline();
+  tl.to(o, {u:1, duration:1.9, ease:'power1.inOut',
+            onUpdate(){ if (gate) gate.draw(o.u); }})
+    .to(doors, {opacity:1, y:0, duration:.72, ease:'power2.out'}, '-=0.25')
+    .to(skip,  {opacity:1, duration:.5, ease:'power2.out'}, '-=0.4');
+
+  if (doors) doors.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); open(a.dataset.go); });
+  });
+  if (skip) skip.addEventListener('click', ()=>open(null));
+  addEventListener('keydown', e => { if (e.key === 'Escape') open(null); });
 
   if (!matchMedia('(hover: none)').matches){
     const sx=gsap.quickTo('.sig','x',{duration:.9,ease:'power3'}),
