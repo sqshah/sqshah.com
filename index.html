@@ -10,6 +10,13 @@
 <link rel="apple-touch-icon" href="assets/icon-180.png?v=3cc8c631">
 <meta name="theme-color" content="#0E0E0D">
 <style>
+@font-face{font-family:Anton;font-style:normal;font-weight:400;font-display:block;
+  src:url(/assets/fonts/anton.woff2) format('woff2')}
+@font-face{font-family:Marker;font-style:normal;font-weight:400;font-display:swap;
+  src:url(/assets/fonts/marker.woff2) format('woff2')}
+@font-face{font-family:Instrument;font-style:normal;font-weight:400 700;font-display:block;
+  src:url(/assets/fonts/instrument.woff2) format('woff2-variations')}
+
 /* One dark world, one accent of paper. The signature writes itself, the figures count
    themselves up, a car dissolves into a face, and the work list reads like a contents page. */
 :root{
@@ -20,7 +27,8 @@
   --hair:#232322;       /* rules */
   --dim:#78766F;        /* small caps still need 4.5:1 on the ink */
   --plate:#FBFAF8;      /* paper the portrait is printed on */
-  --display:Fraunces,ui-serif,Georgia,serif;
+  --display:Anton,Impact,"Haettenschweiler","Arial Narrow Bold",sans-serif;
+  --tag:Marker,"Comic Sans MS",cursive;
   --ui:Instrument,ui-sans-serif,system-ui,sans-serif;
   --gut:clamp(22px,5vw,76px);
   --edge:max(16px,env(safe-area-inset-left,0px));
@@ -38,8 +46,8 @@ a{color:inherit;text-decoration:none}
 /* ---- load curtain + scroll progress ---- */
 .curtain{position:fixed;inset:0;z-index:60;background:var(--ink);
   display:grid;place-items:center;will-change:transform}
-.curtain span{font-family:var(--display);font-style:italic;font-size:clamp(26px,4vw,44px);
-  color:var(--paper);opacity:0}
+.curtain span{font-family:var(--display);font-size:clamp(26px,4vw,44px);
+  color:var(--paper);opacity:0;text-transform:uppercase}
 .prog{position:fixed;top:0;left:0;height:1px;width:100%;z-index:50;background:var(--paper);
   transform:scaleX(0);transform-origin:left;mix-blend-mode:difference;pointer-events:none}
 
@@ -79,7 +87,7 @@ a{color:inherit;text-decoration:none}
 }
 /* the room the camera flies through, behind everything in the hero */
 .stage{position:relative;width:100%;padding-inline:calc(var(--gut) - var(--edge))}
-.ch,.ttl,.fn,.mark{font-variation-settings:"opsz" 72,"SOFT" 0,"WONK" 0}
+
 .sig{position:relative;z-index:3;display:block;width:min(74vw,880px);height:auto;overflow:visible;will-change:transform}
 .sig .fill{fill:var(--paper)}
 .sig .pen{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
@@ -91,8 +99,8 @@ a{color:inherit;text-decoration:none}
 .eyebrow i{display:block;width:clamp(28px,4vw,56px);height:1px;background:var(--hair);flex:none}
 .line{
   position:relative;z-index:3;margin-top:clamp(26px,4.5vh,50px);
-  font-family:var(--display);font-style:italic;font-weight:300;
-  font-size:clamp(21px,2.5vw,34px);line-height:1.5;color:#D9D7D2;max-width:19ch;opacity:0;
+  font-family:var(--display);text-transform:uppercase;font-style:normal;font-weight:400;letter-spacing:-.012em;
+  clamp(26px,3.4vw,46px);line-height:.96;color:#D9D7D2;max-width:19ch;opacity:0;
   text-wrap:balance;
 }
 .cue{position:absolute;left:50%;bottom:clamp(22px,4vh,42px);transform:translateX(-50%);z-index:3;
@@ -108,8 +116,8 @@ a{color:inherit;text-decoration:none}
 .strip{position:relative;z-index:3;overflow:hidden;border-top:1px solid var(--hair);
   border-bottom:1px solid var(--hair);padding-block:clamp(16px,2.4vh,26px);background:#0B0B0A}
 .strip .run{display:flex;width:max-content;will-change:transform}
-.strip span{display:block;white-space:nowrap;font-family:var(--display);font-style:italic;
-  font-size:clamp(20px,2.6vw,36px);color:#4A4A47;padding-right:.6em}
+.strip span{display:block;white-space:nowrap;font-family:var(--display);
+  font-size:clamp(20px,2.6vw,36px);color:#4A4A47;padding-right:.6em;text-transform:uppercase}
 .strip b{font-weight:300;color:#CFCCC6}
 
 /* ---- bands ---- */
@@ -131,9 +139,9 @@ a{color:inherit;text-decoration:none}
   transform:scaleX(0);transform-origin:left}
 .fk{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--quiet);
   margin-top:16px;max-width:20ch;line-height:1.6}
-.ch{font-family:var(--display);font-style:italic;font-weight:300;
-  font-size:clamp(26px,3.6vw,48px);line-height:1.34;color:var(--paper);max-width:20ch;text-wrap:balance}
-.ch em{font-style:normal;font-family:var(--ui);font-weight:300;letter-spacing:-.005em}
+.ch{font-family:var(--display);text-transform:uppercase;font-style:normal;font-weight:400;letter-spacing:-.012em;
+  clamp(30px,4.4vw,62px);line-height:.92;color:var(--paper);max-width:20ch;text-wrap:balance}
+.ch em{font-family:var(--tag);font-style:normal;text-transform:none;letter-spacing:0;display:inline-block;transform:rotate(-2.6deg)}
 .body{margin-top:clamp(24px,3.5vh,38px);max-width:52ch;font-size:clamp(14px,1.05vw,16px);
   line-height:1.8;color:#A8A7A2}
 .who{display:grid;gap:clamp(34px,5vw,72px);align-items:end;grid-template-columns:minmax(0,1fr)}
@@ -183,8 +191,8 @@ a{color:inherit;text-decoration:none}
 @media (min-width:861px){ .row .in{grid-template-columns:auto minmax(0,1fr) auto} }
 .row .idx{font-size:10px;letter-spacing:.2em;color:var(--dim);font-variant-numeric:tabular-nums;
   transition:color .4s}
-.row .ttl{font-family:var(--display);font-style:italic;font-weight:300;
-  font-size:clamp(22px,2.9vw,40px);line-height:1.22;color:#D6D4CE;transition:color .4s;text-wrap:balance}
+.row .ttl{font-family:var(--display);text-transform:uppercase;font-style:normal;font-weight:400;letter-spacing:-.012em;
+  clamp(24px,3.4vw,48px);line-height:.94;color:#D6D4CE;transition:color .4s;text-wrap:balance}
 .row .met{grid-column:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--dim);transition:color .4s;line-height:1.7}
 @media (min-width:861px){ .row .met{grid-column:3;text-align:right;white-space:nowrap;align-self:center} }
@@ -211,8 +219,8 @@ a{color:inherit;text-decoration:none}
 .cap.on{opacity:1;transform:none}
 .cap span{display:block}
 .cap .ci{font-size:10px;letter-spacing:.26em;color:var(--dim)}
-.cap .ct{font-family:var(--display);font-style:italic;font-size:clamp(19px,2.2vw,30px);
-  line-height:1.24;color:var(--paper);margin-top:12px}
+.cap .ct{font-family:var(--display);font-size:clamp(19px,2.2vw,30px);
+  line-height:1.24;color:var(--paper);margin-top:12px;text-transform:uppercase}
 .cap .cm{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--quiet);margin-top:12px}
 .cap .cgo{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-top:16px}
 /* kept in the document for screen readers and keyboards once the gallery is live */
@@ -222,15 +230,15 @@ a{color:inherit;text-decoration:none}
 
 /* ---- method ---- */
 .cols{display:grid;gap:clamp(34px,4.4vw,62px);grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.col h3{font-family:var(--display);font-style:italic;font-weight:300;
+.col h3{font-family:var(--display);text-transform:uppercase;font-style:normal;font-weight:400;letter-spacing:-.012em;
   font-size:clamp(20px,2.1vw,28px);color:var(--paper);margin-bottom:14px}
 .col p{font-size:clamp(13.5px,1vw,15px);line-height:1.82;color:#A8A7A2}
 .col span{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
   color:var(--dim);margin-bottom:18px}
 
 /* ---- contact ---- */
-.big{font-family:var(--display);font-style:italic;font-weight:300;
-  font-size:clamp(34px,6.4vw,92px);line-height:1.1;letter-spacing:-.01em;max-width:14ch;text-wrap:balance}
+.big{font-family:var(--display);font-weight:400;
+  font-size:clamp(34px,6.4vw,92px);line-height:1.1;letter-spacing:-.01em;max-width:14ch;text-wrap:balance;text-transform:uppercase}
 .mail{display:inline-block;margin-top:clamp(32px,4.6vh,54px);font-size:clamp(15px,1.6vw,22px);
   letter-spacing:-.01em;color:#D6D4CE;position:relative}
 .mail::after{content:"";position:absolute;left:0;bottom:-7px;width:100%;height:1px;background:currentColor;
@@ -278,8 +286,8 @@ a{color:inherit;text-decoration:none}
 .cov thead th{font-family:var(--ui);font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--dim);font-weight:400;padding-bottom:12px}
 .cov tbody th{text-align:left;padding-left:0;font-weight:400}
-.cov tbody th b{display:block;font-family:var(--display);font-style:italic;font-weight:300;
-  font-size:clamp(16px,1.5vw,21px);color:var(--paper)}
+.cov tbody th b{display:block;font-family:var(--display);font-weight:400;
+  font-size:clamp(16px,1.5vw,21px);color:var(--paper);text-transform:uppercase}
 .cov .where{display:block;font-family:var(--ui);font-size:10px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--dim);margin-top:5px}
 .cov td i{display:inline-block;width:7px;height:7px;background:var(--paper);
@@ -424,11 +432,11 @@ a{color:inherit;text-decoration:none}
         <span class="idx">11</span>
         <span class="ttl">A 112,000-follower account, taken and recovered</span>
         <span class="met">Social</span></span></a>
-      <a class="row" href="#contact" data-slug="roi-dashboard" data-industry="Attribution" data-market="East Africa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/roi-dashboard/" data-slug="roi-dashboard" data-industry="Attribution" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">12</span>
         <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
         <span class="met">402 months of spend</span></span></a>
-      <a class="row" href="#contact" data-slug="missing-spend" data-industry="Audit" data-market="East Africa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/missing-spend/" data-slug="missing-spend" data-industry="Audit" data-market="East Africa"><span class="sweep"></span><span class="in">
         <span class="idx">13</span>
         <span class="ttl">$25,968 of advertising that no report had ever counted</span>
         <span class="met">Found, allocated, booked</span></span></a>
@@ -442,7 +450,7 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <p class="kicker"><i></i><span>Contact</span></p>
     <h2 class="big">Let&rsquo;s build something worth measuring.</h2>
-    <a class="mail" href="mailto:hello@sqshah.com">hello@sqshah.com</a>
+    <a class="mail" href="mailto:talk@sqshah.com">talk@sqshah.com</a>
     <div class="ends">
       <a href="#work">Work</a>
       <a href="#chapter">Story</a>
@@ -535,15 +543,16 @@ a{color:inherit;text-decoration:none}
 
         // the title, with a little tube fringe on it
         const lines = [];
-        g.font = 'italic 400 42px Fraunces, Georgia, serif';
+        // Anton is condensed, so it takes a larger size and tighter leading
+        g.font = '400 46px Anton, Impact, "Arial Narrow Bold", sans-serif';
         let ln = '';
-        item.title.split(' ').forEach(w => {
+        item.title.toUpperCase().split(' ').forEach(w => {
           const test = ln ? ln + ' ' + w : w;
           if (g.measureText(test).width > SW - 68 && ln) { lines.push(ln); ln = w; } else ln = test;
         });
         if (ln) lines.push(ln);
         lines.slice(0, 4).forEach((L, i) => {
-          const y = SY + 132 + i * 50;
+          const y = SY + 128 + i * 44;
           g.fillStyle = 'rgba(120,190,255,.30)'; g.fillText(L, SX + 32.4, y);
           g.fillStyle = 'rgba(255,110,120,.26)'; g.fillText(L, SX + 35.6, y);
           g.fillStyle = '#FFFFFF'; g.fillText(L, SX + 34, y);
