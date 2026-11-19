@@ -281,25 +281,6 @@ a{color:inherit;text-decoration:none}
 .beats{display:grid}
 .beat{grid-area:1/1;will-change:opacity,transform}
 .beat:not(:first-child){opacity:0}
-/* who, as a record rather than a pitch: what he runs, where, since when.
-   Four rows anyone can check, and no sentence about how well it went. */
-.facts{margin-top:clamp(22px,2.6vw,34px);border-top:1px solid var(--hair)}
-.facts>div{display:grid;gap:4px 24px;padding:clamp(13px,1.5vw,18px) 0;
-  border-bottom:1px solid var(--hair)}
-@media (min-width:620px){ .facts>div{grid-template-columns:minmax(0,120px) minmax(0,1fr)} }
-.facts dt{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);
-  padding-top:.35em}
-.facts dd{margin:0;font-size:clamp(14px,1.15vw,17px);line-height:1.45;color:var(--paper)}
-.paper .facts{border-color:#DCD8D0} .paper .facts>div{border-color:#DCD8D0}
-.paper .facts dt{color:#8A8782} .paper .facts dd{color:var(--ink)}
-.go{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(22px,2.6vw,32px);
-  font-size:11px;letter-spacing:.2em;text-transform:uppercase}
-.go i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
-  border:1px solid currentColor;opacity:.45;
-  transition:opacity .4s,background .4s,color .4s}
-.go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;
-  stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(.3,0,.1,1)}
-@media (hover:hover){ .go:hover i{opacity:1} .go:hover svg{transform:translateX(2px)} }
 .plate{position:relative;width:100%;max-width:430px;aspect-ratio:3/4;align-self:end;will-change:transform;
   background:var(--plate);overflow:hidden;will-change:transform;
   transition:box-shadow .6s ease;
@@ -370,73 +351,50 @@ a{color:inherit;text-decoration:none}
   .lrow{grid-template-columns:minmax(0,1fr)}
   .lf{grid-column:1;grid-row:3;justify-self:start;margin-top:10px}
 }
-/* The index is a reel, not a list: twelve frames you pull sideways, the one in
-   the middle at full strength and the rest held back. Each frame carries the
-   plate from its own case, so the work is visible before anything is opened. */
-.rhead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
-  flex-wrap:wrap;margin-bottom:clamp(22px,2.6vw,34px)}
-.rhead .kicker{margin:0}
-.rnav{display:flex;align-items:center;gap:clamp(10px,1.2vw,16px)}
-.count{display:flex;align-items:baseline;gap:7px;margin-right:6px;
-  font-size:11px;letter-spacing:.18em;color:var(--dim);font-variant-numeric:tabular-nums}
-.count b{font-weight:400;color:var(--paper)}
-.count i{font-style:normal;opacity:.5}
-.rbtn{appearance:none;width:clamp(42px,3.4vw,52px);height:clamp(42px,3.4vw,52px);
-  border-radius:50%;border:1px solid #302E2B;background:transparent;cursor:pointer;
-  display:grid;place-items:center;color:var(--paper);
-  transition:background .4s cubic-bezier(.3,0,.1,1),border-color .4s,opacity .4s}
-.rbtn svg{width:40%;height:40%;fill:none;stroke:currentColor;stroke-width:1.6;
-  stroke-linecap:round;stroke-linejoin:round}
-.rbtn[disabled]{opacity:.28;cursor:default}
-@media (hover:hover){ .rbtn:not([disabled]):hover{background:var(--paper);color:var(--ink);
-  border-color:var(--paper)} }
-.reel{margin-top:4px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;
-  -ms-overflow-style:none;scroll-snap-type:x mandatory;
-  cursor:grab;outline:none;-webkit-overflow-scrolling:touch}
-.reel::-webkit-scrollbar{display:none}
-.reel.drag{cursor:grabbing;scroll-snap-type:none}
-.reel:focus-visible{outline:1px solid var(--paper);outline-offset:-4px}
-.track{display:flex;gap:clamp(14px,1.6vw,26px);
-  padding:0 clamp(16px,calc(50vw - 300px),50vw) 0 var(--edge);width:max-content}
-.card{position:relative;flex:none;width:clamp(260px,38vw,560px);scroll-snap-align:center;
-  text-decoration:none;opacity:.34;transform:scale(.94);transform-origin:center bottom;
-  transition:opacity .6s cubic-bezier(.3,0,.1,1),transform .6s cubic-bezier(.3,0,.1,1)}
-.card.on{opacity:1;transform:scale(1)}
-.pl{position:relative;display:block;overflow:hidden;background:#0E0E0D;
-  border:1px solid var(--hair);aspect-ratio:16/10}
-.shot{position:absolute;inset:0;display:block}
-.shot img{width:100%;height:100%;object-fit:cover;object-position:top center;
-  filter:grayscale(1) contrast(1.04);
-  transition:filter .7s cubic-bezier(.3,0,.1,1),transform 1s cubic-bezier(.3,0,.1,1)}
-.card.on .shot img{filter:grayscale(1) contrast(1.06) brightness(.97)}
-/* two of the twelve have no screenshot. Those frames carry the number instead. */
-.shot.type{display:grid;align-content:center;gap:10px;padding:0 clamp(20px,2.4vw,34px)}
-.shot.type b{font-family:var(--display);text-transform:uppercase;font-weight:400;
-  font-size:clamp(40px,5vw,78px);line-height:.86;color:var(--paper)}
-.shot.type i{font-family:var(--tag);font-style:normal;font-size:clamp(12px,1vw,16px);
-  color:var(--dim)}
-.no{position:absolute;left:0;top:0;z-index:2;padding:9px 13px;
-  font-size:10px;letter-spacing:.2em;color:var(--paper);
-  background:rgba(8,8,7,.72);border-right:1px solid var(--hair);
-  border-bottom:1px solid var(--hair);font-variant-numeric:tabular-nums}
-.cinfo{display:flex;flex-direction:column;gap:7px;padding:clamp(14px,1.4vw,20px) 2px 0}
-.cinfo .ttl{font-family:var(--display);text-transform:uppercase;font-weight:400;
-  letter-spacing:-.012em;font-size:clamp(17px,1.65vw,26px);line-height:1;color:var(--paper)}
-.cinfo .met{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
-.rhint{margin-top:clamp(18px,2vw,26px);font-size:10px;letter-spacing:.26em;
-  text-transform:uppercase;color:#45423F}
-@media (max-width:860px){ .card{opacity:.6} .track{padding-right:22vw} }
-/* the cursor carries the verb and the number of the frame under it */
-.pk{position:fixed;left:0;top:0;z-index:40;pointer-events:none;opacity:0;
-  width:124px;height:124px;border-radius:50%;background:var(--ink);
-  border:1px solid #3C3A37;display:grid;place-items:center;align-content:center;
-  gap:5px;text-align:center;will-change:transform}
-.pk .pv{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim)}
-.pk .pf{font-family:var(--display);text-transform:uppercase;font-size:27px;
+.rows{border-top:1px solid var(--hair)}
+.row{position:relative;display:block;border-bottom:1px solid var(--hair);
+  padding-block:clamp(26px,3.6vh,40px);overflow:hidden}
+.row .in{position:relative;z-index:2;display:grid;gap:4px clamp(18px,2.6vw,38px);align-items:baseline;
+  grid-template-columns:auto 1fr;transition:transform .55s cubic-bezier(.3,0,.1,1)}
+@media (min-width:861px){ .row .in{grid-template-columns:auto minmax(0,1fr) auto} }
+.row .idx{font-size:10px;letter-spacing:.2em;color:var(--dim);font-variant-numeric:tabular-nums;
+  transition:color .4s}
+.row .ttl{font-family:var(--display);text-transform:uppercase;font-style:normal;font-weight:400;letter-spacing:-.012em;
+  font-size:clamp(24px,3.4vw,48px);line-height:.94;color:#D6D4CE;transition:color .4s;text-wrap:balance}
+.row .met{grid-column:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);transition:color .4s;line-height:1.7}
+@media (min-width:861px){ .row .met{grid-column:3;text-align:right;white-space:nowrap;align-self:center} }
+/* Hovering one case pulls the other eleven back and lifts a card of its own
+   evidence under the cursor: the screenshot and the number the case turns on.
+   It is a preview of the page you are about to open, not decoration, so it
+   carries the real plate from that case. Pointer devices only. */
+.pk{position:fixed;left:0;top:0;z-index:40;width:280px;pointer-events:none;
+  opacity:0;will-change:transform;
+  border:1px solid #2E2C2A;background:#0C0C0B;
+  box-shadow:0 26px 60px rgba(0,0,0,.72)}
+.pk img:not([src]){display:none}
+.pk img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;
+  object-position:top center;filter:grayscale(1) contrast(1.04)}
+.pk .pb{display:flex;align-items:baseline;gap:10px;padding:13px 15px 15px;
+  border-top:1px solid #1E1D1C}
+.pk .pf{font-family:var(--display);text-transform:uppercase;font-size:30px;
   line-height:.86;color:var(--paper);letter-spacing:-.012em;white-space:nowrap}
-.pk .pn{font-family:var(--tag);font-size:11px;color:var(--quiet);max-width:104px;
-  line-height:1.2}
+.pk .pn{font-family:var(--tag);font-size:12px;color:var(--dim);
+  transform:rotate(-1.4deg)}
+/* two of the twelve have no screenshot to show. Those cards say so with the
+   number the case turns on, at the size the plate would have been. */
+.pk.noimg{width:240px}
+.pk.noimg .pb{flex-direction:column;align-items:flex-start;gap:8px;
+  border-top:0;padding:26px 20px 24px;min-height:120px;justify-content:center}
+.pk.noimg .pf{font-size:48px}
+.pk.noimg .pn{font-size:13px}
 @media (hover:none),(max-width:860px){ .pk{display:none} }
+@media (hover:hover){
+  /* the reveal animation leaves an inline opacity on each row, so the dim has
+     to outrank it */
+  .rows:hover .row{opacity:.32!important}
+  .rows:hover .row:hover{opacity:1!important}
+  .row{transition:opacity .4s cubic-bezier(.3,0,.1,1)}
 }
 .row .sweep{position:absolute;inset:0;z-index:1;background:
   linear-gradient(90deg,rgba(251,250,248,.065),rgba(251,250,248,.015) 55%,transparent);
@@ -586,7 +544,7 @@ a{color:inherit;text-decoration:none}
   <button class="skip" id="skip" type="button">Skip</button>
 </div>
 <i class="prog"></i>
-<div class="pk" id="peek" aria-hidden="true"><span class="pv">View</span><b class="pf"></b><span class="pn"></span></div>
+<figure class="pk" id="peek" aria-hidden="true"><img alt=""><figcaption class="pb"><b class="pf"></b><span class="pn"></span></figcaption></figure>
 
 <nav class="nav">
   <a class="mark" href="#top">SQ</a>
@@ -652,121 +610,73 @@ a{color:inherit;text-decoration:none}
     </figure>
     <div>
       <p class="kicker"><i></i><span>Syed Qasim Ali</span></p>
-      <h2 class="ch bt">Paid media, the tracking under it, and the systems that join the two.</h2>
-      <dl class="facts">
-        <div><dt>Based</dt><dd>Gujranwala, Pakistan</dd></div>
-        <div><dt>Markets</dt><dd>Kenya, Uganda, Tanzania, Pakistan, United States, Canada</dd></div>
-        <div><dt>Runs</dt><dd>Google Ads, Meta, email, search, landing pages, attribution</dd></div>
-        <div><dt>Since</dt><dd>2018</dd></div>
-      </dl>
-      <a class="go" href="#contact"><span>Get in touch</span>
-        <i><svg viewBox="0 0 26 26"><path d="M5 13h15M13.5 6.5 20 13l-6.5 6.5"/></svg></i></a>
+      <div class="beats">
+        <div class="beat">
+          <h2 class="ch bt">Paid media, the tracking under it, and the systems that join the two.</h2>
+          <p class="body bt">Google Ads, Meta, email and search, for clients in Kenya, Uganda,
+          Tanzania, Pakistan, the United States and Canada. Based in Gujranwala, working since
+          2018. The cases are the rest of it.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="band" id="work">
   <div class="wrap">
-    <div class="rhead">
-      <p class="kicker"><i></i><span>Selected work</span></p>
-      <div class="rnav">
-        <span class="count"><b id="rcur">01</b><i>/</i><span id="rtot">12</span></span>
-        <button class="rbtn" id="rprev" type="button" aria-label="Previous case">
-          <svg viewBox="0 0 26 26"><path d="M21 13H6M12.5 6.5 6 13l6.5 6.5"/></svg></button>
-        <button class="rbtn" id="rnext" type="button" aria-label="Next case">
-          <svg viewBox="0 0 26 26"><path d="M5 13h15M13.5 6.5 20 13l-6.5 6.5"/></svg></button>
-      </div>
+    <p class="kicker"><i></i><span>Selected work</span></p>
+    <div class="rows">
+      <a class="row" href="/work/khushi-motors/" data-slug="khushi-motors" data-peek="/assets/work/km/cover.jpg" data-fig="$0.29" data-fk="a lead" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
+        <span class="idx">01</span>
+        <span class="ttl">Four years of paid media for an East African motor group</span>
+        <span class="met">Google, Meta, email</span></span></a>
+      <a class="row" href="/work/arsh-properties/" data-slug="arsh-properties" data-peek="/assets/work/cs/arsh.jpg" data-fig="$0.32" data-fk="an enquiry" data-industry="Real estate" data-market="Pakistan"><span class="sweep"></span><span class="in">
+        <span class="idx">02</span>
+        <span class="ttl">Premium property across four cities, two channels at once</span>
+        <span class="met">Zameen, Meta</span></span></a>
+      <a class="row" href="/work/ocean-trading/" data-slug="ocean-trading" data-peek="/assets/work/cs/ocean.jpg" data-fig="A to Z" data-fk="from nothing" data-industry="Export trade" data-market="Japan"><span class="sweep"></span><span class="in">
+        <span class="idx">03</span>
+        <span class="ttl">A Japanese exporter, set up digitally from nothing</span>
+        <span class="met">Search, Meta, hiring</span></span></a>
+      <a class="row" href="/work/organic-search/" data-slug="organic-search" data-peek="/assets/work/km/gsc.jpg" data-fig="113K" data-fk="clicks" data-industry="Automotive" data-market="East Africa"><span class="sweep"></span><span class="in">
+        <span class="idx">04</span>
+        <span class="ttl">Organic search, rebuilt on the pages the ads point at</span>
+        <span class="met">113k clicks</span></span></a>
+      <a class="row" href="/work/email-platform/" data-slug="email-platform" data-peek="/assets/work/km/tool-overview.jpg" data-fig="37.4%" data-fk="opened" data-industry="Product" data-market="East Africa"><span class="sweep"></span><span class="in">
+        <span class="idx">05</span>
+        <span class="ttl">An email platform built in-house instead of rented</span>
+        <span class="met">158,933 sends</span></span></a>
+      <a class="row" href="/work/twelve-brands/" data-slug="twelve-brands" data-peek="/assets/work/cs/togear.jpg" data-fig="12" data-fk="brands" data-industry="Local services" data-market="Canada"><span class="sweep"></span><span class="in">
+        <span class="idx">06</span>
+        <span class="ttl">Twelve Canadian brands, handled end to end</span>
+        <span class="met">Search, brand, web</span></span></a>
+      <a class="row" href="/work/ecommerce-setup/" data-slug="ecommerce-setup" data-peek="" data-fig="A to Z" data-fk="the whole stack" data-industry="Ecommerce" data-market="Pakistan"><span class="sweep"></span><span class="in">
+        <span class="idx">07</span>
+        <span class="ttl">An ecommerce brand, built, migrated and advertised</span>
+        <span class="met">Shopify, WordPress, Meta</span></span></a>
+      <a class="row" href="/work/digital-presence/" data-slug="digital-presence" data-peek="/assets/work/sites/ringlessvoicemail.ai.jpg" data-fig="14" data-fk="properties" data-industry="SaaS and AI" data-market="United States"><span class="sweep"></span><span class="in">
+        <span class="idx">08</span>
+        <span class="ttl">Eight clients, fourteen properties, one digital department</span>
+        <span class="met">Search, ads, email</span></span></a>
+      <a class="row" href="/work/refund-recovery/" data-slug="refund-recovery" data-peek="/assets/work/cs/refund.jpg" data-fig="59" data-fk="charges, two days" data-industry="Spend control" data-market="East Africa"><span class="sweep"></span><span class="in">
+        <span class="idx">09</span>
+        <span class="ttl">$2,343 billed in forty-eight hours, disputed line by line</span>
+        <span class="met">59 charges</span></span></a>
+      <a class="row" href="/work/brand-protection/" data-slug="brand-protection" data-peek="" data-fig="Taken" data-fk="down" data-industry="Brand" data-market="East Africa"><span class="sweep"></span><span class="in">
+        <span class="idx">10</span>
+        <span class="ttl">Brand protection, from the first copy to the takedown</span>
+        <span class="met">Content theft</span></span></a>
+      <a class="row" href="/work/account-recovery/" data-slug="account-recovery" data-peek="/assets/work/cs/insta.jpg" data-fig="112K" data-fk="followers back" data-industry="Brand" data-market="Mombasa"><span class="sweep"></span><span class="in">
+        <span class="idx">11</span>
+        <span class="ttl">A 112,000-follower account, taken and recovered</span>
+        <span class="met">Social</span></span></a>
+      <a class="row" href="/work/roi-dashboard/" data-slug="roi-dashboard" data-peek="/assets/work/km/dash-overview.jpg" data-fig="$227" data-fk="a sale" data-industry="Attribution" data-market="East Africa"><span class="sweep"></span><span class="in">
+        <span class="idx">12</span>
+        <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
+        <span class="met">$74,049 reconciled</span></span></a>
     </div>
+    <p class="note">Figures, dashboards and invoices behind each one &mdash; available on request</p>
   </div>
-  <div class="reel" id="reel" tabindex="0" aria-label="Case studies, scroll sideways">
-    <div class="track" id="track">
-      <a class="card" href="/work/khushi-motors/" data-slug="khushi-motors" data-fig="$0.29" data-fk="a lead" data-industry="Automotive" data-market="East Africa">
-        <span class="pl"><span class="shot"><img src="/assets/work/km/cover.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">01</span></span>
-        <span class="cinfo">
-          <span class="ttl">Four years of paid media for an East African motor group</span>
-          <span class="met">Google, Meta, email</span>
-        </span>
-      </a>
-      <a class="card" href="/work/arsh-properties/" data-slug="arsh-properties" data-fig="$0.32" data-fk="an enquiry" data-industry="Real estate" data-market="Pakistan">
-        <span class="pl"><span class="shot"><img src="/assets/work/cs/arsh.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">02</span></span>
-        <span class="cinfo">
-          <span class="ttl">Premium property across four cities, two channels at once</span>
-          <span class="met">Zameen, Meta</span>
-        </span>
-      </a>
-      <a class="card" href="/work/ocean-trading/" data-slug="ocean-trading" data-fig="A to Z" data-fk="from nothing" data-industry="Export trade" data-market="Japan">
-        <span class="pl"><span class="shot"><img src="/assets/work/cs/ocean.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">03</span></span>
-        <span class="cinfo">
-          <span class="ttl">A Japanese exporter, set up digitally from nothing</span>
-          <span class="met">Search, Meta, hiring</span>
-        </span>
-      </a>
-      <a class="card" href="/work/organic-search/" data-slug="organic-search" data-fig="113K" data-fk="clicks" data-industry="Automotive" data-market="East Africa">
-        <span class="pl"><span class="shot"><img src="/assets/work/km/gsc.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">04</span></span>
-        <span class="cinfo">
-          <span class="ttl">Organic search, rebuilt on the pages the ads point at</span>
-          <span class="met">113k clicks</span>
-        </span>
-      </a>
-      <a class="card" href="/work/email-platform/" data-slug="email-platform" data-fig="37.4%" data-fk="opened" data-industry="Product" data-market="East Africa">
-        <span class="pl"><span class="shot"><img src="/assets/work/km/tool-overview.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">05</span></span>
-        <span class="cinfo">
-          <span class="ttl">An email platform built in-house instead of rented</span>
-          <span class="met">158,933 sends</span>
-        </span>
-      </a>
-      <a class="card" href="/work/twelve-brands/" data-slug="twelve-brands" data-fig="12" data-fk="brands" data-industry="Local services" data-market="Canada">
-        <span class="pl"><span class="shot"><img src="/assets/work/cs/togear.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">06</span></span>
-        <span class="cinfo">
-          <span class="ttl">Twelve Canadian brands, handled end to end</span>
-          <span class="met">Search, brand, web</span>
-        </span>
-      </a>
-      <a class="card" href="/work/ecommerce-setup/" data-slug="ecommerce-setup" data-fig="A to Z" data-fk="the whole stack" data-industry="Ecommerce" data-market="Pakistan">
-        <span class="pl"><span class="shot type"><b>A to Z</b><i>the whole stack</i></span><span class="no">07</span></span>
-        <span class="cinfo">
-          <span class="ttl">An ecommerce brand, built, migrated and advertised</span>
-          <span class="met">Shopify, WordPress, Meta</span>
-        </span>
-      </a>
-      <a class="card" href="/work/digital-presence/" data-slug="digital-presence" data-fig="14" data-fk="properties" data-industry="SaaS and AI" data-market="United States">
-        <span class="pl"><span class="shot"><img src="/assets/work/sites/ringlessvoicemail.ai.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">08</span></span>
-        <span class="cinfo">
-          <span class="ttl">Eight clients, fourteen properties, one digital department</span>
-          <span class="met">Search, ads, email</span>
-        </span>
-      </a>
-      <a class="card" href="/work/refund-recovery/" data-slug="refund-recovery" data-fig="59" data-fk="charges, two days" data-industry="Spend control" data-market="East Africa">
-        <span class="pl"><span class="shot"><img src="/assets/work/cs/refund.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">09</span></span>
-        <span class="cinfo">
-          <span class="ttl">$2,343 billed in forty-eight hours, disputed line by line</span>
-          <span class="met">59 charges</span>
-        </span>
-      </a>
-      <a class="card" href="/work/brand-protection/" data-slug="brand-protection" data-fig="Taken" data-fk="down" data-industry="Brand" data-market="East Africa">
-        <span class="pl"><span class="shot type"><b>Taken</b><i>down</i></span><span class="no">10</span></span>
-        <span class="cinfo">
-          <span class="ttl">Brand protection, from the first copy to the takedown</span>
-          <span class="met">Content theft</span>
-        </span>
-      </a>
-      <a class="card" href="/work/account-recovery/" data-slug="account-recovery" data-fig="112K" data-fk="followers back" data-industry="Brand" data-market="Mombasa">
-        <span class="pl"><span class="shot"><img src="/assets/work/cs/insta.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">11</span></span>
-        <span class="cinfo">
-          <span class="ttl">A 112,000-follower account, taken and recovered</span>
-          <span class="met">Social</span>
-        </span>
-      </a>
-      <a class="card" href="/work/roi-dashboard/" data-slug="roi-dashboard" data-fig="$227" data-fk="a sale" data-industry="Attribution" data-market="East Africa">
-        <span class="pl"><span class="shot"><img src="/assets/work/km/dash-overview.jpg" alt="" loading="lazy" decoding="async"></span><span class="no">12</span></span>
-        <span class="cinfo">
-          <span class="ttl">An ROI dashboard built from nothing, reconciled to the cent</span>
-          <span class="met">$74,049 reconciled</span>
-        </span>
-      </a>
-    </div>
-  </div>
-  <div class="wrap"><p class="rhint"><span>Drag, scroll or use the arrows</span></p></div>
 </section>
 
 
@@ -777,7 +687,7 @@ a{color:inherit;text-decoration:none}
     <a class="mail" href="mailto:talk@sqshah.com">talk@sqshah.com</a>
     <div class="ends">
       <a href="#work">Work</a>
-      <a href="#chapter">Story</a>
+      <a href="#who">About</a>
       <a href="#top">Back to top</a>
     </div>
   </div>
@@ -818,14 +728,14 @@ a{color:inherit;text-decoration:none}
   const SMALL = matchMedia('(max-width:860px)').matches;
 
   // the case studies, read out of the written index so the two can never disagree
-  const WORK = Array.prototype.slice.call(document.querySelectorAll('#work .card')).map(a => ({
-    idx:   a.querySelector('.no').textContent.trim(),
+  const WORK = Array.prototype.slice.call(document.querySelectorAll('#work .row')).map(a => ({
+    idx:   a.querySelector('.idx').textContent.trim(),
     title: a.querySelector('.ttl').textContent.trim(),
     met:   a.querySelector('.met').textContent.trim(),
     fig:   a.dataset.fig || '',
     fk:    a.dataset.fk  || '',
     href:  a.getAttribute('href'),
-    img:   (a.querySelector('.shot img') || {}).src || ''
+    img:   a.dataset.peek || ''
   }));
 
   // ---- one television ----------------------------------------------------
@@ -1169,7 +1079,7 @@ a{color:inherit;text-decoration:none}
       setHot(m);
       if (m && window.__peek){
         const it = m.userData.item;
-        window.__peek.show(it.fig || 'View', it.fk || it.met || '', e.clientX, e.clientY);
+        window.__peek.show(it, e.clientX, e.clientY);
       }
     }, {passive:true});
 
@@ -1553,148 +1463,80 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
   }
 }).catch(showAll);
 
-/* ---------- the reel: twelve frames, pulled sideways ---------- */
+/* ---------- the case index previews itself under the cursor ----------
+   Hovering a case pulls the other eleven back and lifts a card of its own
+   evidence under the cursor: the plate from that case and the number it turns
+   on. The room upstairs borrows the same card for its sets, so the gesture
+   means one thing on the page. Pointer devices only. */
 (function(){
-  const reel  = document.getElementById('reel'),
-        track = document.getElementById('track'),
-        prev  = document.getElementById('rprev'),
-        next  = document.getElementById('rnext'),
-        cur   = document.getElementById('rcur'),
-        tot   = document.getElementById('rtot');
-  if (!reel || !track) return;
-  const cards = Array.prototype.slice.call(track.querySelectorAll('.card'));
-  if (!cards.length) return;
-  if (tot) tot.textContent = String(cards.length).padStart(2,'0');
-
-  let active = 0;
-  const pad = n => String(n+1).padStart(2,'0');
-
-  // whichever frame is nearest the middle of the viewport is the live one
-  const mark = () => {
-    const mid = reel.scrollLeft + reel.clientWidth/2;
-    let best = 0, bd = Infinity;
-    cards.forEach((c,i) => {
-      const d = Math.abs(c.offsetLeft + c.offsetWidth/2 - mid);
-      if (d < bd){ bd = d; best = i; }
-    });
-    if (best !== active || !cards[best].classList.contains('on')){
-      active = best;
-      cards.forEach((c,i) => c.classList.toggle('on', i === active));
-      if (cur) cur.textContent = pad(active);
-    }
-    if (prev) prev.disabled = reel.scrollLeft <= 2;
-    if (next) next.disabled = reel.scrollLeft >= reel.scrollWidth - reel.clientWidth - 2;
-    // the plate drifts inside its frame as the frame crosses the middle
-    if (!RM) cards.forEach(c => {
-      const im = c.querySelector('.shot img'); if (!im) return;
-      const d = (c.offsetLeft + c.offsetWidth/2 - mid) / reel.clientWidth;
-      im.style.transform = 'scale(1.1) translate3d(' +
-        (Math.max(-1, Math.min(1, d)) * -4.2).toFixed(2) + '%,0,0)';
-    });
-  };
-  let tick = 0;
-  reel.addEventListener('scroll', () => {
-    if (tick) return;
-    tick = requestAnimationFrame(()=>{ tick = 0; mark(); });
-  }, {passive:true});
-  addEventListener('resize', mark, {passive:true});
-
-  const go = d => {
-    const i = Math.max(0, Math.min(cards.length-1, active + d));
-    const c = cards[i];
-    reel.scrollTo({left: c.offsetLeft + c.offsetWidth/2 - reel.clientWidth/2,
-                   behavior: RM ? 'auto' : 'smooth'});
-  };
-  if (prev) prev.addEventListener('click', ()=>go(-1));
-  if (next) next.addEventListener('click', ()=>go(1));
-  reel.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight'){ e.preventDefault(); go(1); }
-    else if (e.key === 'ArrowLeft'){ e.preventDefault(); go(-1); }
-  });
-
-  // drag the strip with a pointer, the way you would a contact sheet
-  let down = false, sx = 0, sl = 0, moved = 0;
-  reel.addEventListener('pointerdown', e => {
-    if (e.pointerType === 'touch') return;
-    down = true; moved = 0; sx = e.clientX; sl = reel.scrollLeft;
-    reel.classList.add('drag'); reel.setPointerCapture(e.pointerId);
-  });
-  reel.addEventListener('pointermove', e => {
-    if (!down) return;
-    const dx = e.clientX - sx; moved = Math.max(moved, Math.abs(dx));
-    reel.scrollLeft = sl - dx;
-  });
-  const up = () => {
-    if (!down) return;
-    down = false; reel.classList.remove('drag');
-    const mid = reel.scrollLeft + reel.clientWidth/2;
-    let best = cards[0], bd = Infinity;
-    cards.forEach(c => { const d = Math.abs(c.offsetLeft + c.offsetWidth/2 - mid);
-      if (d < bd){ bd = d; best = c; } });
-    reel.scrollTo({left: best.offsetLeft + best.offsetWidth/2 - reel.clientWidth/2,
-                   behavior: RM ? 'auto' : 'smooth'});
-  };
-  reel.addEventListener('pointerup', up);
-  reel.addEventListener('pointercancel', up);
-  // a drag is not a click
-  cards.forEach(c => c.addEventListener('click', e => { if (moved > 6) e.preventDefault(); }));
-
-  // the cursor carries the verb and that frame's own number. The room upstairs
-  // borrows the same disc for its sets, so the gesture means one thing on the
-  // page: this is a case, and it opens.
   const card = document.getElementById('peek');
-  if (card && !RM && matchMedia('(hover: hover)').matches){
-    const fig = card.querySelector('.pf'), kic = card.querySelector('.pn');
-    const S = 124; let raf = 0, tx = 0, ty = 0, cx = 0, cy = 0, shown = false;
-    const place = () => {
-      raf = 0;
-      cx += (tx-cx)*.2; cy += (ty-cy)*.2;
-      card.style.transform = 'translate3d('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px,0)';
-      if (shown && (Math.abs(tx-cx) > .4 || Math.abs(ty-cy) > .4)) raf = requestAnimationFrame(place);
-    };
-    const api = {
-      move(x, y){ tx = x - S/2; ty = y - S/2; if (!raf) raf = requestAnimationFrame(place); },
-      show(f, k, x, y){
-        fig.textContent = f || ''; kic.textContent = k || '';
-        if (shown){ api.move(x, y); return; }
-        cx = tx = x - S/2; cy = ty = y - S/2;
-        card.style.transform = 'translate3d('+cx+'px,'+cy+'px,0)';
-        shown = true;
-        if (window.gsap) gsap.to(card, {opacity:1, scale:1, duration:.3, ease:'power2.out',
-                                        startAt:{scale:.7}});
-        else card.style.opacity = 1;
-      },
-      hide(){
-        if (!shown) return;
-        shown = false;
-        if (window.gsap) gsap.to(card, {opacity:0, scale:.7, duration:.22, ease:'power2.in'});
-        else card.style.opacity = 0;
-      }
-    };
-    window.__peek = api;
-    cards.forEach(c => {
-      c.addEventListener('mouseenter', e => api.show(c.dataset.fig, c.dataset.fk, e.clientX, e.clientY));
-      c.addEventListener('mousemove', e => api.move(e.clientX, e.clientY), {passive:true});
-      c.addEventListener('mouseleave', api.hide);
-    });
-  }
+  if (!card || RM || !matchMedia('(hover: hover)').matches) return;
+  const img = card.querySelector('img'),
+        fig = card.querySelector('.pf'),
+        kic = card.querySelector('.pn');
 
-  mark();
+  const W = 280, PAD = 18;
+  let shown = false, raf = 0, tx = 0, ty = 0, cx = 0, cy = 0;
 
-  // the strip deals itself out when the section arrives
-  // the frames stay visible if nothing ever fires: the animation is the extra,
-  // not the thing that makes them appear
-  if (!RM && window.gsap && window.ScrollTrigger){
-    gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.create({
-      trigger:'#work', start:'top 78%', once:true,
-      onEnter(){
-        gsap.from(cards, {opacity:0, xPercent:14, duration:.9, ease:'power3.out',
-          stagger:.055, clearProps:'transform,opacity',
-          onComplete(){ mark(); }});
-      }
-    });
-  }
+  const place = () => {
+    raf = 0;
+    cx += (tx - cx) * .18; cy += (ty - cy) * .18;
+    card.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) +
+      'px,0) rotate(1.6deg)';
+    if (shown && (Math.abs(tx-cx) > .4 || Math.abs(ty-cy) > .4)) raf = requestAnimationFrame(place);
+  };
+  const at = (x, y) => {
+    const h = card.offsetHeight || 230;
+    tx = Math.min(innerWidth - W - PAD, x + 26);
+    ty = Math.min(innerHeight - h - PAD, Math.max(PAD, y - h/2));
+  };
+  const api = {
+    move(x, y){ at(x, y); if (!raf) raf = requestAnimationFrame(place); },
+    show(d, x, y){
+      const src = d.img || '';
+      card.classList.toggle('noimg', !src);
+      if (src){ if (img.getAttribute('src') !== src) img.src = src; img.style.display = ''; }
+      else { img.removeAttribute('src'); img.style.display = 'none'; }
+      fig.textContent = d.fig || '';
+      kic.textContent = d.fk  || '';
+      if (shown){ api.move(x, y); return; }
+      at(x, y); cx = tx; cy = ty;
+      card.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0) rotate(1.6deg)';
+      shown = true;
+      if (window.gsap) gsap.to(card, {opacity:1, duration:.28, ease:'power2.out'});
+      else card.style.opacity = 1;
+    },
+    hide(){
+      if (!shown) return;
+      shown = false;
+      if (window.gsap) gsap.to(card, {opacity:0, duration:.22, ease:'power2.in'});
+      else card.style.opacity = 0;
+    }
+  };
+  window.__peek = api;
+
+  Array.prototype.slice.call(document.querySelectorAll('#work .row')).forEach(row => {
+    const d = {img: row.dataset.peek, fig: row.dataset.fig, fk: row.dataset.fk};
+    row.addEventListener('mouseenter', e => api.show(d, e.clientX, e.clientY));
+    row.addEventListener('mousemove', e => api.move(e.clientX, e.clientY), {passive:true});
+    row.addEventListener('mouseleave', api.hide);
+  });
+})();
+
+/* ---------- the list arrives a line at a time ---------- */
+(function(){
+  const rows = Array.prototype.slice.call(document.querySelectorAll('#work .row'));
+  if (!rows.length || RM || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  const ins = rows.map(r => r.querySelector('.in')).filter(Boolean);
+  if (!ins.length) return;
+  ScrollTrigger.create({
+    trigger:'#work .rows', start:'top 84%', once:true,
+    onEnter(){
+      gsap.from(ins, {yPercent:106, duration:1.05, ease:'power4.out', stagger:.06,
+                      clearProps:'transform'});
+    }
+  });
 })();
 
 /* ---------- everything the scroll drives ---------- */
@@ -1754,7 +1596,7 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
     const heads = Array.prototype.slice.call(sec.querySelectorAll('.ch:not(.bt),.big'));
     const words = heads.reduce((all,h)=>all.concat(splitWords(h)), []);
     const bits  = Array.prototype.slice.call(
-      sec.querySelectorAll('.kicker span,.body:not(.bt),.fn,.fk,.col,.mail,.ends,.note,.facts>div,.go'));
+      sec.querySelectorAll('.kicker span,.body:not(.bt),.fn,.fk,.col,.mail,.ends,.note'));
     if (!words.length && !bits.length) return;
     if (words.length) gsap.set(words, {yPercent:115});
     if (bits.length)  gsap.set(bits,  {opacity:0, y:20});
