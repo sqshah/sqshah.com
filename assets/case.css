@@ -37,8 +37,18 @@ section{scroll-margin-top:70px}
 .tagline::before{content:"";width:16px;height:16px;flex:none;
   background:var(--off);clip-path:polygon(0 100%,22% 34%,50% 62%,78% 34%,100% 100%)}
 
+/* The bar hangs over whatever is scrolling under it. Difference blending holds
+   up over flat black; on a phone, where chapter headings and plates run the
+   full width, it needs a floor of its own to sit on. */
 .bar{position:fixed;top:0;left:0;right:0;z-index:60;mix-blend-mode:difference}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:16px}
+@media(max-width:760px){
+  .bar{mix-blend-mode:normal;background:linear-gradient(to bottom,
+    rgba(0,0,0,.92) 0%, rgba(0,0,0,.78) 58%, rgba(0,0,0,0) 100%);
+    padding-bottom:14px;-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
+  .bar .wrap{padding-block:13px 4px}
+  .bar a{opacity:.9}
+}
 .bar a{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#fff;
   text-decoration:none;opacity:.75;transition:opacity .3s}
 .bar a:hover{opacity:1}
@@ -104,7 +114,8 @@ main{padding-left:var(--rail)}
 .body .fig .v{display:block;font-family:var(--head);font-size:clamp(34px,5.4vw,84px);
   line-height:.84;letter-spacing:-.01em}
 .body .fig .k{display:block;margin-top:11px}
-@media(max-width:760px){.body{grid-template-columns:1fr}.body .fig{text-align:left}}
+@media(max-width:760px){.body{grid-template-columns:1fr}.body .fig{text-align:left}
+  .ch,[data-ch]{scroll-margin-top:70px}}
 
 .plate img{width:100%;border:1px solid var(--g3);
   filter:grayscale(1) blur(8px);opacity:.45;transform:translateY(18px);
