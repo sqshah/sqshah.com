@@ -28,7 +28,7 @@
   /* Two signals, one per path, and nowhere else on the site: the work answers
      in acid, the person in volt. Only ever on the thing you press. */
   --acid:#D9FF3F;
-  --volt:#2D5BFF;
+  --volt:#FF7A45;
   --dim:#78766F;        /* small caps still need 4.5:1 on the ink */
   --plate:#FBFAF8;      /* paper the portrait is printed on */
   --display:Anton,Impact,"Haettenschweiler","Arial Narrow Bold",sans-serif;
@@ -233,12 +233,12 @@ a{color:inherit;text-decoration:none}
   /* the button lights up in that path's own signal */
   .half:hover .dgo{background:var(--sig);border-color:var(--sig)}
   .hw:hover .dgt{color:#121209}
-  .hp:hover .dgt{color:var(--paper)}
+  .hp:hover .dgt{color:#121209}
   .half:hover .dar{background:#0C0C0B;border-color:#0C0C0B}
   .half:hover .dar svg{stroke:var(--sig);transform:translateX(2px)}
   /* the numbers that fly in carry it as a hairline */
   .hw:hover .evc{border-color:rgba(217,255,63,.45)}
-  .hp:hover .evc{border-color:rgba(45,91,255,.42)}
+  .hp:hover .evc{border-color:rgba(255,122,69,.5)}
 }
 /* something on the screen has a pulse, so it reads as live rather than printed */
 .meta{display:flex;align-items:center;gap:9px}
@@ -320,7 +320,7 @@ a{color:inherit;text-decoration:none}
     text-transform:uppercase;color:rgba(251,250,248,.55);transition:color .4s}
   .segb.on{color:#121209}
   .split.on-who~.dock .segb{color:rgba(14,14,14,.5)}
-  .split.on-who~.dock .segb.on{color:var(--paper)}
+  .split.on-who~.dock .segb.on{color:#121209}
   .swipe{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
     color:rgba(251,250,248,.34);transition:color .5s}
   .split.on-who~.dock .swipe{color:rgba(14,14,14,.36)}
@@ -701,7 +701,7 @@ a{color:inherit;text-decoration:none}
   <div id="room" aria-hidden="true"></div>
   <div class="vig" aria-hidden="true"></div>
   <div class="stage">
-    <p class="eyebrow"><i></i><span>Performance marketing &nbsp;&middot;&nbsp; East Africa</span></p>
+    <p class="eyebrow"><i></i><span>Performance marketing &nbsp;&middot;&nbsp; Five markets</span></p>
     <svg class="sig" id="sig" role="img" aria-label="SQ Shah"></svg>
     <p class="line">The numbers were wrong before they were bad.</p>
   </div>
@@ -1070,23 +1070,33 @@ a{color:inherit;text-decoration:none}
   // ---- the room ----------------------------------------------------------
   const scene = new T.Scene();
   scene.fog = new T.FogExp2(INK, 0.030);
-  const camera = new T.PerspectiveCamera(50, 1, 0.1, 160);
+  const camera = new T.PerspectiveCamera(SMALL ? 64 : 50, 1, 0.1, 160);
 
   const renderer = new T.WebGLRenderer({ antialias: !SMALL, alpha: false });
   renderer.setClearColor(INK, 1);
   host.appendChild(renderer.domElement);
 
-  // sets scattered through the volume, clear of the line the camera takes
-  // Twelve sets, one per case, hung down a corridor rather than scattered: two
-  // columns at the same angle, a steady four units apart, alternating high and
-  // low so the camera has something to read on the way through. Each one throws
-  // a reflection on the floor it is standing on.
-  const LAYOUT = WORK.map((_, i) => {
-    const side = (i % 2) ? 1 : -1;
-    const high = (i % 4) < 2;
-    return [side * 4.9, (high ? 1.15 : -1.15) * (1 + (i % 3) * 0.05),
-            -6 - i * 4, -side * 0.42, 1];
-  });
+  // Twelve sets, one per case, hung down a corridor: two columns at the same
+  // angle, a steady four units apart, alternating high and low so the camera has
+  // something to read on the way through. Each one throws a reflection on the
+  // surface under it.
+  //
+  // A portrait phone sees a much narrower slice of that room — at this distance
+  // the corridor puts every set past the edge of the glass, which is why it read
+  // as litter. So the phone gets a room of its own: eight sets instead of twelve,
+  // half again as large, close to the line the camera takes and turned to face it.
+  const LAYOUT = (SMALL
+    ? WORK.slice(0, 8).map((_, i) => {
+        const side = (i % 2) ? 1 : -1;
+        // sized so the nearest set clears both edges of a portrait screen
+        return [side * 1.15, (i % 4 < 2 ? .85 : -.85) * (1 + (i % 3) * .06),
+                -6.4 - i * 5.2, -side * 0.16, 1.18];
+      })
+    : WORK.map((_, i) => {
+        const side = (i % 2) ? 1 : -1;
+        return [side * 4.9, (i % 4 < 2 ? 1.15 : -1.15) * (1 + (i % 3) * .05),
+                -6 - i * 4, -side * 0.42, 1];
+      }));
   const sets = [], screens = [];
   LAYOUT.forEach((L, i) => {
     const [x, y, z, ry, sc] = L;
@@ -1187,8 +1197,9 @@ a{color:inherit;text-decoration:none}
     cur.y += (aim.y - cur.y) * 0.045;
 
     const f = flight;
+    const sway = SMALL ? 0.5 : 1.5;
     camera.position.set(
-      cur.x * 1.5 + Math.sin(spin) * 0.16,
+      cur.x * sway + Math.sin(spin) * 0.16,
       0.1 - cur.y * 0.7 + Math.cos(spin * .8) * 0.09,
       5.5 - f * 62
     );
@@ -1627,6 +1638,19 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
     tl.to('.eyebrow', {opacity:1, duration:.7, ease:'power2.out'}, '-=0.42')
       .to('.nav',     {opacity:1, duration:.7, ease:'power2.out'}, '-=0.55');
   };
+
+  // A link to a section is a link to the section: anyone arriving at /#work has
+  // already made the choice the gate exists to ask.
+  const deep = location.hash.replace('#', '');
+  if (deep && document.getElementById(deep)){
+    opened = true;
+    gateEl.remove();
+    document.querySelectorAll('.eyebrow,.nav').forEach(el => el.style.opacity = 1);
+    const go = () => { const t = document.getElementById(deep);
+      if (t) t.scrollIntoView({block:'start', behavior:'auto'}); };
+    go(); addEventListener('load', () => setTimeout(go, 160));
+    return;
+  }
 
   // hold the page still behind the gate
   document.documentElement.style.overflow = 'hidden';
