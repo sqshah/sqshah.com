@@ -303,6 +303,10 @@ footer{border-top:1px solid var(--g3);padding-block:34px;
 .swin .st i{width:5px;height:5px;border-radius:50%;border:1px solid var(--g2);flex:none}
 .swin .st b{flex:1;min-width:0;font-weight:400;font-size:8px;letter-spacing:.11em;
   color:var(--g1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* the address bar carries a redaction instead of a hostname: these are live
+   client properties and the names are not ours to publish */
+.swin .st b.rd{height:5px;max-width:120px;background:var(--g3);border-radius:2px;
+  display:block}
 .swin img{display:block;width:100%;height:auto;
   filter:grayscale(1) contrast(.95);opacity:.55;
   transition:filter .9s var(--ease),opacity .9s var(--ease)}

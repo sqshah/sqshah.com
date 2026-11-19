@@ -3,7 +3,7 @@
 
 Eleven pages sharing a layout means one template and a data file, not eleven
 copies of the markup - otherwise the twelfth change gets made eleven times and
-three of them get missed. Khushi Motors is in here too, so the page that was
+three of them get missed. The motor group is in here too, so the page that was
 approved and the ten built on it cannot drift apart.
 
 Public text names a client only where he already names them himself. The motor
@@ -41,16 +41,16 @@ def fig(text, n=None, pre=None, compact=False):
 CASES = [
     # ---------------------------------------------------------------------- 1
     dict(
-        slug='khushi-motors',
+        slug='motor-group',
         title='$0.29 a lead',
         desc='Four years of paid media for an East African motor group. Six accounts, '
              'four countries, 145,902 leads at $0.29 each.',
-        shot='/assets/work/km/cover.jpg',
+        shot='/assets/work/grp/cover.jpg',
         tagline='four years, four countries',
         big='$0.29', bigmk='a lead',
         sub='Six ad accounts for an East African motor group, consolidated into one '
             'structure that could say what a sale had cost.',
-        strip=[('Industry', 'Automotive'), ('Market', 'East Africa'),
+        strip=[('Industry', 'Automotive'), ('Market', 'Mombasa'),
                ('Duration', 'Four years'), ('Channels', 'Google, Meta, Email'),
                ('Role', 'Performance lead')],
         problem=dict(head='Nobody knew what a <span class="mk">sale</span> cost',
@@ -60,7 +60,7 @@ CASES = [
                  head='Google carried the', mk='volume',
                  chips=['Search', 'Performance Max', 'Demand Gen', 'Display', 'Video',
                         'Store visits'],
-                 img='/assets/work/km/ads.jpg',
+                 img='/assets/work/grp/ads.jpg',
                  alt='Google Ads account overview, client name removed',
                  cap=('Google Ads', 'All campaigns'),
                  fig=fig('1,238,753', 1238753), figk='Clicks', note='three cents each'),
@@ -77,7 +77,7 @@ CASES = [
             dict(id='email', label='Email', icon='mail',
                  head='The list we already', mk='owned',
                  chips=['57 flows', '95.2% delivered', 'Built in-house after'],
-                 img='/assets/work/km/email.jpg',
+                 img='/assets/work/grp/email.jpg',
                  alt='Email dashboard, sends and engagement',
                  cap=('Email', 'Six months'),
                  fig=fig('158,933', 158933), figk='Sends', note='95.2% delivered'),
@@ -86,7 +86,7 @@ CASES = [
                  chips=['Eleven pages', 'Filterable by campaign, ad group, device',
                         'Live from the ad platform', 'No login needed to ask a question'],
                  win=dict(url='the group’s reporting dashboard — overview',
-                          img='/assets/work/km/dash-overview.jpg',
+                          img='/assets/work/grp/dash-overview.jpg',
                           alt='The reporting dashboard, overview page',
                           cap=('Reporting dashboard', 'Built, not bought')),
                  fig=fig('14.56'), figk='Return on ad spend',
@@ -96,7 +96,7 @@ CASES = [
                  chips=['96.1% of clicks', '92.4% of conversions',
                         'One figure, every decision'],
                  win=dict(url='the group’s reporting dashboard — device',
-                          img='/assets/work/km/dash-device.jpg',
+                          img='/assets/work/grp/dash-device.jpg',
                           alt='Device performance, mobile share of clicks and conversions',
                           cap=('Device performance', '48,370 of 52,360 on mobile')),
                  fig=fig('96.1%'), figk='Of clicks from mobile',
@@ -119,26 +119,26 @@ CASES = [
                       note='four years of it')],
         reveal=dict(left='Drag to see what access opens',
                     right='Google Ads &nbsp;&middot;&nbsp; all campaigns',
-                    pub='/assets/work/km/ads-public.jpg', pubalt='The same account, obscured',
-                    full='/assets/work/km/ads.jpg', fullalt='Google Ads account overview'),
+                    pub='/assets/work/grp/ads-public.jpg', pubalt='The same account, obscured',
+                    full='/assets/work/grp/ads.jpg', fullalt='Google Ads account overview'),
         gallery=dict(label='Four years of it', items=[
-            ('/assets/work/km/ga4.jpg', 'GA4 acquisition report', 'GA4', 'Acquisition'),
-            ('/assets/work/km/gsc.jpg', 'Search Console performance', 'Search Console',
+            ('/assets/work/grp/ga4.jpg', 'GA4 acquisition report', 'GA4', 'Acquisition'),
+            ('/assets/work/grp/gsc.jpg', 'Search Console performance', 'Search Console',
              '113k clicks'),
-            ('/assets/work/km/ahrefs.jpg', 'Ahrefs overview', 'Ahrefs', 'Organic growth'),
-            ('/assets/work/km/email.jpg', 'Email engagement dashboard', 'Email',
+            ('/assets/work/grp/ahrefs.jpg', 'Ahrefs overview', 'Ahrefs', 'Organic growth'),
+            ('/assets/work/grp/email.jpg', 'Email engagement dashboard', 'Email',
              '158,933 sends'),
-            ('/assets/work/km/dash-roi.jpg', 'Account performance and return',
+            ('/assets/work/grp/dash-roi.jpg', 'Account performance and return',
              'Dashboard', 'ROAS 14.56')]),
         gate=('The screenshots, the invoices and the live', 'dashboard'),
     ),
     # ---------------------------------------------------------------------- 2
     dict(
-        slug='arsh-properties',
+        slug='property-developer',
         title='$0.32 an enquiry',
         desc='Premium property across four Pakistani cities, listed on a portal for intent '
              'and advertised on Meta for reach.',
-        shot='/assets/work/cs/arsh.jpg',
+        shot='/assets/work/cs/listings.jpg',
         tagline='fifteen properties, four cities',
         big='$0.32', bigmk='an enquiry',
         sub='Apartments, penthouses, houses and land from PKR 3.5 crore upward, listed '
@@ -152,7 +152,7 @@ CASES = [
             dict(id='portal', label='Portal', icon='pin',
                  head='The portal carried the', mk='intent',
                  chips=['Zameen', 'Profolio', 'Six live listings', 'Super Hot credits'],
-                 img='/assets/work/cs/arsh.jpg',
+                 img='/assets/work/cs/listings.jpg',
                  alt='Property portal dashboard, views, clicks and leads',
                  cap=('Property portal', 'Listings and analytics'),
                  fig=fig('6,985', 6985), figk='Listing views', note='167 clicked through'),
@@ -174,11 +174,11 @@ CASES = [
     ),
     # ---------------------------------------------------------------------- 3
     dict(
-        slug='ocean-trading',
+        slug='export-trade',
         title='A company, set up digitally',
         desc='An established Japanese exporter with no digital footing. Search, social, '
              'hiring and the internal plumbing, built from nothing.',
-        shot='/assets/work/cs/ocean.jpg',
+        shot='/assets/work/cs/hiring.jpg',
         tagline='an old name, no digital anything',
         big='A to Z', bigmk='from nothing',
         sub='An established exporter with no site structure, no accounts and no process. '
@@ -193,7 +193,7 @@ CASES = [
                  head='Hiring ran on the job', mk='boards',
                  chips=['Nine job ads', 'Two sites', 'Performance tracked',
                         'Meta retargeting'],
-                 img='/assets/work/cs/ocean.jpg',
+                 img='/assets/work/cs/hiring.jpg',
                  alt='Job board performance overview across nine hiring ads',
                  cap=('Job board', 'Nine ads, performance'),
                  fig=fig('27', 27), figk='Applications', note='24 CVs received'),
@@ -232,7 +232,7 @@ CASES = [
         title='113,000 clicks, no media cost',
         desc='Technical fixes, a content system and the keyword work behind the landing '
              'pages the ads point at.',
-        shot='/assets/work/km/gsc.jpg',
+        shot='/assets/work/grp/gsc.jpg',
         tagline='the same pages the ads point at',
         big='113K', bigmk='clicks',
         sub='Paid and organic were bidding against each other for the same queries. One '
@@ -246,7 +246,7 @@ CASES = [
             dict(id='fixes', label='Fixes', icon='find',
                  head='Search Console told the', mk='truth',
                  chips=['Technical fixes', 'Content system', 'Keyword mapping'],
-                 img='/assets/work/km/gsc.jpg',
+                 img='/assets/work/grp/gsc.jpg',
                  alt='Search Console performance, clicks and impressions',
                  cap=('Search Console', 'Clicks and impressions'),
                  fig=fig('113,000', 113000), figk='Clicks from search',
@@ -254,7 +254,7 @@ CASES = [
             dict(id='climb', label='Climb', icon='link',
                  head='Then it was a long', mk='climb',
                  chips=['Backlinks', 'Keyword positions', 'Competitor gaps'],
-                 img='/assets/work/km/ahrefs.jpg',
+                 img='/assets/work/grp/ahrefs.jpg',
                  alt='Backlink and keyword growth over time',
                  cap=('Backlink tooling', 'Organic growth'),
                  fig=fig('6.1M', 6100000, compact=True), figk='Impressions',
@@ -262,7 +262,7 @@ CASES = [
             dict(id='traffic', label='Traffic', icon='find',
                  head='And analytics counted what', mk='arrived',
                  chips=['Sessions', 'Active users', 'Engagement time', 'Events'],
-                 img='/assets/work/km/ga4.jpg',
+                 img='/assets/work/grp/ga4.jpg',
                  alt='Analytics reports snapshot, sessions and active users',
                  cap=('Analytics', 'Site-wide, Jan 2025 to Oct 2026'),
                  fig=fig('907K'), figk='Sessions, all channels',
@@ -277,10 +277,10 @@ CASES = [
                  dict(f=fig('907,000', 907000), k='Sessions, site-wide',
                       note='all channels, Jan 2025 to Oct 2026')],
         gallery=dict(label='Before and after', items=[
-            ('/assets/work/km/gsc.jpg', 'Search Console performance', 'Search Console',
+            ('/assets/work/grp/gsc.jpg', 'Search Console performance', 'Search Console',
              '113k clicks'),
-            ('/assets/work/km/ahrefs.jpg', 'Backlink growth', 'Backlinks', 'Organic growth'),
-            ('/assets/work/km/ga4.jpg', 'Acquisition report', 'Analytics', 'Acquisition')]),
+            ('/assets/work/grp/ahrefs.jpg', 'Backlink growth', 'Backlinks', 'Organic growth'),
+            ('/assets/work/grp/ga4.jpg', 'Acquisition report', 'Analytics', 'Acquisition')]),
         gate=('The Search Console history, the content map and the', 'rankings'),
     ),
     # ---------------------------------------------------------------------- 5
@@ -289,7 +289,7 @@ CASES = [
         title='Built, not rented',
         desc='Four years on a per-contact plan taught us which automations mattered. Then '
              'we built the thing that runs them, inside the company site.',
-        shot='/assets/work/km/tool-overview.jpg',
+        shot='/assets/work/grp/tool-overview.jpg',
         tagline='four years of rent, then we owned it',
         big='37.4%', bigmk='opened',
         sub='A bill that grew with the list, and a card that could decline on a Friday. '
@@ -313,7 +313,7 @@ CASES = [
                  chips=['Built with a developer', 'Inside the company site',
                         'No per-contact bill'],
                  win=dict(url='the company site /admin — email marketing / overview',
-                          img='/assets/work/km/tool-overview.jpg',
+                          img='/assets/work/grp/tool-overview.jpg',
                           alt='The in-house email platform, overview screen',
                           cap=('In-house platform', 'Overview')),
                  fig=fig('37.4%'), figk='Open rate', note='four times the rented one'),
@@ -322,7 +322,7 @@ CASES = [
                  chips=['Inquiry follow-up', 'Registration onboarding',
                         'Customer retention', '12 core templates'],
                  win=dict(url='the company site /admin — sequences / inquiry follow-up',
-                          img='/assets/work/km/tool-timeline.jpg',
+                          img='/assets/work/grp/tool-timeline.jpg',
                           alt='The inquiry follow-up automation, eleven emails over 28 days',
                           cap=('Automation timeline', 'Eleven emails, 28 days'), tall=True),
                  fig=fig('5,152', 5152), figk='Leads enrolled', note='49,821 queued'),
@@ -336,17 +336,17 @@ CASES = [
                  dict(f=fig('11', 11), k='Emails in the live sequence',
                       note='28 days, automated')],
         gallery=dict(label='The platform', items=[
-            ('/assets/work/km/tool-sequences.jpg', 'The three automations and their rates',
+            ('/assets/work/grp/tool-sequences.jpg', 'The three automations and their rates',
              'Sequences', 'Three automations'),
-            ('/assets/work/km/tool-overview.jpg', 'Overview screen of the in-house platform',
+            ('/assets/work/grp/tool-overview.jpg', 'Overview screen of the in-house platform',
              'Overview', 'Delivery and engagement'),
-            ('/assets/work/km/email.jpg', 'The rented platform it replaced',
+            ('/assets/work/grp/email.jpg', 'The rented platform it replaced',
              'Before', 'The rented plan')]),
         reveal=dict(left='Drag to see what access opens',
                     right='Email &nbsp;&middot;&nbsp; sends and engagement',
-                    pub='/assets/work/km/email-public.jpg',
+                    pub='/assets/work/grp/email-public.jpg',
                     pubalt='The same dashboard, obscured',
-                    full='/assets/work/km/email.jpg', fullalt='Email engagement dashboard'),
+                    full='/assets/work/grp/email.jpg', fullalt='Email engagement dashboard'),
         gate=('The platform screens, the deliverability and the cost', 'before'),
     ),
     # ---------------------------------------------------------------------- 6
@@ -355,7 +355,7 @@ CASES = [
         title='Twelve brands, one roster',
         desc='A Surrey agency roster covering eleven trades, handled remotely from '
              'Pakistan.',
-        shot='/assets/work/cs/togear.jpg',
+        shot='/assets/work/cs/salon.jpg',
         tagline='eleven trades, one person',
         big='12', bigmk='brands',
         sub='A daycare, construction, landscaping, a restaurant, a salon, plumbing, pest '
@@ -369,10 +369,11 @@ CASES = [
             dict(id='search', label='Search', icon='link',
                  head='Off-page carried the', mk='rankings',
                  chips=['Link building', 'Citations', 'Local listings', 'Content'],
-                 img='/assets/work/cs/togear.jpg',
+                 img='/assets/work/cs/salon.jpg',
                  alt='Brand and identity work for one of the twelve',
-                 cap=('Brand work', 'One of twelve'),
-                 fig=fig('12', 12), figk='Brands at once', note='one roster'),
+                 cap=('Brand work', 'One of twelve, name withheld'),
+                 fig=fig('12', 12), figk='Brands at once',
+                 note='names withheld &mdash; available on request'),
         ],
         aside=('Twelve trades that share nothing except needing to be found on the same',
                'map'),
@@ -453,26 +454,19 @@ CASES = [
                         'Energy', 'Digital assets', 'Legal'],
                  sites=[
                      dict(client='Voice broadcast and ringless voicemail',
-                          kind='four properties',
-                          sites=['drop.co', 'dropvm.ai', 'ringlessvoicemail.ai',
-                                 'press1voice.com']),
+                          kind='four properties', n=4),
                      dict(client='Call tracking and number reputation',
-                          kind='three properties',
-                          sites=['calltrack.ai', 'callconfident.com', 'spamchecker.co']),
-                     dict(client='SHIFT', kind='two properties',
-                          sites=['shiftforbusiness.ai', 'earnwithshift.ai']),
-                     dict(client='Acquira Labs', kind='performance lead generation',
-                          sites=['acquiralabs.com']),
-                     dict(client='Mode', kind='company data partnerships',
-                          sites=['modeinc.ai']),
-                     dict(client='XGRID', kind='energy and virtual power plants',
-                          sites=['xgrid.io']),
-                     dict(client='Aurum Crypto', kind='digital assets',
-                          sites=['aurumcrypto.ai']),
-                     dict(client='SocialLawsuit.org', kind='school district claims',
-                          sites=['sociallawsuit.org']),
+                          kind='three properties', n=3),
+                     dict(client='Workforce AI platform',
+                          kind='two properties', n=2),
+                     dict(client='Performance lead generation', kind='one property', n=1),
+                     dict(client='Company data partnerships', kind='one property', n=1),
+                     dict(client='Energy and virtual power plants', kind='one property', n=1),
+                     dict(client='Digital assets', kind='one property', n=1),
+                     dict(client='Legal claims', kind='one property', n=1),
                  ],
-                 fig=fig('8', 8), figk='Clients', note='fourteen properties between them'),
+                 fig=fig('8', 8), figk='Clients',
+                 note='names withheld &mdash; available on request'),
             dict(id='reporting', label='Reporting', icon='find',
                  head='And a report every month, per', mk='property',
                  chips=['Rankings', 'Backlinks', 'Traffic', 'Conversions'],
@@ -572,7 +566,7 @@ CASES = [
         big='112K', bigmk='followers back',
         sub='A branch account with a hundred and twelve thousand followers, compromised, '
             'with the route a brand is supposed to use going nowhere.',
-        strip=[('Industry', 'Automotive'), ('Market', 'Mombasa'),
+        strip=[('Industry', 'Automotive'), ('Market', 'East Africa'),
                ('Discipline', 'Brand protection'), ('Channel', 'Social'),
                ('Role', 'Recovery lead')],
         problem=dict(head='Locked out of our own <span class="mk">audience</span>',
@@ -696,25 +690,27 @@ def panel_markup(p):
 
 
 def sites_markup(groups):
-    """The properties, grouped by the client they belong to.
+    """The properties, grouped by the client they belong to, with the names off.
 
-    Each client gets its own band with its name and sector on the line above,
-    so a brand with four properties reads as one client with four properties
-    and a brand with one reads as a client of its own. Flattening them into a
-    single grid would have implied fourteen unrelated clients, which the sites
-    themselves disprove the moment anyone opens two of them.
+    Every one of these is under someone else's brand, so the frames carry the
+    layout and nothing that identifies it: no hostname in the bar, no logo
+    through the blur. The sector on the line above is as far as it goes
+    without the client's say-so.
     """
     out = '    <div class="sgrps" data-rise>\n'
+    k = 0
     for g in groups:
         out += ('      <div class="sgrp">\n'
                 f'        <div class="sgh"><b>{g["client"]}</b><i></i>'
                 f'<span>{g["kind"]}</span></div>\n'
                 '        <div class="sgrid">\n')
-        for host in g['sites']:
-            out += (f'          <figure class="swin"><div class="st"><i></i><i></i><i></i>'
-                    f'<b>{host}</b></div>'
-                    f'<img src="/assets/work/sites/{host}.jpg" alt="{host} home page">'
-                    f'</figure>\n')
+        for _ in range(g['n']):
+            k += 1
+            out += ('          <figure class="swin"><div class="st">'
+                    '<i></i><i></i><i></i><b class="rd"></b></div>'
+                    f'<img src="/assets/work/sites/p{k:02d}.jpg" '
+                    'alt="A client property, name and branding withheld">'
+                    '</figure>\n')
         out += '        </div>\n      </div>\n'
     return out + '    </div>'
 
