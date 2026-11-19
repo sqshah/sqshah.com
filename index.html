@@ -96,9 +96,10 @@ a{color:inherit;text-decoration:none}
   padding-block:clamp(90px,16vh,160px) clamp(110px,20vh,190px);
 }
 /* the room the camera flies through, behind everything in the hero */
-.stage{position:relative;width:100%;padding-inline:calc(var(--gut) - var(--edge))}
+.stage{position:relative;width:100%;padding-inline:calc(var(--gut) - var(--edge));pointer-events:none}
+.stage a,.stage button{pointer-events:auto}
 
-.sig{position:relative;z-index:3;display:block;width:min(74vw,880px);height:auto;overflow:visible;will-change:transform}
+.sig{position:relative;z-index:3;display:block;width:min(74vw,880px);height:auto;overflow:visible;will-change:transform;pointer-events:none}
 .sig .fill{fill:var(--paper)}
 .sig .pen{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
 .eyebrow{
@@ -822,73 +823,146 @@ a{color:inherit;text-decoration:none}
     title: a.querySelector('.ttl').textContent.trim(),
     met:   a.querySelector('.met').textContent.trim(),
     fig:   a.dataset.fig || '',
+    fk:    a.dataset.fk  || '',
     href:  a.getAttribute('href'),
     img:   (a.querySelector('.shot img') || {}).src || ''
   }));
 
   // ---- one television ----------------------------------------------------
+  // One set. The screen carries the case's own plate, graded down to grey so the
+  // room stays a room, with the title burned into the lower third the way a
+  // broadcast caption would be. Everything that does not move is painted once
+  // into a base canvas; the frame loop only blits that and rolls a bar down it.
   function tvTexture(item, seed) {
     const W = 640, H = 460;
     const c = document.createElement('canvas'); c.width = W; c.height = H;
     const g = c.getContext('2d');
+    const base = document.createElement('canvas'); base.width = W; base.height = H;
+    const bg = base.getContext('2d');
     const tex = new T.CanvasTexture(c);
     tex.colorSpace = T.SRGBColorSpace;
     tex.anisotropy = 4;
     const rnd = (() => { let s = seed * 7919 + 13; return () => (s = (s * 9301 + 49297) % 233280) / 233280; })();
     const SX = 44, SY = 38, SW = W - 88, SH = H - 128;   // the screen inside the set
-    let t = rnd() * 400;
+    let t = rnd() * 400, shot = null;
 
-    function round(x, y, w, h, r) {
-      g.beginPath();
-      g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r);
-      g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r);
-      g.arcTo(x, y, x + w, y, r); g.closePath();
+    function round(x, y, w, h, r, ctx) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
     }
+
+    // the plate, cropped to fill the tube the way object-fit: cover would
+    function plate(ctx) {
+      if (!shot) return false;
+      const ir = shot.width / shot.height, sr = SW / SH;
+      let sw = shot.width, sh = shot.height, sx = 0, sy = 0;
+      if (ir > sr) { sw = shot.height * sr; sx = (shot.width - sw) / 2; }
+      else { sh = shot.width / sr; }
+      ctx.save();
+      round(SX, SY, SW, SH, 16, ctx); ctx.clip();
+      try { ctx.filter = 'grayscale(1) contrast(1.14) brightness(.72)'; } catch (e) {}
+      ctx.drawImage(shot, sx, sy, sw, sh, SX, SY, SW, SH);
+      ctx.filter = 'none';
+      ctx.restore();
+      return true;
+    }
+
+    function paintBase() {
+      const g2 = bg;
+      g2.clearRect(0, 0, W, H);
+      // the cabinet
+      g2.fillStyle = '#201F1D'; round(6, 6, W - 12, H - 12, 26, g2); g2.fill();
+      g2.strokeStyle = 'rgba(251,250,248,.18)'; g2.lineWidth = 2; g2.stroke();
+      g2.fillStyle = '#0D0D0C'; round(SX - 8, SY - 8, SW + 16, SH + 16, 20, g2); g2.fill();
+
+      g2.save();
+      round(SX, SY, SW, SH, 16, g2); g2.clip();
+      g2.fillStyle = '#0A0B0C'; g2.fillRect(SX, SY, SW, SH);
+
+      if (item) {
+        const hasShot = plate(g2);
+        if (!hasShot) {
+          const gr = g2.createRadialGradient(SX + SW / 2, SY + SH / 2, 10,
+                                             SX + SW / 2, SY + SH / 2, SW * .72);
+          gr.addColorStop(0, 'rgba(186,208,228,.30)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+          g2.fillStyle = gr; g2.fillRect(SX, SY, SW, SH);
+        }
+
+        // the caption sits in a band at the foot of the tube, over the plate
+        const BH = hasShot ? 150 : SH;
+        const bandTop = SY + SH - BH;
+        const bd = g2.createLinearGradient(0, bandTop, 0, SY + SH);
+        bd.addColorStop(0, 'rgba(6,6,6,0)'); bd.addColorStop(.45, 'rgba(6,6,6,.80)');
+        bd.addColorStop(1, 'rgba(6,6,6,.96)');
+        g2.fillStyle = bd; g2.fillRect(SX, bandTop, SW, BH);
+
+        // index, top left, against the plate
+        g2.fillStyle = 'rgba(251,250,248,.62)';
+        g2.font = '500 18px Instrument, Arial, sans-serif';
+        g2.fillText(item.idx, SX + 30, SY + 44);
+        g2.fillStyle = 'rgba(251,250,248,.28)';
+        g2.fillRect(SX + 30, SY + 56, 40, 1);
+        if (item.fig) {
+          g2.textAlign = 'right';
+          g2.font = '400 30px Anton, Impact, "Arial Narrow Bold", sans-serif';
+          g2.fillStyle = 'rgba(251,250,248,.92)';
+          g2.fillText(item.fig.toUpperCase(), SX + SW - 30, SY + 52);
+          g2.textAlign = 'left';
+        }
+
+        // the title, two lines at most, with a little tube fringe on it
+        g2.font = '400 38px Anton, Impact, "Arial Narrow Bold", sans-serif';
+        const words = item.title.toUpperCase().split(' '), lines = [];
+        let ln = '';
+        words.forEach(w => {
+          const test = ln ? ln + ' ' + w : w;
+          if (g2.measureText(test).width > SW - 64 && ln) { lines.push(ln); ln = w; } else ln = test;
+        });
+        if (ln) lines.push(ln);
+        const show = lines.slice(0, 2);
+        if (lines.length > 2) show[1] = show[1].replace(/[ ,]+$/, '') + '\u2026';
+        const y0 = SY + SH - 56 - (show.length - 1) * 38;
+        show.forEach((L, i) => {
+          const y = y0 + i * 38;
+          g2.fillStyle = 'rgba(120,190,255,.26)'; g2.fillText(L, SX + 29, y);
+          g2.fillStyle = 'rgba(255,110,120,.22)'; g2.fillText(L, SX + 32, y);
+          g2.fillStyle = '#FFFFFF'; g2.fillText(L, SX + 30.5, y);
+        });
+        if (item.met) {
+          g2.fillStyle = 'rgba(251,250,248,.55)';
+          g2.font = '500 14px Instrument, Arial, sans-serif';
+          g2.fillText(item.met.toUpperCase(), SX + 30, SY + SH - 24);
+        }
+      }
+
+      // scanlines and the curve of the glass do not move, so they live here
+      g2.fillStyle = 'rgba(0,0,0,.20)';
+      for (let y = SY; y < SY + SH; y += 3) g2.fillRect(SX, y, SW, 1.3);
+      const vg = g2.createRadialGradient(SX + SW / 2, SY + SH / 2, SH * .34,
+                                         SX + SW / 2, SY + SH / 2, SW * .78);
+      vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.42)');
+      g2.fillStyle = vg; g2.fillRect(SX, SY, SW, SH);
+      g2.restore();
+    }
+
+    if (item && item.img) {
+      const im = new Image();
+      im.decoding = 'async';
+      im.onload = () => { shot = im; paintBase(); };
+      im.src = item.img;
+    }
+    paintBase();
 
     function draw() {
       t += 1;
-      // the cabinet
-      g.fillStyle = '#201F1D'; round(6, 6, W - 12, H - 12, 26); g.fill();
-      g.strokeStyle = 'rgba(251,250,248,.18)'; g.lineWidth = 2; g.stroke();
-      g.fillStyle = '#0D0D0C'; round(SX - 8, SY - 8, SW + 16, SH + 16, 20); g.fill();
+      g.clearRect(0, 0, W, H);
+      g.drawImage(base, 0, 0);
 
       g.save();
-      round(SX, SY, SW, SH, 16); g.clip();
-      g.fillStyle = '#0A0B0C'; g.fillRect(SX, SY, SW, SH);
-
-      if (item) {
-        // a faint glow from the tube itself
-        const gr = g.createRadialGradient(SX + SW / 2, SY + SH / 2, 10, SX + SW / 2, SY + SH / 2, SW * .72);
-        gr.addColorStop(0, 'rgba(186,208,228,.30)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
-        g.fillStyle = gr; g.fillRect(SX, SY, SW, SH);
-
-        g.fillStyle = 'rgba(251,250,248,.5)';
-        g.font = '500 19px Instrument, Arial, sans-serif';
-        g.fillText(item.idx, SX + 34, SY + 58);
-        g.fillRect(SX + 34, SY + 74, 46, 1);
-
-        // the title, with a little tube fringe on it
-        const lines = [];
-        // Anton is condensed, so it takes a larger size and tighter leading
-        g.font = '400 46px Anton, Impact, "Arial Narrow Bold", sans-serif';
-        let ln = '';
-        item.title.toUpperCase().split(' ').forEach(w => {
-          const test = ln ? ln + ' ' + w : w;
-          if (g.measureText(test).width > SW - 68 && ln) { lines.push(ln); ln = w; } else ln = test;
-        });
-        if (ln) lines.push(ln);
-        lines.slice(0, 4).forEach((L, i) => {
-          const y = SY + 128 + i * 44;
-          g.fillStyle = 'rgba(120,190,255,.30)'; g.fillText(L, SX + 32.4, y);
-          g.fillStyle = 'rgba(255,110,120,.26)'; g.fillText(L, SX + 35.6, y);
-          g.fillStyle = '#FFFFFF'; g.fillText(L, SX + 34, y);
-        });
-        if (item.met) {
-          g.fillStyle = 'rgba(251,250,248,.55)';
-          g.font = '500 16px Instrument, Arial, sans-serif';
-          g.fillText(item.met.toUpperCase(), SX + 34, SY + SH - 40);
-        }
-      } else {
+      round(SX, SY, SW, SH, 16, g); g.clip();
+      if (!item) {
         // an idle set: colour bars, or snow
         if (seed % 2) {
           const bars = ['#C8C8C8', '#C8C800', '#00C8C8', '#00C800', '#C800C8', '#C80000', '#0000C8'];
@@ -903,16 +977,12 @@ a{color:inherit;text-decoration:none}
           }
           g.putImageData(im, SX, SY);
         }
+        g.fillStyle = 'rgba(0,0,0,.20)';
+        for (let y = SY; y < SY + SH; y += 3) g.fillRect(SX, y, SW, 1.3);
       }
-
-      // scanlines, a rolling bar, and the curve of the glass
-      g.fillStyle = 'rgba(0,0,0,.20)';
-      for (let y = SY; y < SY + SH; y += 3) g.fillRect(SX, y, SW, 1.3);
-      g.fillStyle = 'rgba(251,250,248,.055)';
+      // the tube's own refresh, rolling down the glass
+      g.fillStyle = 'rgba(251,250,248,.05)';
       g.fillRect(SX, SY + ((t * 2.4) % SH), SW, 26);
-      const vg = g.createRadialGradient(SX + SW / 2, SY + SH / 2, SH * .34, SX + SW / 2, SY + SH / 2, SW * .78);
-      vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.42)');
-      g.fillStyle = vg; g.fillRect(SX, SY, SW, SH);
       g.restore();
 
       tex.needsUpdate = true;
@@ -965,10 +1035,10 @@ a{color:inherit;text-decoration:none}
     scene.add(m);
 
     const glow = new T.Sprite(new T.SpriteMaterial({
-      map: glowTex, transparent: true, opacity: item ? 1.0 : .72,
+      map: glowTex, transparent: true, opacity: item ? .34 : .26,
       blending: T.AdditiveBlending, depthWrite: false, fog: true
     }));
-    glow.position.set(x, y, z + 0.1); glow.scale.set(w * 2.9, h * 3.3, 1);
+    glow.position.set(x, y, z - 0.12); glow.scale.set(w * 2.1, h * 2.4, 1);
     scene.add(glow);
     sets.push({ m, glow, z });
   });
@@ -1044,6 +1114,76 @@ a{color:inherit;text-decoration:none}
     dust.material.opacity = .5 * (1 - out * .7);
     renderer.render(scene, camera);
   }
+  // The sets are the work, so they behave like it: the one under the cursor
+  // lifts out of the dark and opens its case when you click it. The disc from
+  // the index comes along, carrying that case's number.
+  (function(){
+    const pickable = [];
+    sets.forEach((s, i) => {
+      const it = i < WORK.length ? WORK[i] : null;
+      if (it && it.href){ s.m.userData.item = it; s.m.userData.set = s; pickable.push(s.m); }
+    });
+    if (!pickable.length) return;
+
+    const hero = document.getElementById('top');
+    const el = renderer.domElement;
+    const ray = new T.Raycaster(), v = new T.Vector2();
+    let hot = null;
+
+    const at = e => {
+      const r = el.getBoundingClientRect();
+      if (!r.width || !r.height) return null;
+      v.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+      v.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+      ray.setFromCamera(v, camera);
+      const hit = ray.intersectObjects(pickable, false)[0];
+      return hit ? hit.object : null;
+    };
+
+    const setHot = m => {
+      if (m === hot) return;
+      if (hot){
+        gsap.to(hot.scale, {x:1, y:1, duration:.5, ease:'power3.out'});
+        const s = hot.userData.set;
+        gsap.to(s.glow.material, {opacity: s.glow.userData.b, duration:.5});
+      }
+      hot = m;
+      if (hot){
+        gsap.to(hot.scale, {x:1.055, y:1.055, duration:.5, ease:'power3.out'});
+        const s = hot.userData.set;
+        if (s.glow.userData.b === undefined) s.glow.userData.b = s.glow.material.opacity;
+        gsap.to(s.glow.material, {opacity: Math.min(1, s.glow.userData.b * 2.4), duration:.5});
+      }
+      hero.style.cursor = hot ? 'pointer' : '';
+      if (!hot && window.__peek) window.__peek.hide();
+    };
+
+    // the gate is still up, or the camera has already flown past them
+    const shut = () => document.getElementById('gate') || flight > 0.45;
+
+    hero.addEventListener('pointermove', e => {
+      if (e.pointerType === 'touch') return;
+      if (shut()){ setHot(null); return; }
+      const over = e.target.closest ? e.target.closest('a, button') : null;
+      const m = over ? null : at(e);
+      setHot(m);
+      if (m && window.__peek){
+        const it = m.userData.item;
+        window.__peek.show(it.fig || 'View', it.fk || it.met || '', e.clientX, e.clientY);
+      }
+    }, {passive:true});
+
+    hero.addEventListener('pointerleave', () => setHot(null), {passive:true});
+    addEventListener('scroll', () => { if (hot && shut()) setHot(null); }, {passive:true});
+
+    hero.addEventListener('click', e => {
+      if (shut()) return;
+      if (e.target.closest && e.target.closest('a, button')) return;
+      const m = at(e);
+      if (m && m.userData.item.href) location.href = m.userData.item.href;
+    });
+  })();
+
   tick();
 
   window.__flight = (p) => { flight = Math.max(0, Math.min(1, p)); };
@@ -1499,7 +1639,9 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
   // a drag is not a click
   cards.forEach(c => c.addEventListener('click', e => { if (moved > 6) e.preventDefault(); }));
 
-  // the cursor carries the verb and that frame's own number
+  // the cursor carries the verb and that frame's own number. The room upstairs
+  // borrows the same disc for its sets, so the gesture means one thing on the
+  // page: this is a case, and it opens.
   const card = document.getElementById('peek');
   if (card && !RM && matchMedia('(hover: hover)').matches){
     const fig = card.querySelector('.pf'), kic = card.querySelector('.pn');
@@ -1510,29 +1652,33 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
       card.style.transform = 'translate3d('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px,0)';
       if (shown && (Math.abs(tx-cx) > .4 || Math.abs(ty-cy) > .4)) raf = requestAnimationFrame(place);
     };
-    const track2 = e => {
-      tx = e.clientX - S/2; ty = e.clientY - S/2;
-      if (!raf) raf = requestAnimationFrame(place);
-    };
-    cards.forEach(c => {
-      c.addEventListener('mouseenter', e => {
-        fig.textContent = c.dataset.fig || '';
-        kic.textContent = c.dataset.fk  || '';
-        cx = tx = e.clientX - S/2; cy = ty = e.clientY - S/2;
+    const api = {
+      move(x, y){ tx = x - S/2; ty = y - S/2; if (!raf) raf = requestAnimationFrame(place); },
+      show(f, k, x, y){
+        fig.textContent = f || ''; kic.textContent = k || '';
+        if (shown){ api.move(x, y); return; }
+        cx = tx = x - S/2; cy = ty = y - S/2;
         card.style.transform = 'translate3d('+cx+'px,'+cy+'px,0)';
         shown = true;
         if (window.gsap) gsap.to(card, {opacity:1, scale:1, duration:.3, ease:'power2.out',
                                         startAt:{scale:.7}});
         else card.style.opacity = 1;
-      });
-      c.addEventListener('mousemove', track2, {passive:true});
-      c.addEventListener('mouseleave', () => {
+      },
+      hide(){
+        if (!shown) return;
         shown = false;
         if (window.gsap) gsap.to(card, {opacity:0, scale:.7, duration:.22, ease:'power2.in'});
         else card.style.opacity = 0;
-      });
+      }
+    };
+    window.__peek = api;
+    cards.forEach(c => {
+      c.addEventListener('mouseenter', e => api.show(c.dataset.fig, c.dataset.fk, e.clientX, e.clientY));
+      c.addEventListener('mousemove', e => api.move(e.clientX, e.clientY), {passive:true});
+      c.addEventListener('mouseleave', api.hide);
     });
   }
+
   mark();
 
   // the strip deals itself out when the section arrives
