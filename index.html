@@ -156,6 +156,28 @@ a{color:inherit;text-decoration:none}
   font-size:clamp(12px,1vw,16px);line-height:1.45;max-width:30ch;
   transform:rotate(-1.1deg);transform-origin:left;transition:color .5s}
 .hw .dn{color:var(--dim)} .hp .dn{color:#6E6B66}
+/* At rest each half runs its own index down the far edge, so the screen is
+   never two headlines in a void: the work lists its twelve cases, the person
+   lists the markets and the disciplines. Lean on a half and the index steps
+   back to let that half's numbers through. */
+.roll{position:absolute;right:clamp(16px,3.4vw,54px);top:0;bottom:0;z-index:0;
+  width:min(44%,330px);overflow:hidden;pointer-events:none;opacity:.55;
+  transition:opacity .6s cubic-bezier(.3,0,.1,1);
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 76%,transparent);
+  mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 76%,transparent)}
+.roll ul{list-style:none;margin:0;padding:0;animation:roll 46s linear infinite}
+.hp .roll ul{animation-duration:38s;animation-direction:reverse}
+.roll li{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding:10px 0;border-bottom:1px solid currentColor;
+  font-family:var(--ui);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.roll i{font-style:normal;opacity:.6;font-variant-numeric:tabular-nums}
+.roll b{font-weight:400;text-align:right;min-width:0;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.hw .roll{color:#36342F} .hp .roll{color:#BCB6AD}
+@keyframes roll{to{transform:translateY(-50%)}}
+@media (hover:hover){ .half:hover .roll{opacity:.16} }
+@media (max-width:860px){ .roll{display:none} }
+@media (prefers-reduced-motion:reduce){ .roll ul{animation:none} }
 /* two of its numbers, which come in only when you lean on that side */
 .ev{position:absolute;inset:0;z-index:0;pointer-events:none}
 .evc{position:absolute;right:clamp(18px,4vw,64px);
@@ -509,6 +531,7 @@ a{color:inherit;text-decoration:none}
 <div class="curtain" id="gate">
   <nav class="split" id="doors" aria-label="Choose where to start">
     <a class="half hw" href="#work" data-go="work">
+      <span class="roll" aria-hidden="true"><ul><li><i>01</i><b>Four years of paid media for a…</b></li><li><i>02</i><b>Premium property across four c…</b></li><li><i>03</i><b>A Japanese exporter, set up di…</b></li><li><i>04</i><b>Organic search, rebuilt on the…</b></li><li><i>05</i><b>An email platform built in-hou…</b></li><li><i>06</i><b>Twelve Canadian brands, handle…</b></li><li><i>07</i><b>An ecommerce brand, built, mig…</b></li><li><i>08</i><b>Eight clients, fourteen proper…</b></li><li><i>09</i><b>$2,343 billed in forty-eight h…</b></li><li><i>10</i><b>Brand protection, from the fir…</b></li><li><i>11</i><b>A 112,000-follower account, ta…</b></li><li><i>12</i><b>An ROI dashboard built from no…</b></li><li><i>01</i><b>Four years of paid media for a…</b></li><li><i>02</i><b>Premium property across four c…</b></li><li><i>03</i><b>A Japanese exporter, set up di…</b></li><li><i>04</i><b>Organic search, rebuilt on the…</b></li><li><i>05</i><b>An email platform built in-hou…</b></li><li><i>06</i><b>Twelve Canadian brands, handle…</b></li><li><i>07</i><b>An ecommerce brand, built, mig…</b></li><li><i>08</i><b>Eight clients, fourteen proper…</b></li><li><i>09</i><b>$2,343 billed in forty-eight h…</b></li><li><i>10</i><b>Brand protection, from the fir…</b></li><li><i>11</i><b>A 112,000-follower account, ta…</b></li><li><i>12</i><b>An ROI dashboard built from no…</b></li></ul></span>
       <span class="ev" aria-hidden="true">
         <span class="evc e1">300&ndash;400 vehicles a month</span>
         <span class="evc e2">14 months of invoices</span>
@@ -524,6 +547,7 @@ a{color:inherit;text-decoration:none}
       </span>
     </a>
     <a class="half hp" href="#who" data-go="who">
+      <span class="roll" aria-hidden="true"><ul><li><i>KE</i><b>Kenya</b></li><li><i>UG</i><b>Uganda</b></li><li><i>TZ</i><b>Tanzania</b></li><li><i>PK</i><b>Pakistan</b></li><li><i>US</i><b>United States</b></li><li><i>CA</i><b>Canada</b></li><li><i>·</i><b>Google Ads</b></li><li><i>·</i><b>Meta</b></li><li><i>·</i><b>Email</b></li><li><i>·</i><b>Search</b></li><li><i>·</i><b>Landing pages</b></li><li><i>·</i><b>Attribution</b></li><li><i>·</i><b>Reporting</b></li><li><i>18</i><b>Since 2018</b></li><li><i>KE</i><b>Kenya</b></li><li><i>UG</i><b>Uganda</b></li><li><i>TZ</i><b>Tanzania</b></li><li><i>PK</i><b>Pakistan</b></li><li><i>US</i><b>United States</b></li><li><i>CA</i><b>Canada</b></li><li><i>·</i><b>Google Ads</b></li><li><i>·</i><b>Meta</b></li><li><i>·</i><b>Email</b></li><li><i>·</i><b>Search</b></li><li><i>·</i><b>Landing pages</b></li><li><i>·</i><b>Attribution</b></li><li><i>·</i><b>Reporting</b></li><li><i>18</i><b>Since 2018</b></li></ul></span>
       <span class="ev" aria-hidden="true">
         <span class="evc e1">Six markets, four years</span>
         <span class="evc e2">$166,643 of media managed</span>
@@ -923,26 +947,37 @@ a{color:inherit;text-decoration:none}
   host.appendChild(renderer.domElement);
 
   // sets scattered through the volume, clear of the line the camera takes
-  const LAYOUT = [
-    [-4.6,  1.5, -6,  0.42, 1.00], [ 4.9, -0.4, -9,  -0.46, 1.15],
-    [-5.6, -1.9, -13, 0.38, 0.92], [ 4.2,  2.1, -17, -0.40, 0.86],
-    [-3.9,  0.2, -21, 0.34, 1.08], [ 5.4, -2.0, -25, -0.44, 0.96],
-    [-5.1,  2.2, -29, 0.40, 0.90], [ 3.8, -1.2, -33, -0.36, 1.04],
-    [-4.4, -0.8, -37, 0.36, 0.88], [ 5.0,  1.6, -41, -0.42, 0.98],
-    [-5.3,  0.9, -45, 0.38, 0.94], [ 4.1, -2.1, -49, -0.38, 1.02],
-    [-4.0,  1.9, -53, 0.34, 0.90]
-  ];
+  // Twelve sets, one per case, hung down a corridor rather than scattered: two
+  // columns at the same angle, a steady four units apart, alternating high and
+  // low so the camera has something to read on the way through. Each one throws
+  // a reflection on the floor it is standing on.
+  const LAYOUT = WORK.map((_, i) => {
+    const side = (i % 2) ? 1 : -1;
+    const high = (i % 4) < 2;
+    return [side * 4.9, (high ? 1.15 : -1.15) * (1 + (i % 3) * 0.05),
+            -6 - i * 4, -side * 0.42, 1];
+  });
   const sets = [], screens = [];
   LAYOUT.forEach((L, i) => {
     const [x, y, z, ry, sc] = L;
-    const item = i < WORK.length ? WORK[i] : null;     // the rest are idle sets
+    const item = i < WORK.length ? WORK[i] : null;
     const p = tvTexture(item, i + 2);
     screens.push(p);
     const w = 3.5 * sc, h = w * (460 / 640);
-    const m = new T.Mesh(new T.PlaneGeometry(w, h),
+    const geo = new T.PlaneGeometry(w, h);
+    const m = new T.Mesh(geo,
       new T.MeshBasicMaterial({ map: p.tex, fog: true, transparent: true }));
-    m.position.set(x, y, z); m.rotation.y = ry; m.rotation.z = (i % 3 - 1) * 0.02;
+    m.position.set(x, y, z); m.rotation.y = ry; m.rotation.z = (i % 3 - 1) * 0.015;
     scene.add(m);
+
+    // the same set, upside down on the surface it is standing on
+    const refl = new T.Mesh(geo, new T.MeshBasicMaterial({
+      map: p.tex, fog: true, transparent: true, opacity: .1, depthWrite: false
+    }));
+    refl.position.set(x, y - h - 0.26, z + 0.02);
+    refl.rotation.y = ry; refl.rotation.z = -m.rotation.z;
+    refl.scale.y = -1;
+    scene.add(refl);
 
     const glow = new T.Sprite(new T.SpriteMaterial({
       map: glowTex, transparent: true, opacity: item ? .34 : .26,
@@ -950,8 +985,23 @@ a{color:inherit;text-decoration:none}
     }));
     glow.position.set(x, y, z - 0.12); glow.scale.set(w * 2.1, h * 2.4, 1);
     scene.add(glow);
-    sets.push({ m, glow, z });
+    sets.push({ m, glow, refl, z });
   });
+
+  // a current runs down the wall: one set at a time comes up and settles back,
+  // the way a bank of monitors refreshes out of step with itself
+  if (window.gsap) {
+    let n = 0;
+    setInterval(() => {
+      const s = sets[n % sets.length]; n++;
+      if (!s || document.hidden) return;
+      const b = s.glow.userData.b === undefined
+        ? (s.glow.userData.b = s.glow.material.opacity) : s.glow.userData.b;
+      gsap.timeline()
+        .to(s.glow.material, {opacity: Math.min(1, b * 1.9), duration: .55, ease: 'power2.out'})
+        .to(s.glow.material, {opacity: b, duration: 1.3, ease: 'power2.inOut'});
+    }, 1700);
+  }
 
   // dust in the air, so the dark is not empty
   const dust = (() => {
@@ -1019,6 +1069,7 @@ a{color:inherit;text-decoration:none}
     const out = Math.max(0, Math.min(1, (f - 0.80) / 0.14));
     sets.forEach(s => {
       s.m.material.opacity = 1 - out;
+      if (s.refl) s.refl.material.opacity = .1 * (1 - out);
       s.glow.material.opacity = (s.glow.userData.b || (s.glow.userData.b = s.glow.material.opacity)) * (1 - out);
     });
     dust.material.opacity = .5 * (1 - out * .7);
@@ -1435,7 +1486,7 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
   const tl = gsap.timeline();
   tl.fromTo('.hw', {xPercent:-101}, {xPercent:0, duration:.85, ease:'power3.inOut'})
     .fromTo('.hp', {xPercent:101},  {xPercent:0, duration:.85, ease:'power3.inOut'}, '<')
-    .from('.half>*', {opacity:0, y:16, duration:.7, ease:'power3.out',
+    .from('.htop, .hc, .hfoot', {opacity:0, y:16, duration:.7, ease:'power3.out',
                       stagger:{each:.06}}, '-=0.4')
     .add(()=>{ if (seam) seam.classList.add('on'); }, '-=0.45')
     .to('.dar svg', {x:5, duration:.4, ease:'power2.out', stagger:.08}, '-=0.2')
