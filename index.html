@@ -25,6 +25,7 @@
   --paper:#FBFAF8;      /* off-white ink */
   --quiet:#8A8A86;      /* label grey */
   --hair:#232322;       /* rules */
+  --acid:#D9FF3F;      /* the one colour, and only on the thing you press */
   --dim:#78766F;        /* small caps still need 4.5:1 on the ink */
   --plate:#FBFAF8;      /* paper the portrait is printed on */
   --display:Anton,Impact,"Haettenschweiler","Arial Narrow Bold",sans-serif;
@@ -151,9 +152,9 @@ a{color:inherit;text-decoration:none}
 .hw .pill{border:1px solid #2B2A28;color:var(--quiet)}
 .hp .pill{border:1px solid #DCD8D0;color:#6E6B66}
 .dk{display:block;font-family:var(--display);text-transform:uppercase;font-weight:400;
-  letter-spacing:-.012em;font-size:clamp(30px,4.3vw,66px);line-height:.9}
-.dn{display:block;margin-top:clamp(10px,1.1vw,16px);font-family:var(--tag);
-  font-size:clamp(12px,1vw,16px);line-height:1.45;max-width:30ch;
+  letter-spacing:-.015em;font-size:clamp(38px,6.6vw,104px);line-height:.86}
+.dn{display:block;margin-top:clamp(12px,1.3vw,20px);font-family:var(--tag);
+  font-size:clamp(13px,1.15vw,19px);line-height:1.4;max-width:30ch;
   transform:rotate(-1.1deg);transform-origin:left;transition:color .5s}
 .hw .dn{color:var(--dim)} .hp .dn{color:#6E6B66}
 /* At rest each half runs its own index down the far edge, so the screen is
@@ -192,20 +193,23 @@ a{color:inherit;text-decoration:none}
 /* the action line: what happens when you click, and the arrow that says you can */
 .hfoot{display:flex;flex-direction:column;gap:clamp(10px,1.1vw,15px)}
 .dgo{display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding-top:clamp(14px,1.4vw,20px)}
-.hw .dgo{border-top:1px solid #272624} .hp .dgo{border-top:1px solid #DCD8D0}
-.dgt{font-family:var(--ui);font-weight:400;font-size:11px;letter-spacing:.2em;
-  text-transform:uppercase;transition:color .45s}
+  padding:clamp(13px,1.3vw,18px) clamp(14px,1.4vw,20px) clamp(13px,1.3vw,18px)
+          clamp(18px,1.8vw,26px);
+  border-radius:999px;transition:background .45s cubic-bezier(.3,0,.1,1),
+                                border-color .45s cubic-bezier(.3,0,.1,1)}
+.hw .dgo{border:1px solid #38352F} .hp .dgo{border:1px solid #D3CEC5}
+.dgt{font-family:var(--ui);font-weight:400;font-size:clamp(11px,.95vw,13px);
+  letter-spacing:.2em;text-transform:uppercase;transition:color .45s}
 .hw .dgt{color:var(--quiet)} .hp .dgt{color:#5E5B57}
 .meta{font-family:var(--ui);font-size:9px;letter-spacing:.26em;text-transform:uppercase}
 .meta i{font-style:normal}
 .hw .meta{color:#54514D} .hp .meta{color:#A09B93}
 .meta .tp{display:none}
-.dar{flex:none;width:clamp(44px,3.6vw,58px);height:clamp(44px,3.6vw,58px);
+.dar{flex:none;width:clamp(38px,3vw,48px);height:clamp(38px,3vw,48px);
   border-radius:50%;display:grid;place-items:center;
   transition:background .5s cubic-bezier(.22,1,.36,1),
              border-color .5s cubic-bezier(.22,1,.36,1)}
-.hw .dar{border:1px solid #3C3A37} .hp .dar{border:1px solid #CFCAC2}
+.hw .dar,.hp .dar{border:1px solid var(--acid)}
 .dar svg{width:44%;height:44%;fill:none;stroke-width:1.6;
   stroke-linecap:round;stroke-linejoin:round;
   transition:stroke .5s,transform .5s cubic-bezier(.22,1,.36,1)}
@@ -220,15 +224,20 @@ a{color:inherit;text-decoration:none}
   .half:hover .evc{opacity:1}
   .half:hover .e1{transform:rotate(1.4deg) translateY(0)}
   .half:hover .e2{transform:rotate(-1.2deg) translateY(0)}
-  .hw:hover .dgt,.hw:hover .pill{color:var(--paper)}
-  .hw:hover .pill{border-color:#55524E}
-  .hw:hover .dar{background:var(--paper);border-color:var(--paper)}
-  .hw:hover .dar svg{stroke:var(--ink);transform:translateX(2px)}
-  .hp:hover .dgt,.hp:hover .pill{color:var(--ink)}
-  .hp:hover .pill{border-color:#B6B1A9}
-  .hp:hover .dar{background:var(--ink);border-color:var(--ink)}
-  .hp:hover .dar svg{stroke:var(--paper);transform:translateX(2px)}
+  .hw:hover .pill{color:var(--paper);border-color:#55524E}
+  .hp:hover .pill{color:var(--ink);border-color:#B6B1A9}
+  /* the button lights up in the one colour the site owns */
+  .half:hover .dgo{background:var(--acid);border-color:var(--acid)}
+  .half:hover .dgt{color:#121209}
+  .half:hover .dar{background:#121209;border-color:#121209}
+  .half:hover .dar svg{stroke:var(--acid);transform:translateX(2px)}
 }
+/* something on the screen has a pulse, so it reads as live rather than printed */
+.meta{display:flex;align-items:center;gap:9px}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--acid);flex:none;
+  animation:beat 2.4s ease-in-out infinite}
+@keyframes beat{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){ .pulse{animation:none;opacity:.8} }
 .half:focus-visible{outline:2px solid currentColor;outline-offset:-12px}
 /* the monogram rides the seam and leans toward whichever side is winning */
 .seam{position:absolute;left:50%;top:50%;z-index:5;opacity:0;
@@ -390,7 +399,7 @@ a{color:inherit;text-decoration:none}
    evidence under the cursor: the screenshot and the number the case turns on.
    It is a preview of the page you are about to open, not decoration, so it
    carries the real plate from that case. Pointer devices only. */
-.pk{position:fixed;left:0;top:0;z-index:40;width:280px;pointer-events:none;
+.pk{position:fixed;left:0;top:0;z-index:70;width:280px;pointer-events:none;
   opacity:0;will-change:transform;
   border:1px solid #2E2C2A;background:#0C0C0B;
   box-shadow:0 26px 60px rgba(0,0,0,.72)}
@@ -542,8 +551,8 @@ a{color:inherit;text-decoration:none}
         <span class="dn">Twelve cases. Screenshots, invoices, dashboards.</span>
       </span>
       <span class="hfoot">
-        <span class="dgo"><span class="dgt">Open the case files</span><span class="dar" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 13h15M13.5 6.5 20 13l-6.5 6.5"/></svg></span></span>
-        <span class="meta"><i class="kb">Press 1 or click</i><i class="tp">Tap this half</i></span>
+        <span class="dgo" role="presentation"><span class="dgt">Open the case files</span><span class="dar" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 13h15M13.5 6.5 20 13l-6.5 6.5"/></svg></span></span>
+        <span class="meta"><b class="pulse" aria-hidden="true"></b><i class="kb">Press 1 or click</i><i class="tp">Tap this half</i></span>
       </span>
     </a>
     <a class="half hp" href="#who" data-go="who">
@@ -558,8 +567,8 @@ a{color:inherit;text-decoration:none}
         <span class="dn">Where I work, what I run, how to reach me.</span>
       </span>
       <span class="hfoot">
-        <span class="dgo"><span class="dgt">Start at the beginning</span><span class="dar" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 13h15M13.5 6.5 20 13l-6.5 6.5"/></svg></span></span>
-        <span class="meta"><i class="kb">Press 2 or click</i><i class="tp">Tap this half</i></span>
+        <span class="dgo" role="presentation"><span class="dgt">Start at the beginning</span><span class="dar" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 13h15M13.5 6.5 20 13l-6.5 6.5"/></svg></span></span>
+        <span class="meta"><b class="pulse" aria-hidden="true"></b><i class="kb">Press 2 or click</i><i class="tp">Tap this half</i></span>
       </span>
     </a>
   </nav>
@@ -670,7 +679,7 @@ a{color:inherit;text-decoration:none}
         <span class="idx">05</span>
         <span class="ttl">An email platform built in-house instead of rented</span>
         <span class="met">158,933 sends</span></span></a>
-      <a class="row" href="/work/twelve-brands/" data-slug="twelve-brands" data-peek="/assets/work/cs/salon.jpg" data-fig="12" data-fk="brands" data-industry="Local services" data-market="Canada"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/twelve-brands/" data-slug="twelve-brands" data-peek="" data-fig="12" data-fk="brands" data-industry="Local services" data-market="Canada"><span class="sweep"></span><span class="in">
         <span class="idx">06</span>
         <span class="ttl">Twelve Canadian brands, handled end to end</span>
         <span class="met">Search, brand, web</span></span></a>
@@ -690,7 +699,7 @@ a{color:inherit;text-decoration:none}
         <span class="idx">10</span>
         <span class="ttl">Brand protection, from the first copy to the takedown</span>
         <span class="met">Content theft</span></span></a>
-      <a class="row" href="/work/account-recovery/" data-slug="account-recovery" data-peek="/assets/work/cs/insta.jpg" data-fig="112K" data-fk="followers back" data-industry="Brand" data-market="Mombasa"><span class="sweep"></span><span class="in">
+      <a class="row" href="/work/account-recovery/" data-slug="account-recovery" data-peek="/assets/work/cs/insta.jpg" data-fig="112K" data-fk="followers back" data-industry="Brand" data-market="Kenya"><span class="sweep"></span><span class="in">
         <span class="idx">11</span>
         <span class="ttl">A 112,000-follower account, taken and recovered</span>
         <span class="met">Social</span></span></a>
@@ -1493,6 +1502,25 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
     .to('.dar svg', {x:0, duration:.8, ease:'elastic.out(1,.55)', stagger:.08}, '-=0.14')
     .set(skip, {display:'block'}, '-=0.9')
     .to(skip, {opacity:1, duration:.5, ease:'power2.out'}, '-=0.85');
+
+  // the same card the index uses, so the gesture is one gesture
+  if (!RM && matchMedia('(hover: hover)').matches && doors){
+    const plate = document.querySelector('.plate');
+    const cards = {
+      work: {img:'/assets/work/grp/cover.jpg', fig:'12', fk:'cases on file'},
+      who:  {img: plate ? plate.dataset.src : '', fig:'2018', fk:'to now, five markets'}
+    };
+    doors.querySelectorAll('a').forEach(a => {
+      const d = cards[a.dataset.go] || {};
+      a.addEventListener('mouseenter', e => {
+        if (window.__peek) window.__peek.show(d, e.clientX, e.clientY);
+      });
+      a.addEventListener('mousemove', e => {
+        if (window.__peek) window.__peek.move(e.clientX, e.clientY);
+      }, {passive:true});
+      a.addEventListener('mouseleave', () => { if (window.__peek) window.__peek.hide(); });
+    });
+  }
 
   if (doors) doors.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', e => { e.preventDefault(); open(a.dataset.go); });
