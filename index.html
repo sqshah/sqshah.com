@@ -263,25 +263,76 @@ a{color:inherit;text-decoration:none}
   .split:has(.hp:hover)~.seam{left:34%;transform:translate(-50%,-50%) rotate(-8deg);
     border-color:var(--volt);color:var(--volt)}
 }
+/* ---------------------------------------------------------------- phone --
+   A phone gets one world at a time, not two halves of one. The slides sit on a
+   track that moves sideways, the switch lives where a thumb already is, and the
+   slide itself is the link. Everything that was there to fill a wide screen —
+   the rolling index, the pill, the two numbers, the keyboard hint — comes off. */
+.dock{display:none}
 @media (max-width:860px){
-  .split{flex-direction:column}
-  .half{flex:1 1 50%;gap:clamp(10px,1.8vh,18px);padding:clamp(18px,5vw,26px);
-    display:flex;flex-direction:column}
-  .htop{order:1} .hc{order:2} .ev{order:3} .hfoot{order:4;margin-top:auto}
-  .dk{font-size:clamp(34px,11.4vw,58px);line-height:.88}
-  .dn{font-size:clamp(13px,3.6vw,16px);max-width:34ch;margin-top:8px}
-  .meta .kb{display:none} .meta .tp{display:inline}
-  /* no cursor to lean on, so the two numbers are simply there */
-  .ev{position:static;display:flex;flex-wrap:wrap;gap:7px;padding-top:2px}
-  .evc{position:static;opacity:1;transform:none;padding:7px 11px;font-size:9.5px;
-    letter-spacing:.1em;white-space:normal}
-  .dgo{padding:14px 14px 14px 18px}
+  .split{flex-direction:row;width:200vw;height:100%;
+    transition:transform .58s cubic-bezier(.22,1,.36,1)}
+  .split.on-who{transform:translateX(-100vw)}
+  .half{flex:0 0 100vw;width:100vw;height:100%;gap:0;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:calc(env(safe-area-inset-top,14px) + 90px) var(--edge)
+            calc(env(safe-area-inset-bottom,14px) + 134px);
+    transition:none;filter:none}
+  .htop{order:1;margin-bottom:20px} .pill{display:none}
+  .hc{order:2} .ev{display:none} .roll{display:none} .meta{display:none}
+  .hfoot{order:3;margin-top:30px;gap:0}
+  .dk{font-size:clamp(44px,15vw,76px);line-height:.88;letter-spacing:-.02em}
+  .dn{font-size:clamp(14px,4.2vw,18px);max-width:26ch;margin-top:16px}
+  .dgo{align-self:flex-start;width:auto;gap:18px;padding:9px 9px 9px 22px}
   .dgt{font-size:11px}
+  .dar{width:40px;height:40px;background:var(--sig);border-color:var(--sig)}
+  .half .dar svg{stroke:#121209}
   .hw::before{-webkit-mask-image:radial-gradient(circle at 40% 50%,#000 10%,transparent 80%);
     mask-image:radial-gradient(circle at 40% 50%,#000 10%,transparent 80%)}
-  .seam{display:none}
-  .skip{bottom:auto;top:50%;transform:translate(-50%,-50%)}
+  /* the mark takes the corner, the skip sits opposite it */
+  .seam{display:grid;top:calc(env(safe-area-inset-top,14px) + 16px);left:var(--edge);
+    transform:none;opacity:1;width:34px;height:34px;border-radius:9px;
+    background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);
+    color:var(--paper);font-size:12px;
+    transition:background .5s,color .5s,border-color .5s}
+  .split.on-who~.seam{background:rgba(14,14,14,.06);border-color:rgba(14,14,14,.16);
+    color:var(--ink)}
+  .skip{top:calc(env(safe-area-inset-top,14px) + 16px);bottom:auto;left:auto;
+    right:var(--edge);transform:none;background:none;border:0;padding:8px 2px;
+    opacity:1;display:block;color:rgba(251,250,248,.5);transition:color .5s}
+  .split.on-who~.skip{color:rgba(14,14,14,.5)}
+  /* the switch */
+  .dock{display:flex;position:absolute;z-index:6;left:var(--edge);right:var(--edge);
+    bottom:calc(env(safe-area-inset-bottom,14px) + 20px);
+    flex-direction:column;align-items:center;gap:10px}
+  .seg{position:relative;display:grid;grid-template-columns:1fr 1fr;width:100%;
+    max-width:340px;height:52px;padding:4px;border-radius:999px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    transition:background .5s,border-color .5s}
+  .split.on-who~.dock .seg{background:rgba(14,14,14,.06);border-color:rgba(14,14,14,.14)}
+  .segt{position:absolute;top:4px;left:4px;width:calc(50% - 4px);height:calc(100% - 8px);
+    border-radius:999px;background:var(--acid);
+    transition:transform .5s cubic-bezier(.22,1,.36,1),background .5s}
+  .split.on-who~.dock .segt{transform:translateX(100%);background:var(--volt)}
+  .segb{position:relative;z-index:2;appearance:none;background:none;border:0;
+    cursor:pointer;font:inherit;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:rgba(251,250,248,.55);transition:color .4s}
+  .segb.on{color:#121209}
+  .split.on-who~.dock .segb{color:rgba(14,14,14,.5)}
+  .split.on-who~.dock .segb.on{color:var(--paper)}
+  .swipe{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(251,250,248,.34);transition:color .5s}
+  .split.on-who~.dock .swipe{color:rgba(14,14,14,.36)}
 }
+@media (prefers-reduced-motion:reduce){ .split{transition:none} }
+/* the curtain that covers the change of scene */
+.veil{position:fixed;inset:0;z-index:80;display:grid;place-items:center;
+  visibility:hidden;pointer-events:none;will-change:transform}
+.veil span{font-family:var(--display);text-transform:uppercase;font-weight:400;
+  letter-spacing:-.015em;font-size:clamp(28px,5.4vw,64px);line-height:.9;
+  text-align:center;padding:0 var(--edge)}
+
 .cue{position:absolute;left:50%;bottom:clamp(22px,4vh,42px);transform:translateX(-50%);z-index:3;
   display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;
   font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
@@ -622,9 +673,18 @@ a{color:inherit;text-decoration:none}
     </a>
   </nav>
   <span class="grain" aria-hidden="true"></span>
+  <div class="dock" id="dock">
+    <div class="seg" role="tablist" aria-label="Choose a path">
+      <span class="segt" aria-hidden="true"></span>
+      <button class="segb on" type="button" role="tab" data-to="work" aria-selected="true">Receipts</button>
+      <button class="segb" type="button" role="tab" data-to="who" aria-selected="false">Person</button>
+    </div>
+    <span class="swipe">Swipe, or tap the switch</span>
+  </div>
   <span class="seam" id="seam" aria-hidden="true">SQ</span>
   <button class="skip" id="skip" type="button">Skip</button>
 </div>
+<div class="veil" id="veil" aria-hidden="true"><span></span></div>
 <i class="prog"></i>
 <figure class="pk" id="peek" aria-hidden="true"><img alt=""><figcaption class="pb"><b class="pf"></b><span class="pn"></span></figcaption></figure>
 
@@ -1536,16 +1596,36 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
   const skip   = document.getElementById('skip');
   let opened = false;
 
+  // The change of scene happens behind a curtain: it comes up in the colour of
+  // wherever you are going, says so, and leaves on the other side.
+  const veil = document.getElementById('veil');
+  if (veil) gsap.set(veil, {yPercent:101});
+  const VEIL = {
+    work: ['#0C0C0B', 'var(--paper)', 'Opening the case files'],
+    who:  ['#FBFAF8', 'var(--ink)',   'Starting at the beginning'],
+    null: ['#0C0C0B', 'var(--paper)', 'Straight in']
+  };
   const open = (target) => {
     if (opened) return; opened = true;
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-    gsap.timeline()
-      .to(doors, {opacity:0, y:-8, duration:.3, ease:'power2.in'})
-      .to(gateEl, {yPercent:-100, duration:.78, ease:'power3.inOut'}, '-=0.06')
-      .add(()=>{ gateEl.remove(); if (target) location.hash = target; })
-      .to('.eyebrow',{opacity:1,duration:.7,ease:'power2.out'},'-=0.42')
-      .to('.nav',{opacity:1,duration:.7,ease:'power2.out'},'-=0.55');
+    const [bg, fg, line] = VEIL[target] || VEIL.null;
+    const tl = gsap.timeline();
+    if (veil){
+      veil.style.background = bg;
+      veil.style.color = fg;
+      veil.firstElementChild.textContent = line;
+      tl.set(veil, {visibility:'visible', yPercent:101})
+        .to(veil, {yPercent:0, duration:.52, ease:'power3.inOut'});
+    }
+    tl.add(()=>{
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        gateEl.remove();
+        if (target) location.hash = target;
+      });
+    if (veil) tl.to(veil, {yPercent:-101, duration:.64, ease:'power3.inOut'}, '+=0.24')
+                .set(veil, {visibility:'hidden'});
+    tl.to('.eyebrow', {opacity:1, duration:.7, ease:'power2.out'}, '-=0.42')
+      .to('.nav',     {opacity:1, duration:.7, ease:'power2.out'}, '-=0.55');
   };
 
   // hold the page still behind the gate
@@ -1566,6 +1646,39 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
     .to('.dar svg', {x:0, duration:.8, ease:'elastic.out(1,.55)', stagger:.08}, '-=0.14')
     .set(skip, {display:'block'}, '-=0.9')
     .to(skip, {opacity:1, duration:.5, ease:'power2.out'}, '-=0.85');
+
+  // ---- the phone stage: one world at a time -------------------------------
+  const dock = document.getElementById('dock');
+  const PHONE = () => matchMedia('(max-width:860px)').matches;
+  let mode = 'work';
+  const setMode = (m) => {
+    if (m === mode) return;
+    mode = m;
+    doors.classList.toggle('on-who', m === 'who');
+    if (dock) dock.querySelectorAll('.segb').forEach(btn => {
+      const on = btn.dataset.to === m;
+      btn.classList.toggle('on', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  };
+  if (dock) dock.querySelectorAll('.segb').forEach(btn => {
+    btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation();
+      setMode(btn.dataset.to); });
+  });
+  // a swipe moves between them; a tap on the slide opens it
+  let sx = 0, sy = 0, moved = false;
+  gateEl.addEventListener('touchstart', e => {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; moved = false;
+  }, {passive:true});
+  gateEl.addEventListener('touchmove', () => { moved = true; }, {passive:true});
+  gateEl.addEventListener('touchend', e => {
+    if (!PHONE()) return;
+    const dx = e.changedTouches[0].clientX - sx,
+          dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4){
+      setMode(dx < 0 ? 'who' : 'work');
+    }
+  }, {passive:true});
 
   // the same card the index uses, so the gesture is one gesture
   if (!RM && matchMedia('(hover: hover)').matches && doors){
@@ -1588,7 +1701,11 @@ Promise.resolve(JSON.parse(document.getElementById('sigdata').textContent)).then
   }
 
   if (doors) doors.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', e => { e.preventDefault(); open(a.dataset.go); });
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      if (PHONE() && a.dataset.go !== mode){ setMode(a.dataset.go); return; }
+      open(a.dataset.go);
+    });
   });
   if (skip) skip.addEventListener('click', ()=>open(null));
   addEventListener('keydown', e => {
