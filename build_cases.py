@@ -711,7 +711,7 @@ def sites_markup(groups):
             k += 1
             out += ('          <figure class="swin"><div class="st">'
                     '<i></i><i></i><i></i><b class="rd"></b></div>'
-                    f'<img src="/assets/work/sites/p{k:02d}.jpg" '
+                    f'<img src="/assets/work/sites/p{k:02d}.jpg" loading="lazy" decoding="async" '
                     'alt="A client property, name and branding withheld">'
                     '</figure>\n')
         out += '        </div>\n      </div>\n'
@@ -724,7 +724,7 @@ def win_markup(w):
     return (f'    <figure class="win{tall}" data-win>\n'
             f'      <div class="top"><span class="dots"><i></i><i></i><i></i></span>\n'
             f'        <span class="url">{w["url"]}</span></div>\n'
-            f'      <div class="pane"><img src="{w["img"]}" alt="{w["alt"]}"></div>\n'
+            f'      <div class="pane"><img src="{w["img"]}" alt="{w["alt"]}" loading="lazy" decoding="async"></div>\n'
             f'      <figcaption><span class="lbl">{w["cap"][0]}</span>'
             f'<span class="lbl">{w["cap"][1]}</span></figcaption>\n    </figure>')
 
@@ -749,7 +749,7 @@ def chapter(no, c):
     if c.get('img'):
         a, b = c['cap']
         parts.append(f'    <figure class="plate">\n'
-                     f'      <img src="{c["img"]}" alt="{c["alt"]}">\n'
+                     f'      <img src="{c["img"]}" alt="{c["alt"]}" loading="lazy" decoding="async">\n'
                      f'      <figcaption><span class="lbl">{a}</span>'
                      f'<span class="lbl">{b}</span></figcaption>\n    </figure>')
     elif c.get('sites'):
@@ -828,7 +828,7 @@ def reveal_markup(r):
     <p class="lbl">{r["right"]}</p>
   </div>
   <figure class="cmp" id="cmp" role="group" aria-label="Public view against the full screenshot">
-    <img src="{r["pub"]}" alt="{r["pubalt"]}">
+    <img src="{r["pub"]}" alt="{r["pubalt"]}" loading="lazy" decoding="async">
     <img class="top2" src="{r["full"]}" alt="{r["fullalt"]}">
     <span class="bar2"></span><span class="grab">DRAG</span>
     <figcaption class="l">Public</figcaption>
@@ -841,7 +841,7 @@ def reveal_markup(r):
 def gallery_markup(g):
     figs = ''
     for src, alt, a, b in g['items']:
-        figs += (f'      <figure><img src="{src}" alt="{alt}">\n'
+        figs += (f'      <figure><img src="{src}" alt="{alt}" loading="lazy" decoding="async">\n'
                  f'        <figcaption><span class="lbl">{a}</span>'
                  f'<span class="lbl">{b}</span></figcaption></figure>\n')
     return f'''
