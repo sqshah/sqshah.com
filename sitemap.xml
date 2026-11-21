@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sqshah.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://sqshah.com/portfolio</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://sqshah.com/links</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://sqshah.com/work/account-recovery/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/brand-protection/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/digital-presence/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/ecommerce-setup/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/email-platform/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/export-trade/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/motor-group/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/organic-search/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/property-developer/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/refund-recovery/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/roi-dashboard/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sqshah.com/work/twelve-brands/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

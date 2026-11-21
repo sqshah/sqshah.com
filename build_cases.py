@@ -900,7 +900,7 @@ def page(c):
 <body>
 
 <header class="bar">
-  <div class="wrap"><a href="/#work">All work</a><a href="/">SQ Shah</a></div>
+  <div class="wrap"><a href="/portfolio#work">All work</a><a href="/">SQ Shah</a></div>
 </header>
 
 <nav class="rail" aria-label="Chapters">
@@ -945,7 +945,7 @@ def page(c):
   <h2 class="h" data-rise>{gh} <span class="mk">{gm}</span></h2>
   <div class="act" data-rise>
     <a class="btn" href="mailto:talk@sqshah.com?subject=Access%20%E2%80%94%20{subj}">Request access</a>
-    <a class="ghost" href="/#work">All work</a>
+    <a class="ghost" href="/portfolio#work">All work</a>
   </div>
 </section>
 
